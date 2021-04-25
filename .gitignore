@@ -1,13 +1,22 @@
-node_modules/
-.expo/
-npm-debug.*
+# Editor
+.vscode
+
+# Node
+node_modules/**/*
+
+# Yarn
+yarn.lock
+yarn-error.log
+
+# Expo
+.expo/*
+
+# Binary
 *.jks
 *.p8
 *.p12
 *.key
-*.mobileprovision
 *.orig.*
-web-build/
 
-# macOS
-.DS_Store
+# Build
+web-build
