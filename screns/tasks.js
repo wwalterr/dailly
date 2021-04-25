@@ -2,10 +2,16 @@ import React from "react";
 
 import { View, Text, StyleSheet } from "react-native";
 
+import { useTasks } from "../contexts/tasks";
+
 const Tasks = () => {
+  const { tasks, addTask, updateTask, removeTask } = useTasks();
+
   return (
     <View style={styles.container}>
       <Text>Tasks</Text>
+
+      <Text>{JSON.stringify(tasks)}</Text>
     </View>
   );
 };
