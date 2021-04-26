@@ -1,20 +1,8 @@
 import React, { createContext, useState, useContext } from "react";
 
-import * as SecureStore from "expo-secure-store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-/*
-	Task example:
-
-	{
-		id: '',
-		category: '',
-		text: '',
-		remindEmail: false,
-		remindNotification: false,
-		increment: false,
-		counter: 0,
-	}
-*/
+const key = "Tasks";
 
 const TasksDefaultState = [];
 
@@ -23,40 +11,40 @@ const TasksContext = createContext(TasksDefaultState);
 const TasksProvider = ({ children }) => {
   const [tasks, setTasks] = useState(TasksDefaultState);
 
-  const addTask = async (task) => {
-    setTasks((previousTasks) => [...previousTasks, task]);
+  const startTasks = async () => {
+    const _tasks = await AsyncStorage.getItem(key);
 
-    try {
-      await SecureStore.setItemAsync("tasks", JSON.stringify(tasks));
-    } catch (error) {
-      throw new Error(error.message);
-    }
+    if (_tasks) setTasks(JSON.parse(_tasks));
+  };
+
+  const createTask = async (task) => {
+    const _tasks = [...tasks, task];
+
+    setTasks(_tasks);
+
+    await AsyncStorage.setItem(key, JSON.stringify(_tasks));
   };
 
   const updateTask = async (id, task) => {
-    setTasks((previousTasks) =>
-      previousTasks.map((_task) => (_task.id === id ? task : _task))
-    );
+    const _tasks = tasks.map((__task) => (__task.id == id ? task : __task));
 
-    try {
-      await SecureStore.setItemAsync("tasks", JSON.stringify(tasks));
-    } catch (error) {
-      throw new Error(error.message);
-    }
+    setTasks(_tasks);
+
+    await AsyncStorage.setItem(key, JSON.stringify(_tasks));
   };
 
   const removeTask = async (id) => {
-    setTasks((previousTasks) => previousTasks.filter((task) => task.id === id));
+    const _tasks = tasks.filter((task) => !(task.id === id));
 
-    try {
-      await SecureStore.setItemAsync("tasks", JSON.stringify(tasks));
-    } catch (error) {
-      throw new Error(error.message);
-    }
+    setTasks(_tasks);
+
+    await AsyncStorage.setItem(key, JSON.stringify(_tasks));
   };
 
   return (
-    <TasksContext.Provider value={{ tasks, addTask, updateTask, removeTask }}>
+    <TasksContext.Provider
+      value={{ tasks, startTasks, createTask, updateTask, removeTask }}
+    >
       {children}
     </TasksContext.Provider>
   );

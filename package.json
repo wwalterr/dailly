@@ -8,13 +8,24 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo-google-fonts/inter": "^0.1.0",
+    "@expo/vector-icons": "^12.0.4",
+    "@react-native-async-storage/async-storage": "^1.13.0",
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/native": "^5.9.4",
+    "@react-navigation/stack": "^5.14.4",
     "expo": "~41.0.1",
-    "expo-secure-store": "~10.1.0",
-    "expo-status-bar": "~1.0.4",
+    "expo-app-loading": "^1.0.3",
+    "expo-font": "~9.1.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
     "react-native-emoji": "^1.8.0",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-reanimated": "^2.1.0",
+    "react-native-safe-area-context": "^3.2.0",
+    "react-native-screens": "~3.0.0",
+    "react-native-switch": "https://github.com/shahen94/react-native-switch",
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {

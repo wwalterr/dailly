@@ -1,33 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { View, Text, StyleSheet } from "react-native";
+import { Text, FlatList, StyleSheet } from "react-native";
 
-import Emoji from "react-native-emoji";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
 
-import emojis from "../utils/emojis";
+import Task from "../components/task";
+
+import NewTask from "../components/newTask";
 
 const Tasks = () => {
-  const { tasks, addTask, updateTask, removeTask } = useTasks();
+  const { tasks } = useTasks();
+
+  const [newTaskVisible, setNewTaskVisible] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <Text>Tasks</Text>
+    <SafeAreaView style={styles.container}>
+      <Text
+        onPress={() =>
+          setNewTaskVisible((previousNewTaskVisible) => !previousNewTaskVisible)
+        }
+      >
+        New goal
+      </Text>
 
-      <Text>{JSON.stringify(tasks)}</Text>
+      {tasks.length ? (
+        <FlatList
+          data={tasks}
+          renderItem={({ item, index }) => <Task task={item} />}
+          keyExtractor={(item, index) => item.id}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          bounces={false}
+          style={styles.flatList}
+        />
+      ) : null}
 
-      <Emoji name={emojis[0].aliases} style={{ fontSize: 50 }} />
-    </View>
+      {newTaskVisible ? (
+        <NewTask setNewTaskVisible={setNewTaskVisible} />
+      ) : null}
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#d7d6d7",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
+    width: "100%",
+    paddingVertical: 8,
+    backgroundColor: theme.color.white.main,
+  },
+  flatList: {
+    width: "100%",
   },
 });
 

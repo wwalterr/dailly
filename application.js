@@ -1,30 +1,40 @@
 import React from "react";
 
-import { View, StyleSheet } from "react-native";
+import {
+  useFonts,
+  Inter_300Light,
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_900Black,
+} from "@expo-google-fonts/inter";
+
+import AppLoading from "expo-app-loading";
+
+import { NavigationContainer } from "@react-navigation/native";
 
 import { registerRootComponent } from "expo";
 
-import Tasks from "./screns/tasks";
-
 import { TasksProvider } from "./contexts/tasks";
 
+import Routes from "./routes";
+
 const Application = () => {
+  const [fontsLoaded] = useFonts({
+    Inter_300Light,
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_900Black,
+  });
+
+  if (!fontsLoaded) return <AppLoading />;
+
   return (
-    <TasksProvider>
-      <View style={styles.container}>
-        <Tasks />
-      </View>
-    </TasksProvider>
+    <NavigationContainer>
+      <TasksProvider>
+        <Routes />
+      </TasksProvider>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#d7d6d7",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default registerRootComponent(Application);
