@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext } from "react";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from "expo-secure-store";
 
 const key = "Tasks";
 
@@ -12,7 +12,7 @@ const TasksProvider = ({ children }) => {
   const [tasks, setTasks] = useState(TasksDefaultState);
 
   const startTasks = async () => {
-    const _tasks = await AsyncStorage.getItem(key);
+    const _tasks = await SecureStore.getItemAsync(key);
 
     if (_tasks) setTasks(JSON.parse(_tasks));
   };
@@ -22,7 +22,7 @@ const TasksProvider = ({ children }) => {
 
     setTasks(_tasks);
 
-    await AsyncStorage.setItem(key, JSON.stringify(_tasks));
+    await SecureStore.setItemAsync(key, JSON.stringify(_tasks));
   };
 
   const updateTask = async (id, task) => {
@@ -30,7 +30,7 @@ const TasksProvider = ({ children }) => {
 
     setTasks(_tasks);
 
-    await AsyncStorage.setItem(key, JSON.stringify(_tasks));
+    await SecureStore.setItemAsync(key, JSON.stringify(_tasks));
   };
 
   const removeTask = async (id) => {
@@ -38,7 +38,7 @@ const TasksProvider = ({ children }) => {
 
     setTasks(_tasks);
 
-    await AsyncStorage.setItem(key, JSON.stringify(_tasks));
+    await SecureStore.setItemAsync(key, JSON.stringify(_tasks));
   };
 
   return (
