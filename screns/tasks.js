@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { FlatList, StyleSheet } from "react-native";
+import { Dimensions, FlatList, StyleSheet } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -23,7 +23,9 @@ import NewTask from "../components/newTask";
 const Tasks = () => {
   const { tasks } = useTasks();
 
-  const newTaskTranslateY = useState(new Animated.Value(360))[0];
+  const newTaskTranslateY = useState(
+    new Animated.Value(Dimensions.get("window").height)
+  )[0];
 
   const showNewTask = () =>
     Animated.timing(newTaskTranslateY, {
@@ -34,7 +36,7 @@ const Tasks = () => {
 
   const hideNewTask = () =>
     Animated.timing(newTaskTranslateY, {
-      toValue: 360,
+      toValue: Dimensions.get("window").height,
       duration: 250,
       useNativeDriver: true,
     }).start();
