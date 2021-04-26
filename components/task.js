@@ -59,6 +59,7 @@ const Task = ({ task }) => {
             remind,
             increment,
             ...(increment ? { counter } : {}),
+            createdAt: task.createdAt,
           })
         }
       />

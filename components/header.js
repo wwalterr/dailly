@@ -18,9 +18,9 @@ const Header = ({ setNewTaskVisible }) => {
       <View style={[styles.column, styles.columnSlogan]}>
         <Text style={styles.textSlogan}>Plan /</Text>
 
-        <Text style={styles.textSlogan}>Focus /</Text>
-
         <Text style={styles.textSlogan}>Work /</Text>
+
+        <Text style={styles.textSlogan}>Breathe /</Text>
 
         <Entypo
           name="dots-three-horizontal"
