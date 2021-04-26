@@ -8,7 +8,7 @@ import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
 
-const Header = ({ setNewTaskVisible }) => {
+const Header = () => {
   const { tasks } = useTasks();
 
   const [options, setOptions] = useState(false);

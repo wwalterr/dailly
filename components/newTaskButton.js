@@ -4,12 +4,12 @@ import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
 import theme from "../theme";
 
-const NewTaskButton = ({ setNewTaskVisible }) => {
+const NewTaskButton = ({ showNewTask }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => {
-          setNewTaskVisible(true);
+          showNewTask();
         }}
         activeOpacity={0.8}
         style={styles.button}

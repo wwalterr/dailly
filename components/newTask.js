@@ -12,6 +12,8 @@ import {
 
 import { Switch } from "react-native-switch";
 
+import { Animated } from "react-native";
+
 import { AntDesign } from "@expo/vector-icons";
 
 // import Emoji from "react-native-emoji";
@@ -30,7 +32,7 @@ const inActiveText = "No";
 
 const message = "Goal created";
 
-const NewTask = ({ setNewTaskVisible }) => {
+const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
   const { createTask } = useTasks();
 
   const [text, setText] = useState("");
@@ -41,13 +43,32 @@ const NewTask = ({ setNewTaskVisible }) => {
 
   const [increment, setIncrement] = useState(false);
 
+  const resetFields = () => {
+    setText("");
+
+    setTextError(false);
+
+    setRemind(false);
+
+    setIncrement(false);
+  };
+
   return (
-    <View style={styles.container}>
+    <Animated.View
+      style={{
+        ...styles.container,
+        transform: [{ translateY: newTaskTranslateY }],
+      }}
+    >
       <View style={styles.rowClose}>
         <AntDesign
           name="close"
           size={20}
-          onPress={() => setNewTaskVisible(false)}
+          onPress={() => {
+            hideNewTask();
+
+            resetFields();
+          }}
           color={theme.color.gray.dark}
           style={styles.closeIcon}
         />
@@ -149,7 +170,9 @@ const NewTask = ({ setNewTaskVisible }) => {
               });
             else ToastAndroid.show(message, ToastAndroid.SHORT);
 
-            setNewTaskVisible(false);
+            resetFields();
+
+            hideNewTask();
           }}
           activeOpacity={0.8}
           style={styles.button}
@@ -157,7 +180,7 @@ const NewTask = ({ setNewTaskVisible }) => {
           <Text style={styles.buttonText}>Create goal</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 
@@ -166,7 +189,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     width: "100%",
     height: "50%",
-    minHeight: 250,
+    zIndex: 999,
+    minHeight: 300,
     position: "absolute",
     bottom: 0,
     paddingHorizontal: 32,

@@ -4,6 +4,8 @@ import { FlatList, StyleSheet } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { Animated } from "react-native";
+
 import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
@@ -21,11 +23,25 @@ import NewTask from "../components/newTask";
 const Tasks = () => {
   const { tasks } = useTasks();
 
-  const [newTaskVisible, setNewTaskVisible] = useState(false);
+  const newTaskTranslateY = useState(new Animated.Value(360))[0];
+
+  const showNewTask = () =>
+    Animated.timing(newTaskTranslateY, {
+      toValue: 0,
+      duration: 250,
+      useNativeDriver: true,
+    }).start();
+
+  const hideNewTask = () =>
+    Animated.timing(newTaskTranslateY, {
+      toValue: 360,
+      duration: 250,
+      useNativeDriver: true,
+    }).start();
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header setNewTaskVisible={setNewTaskVisible} />
+      <Header />
 
       {tasks.length ? (
         <FlatList
@@ -41,13 +57,12 @@ const Tasks = () => {
         <NoTask />
       )}
 
-      {newTaskVisible ? (
-        <NewTask setNewTaskVisible={setNewTaskVisible} />
-      ) : null}
+      <NewTask
+        newTaskTranslateY={newTaskTranslateY}
+        hideNewTask={hideNewTask}
+      />
 
-      {!newTaskVisible ? (
-        <NewTaskButton setNewTaskVisible={setNewTaskVisible} />
-      ) : null}
+      <NewTaskButton showNewTask={showNewTask} />
     </SafeAreaView>
   );
 };
