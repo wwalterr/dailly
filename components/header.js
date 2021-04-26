@@ -20,7 +20,7 @@ const Header = ({ setNewTaskVisible }) => {
 
         <Text style={styles.textSlogan}>Work /</Text>
 
-        <Text style={styles.textSlogan}>Breathe /</Text>
+        <Text style={styles.textSlogan}>Relax /</Text>
 
         <Entypo
           name="dots-three-horizontal"

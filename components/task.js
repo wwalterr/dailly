@@ -55,7 +55,7 @@ const Task = ({ task }) => {
           updateTask(task.id, {
             id: task.id,
             category: "",
-            text,
+            text: text.trim(),
             remind,
             increment,
             ...(increment ? { counter } : {}),

@@ -28,8 +28,7 @@ const styles = StyleSheet.create({
     // position: "absolute",
     // bottom: 0,
     paddingHorizontal: 32,
-    paddingVertical: 5,
-    paddingBottom: 16,
+    paddingVertical: 8,
   },
   button: {
     height: 50,

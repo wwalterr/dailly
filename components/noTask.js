@@ -9,7 +9,7 @@ const NoTask = () => {
     <View style={styles.container}>
       <MaterialIcons name="emoji-flags" size={68} color="black" />
 
-      <Text style={styles.text}>You don't have goals</Text>
+      <Text style={styles.text}>You don't have any goals</Text>
     </View>
   );
 };

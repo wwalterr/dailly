@@ -55,7 +55,7 @@ const NewTask = ({ setNewTaskVisible }) => {
 
       <View style={[styles.row, styles.rowText]}>
         <TextInput
-          placeholder="What's your goal?"
+          placeholder="Describe your goal"
           placeholderTextColor={theme.color.gray.main}
           textAlign="left"
           multiline={true}
@@ -67,7 +67,7 @@ const NewTask = ({ setNewTaskVisible }) => {
         />
 
         <Text style={styles.textError}>
-          {textError ? "Your goal is required to create" : ""}
+          {textError ? "To create a goal you need to describe it!" : ""}
         </Text>
       </View>
 
@@ -135,7 +135,7 @@ const NewTask = ({ setNewTaskVisible }) => {
             createTask({
               id: generateRandomCode(),
               category: "",
-              text,
+              text: text.trim(),
               remind,
               increment,
               ...(increment ? { counter: 0 } : {}),
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "space-evenly",
     width: "100%",
-    height: "65%",
+    height: "50%",
     minHeight: 250,
     position: "absolute",
     bottom: 0,

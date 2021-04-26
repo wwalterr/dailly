@@ -58,10 +58,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
+    paddingTop: 8,
     backgroundColor: theme.color.white.main,
   },
   flatList: {
-    width: "100%",
+    width: "95%",
   },
 });
 
