@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "space-evenly",
     width: "100%",
-    height: "50%",
+    height: "65%",
     minHeight: 250,
     position: "absolute",
     bottom: 0,

@@ -5,6 +5,7 @@ import {
   Inter_300Light,
   Inter_400Regular,
   Inter_500Medium,
+  Inter_700Bold,
   Inter_900Black,
 } from "@expo-google-fonts/inter";
 
@@ -23,6 +24,7 @@ const Application = () => {
     Inter_300Light,
     Inter_400Regular,
     Inter_500Medium,
+    Inter_700Bold,
     Inter_900Black,
   });
 

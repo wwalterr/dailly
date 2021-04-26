@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
-import { Text, FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
+
+import Header from "../components/header";
 
 import Task from "../components/task";
 
@@ -19,13 +21,7 @@ const Tasks = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text
-        onPress={() =>
-          setNewTaskVisible((previousNewTaskVisible) => !previousNewTaskVisible)
-        }
-      >
-        New goal
-      </Text>
+      <Header setNewTaskVisible={setNewTaskVisible} />
 
       {tasks.length ? (
         <FlatList
