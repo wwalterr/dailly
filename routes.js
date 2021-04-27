@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import { createStackNavigator } from "@react-navigation/stack";
 
-import Tasks from "./screns/tasks";
+import TasksScreen from "./screns/tasks";
 
 import { useTasks } from "./contexts/tasks";
 
@@ -23,7 +23,7 @@ const Routes = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Tasks" component={Tasks} />
+      <Stack.Screen name="Tasks" component={TasksScreen} />
     </Stack.Navigator>
   );
 };

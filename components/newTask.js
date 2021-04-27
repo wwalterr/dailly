@@ -163,7 +163,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
             if (remind) {
               identifier = await schedulePushNotification({
-                title: "Check your goal 📬",
+                title: "Check your daily goal 🛸",
                 body: text,
                 vibrate: true,
               });

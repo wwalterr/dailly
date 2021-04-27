@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Dimensions, FlatList, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -12,15 +12,15 @@ import { useTasks } from "../contexts/tasks";
 
 import Header from "../components/header";
 
-import NoTask from "../components/noTask";
+import Tasks from "../components/tasks";
 
-import Task from "../components/task";
+import NoTask from "../components/noTask";
 
 import NewTaskButton from "../components/newTaskButton";
 
 import NewTask from "../components/newTask";
 
-const Tasks = () => {
+const TasksScreen = () => {
   const { tasks } = useTasks();
 
   const newTaskTranslateY = useState(
@@ -45,19 +45,7 @@ const Tasks = () => {
     <SafeAreaView style={styles.container}>
       <Header />
 
-      {tasks.length ? (
-        <FlatList
-          data={tasks}
-          renderItem={({ item, index }) => <Task task={item} />}
-          keyExtractor={(item, index) => item.id}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          bounces={false}
-          style={styles.flatList}
-        />
-      ) : (
-        <NoTask />
-      )}
+      {tasks.length ? <Tasks /> : <NoTask />}
 
       <NewTask
         newTaskTranslateY={newTaskTranslateY}
@@ -78,9 +66,6 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     backgroundColor: theme.color.white.main,
   },
-  flatList: {
-    width: "95%",
-  },
 });
 
-export default Tasks;
+export default TasksScreen;
