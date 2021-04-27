@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
@@ -11,8 +11,6 @@ import { useTasks } from "../contexts/tasks";
 const Header = () => {
   const { tasks } = useTasks();
 
-  const [options, setOptions] = useState(false);
-
   return (
     <View style={styles.container}>
       <View style={[styles.column, styles.columnSlogan]}>
@@ -22,39 +20,16 @@ const Header = () => {
 
         <Text style={styles.textSlogan}>Relax /</Text>
 
-        <Entypo
-          name="dots-three-horizontal"
-          size={24}
-          color="black"
-          onPress={() => setOptions((previousOptions) => !previousOptions)}
-        />
+        <Entypo name="dots-three-horizontal" size={24} color="black" />
       </View>
 
-      {!options ? (
-        <View style={[styles.column, styles.columnPresentation]}>
-          <View style={styles.columnPresentationContainer}>
-            <Text style={styles.textAmountTasks}>{tasks.length}</Text>
+      <View style={[styles.column, styles.columnPresentation]}>
+        <View style={styles.columnPresentationContainer}>
+          <Text style={styles.textAmountTasks}>{tasks.length}</Text>
 
-            <Text style={styles.textAmountTasksDescription}>Goals</Text>
-          </View>
+          <Text style={styles.textAmountTasksDescription}>Goals</Text>
         </View>
-      ) : null}
-
-      {options ? (
-        <View style={[styles.column, styles.columnMenu]}>
-          <TouchableOpacity style={styles.chip}>
-            <Text style={styles.chipText}>Settings</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.chip}>
-            <Text style={styles.chipText}>About</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.chip}>
-            <Text style={styles.chipText}>Privacy</Text>
-          </TouchableOpacity>
-        </View>
-      ) : null}
+      </View>
     </View>
   );
 };
@@ -100,18 +75,6 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_500Medium",
     fontSize: 16,
     color: theme.color.black.main,
-  },
-  columnMenu: {
-    flex: 1.25,
-    flexDirection: "column",
-    justifyContent: "space-around",
-    alignItems: "flex-end",
-  },
-  chip: {},
-  chipText: {
-    color: theme.color.black.main,
-    fontFamily: "Inter_400Regular",
-    fontSize: 14,
   },
 });
 
