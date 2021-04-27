@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ToastAndroid,
   Platform,
+  Keyboard,
   StyleSheet,
 } from "react-native";
 
@@ -65,9 +66,11 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
           name="close"
           size={20}
           onPress={() => {
-            hideNewTask();
+            Keyboard.dismiss();
 
             resetFields();
+
+            hideNewTask();
           }}
           color={theme.color.gray.dark}
           style={styles.closeIcon}
@@ -82,6 +85,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
           multiline={true}
           spellCheck={true}
           autoFocus={false}
+          underlineColorAndroid="transparent"
           value={text}
           onChangeText={setText}
           style={styles.textInput}
@@ -169,6 +173,8 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
                 duration: Snackbar.LENGTH_SHORT,
               });
             else ToastAndroid.show(message, ToastAndroid.SHORT);
+
+            Keyboard.dismiss();
 
             resetFields();
 
