@@ -27,6 +27,8 @@ import { useTasks } from "../contexts/tasks";
 
 import generateRandomCode from "../utils/random";
 
+import { schedulePushNotification } from "../utils/notifications";
+
 const activeText = "Yes";
 
 const inActiveText = "No";
@@ -150,11 +152,21 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
       <View style={[styles.row, styles.rowButton]}>
         <TouchableOpacity
-          onPress={() => {
+          onPress={async () => {
             if (!text) {
               setTextError(true);
 
               return;
+            }
+
+            let identifier;
+
+            if (remind) {
+              identifier = await schedulePushNotification({
+                title: "Check your goal 📬",
+                body: text,
+                vibrate: true,
+              });
             }
 
             createTask({
@@ -162,6 +174,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
               category: "",
               text: text.trim(),
               remind,
+              ...(remind ? { identifier } : {}),
               increment,
               ...(increment ? { counter: 0 } : {}),
               createdAt: new Date().toLocaleDateString(),
@@ -224,7 +237,7 @@ const styles = StyleSheet.create({
   rowText: {},
   textInput: {
     width: "100%",
-    height: 40,
+    height: 45,
     paddingHorizontal: 15,
     borderRadius: 5,
     fontFamily: "Inter_400Regular",
