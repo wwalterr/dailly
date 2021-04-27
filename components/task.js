@@ -28,7 +28,7 @@ const Task = ({ task }) => {
 
       {/* <Emoji name={emojis[0].aliases[0]} style={{ fontSize: 50 }} /> */}
 
-      <Switch
+      {/* <Switch
         trackColor={{ false: "#767577", true: "#81b0ff" }}
         thumbColor={increment ? "#f5dd4b" : "#f4f3f4"}
         ios_backgroundColor="#3e3e3e"
@@ -44,11 +44,11 @@ const Task = ({ task }) => {
         ios_backgroundColor="#3e3e3e"
         onValueChange={() => setRemind((previousRemind) => !previousRemind)}
         value={remind}
-      />
+      /> */}
 
       <Text>{task.createdAt}</Text>
 
-      <Button
+      {/* <Button
         title="Update"
         color="#841584"
         onPress={() =>
@@ -67,14 +67,14 @@ const Task = ({ task }) => {
         title="Remove"
         color="#841584"
         onPress={() => removeTask(task.id)}
-      />
+      /> */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f00",
+    // backgroundColor: "#f00",
     margin: 24,
   },
 });
