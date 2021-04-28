@@ -1,10 +1,11 @@
-import React, { memo } from "react";
+import React from "react";
 
 import {
   StyleSheet,
   TouchableOpacity,
   Text,
   View,
+  FlatList,
   ScrollView,
 } from "react-native";
 
@@ -14,7 +15,7 @@ import { emojisCategorized, emojisCategories } from "../utils/emojis";
 
 const EmojiPicker = ({ emoji, setEmoji, category, setCategory }) => {
   return (
-    <View style={[styles.container, { height: category !== "" ? 70 : 25 }]}>
+    <View style={[styles.container, { height: category ? 70 : 25 }]}>
       <ScrollView
         horizontal={true}
         showsVerticalScrollIndicator={false}
@@ -26,7 +27,7 @@ const EmojiPicker = ({ emoji, setEmoji, category, setCategory }) => {
             <TouchableOpacity
               onPress={() => {
                 if (category !== _category) setCategory(_category);
-                else setCategory("");
+                // else setCategory("");
               }}
               activeOpacity={0.8}
               key={_category}
@@ -46,39 +47,36 @@ const EmojiPicker = ({ emoji, setEmoji, category, setCategory }) => {
       </ScrollView>
 
       {category ? (
-        <ScrollView
+        <FlatList
+          data={emojisCategorized[category]}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => {
+                setEmoji(item);
+              }}
+              activeOpacity={0.8}
+              key={item.description}
+              style={styles.emojiButton}
+            >
+              <Text style={styles.emoji}>{item.emoji}</Text>
+            </TouchableOpacity>
+          )}
+          keyExtractor={(item) => item.aliases[0]}
           horizontal={true}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{
-            flexGrow: 1,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          style={styles.containerEmojis}
-        >
-          {emojisCategorized[category].map((emoji) => {
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  setEmoji(emoji);
-                }}
-                activeOpacity={0.8}
-                key={emoji.description}
-                style={styles.emojiButton}
-              >
-                <Text style={styles.emoji}>{emoji.emoji}</Text>
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView>
+          style={styles.flatListEmojis}
+        />
       ) : null}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    height: 70,
+    backgroundColor: "red",
+  },
   containerChips: {
     height: 25,
     maxHeight: 25,
@@ -100,7 +98,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: theme.color.gray.main,
   },
-  containerEmojis: {
+  flatListEmojis: {
     height: 45,
   },
   emojiButton: {},
@@ -110,4 +108,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(EmojiPicker);
+export default EmojiPicker;

@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     width: "100%",
     height: "65%",
-    minHeight: 400,
+    minHeight: 505,
     zIndex: 999,
     position: "absolute",
     bottom: 0,
