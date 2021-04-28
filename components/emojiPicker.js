@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import {
   StyleSheet,
@@ -14,6 +14,22 @@ import theme from "../theme";
 import { emojisCategorized, emojisCategories } from "../utils/emojis";
 
 const EmojiPicker = ({ emoji, setEmoji, category, setCategory }) => {
+  const renderItem = useCallback(
+    ({ item }) => (
+      <TouchableOpacity
+        onPress={() => {
+          setEmoji(item);
+        }}
+        activeOpacity={0.8}
+        key={item.description}
+        style={styles.emojiButton}
+      >
+        <Text style={styles.emoji}>{item.emoji}</Text>
+      </TouchableOpacity>
+    ),
+    []
+  );
+
   return (
     <View style={[styles.container, { height: category ? 70 : 25 }]}>
       <ScrollView
@@ -27,7 +43,7 @@ const EmojiPicker = ({ emoji, setEmoji, category, setCategory }) => {
             <TouchableOpacity
               onPress={() => {
                 if (category !== _category) setCategory(_category);
-                // else setCategory("");
+                else setCategory("");
               }}
               activeOpacity={0.8}
               key={_category}
@@ -49,18 +65,7 @@ const EmojiPicker = ({ emoji, setEmoji, category, setCategory }) => {
       {category ? (
         <FlatList
           data={emojisCategorized[category]}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() => {
-                setEmoji(item);
-              }}
-              activeOpacity={0.8}
-              key={item.description}
-              style={styles.emojiButton}
-            >
-              <Text style={styles.emoji}>{item.emoji}</Text>
-            </TouchableOpacity>
-          )}
+          renderItem={renderItem}
           keyExtractor={(item) => item.aliases[0]}
           horizontal={true}
           showsVerticalScrollIndicator={false}
@@ -75,7 +80,6 @@ const EmojiPicker = ({ emoji, setEmoji, category, setCategory }) => {
 const styles = StyleSheet.create({
   container: {
     height: 70,
-    backgroundColor: "red",
   },
   containerChips: {
     height: 25,
