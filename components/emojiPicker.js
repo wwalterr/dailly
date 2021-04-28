@@ -13,12 +13,20 @@ import theme from "../theme";
 
 import { emojisCategorized, emojisCategories } from "../utils/emojis";
 
-const EmojiPicker = ({ emoji, setEmoji, category, setCategory }) => {
+const EmojiPicker = ({
+  emoji,
+  setEmoji,
+  setEmojiError,
+  category,
+  setCategory,
+}) => {
   const renderItem = useCallback(
     ({ item }) => (
       <TouchableOpacity
         onPress={() => {
           setEmoji(item);
+
+          setEmojiError(false);
         }}
         activeOpacity={0.8}
         key={item.description}

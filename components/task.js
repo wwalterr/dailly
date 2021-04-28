@@ -75,7 +75,7 @@ const Task = ({ task, index, y }) => {
     >
       {task.emoji ? <Text>{task.emoji.emoji}</Text> : null}
 
-      {/* <TextInput onChangeText={setText} value={text} /> */}
+      <TextInput onChangeText={setText} value={text} />
 
       {/* <Emoji name={emojis[0].aliases[0]} style={{ fontSize: 50 }} /> */}
 

@@ -50,6 +50,8 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
   const [emoji, setEmoji] = useState(defaultEmoji);
 
+  const [emojiError, setEmojiError] = useState(false);
+
   const [category, setCategory] = useState("");
 
   const resetFields = () => {
@@ -62,6 +64,8 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
     setIncrement(false);
 
     setEmoji(defaultEmoji);
+
+    setEmojiError(false);
 
     setCategory("");
   };
@@ -99,7 +103,11 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
           autoFocus={false}
           underlineColorAndroid="transparent"
           value={text}
-          onChangeText={setText}
+          onChangeText={(_text) => {
+            setText(_text);
+
+            if (text) setTextError(false);
+          }}
           style={styles.textInput}
         />
 
@@ -166,9 +174,16 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
         <EmojiPicker
           emoji={emoji}
           setEmoji={setEmoji}
+          setEmojiError={setEmojiError}
           category={category}
           setCategory={setCategory}
         />
+
+        {emojiError ? (
+          <Text style={styles.textError}>
+            To create a goal you need to choose a emoji!
+          </Text>
+        ) : null}
       </View>
 
       <View style={[styles.row, styles.rowButton]}>
@@ -176,6 +191,12 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
           onPress={async () => {
             if (!text) {
               setTextError(true);
+
+              return;
+            }
+
+            if (!Object.keys(emoji).length) {
+              setEmojiError(true);
 
               return;
             }
