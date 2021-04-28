@@ -73,7 +73,9 @@ const Task = ({ task, index, y }) => {
         },
       ]}
     >
-      <TextInput onChangeText={setText} value={text} />
+      {task.emoji ? <Text>{task.emoji.emoji}</Text> : null}
+
+      {/* <TextInput onChangeText={setText} value={text} /> */}
 
       {/* <Emoji name={emojis[0].aliases[0]} style={{ fontSize: 50 }} /> */}
 
@@ -112,11 +114,12 @@ const Task = ({ task, index, y }) => {
           })
         }
       />
+       */}
       <Button
         title="Remove"
-        color="#841584"
+        color="#000000"
         onPress={() => removeTask(task.id)}
-      /> */}
+      />
     </Animated.View>
   );
 };
@@ -125,7 +128,7 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 22,
     marginVertical: TASK_MARGIN,
-    // backgroundColor: theme.color.gray.light,
+    backgroundColor: theme.color.gray.light,
   },
 });
 
