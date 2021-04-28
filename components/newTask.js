@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 
 import {
   View,
@@ -340,4 +340,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NewTask;
+export default memo(NewTask);

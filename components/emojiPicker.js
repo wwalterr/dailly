@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, memo } from "react";
 
 import {
   StyleSheet,
@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EmojiPicker;
+export default memo(EmojiPicker);
