@@ -17,23 +17,25 @@ import { Animated } from "react-native";
 
 import { AntDesign } from "@expo/vector-icons";
 
-// import Emoji from "react-native-emoji";
-
 import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
 
-// import emojis from "../utils/emojis";
-
 import generateRandomCode from "../utils/random";
 
+import { emojisCategories } from "../utils/emojis";
+
 import { schedulePushNotification } from "../utils/notifications";
+
+import EmojiPicker from "./emojiPicker";
 
 const activeText = "Yes";
 
 const inActiveText = "No";
 
 const message = "Goal created";
+
+const defaultEmoji = {};
 
 const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
   const { createTask } = useTasks();
@@ -46,6 +48,10 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
   const [increment, setIncrement] = useState(false);
 
+  const [emoji, setEmoji] = useState(defaultEmoji);
+
+  const [category, setCategory] = useState("");
+
   const resetFields = () => {
     setText("");
 
@@ -54,6 +60,10 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
     setRemind(false);
 
     setIncrement(false);
+
+    setEmoji(defaultEmoji);
+
+    setCategory("");
   };
 
   return (
@@ -93,14 +103,12 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
           style={styles.textInput}
         />
 
-        <Text style={styles.textError}>
-          {textError ? "To create a goal you need to describe it!" : ""}
-        </Text>
+        {textError ? (
+          <Text style={styles.textError}>
+            To create a goal you need to describe it!
+          </Text>
+        ) : null}
       </View>
-
-      {/* <View style={styles.row}>
-        <Emoji name={emojis[*].aliases[*]} style={{ fontSize: 50 }} />
-      </View> */}
 
       <View style={[styles.row, styles.rowIncrement]}>
         <Text style={styles.text}>Is your goal incremental?</Text>
@@ -150,6 +158,19 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
         />
       </View>
 
+      <View style={[styles.row, styles.rowCategory]}>
+        <Text style={styles.textCategory}>
+          Choose a emoji to identify your goal: {emoji.emoji}
+        </Text>
+
+        <EmojiPicker
+          emoji={emoji}
+          setEmoji={setEmoji}
+          category={category}
+          setCategory={setCategory}
+        />
+      </View>
+
       <View style={[styles.row, styles.rowButton]}>
         <TouchableOpacity
           onPress={async () => {
@@ -177,6 +198,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
               ...(remind ? { identifier } : {}),
               increment,
               ...(increment ? { counter: 0 } : {}),
+              emoji,
               createdAt: new Date().toLocaleDateString(),
             });
 
@@ -205,11 +227,11 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
     width: "100%",
-    height: "50%",
+    height: "65%",
+    minHeight: 400,
     zIndex: 999,
-    minHeight: 300,
     position: "absolute",
     bottom: 0,
     paddingHorizontal: 32,
@@ -234,10 +256,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   closeIcon: {},
-  rowText: {},
+  rowText: {
+    flexDirection: "column",
+  },
   textInput: {
-    width: "100%",
     height: 45,
+    width: "100%",
     paddingHorizontal: 15,
     borderRadius: 5,
     fontFamily: "Inter_400Regular",
@@ -266,6 +290,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
+  },
+  rowCategory: {
+    flexDirection: "column",
+  },
+  textCategory: {
+    marginBottom: 10,
+    fontFamily: "Inter_400Regular",
+    fontSize: 14,
+    color: theme.color.black.main,
   },
   rowButton: {
     height: 45,

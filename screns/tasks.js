@@ -30,14 +30,14 @@ const TasksScreen = () => {
   const showNewTask = () =>
     Animated.timing(newTaskTranslateY, {
       toValue: 0,
-      duration: 250,
+      duration: 350,
       useNativeDriver: true,
     }).start();
 
   const hideNewTask = () =>
     Animated.timing(newTaskTranslateY, {
       toValue: Dimensions.get("window").height,
-      duration: 250,
+      duration: 350,
       useNativeDriver: true,
     }).start();
 

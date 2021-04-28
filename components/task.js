@@ -123,9 +123,9 @@ const Task = ({ task, index, y }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 32,
+    marginHorizontal: 22,
     marginVertical: TASK_MARGIN,
-    backgroundColor: theme.color.gray.light,
+    // backgroundColor: theme.color.gray.light,
   },
 });
 
