@@ -18,7 +18,7 @@ const TasksProvider = ({ children }) => {
   };
 
   const createTask = async (task) => {
-    const _tasks = [...tasks, task];
+    const _tasks = [task, ...tasks];
 
     setTasks(_tasks);
 

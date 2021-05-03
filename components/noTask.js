@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "Inter_500Medium",
-    fontSize: 16,
+    fontSize: 14,
     marginTop: 15,
   },
 });

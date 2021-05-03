@@ -20,7 +20,7 @@ import NewTaskButton from "../components/newTaskButton";
 
 import NewTask from "../components/newTask";
 
-const TasksScreen = () => {
+const TasksScreen = ({ navigation }) => {
   const { tasks } = useTasks();
 
   const newTaskTranslateY = useState(
@@ -37,22 +37,20 @@ const TasksScreen = () => {
   const hideNewTask = () =>
     Animated.timing(newTaskTranslateY, {
       toValue: Dimensions.get("window").height,
-      duration: 350,
+      duration: 250,
       useNativeDriver: true,
     }).start();
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
+      <Header newTaskButton={<NewTaskButton showNewTask={showNewTask} />} />
 
-      {tasks.length ? <Tasks /> : <NoTask />}
+      {tasks.length ? <Tasks navigation={navigation} /> : <NoTask />}
 
       <NewTask
         newTaskTranslateY={newTaskTranslateY}
         hideNewTask={hideNewTask}
       />
-
-      <NewTaskButton showNewTask={showNewTask} />
     </SafeAreaView>
   );
 };
@@ -61,9 +59,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     width: "100%",
-    paddingTop: 8,
     backgroundColor: theme.color.white.main,
   },
 });

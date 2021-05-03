@@ -28,7 +28,7 @@ const cancelPushNotification = async (identifier) => {
     identifier
   );
 
-  return statys;
+  return status;
 };
 
 export { schedulePushNotification, cancelPushNotification };

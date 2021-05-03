@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {
   View,
+  ScrollView,
   Text,
-  TextInput,
-  Switch,
-  Button,
   Dimensions,
+  TouchableOpacity,
   Animated,
+  ToastAndroid,
+  Platform,
   StyleSheet,
 } from "react-native";
 
@@ -15,38 +16,34 @@ import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
 
-const HEIGHT = Dimensions.get("window").height - 64;
+import { cancelPushNotification } from "../utils/notifications";
 
-const TASK_MARGIN = 16;
+const height = Dimensions.get("window").height - 64;
 
-const TASK_HEIGHT = 50 + TASK_MARGIN * 2;
+const task_margin = 16;
 
-const Task = ({ task, index, y }) => {
+const task_height = 145 + task_margin * 2;
+
+const message = "Goal removed!";
+
+const Task = ({ task, index, y, navigation }) => {
   const { removeTask, updateTask } = useTasks();
 
-  const [text, setText] = useState(task.text);
+  const position = Animated.subtract(index * task_height, y);
 
-  const [remind, setRemind] = useState(task.remind);
+  const isDisappearing = -task_height;
 
-  const [increment, setIncrement] = useState(task.increment);
-
-  const [counter, setCounter] = useState(task.counter ? task.counter : 0);
-
-  const position = Animated.subtract(index * TASK_HEIGHT, y);
-
-  const isDisappearing = -TASK_HEIGHT;
-
-  const isAppearing = HEIGHT;
+  const isAppearing = height;
 
   const isTop = 0;
 
-  const isBottom = HEIGHT - TASK_HEIGHT;
+  const isBottom = height - task_height;
 
   const translateY = Animated.add(
     y,
     y.interpolate({
-      inputRange: [0, 0.00001 + index * TASK_HEIGHT],
-      outputRange: [0, -index * (TASK_HEIGHT + 2 * TASK_MARGIN)],
+      inputRange: [0, 0.00001 + index * task_height],
+      outputRange: [0, -index * (task_height + 2 * task_margin)],
       extrapolateRight: "clamp",
     })
   );
@@ -67,68 +64,205 @@ const Task = ({ task, index, y }) => {
       style={[
         styles.container,
         {
-          height: TASK_HEIGHT,
+          height: task_height,
           opacity,
           transform: [{ translateY }, { scale }],
         },
       ]}
     >
-      {task.emoji ? <Text>{task.emoji.emoji}</Text> : null}
+      <View style={styles.containerHeader}>
+        <Text style={styles.createdAt}>{task.createdAt}</Text>
 
-      <TextInput onChangeText={setText} value={text} />
+        <Text style={styles.emoji}>{task.emoji.emoji}</Text>
+      </View>
 
-      {/* <Emoji name={emojis[0].aliases[0]} style={{ fontSize: 50 }} /> */}
+      <View style={styles.containerOutsider}>
+        <View style={styles.containerInsider}>
+          <View style={styles.containerContent}>
+            <ScrollView
+              style={styles.containerText}
+              contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
+            >
+              <Text style={styles.text}>{task.text}</Text>
+            </ScrollView>
+          </View>
 
-      {/* <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={increment ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={() =>
-          setIncrement((previousIncrement) => !previousIncrement)
-        }
-        value={increment}
-      />
+          <View style={styles.containerActions}>
+            <View style={styles.actions}>
+              <TouchableOpacity
+                onPress={async () => {
+                  if (task.remind)
+                    await cancelPushNotification(task.identifier);
 
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={remind ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={() => setRemind((previousRemind) => !previousRemind)}
-        value={remind}
-      /> */}
+                  removeTask(task.id);
 
-      <Text>{task.createdAt}</Text>
+                  if (Platform.OS != "android")
+                    Snackbar.show({
+                      text: message,
+                      duration: Snackbar.LENGTH_SHORT,
+                    });
+                  else ToastAndroid.show(message, ToastAndroid.SHORT);
+                }}
+                activeOpacity={0.8}
+                key={"remove"}
+                style={styles.removeButton}
+              >
+                <Text style={styles.remove}>Remove</Text>
 
-      {/* <Button
-        title="Update"
-        color="#841584"
-        onPress={() =>
-          updateTask(task.id, {
-            id: task.id,
-            category: "",
-            text: text.trim(),
-            remind,
-            increment,
-            ...(increment ? { counter } : {}),
-            createdAt: task.createdAt,
-          })
-        }
-      />
-       */}
-      <Button
-        title="Remove"
-        color="#000000"
-        onPress={() => removeTask(task.id)}
-      />
+                <Text style={styles.highlight}>•</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={async () => {
+                  navigation.navigate("Update Task");
+                }}
+                activeOpacity={0.8}
+                key={"update"}
+                style={styles.updateButton}
+              >
+                <Text style={styles.update}>Update</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+
+        {task.increment ? (
+          <View style={styles.containerCounter}>
+            <TouchableOpacity
+              onPress={() => {
+                updateTask(task.id, {
+                  ...task,
+                  counter: task.counter + 1,
+                });
+              }}
+              activeOpacity={0.8}
+              key={"plus"}
+              style={styles.counterPlus}
+            >
+              <Text style={styles.plus}>+</Text>
+            </TouchableOpacity>
+
+            <Text style={styles.counter}>{task.counter}</Text>
+
+            <TouchableOpacity
+              onPress={() => {
+                if (task.counter >= 1)
+                  updateTask(task.id, {
+                    ...task,
+                    counter: task.counter - 1,
+                  });
+              }}
+              activeOpacity={0.8}
+              key={"minus"}
+              style={styles.counterMinus}
+            >
+              <Text style={styles.minus}>-</Text>
+            </TouchableOpacity>
+          </View>
+        ) : null}
+      </View>
     </Animated.View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    justifyContent: "space-between",
     marginHorizontal: 22,
-    marginVertical: TASK_MARGIN,
-    backgroundColor: theme.color.gray.light,
+    marginVertical: task_margin,
+    borderRadius: 5,
+    padding: 16,
+    backgroundColor: theme.color.black.main,
+  },
+  containerHeader: {
+    flex: 0.2,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  createdAt: {
+    paddingHorizontal: 4,
+    paddingVertical: 2,
+    fontFamily: "Inter_300Light",
+    fontSize: 14,
+    color: theme.color.white.main,
+    backgroundColor: theme.color.black.main,
+  },
+  emoji: {
+    fontSize: 22,
+  },
+  containerOutsider: {
+    flex: 1,
+    flexDirection: "row",
+  },
+  containerInsider: {
+    flex: 1,
+    flexDirection: "column",
+  },
+  containerContent: {
+    flex: 0.85,
+    flexDirection: "row",
+  },
+  containerText: {
+    flex: 1,
+  },
+  text: {
+    fontFamily: "Inter_600SemiBold",
+    fontSize: 26,
+    color: theme.color.white.main,
+  },
+  containerCounter: {
+    alignItems: "flex-end",
+    justifyContent: "flex-end",
+    paddingLeft: 4,
+  },
+  counterPlus: {},
+  plus: {
+    fontFamily: "Inter_500Medium",
+    fontSize: 24,
+    color: theme.color.white.main,
+  },
+  counter: {
+    fontFamily: "Inter_500Medium",
+    fontSize: 24,
+    color: theme.color.white.main,
+  },
+  counterMinus: {},
+  minus: {
+    fontFamily: "Inter_500Medium",
+    fontSize: 24,
+    color: theme.color.white.main,
+  },
+  containerActions: {
+    flex: 0.15,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  actions: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+  removeButton: {
+    flexDirection: "row",
+  },
+  remove: {
+    fontFamily: "Inter_300Light",
+    fontSize: 12,
+    color: theme.color.white.main,
+  },
+  highlight: {
+    marginLeft: 8,
+    color: theme.color.white.main,
+  },
+  updateButton: {
+    marginLeft: 8,
+  },
+  update: {
+    fontFamily: "Inter_300Light",
+    fontSize: 12,
+    color: theme.color.white.main,
   },
 });
 

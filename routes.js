@@ -4,6 +4,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import TasksScreen from "./screns/tasks";
 
+import TaskUpdateScreen from "./screns/taskUpdate";
+
+import PrivacyPolicy from "./screns/privacyPolicy";
+
 import { useTasks } from "./contexts/tasks";
 
 const Stack = createStackNavigator();
@@ -24,6 +28,10 @@ const Routes = () => {
       }}
     >
       <Stack.Screen name="Tasks" component={TasksScreen} />
+
+      <Stack.Screen name="Update Task" component={TaskUpdateScreen} />
+
+      <Stack.Screen name="Privacy Policy" component={PrivacyPolicy} />
     </Stack.Navigator>
   );
 };

@@ -27,6 +27,8 @@ const EmojiPicker = ({
           setEmoji(item);
 
           setEmojiError(false);
+
+		  setCategory("")
         }}
         activeOpacity={0.8}
         key={item.description}

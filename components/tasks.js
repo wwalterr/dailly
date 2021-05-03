@@ -8,7 +8,7 @@ import Task from "./task";
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
-const Tasks = () => {
+const Tasks = ({ navigation }) => {
   const { tasks } = useTasks();
 
   const y = new Animated.Value(0);
@@ -31,7 +31,9 @@ const Tasks = () => {
   return (
     <AnimatedFlatList
       data={tasks}
-      renderItem={({ item, index }) => <Task task={item} index={index} y={y} />}
+      renderItem={({ item, index }) => (
+        <Task task={item} index={index} y={y} navigation={navigation} />
+      )}
       keyExtractor={(item, index) => item.id}
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}

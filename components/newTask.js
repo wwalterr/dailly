@@ -34,7 +34,7 @@ const activeText = "Yes";
 
 const inActiveText = "No";
 
-const message = "Goal created";
+const message = "Goal created!";
 
 const defaultEmoji = {};
 
@@ -56,6 +56,8 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
   const [category, setCategory] = useState("");
 
   const resetFields = () => {
+    Keyboard.dismiss();
+
     setText("");
 
     setTextError(false);
@@ -83,8 +85,6 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
           name="close"
           size={20}
           onPress={() => {
-            Keyboard.dismiss();
-
             resetFields();
 
             hideNewTask();
@@ -126,9 +126,11 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
           activeText={activeText}
           inActiveText={inActiveText}
           value={increment}
-          onValueChange={() =>
-            setIncrement((previousIncrement) => !previousIncrement)
-          }
+          onValueChange={() => {
+            Keyboard.dismiss();
+
+            setIncrement((previousIncrement) => !previousIncrement);
+          }}
           circleSize={18}
           circleBorderWidth={0}
           barHeight={25}
@@ -151,7 +153,11 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
           activeText={activeText}
           inActiveText={inActiveText}
           value={remind}
-          onValueChange={() => setRemind((previousRemind) => !previousRemind)}
+          onValueChange={() => {
+            Keyboard.dismiss();
+
+            setRemind((previousRemind) => !previousRemind);
+          }}
           circleSize={18}
           circleBorderWidth={0}
           barHeight={25}
@@ -169,7 +175,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
       <View style={[styles.row, styles.rowCategory]}>
         <Text style={styles.textCategory}>
-          Choose a emoji to identify your goal: {emoji.emoji}
+          Choose an emoji to your goal {emoji.emoji}
         </Text>
 
         <EmojiPicker
@@ -182,7 +188,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
         {emojiError ? (
           <Text style={styles.textError}>
-            To create a goal you need to choose a emoji!
+            To create a goal you need to choose an emoji!
           </Text>
         ) : null}
       </View>
@@ -190,6 +196,8 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
       <View style={[styles.row, styles.rowButton]}>
         <TouchableOpacity
           onPress={async () => {
+            Keyboard.dismiss();
+
             if (!text) {
               setTextError(true);
 
@@ -214,7 +222,6 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
             createTask({
               id: generateRandomCode(),
-              category: "",
               text: text.trim(),
               remind,
               ...(remind ? { identifier } : {}),
@@ -230,8 +237,6 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
                 duration: Snackbar.LENGTH_SHORT,
               });
             else ToastAndroid.show(message, ToastAndroid.SHORT);
-
-            Keyboard.dismiss();
 
             resetFields();
 
@@ -252,7 +257,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     width: "100%",
     height: "65%",
-    minHeight: Dimensions.get("window").height - 248,
+    minHeight: Dimensions.get("window").height / 2,
     zIndex: 999,
     position: "absolute",
     bottom: 0,

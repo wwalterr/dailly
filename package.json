@@ -26,6 +26,7 @@
     "react-native-reanimated": "^2.1.0",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "~3.0.0",
+    "react-native-simple-markdown": "^1.1.0",
     "react-native-switch": "https://github.com/shahen94/react-native-switch",
     "react-native-web": "~0.13.12"
   },

@@ -939,13 +939,6 @@ const emojisCategorized = {
       skin_tones: true,
     },
     {
-      emoji: "🤏",
-      description: "pinching hand",
-      category: "People & Body",
-      aliases: ["pinching_hand"],
-      skin_tones: true,
-    },
-    {
       emoji: "✌️",
       description: "victory hand",
       category: "People & Body",
@@ -1026,14 +1019,14 @@ const emojisCategorized = {
       emoji: "👍",
       description: "thumbs up",
       category: "People & Body",
-      aliases: ["+1", "thumbsup"],
+      aliases: ["thumbsup"],
       skin_tones: true,
     },
     {
       emoji: "👎",
       description: "thumbs down",
       category: "People & Body",
-      aliases: ["-1", "thumbsdown"],
+      aliases: ["thumbsdown"],
       skin_tones: true,
     },
     {
@@ -1134,18 +1127,6 @@ const emojisCategorized = {
       skin_tones: true,
     },
     {
-      emoji: "🦾",
-      description: "mechanical arm",
-      category: "People & Body",
-      aliases: ["mechanical_arm"],
-    },
-    {
-      emoji: "🦿",
-      description: "mechanical leg",
-      category: "People & Body",
-      aliases: ["mechanical_leg"],
-    },
-    {
       emoji: "🦵",
       description: "leg",
       category: "People & Body",
@@ -1164,13 +1145,6 @@ const emojisCategorized = {
       description: "ear",
       category: "People & Body",
       aliases: ["ear"],
-      skin_tones: true,
-    },
-    {
-      emoji: "🦻",
-      description: "ear with hearing aid",
-      category: "People & Body",
-      aliases: ["ear_with_hearing_aid"],
       skin_tones: true,
     },
     {
