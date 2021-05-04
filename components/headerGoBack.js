@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
   },
   icon: { marginRight: 8 },
   text: {
-    fontFamily: "Inter_500Medium",
-    fontSize: 16,
+    fontFamily: "Inter_600SemiBold",
+    fontSize: 14,
     color: theme.color.black.main,
   },
 });

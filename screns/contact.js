@@ -57,9 +57,10 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textDecorationLine: "underline",
-    fontFamily: "Inter_600SemiBold",
+    fontFamily: "Inter_400Regular",
     fontSize: 14,
     color: theme.color.black.main,
+    textDecorationLine: "underline",
   },
 });
 
