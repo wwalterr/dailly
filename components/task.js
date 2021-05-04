@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   View,
@@ -11,6 +11,8 @@ import {
   Platform,
   StyleSheet,
 } from "react-native";
+
+import { AnimatedEmoji } from "react-native-animated-emoji";
 
 import theme from "../theme";
 
@@ -28,6 +30,8 @@ const message = "Goal removed!";
 
 const Task = ({ task, index, y, navigation }) => {
   const { removeTask, updateTask } = useTasks();
+
+  const [emojiCloud, setEmojiCloud] = useState(false);
 
   const position = Animated.subtract(index * task_height, y);
 
@@ -73,7 +77,48 @@ const Task = ({ task, index, y, navigation }) => {
       <View style={styles.containerHeader}>
         <Text style={styles.createdAt}>{task.createdAt}</Text>
 
-        <Text style={styles.emoji}>{task.emoji.emoji}</Text>
+        <TouchableOpacity
+          onPress={() => {
+            setEmojiCloud(true);
+          }}
+          activeOpacity={0.8}
+          key={"emoji"}
+        >
+          <Text style={styles.emoji}>{task.emoji.emoji}</Text>
+        </TouchableOpacity>
+
+        {emojiCloud ? (
+          <>
+            <AnimatedEmoji
+              index={index}
+              style={{ bottom: 0 }}
+              name={task.emoji.aliases[0]}
+              size={35}
+              duration={3500}
+              onAnimationCompleted={() => {}}
+            />
+
+            <AnimatedEmoji
+              index={index + 1}
+              style={{ bottom: 35 }}
+              name={task.emoji.aliases[0]}
+              size={40}
+              duration={3500}
+              onAnimationCompleted={() => {}}
+            />
+
+            <AnimatedEmoji
+              index={index + 2}
+              style={{ bottom: -45 }}
+              name={task.emoji.aliases[0]}
+              size={35}
+              duration={3550}
+              onAnimationCompleted={() => {
+                setEmojiCloud(false);
+              }}
+            />
+          </>
+        ) : null}
       </View>
 
       <View style={styles.containerOutsider}>
