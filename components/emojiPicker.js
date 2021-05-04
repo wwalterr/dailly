@@ -31,7 +31,7 @@ const EmojiPicker = ({
           setCategory("");
         }}
         activeOpacity={0.8}
-        key={item.description}
+        key={item.aliases[0]}
         style={styles.emojiButton}
       >
         <Text style={styles.emoji}>{item.emoji}</Text>
