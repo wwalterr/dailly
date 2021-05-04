@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
   emailText: {
     fontFamily: "Inter_400Regular",
-    fontSize: 14,
+    fontSize: 16,
     color: theme.color.black.main,
   },
   button: {
@@ -57,6 +57,9 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textDecorationLine: "underline",
+    fontFamily: "Inter_600SemiBold",
+    fontSize: 16,
+    color: theme.color.black.main,
   },
 });
 
