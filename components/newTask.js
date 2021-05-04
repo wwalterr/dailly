@@ -34,7 +34,7 @@ const activeText = "Yes";
 
 const inActiveText = "No";
 
-const message = "Goal created!";
+const messageNewGoal = "Goal created!";
 
 const defaultEmoji = {};
 
@@ -231,10 +231,10 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
             if (Platform.OS != "android")
               Snackbar.show({
-                text: message,
+                text: messageNewGoal,
                 duration: Snackbar.LENGTH_SHORT,
               });
-            else ToastAndroid.show(message, ToastAndroid.SHORT);
+            else ToastAndroid.show(messageNewGoal, ToastAndroid.SHORT);
 
             resetFields();
 

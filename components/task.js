@@ -26,7 +26,9 @@ const task_margin = 16;
 
 const task_height = 145 + task_margin * 2;
 
-const message = "Goal removed!";
+const messageRemoveGoal = "Goal removed!";
+
+const messageDecreaseCounter = "No negative numbers!";
 
 const Task = ({ task, index, y, navigation }) => {
   const { removeTask, updateTask } = useTasks();
@@ -94,25 +96,25 @@ const Task = ({ task, index, y, navigation }) => {
               index={index}
               style={{ bottom: 0 }}
               name={task.emoji.aliases[0]}
-              size={35}
+              size={25}
               duration={3500}
               onAnimationCompleted={() => {}}
             />
 
             <AnimatedEmoji
               index={index + 1}
-              style={{ bottom: 35 }}
+              style={{ bottom: 40 }}
               name={task.emoji.aliases[0]}
-              size={40}
+              size={15}
               duration={3500}
               onAnimationCompleted={() => {}}
             />
 
             <AnimatedEmoji
               index={index + 2}
-              style={{ bottom: -45 }}
+              style={{ bottom: -60 }}
               name={task.emoji.aliases[0]}
-              size={35}
+              size={25}
               duration={3550}
               onAnimationCompleted={() => {
                 setEmojiCloud(false);
@@ -144,10 +146,10 @@ const Task = ({ task, index, y, navigation }) => {
 
                   if (Platform.OS != "android")
                     Snackbar.show({
-                      text: message,
+                      text: messageRemoveGoal,
                       duration: Snackbar.LENGTH_SHORT,
                     });
-                  else ToastAndroid.show(message, ToastAndroid.SHORT);
+                  else ToastAndroid.show(messageRemoveGoal, ToastAndroid.SHORT);
                 }}
                 activeOpacity={0.8}
                 key={"remove"}
@@ -192,11 +194,23 @@ const Task = ({ task, index, y, navigation }) => {
 
             <TouchableOpacity
               onPress={() => {
-                if (task.counter >= 1)
+                if (task.counter >= 1) {
                   updateTask(task.id, {
                     ...task,
                     counter: task.counter - 1,
                   });
+                } else {
+                  if (Platform.OS != "android")
+                    Snackbar.show({
+                      text: messageDecreaseCounter,
+                      duration: Snackbar.LENGTH_SHORT,
+                    });
+                  else
+                    ToastAndroid.show(
+                      messageDecreaseCounter,
+                      ToastAndroid.SHORT
+                    );
+                }
               }}
               activeOpacity={0.8}
               key={"minus"}
