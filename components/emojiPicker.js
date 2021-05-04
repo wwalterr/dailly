@@ -28,7 +28,7 @@ const EmojiPicker = ({
 
           setEmojiError(false);
 
-		  setCategory("")
+          setCategory("");
         }}
         activeOpacity={0.8}
         key={item.description}
@@ -78,6 +78,7 @@ const EmojiPicker = ({
           renderItem={renderItem}
           keyExtractor={(item) => item.aliases[0]}
           horizontal={true}
+          maxToRenderPerBatch={5}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
           style={styles.flatListEmojis}
@@ -114,6 +115,7 @@ const styles = StyleSheet.create({
   },
   flatListEmojis: {
     height: 45,
+    maxWidth: "100%",
   },
   emojiButton: {},
   emoji: {

@@ -19,9 +19,9 @@ const PrivacyPolicy = () => {
 
 		This service is provided at no cost and is intended for use as is.{'\n\n'}
 
-		This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my service.{'\n\n'}
+		This page is used to inform visitors regarding the policies with the collection, use, and disclosure of Personal Information if anyone decided to use the service.{'\n\n'}
 
-		If you choose to use my service, then you agree to the collection and use of information in relation to this policy. The Personal Information that I collect is used for providing and improving the service. I will not use or share your information with anyone except as described in this Privacy Policy.{'\n\n'}
+		If you choose to use the service, then you agree to the collection and use of information in relation to this policy. The Personal Information that I collect is used for providing and improving the service. I will not use or share your information with anyone except as described in this Privacy Policy.{'\n\n'}
 
 		The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which is accessible at Dailly unless otherwise defined in this Privacy Policy.{'\n\n\n'}
 
@@ -37,7 +37,7 @@ const PrivacyPolicy = () => {
 
 		**Log Data**{'\n\n'}
 
-		I want to inform you that whenever you use my service, in a case of an error in the app I collect data and information (through third party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing my service, the time and date of your use of the service, and other statistics.{'\n\n\n'}
+		I want to inform you that whenever you use the service, in a case of an error in the app I collect data and information (through third party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing the service, the time and date of your use of the service, and other statistics.{'\n\n\n'}
 
 		**Cookies**{'\n\n'}
 
@@ -74,9 +74,9 @@ const PrivacyPolicy = () => {
 
 		This policy is effective as of 2021-01-01.{'\n\n\n'}
 
-		{/* **Contact Us**{'\n\n'}
+		**Contact Us**
 
-		If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at [dailly@dailly.com](mailto:dailly@dailly.com).{'\n\n'} */}
+		If you have any questions or suggestions about the Privacy Policy, do not hesitate to contact me at [hello.dailly@gmail.com](mailto:hello.dailly@gmail.com).
 	  </Markdown>
     </ScrollView>
   );

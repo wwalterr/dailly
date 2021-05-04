@@ -37,6 +37,14 @@ const Header = ({ newTaskButton, navigation }) => {
       {options ? (
         <View style={[styles.column, styles.columnMenu]}>
           <TouchableOpacity
+            onPress={() => navigation.navigate("Contact")}
+            activeOpacity={0.8}
+            key={"contact"}
+          >
+            <Text style={styles.textMenu}>Contact</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
             onPress={() => navigation.navigate("Privacy Policy")}
             activeOpacity={0.8}
             key={"privacy-policy"}
@@ -124,6 +132,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_400Regular",
     fontSize: 14,
     color: theme.color.black.main,
+    marginTop: 16,
   },
 });
 
