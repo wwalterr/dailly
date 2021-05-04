@@ -1,13 +1,28 @@
 import React from "react";
 
-import { View, Text } from "react-native";
+import { Text, StyleSheet } from "react-native";
 
-const TaskUpdateScreen = () => {
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import theme from "../theme";
+
+import HeaderGoBack from "../components/headerGoBack";
+
+const TaskUpdateScreen = ({ route, navigation }) => {
   return (
-    <View>
-      <Text>Task Update</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <HeaderGoBack navigation={navigation} />
+
+      <Text>{JSON.stringify(route.params)}</Text>
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.color.white.main,
+  },
+});
 
 export default TaskUpdateScreen;

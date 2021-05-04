@@ -85,13 +85,13 @@ const PrivacyPolicy = () => {
 const markdownStyles = {
   text: {
     fontFamily: "Inter_400Regular",
-    fontSize: 16,
+    fontSize: 14,
     color: theme.color.black.main,
 	marginBottom: 4
   },
   strong: {
     fontFamily: "Inter_400Regular",
-	fontSize: 16,
+	fontSize: 14,
     fontWeight: "bold",
     color: theme.color.black.main,
     marginTop: 16,

@@ -114,7 +114,7 @@ const Task = ({ task, index, y, navigation }) => {
 
               <TouchableOpacity
                 onPress={async () => {
-                  navigation.navigate("Update Task");
+                  navigation.navigate("Update Task", task);
                 }}
                 activeOpacity={0.8}
                 key={"update"}
@@ -186,7 +186,6 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_300Light",
     fontSize: 14,
     color: theme.color.white.main,
-    backgroundColor: theme.color.black.main,
   },
   emoji: {
     fontSize: 22,
