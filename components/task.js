@@ -83,6 +83,7 @@ const Task = ({ task, index, y, navigation }) => {
           }}
           activeOpacity={0.8}
           key={"emoji"}
+          style={styles.emojiButton}
         >
           <Text style={styles.emoji}>{task.emoji.emoji}</Text>
         </TouchableOpacity>
@@ -232,6 +233,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: theme.color.white.main,
   },
+  emojiButton: {},
   emoji: {
     fontSize: 22,
   },
