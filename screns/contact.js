@@ -20,7 +20,7 @@ const ContactScreen = ({ navigation }) => {
       <HeaderGoBack navigation={navigation} />
 
       <View style={styles.containerEmail}>
-        <Text style={styles.emailText}>Contact us at:</Text>
+        <Text style={styles.emailText}>Contact us at</Text>
 
         <TouchableOpacity
           onPress={() => Linking.openURL("mailto:hello.dailly@gmail.com")}
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     color: theme.color.black.main,
   },
   button: {
-    marginLeft: 8,
+    marginLeft: 4,
   },
   buttonText: {
     textDecorationLine: "underline",

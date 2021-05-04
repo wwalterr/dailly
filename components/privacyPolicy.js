@@ -23,15 +23,15 @@ const PrivacyPolicy = () => {
 
 		We don't collect any type of data. We don't store any type of data in a database. We don't use any tracker tool.{'\n\n'}
 
-		For privacy purposes we only store data in your device. The security is based at the the way you use your device or provide access to third parties.{'\n\n'}
+		For privacy purposes we only store data in your device, thus the security of this data its your responsibility.{'\n\n'}
 
 		**Log data**{'\n\n'}
 
-		In a case of an error in the application we don't collect any type of log from your device. If you find some error you can contact us using the email at the end of this page or through the contact page.{'\n\n'}
+		In case of an error in the application we don't collect any type of log from your device. You can contact us, using the email at the end of this page, to let us know and provide you support.{'\n\n'}
 
 		**Cookies**{'\n\n'}
 
-		Cookies are files with a small amount of data that are commonly used as anonymous unique identifiers. These are sent to your browser from the websites that you visit and are stored on your device's internal memory.{'\n\n'}
+		Cookies are files with a small amount of data that are commonly used as anonymous unique identifiers. These are sent to your browser from the websites that you visit and are stored on your device.{'\n\n'}
 
 		This service does not use these “cookies” explicitly. However, the application may use third party code and libraries that use “cookies” to collect information and improve their services. You have the option to either accept or refuse these cookies and know when a cookie is being sent to your device.{'\n\n'}
 
@@ -43,7 +43,7 @@ const PrivacyPolicy = () => {
 			* To provide the service on our behalf;{'\n\n'}
 			* To perform service-related services;{'\n\n'}
 
-		We want to inform users of this service that these third parties have access to your Personal Information. The reason is to perform the tasks assigned to them on our behalf. However, they are obligated not to disclose or use the information for any other purpose.{'\n\n'}
+		We want to inform users of this service that these third parties have no access to your personal information.{'\n\n'}
 
 		**Security**{'\n\n'}
 
@@ -51,7 +51,7 @@ const PrivacyPolicy = () => {
 
 		**Links to other sites**{'\n\n'}
 
-		This service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by me. Therefore, we strongly advise you to review the Privacy Policy of these websites. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.{'\n\n'}
+		This service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by us. Therefore, we strongly advise you to review the Privacy Policy of these websites. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.{'\n\n'}
 
 		**Children’s privacy**{'\n\n'}
 

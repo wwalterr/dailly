@@ -196,8 +196,6 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
       <View style={[styles.row, styles.rowButton]}>
         <TouchableOpacity
           onPress={async () => {
-            Keyboard.dismiss();
-
             if (!text) {
               setTextError(true);
 
@@ -214,7 +212,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
             if (remind) {
               identifier = await schedulePushNotification({
-                title: "Check your daily goal 🛸",
+                title: `Check your daily goal ${emoji.emoji}`,
                 body: text,
                 vibrate: true,
               });

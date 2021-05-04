@@ -236,6 +236,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_500Medium",
     fontSize: 24,
     color: theme.color.white.main,
+    paddingRight: 2,
   },
   containerActions: {
     flex: 0.15,
