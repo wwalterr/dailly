@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 import { Entypo } from "@expo/vector-icons";
 
@@ -8,8 +8,10 @@ import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
 
-const Header = ({ newTaskButton }) => {
+const Header = ({ newTaskButton, navigation }) => {
   const { tasks } = useTasks();
+
+  const [options, setOptions] = useState();
 
   return (
     <View style={styles.container}>
@@ -22,20 +24,41 @@ const Header = ({ newTaskButton }) => {
           <Text style={styles.textSlogan}>Relax /</Text>
         </View>
 
-        <Entypo name="dots-three-horizontal" size={24} color="black" />
+        <Entypo
+          name="dots-three-horizontal"
+          size={24}
+          color={theme.color.black.main}
+          onPress={() => {
+            setOptions((previousOptions) => !previousOptions);
+          }}
+        />
       </View>
 
-      <View style={[styles.column, styles.columnPresentation]}>
-        <View style={styles.columnPresentationContainer}>
-          <Text style={styles.textAmountTasks}>{tasks.length}</Text>
-
-          <Text style={styles.textAmountTasksDescription}>
-            {tasks.length === 1 ? "Goal" : "Goals"}
-          </Text>
+      {options ? (
+        <View style={[styles.column, styles.columnMenu]}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Privacy Policy")}
+            activeOpacity={0.8}
+            key={"privacy-policy"}
+          >
+            <Text style={styles.textMenu}>Privacy Policy</Text>
+          </TouchableOpacity>
         </View>
+      ) : null}
 
-        <View style={styles.columnNewTaskContainer}>{newTaskButton}</View>
-      </View>
+      {!options ? (
+        <View style={[styles.column, styles.columnPresentation]}>
+          <View style={styles.columnPresentationContainer}>
+            <Text style={styles.textAmountTasks}>{tasks.length}</Text>
+
+            <Text style={styles.textAmountTasksDescription}>
+              {tasks.length === 1 ? "Goal" : "Goals"}
+            </Text>
+          </View>
+
+          <View style={styles.columnNewTaskContainer}>{newTaskButton}</View>
+        </View>
+      ) : null}
     </View>
   );
 };
@@ -75,7 +98,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textAmountTasks: {
-    flex: 0.75,
     lineHeight: 90,
     fontFamily: "Inter_900Black",
     fontSize: 90,
@@ -90,8 +112,18 @@ const styles = StyleSheet.create({
     flex: 0.25,
     justifyContent: "flex-end",
     paddingBottom: 2,
-    borderBottomWidth: 4,
+    borderBottomWidth: 2,
     borderBottomColor: theme.color.black.main,
+  },
+  columnMenu: {
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+  },
+  textMenu: {
+    fontFamily: "Inter_400Regular",
+    fontSize: 14,
+    color: theme.color.black.main,
   },
 });
 

@@ -4,10 +4,16 @@ import { View, Text, StyleSheet } from "react-native";
 
 import { MaterialIcons } from "@expo/vector-icons";
 
+import theme from "../theme";
+
 const NoTask = () => {
   return (
     <View style={styles.container}>
-      <MaterialIcons name="emoji-flags" size={68} color="black" />
+      <MaterialIcons
+        name="emoji-flags"
+        size={68}
+        color={theme.color.black.main}
+      />
 
       <Text style={styles.text}>You don't have any goals</Text>
     </View>

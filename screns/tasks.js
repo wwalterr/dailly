@@ -43,7 +43,10 @@ const TasksScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header newTaskButton={<NewTaskButton showNewTask={showNewTask} />} />
+      <Header
+        newTaskButton={<NewTaskButton showNewTask={showNewTask} />}
+        navigation={navigation}
+      />
 
       {tasks.length ? <Tasks navigation={navigation} /> : <NoTask />}
 

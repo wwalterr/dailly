@@ -16,6 +16,7 @@ const theme = {
     },
     blue: {
       light: "#f1f5fe",
+      main: "#6492cd",
     },
     red: {
       main: "#fc1f3d",

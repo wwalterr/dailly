@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 22,
     marginVertical: task_margin,
     borderRadius: 5,
-    padding: 16,
+    padding: 20,
     backgroundColor: theme.color.black.main,
   },
   containerHeader: {
@@ -216,7 +216,9 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     paddingLeft: 4,
   },
-  counterPlus: {},
+  counterPlus: {
+    paddingHorizontal: 6,
+  },
   plus: {
     fontFamily: "Inter_500Medium",
     fontSize: 24,
@@ -226,8 +228,11 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_500Medium",
     fontSize: 24,
     color: theme.color.white.main,
+    paddingHorizontal: 6,
   },
-  counterMinus: {},
+  counterMinus: {
+    paddingHorizontal: 6,
+  },
   minus: {
     fontFamily: "Inter_500Medium",
     fontSize: 24,
