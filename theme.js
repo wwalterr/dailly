@@ -21,7 +21,18 @@ const theme = {
       main: "#fc1f3d",
     },
   },
-  cards: ["#ebf1fd", "#fcdb99", "#f1bdd3", "#000000"],
+  cards: [
+    "#000000",
+    "#b0b6c7",
+    "#ebf1fd",
+    "#ef5640",
+    "#f6991e",
+    "#fcdb99",
+    "#7fe3fa",
+    "#73e8ac",
+    "#f1bdd3",
+    "#827ffa",
+  ],
   fonts: ["#ffffff", "#000000"],
 };
 
