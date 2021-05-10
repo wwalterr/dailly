@@ -13,6 +13,10 @@ import {
 
 import { Switch } from "react-native-switch";
 
+import DateTimePicker from "@react-native-community/datetimepicker";
+
+import { createIconSetFromFontello, Ionicons } from "@expo/vector-icons";
+
 import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
@@ -44,6 +48,12 @@ const UpdateTask = ({ task }) => {
   const [emoji, setEmoji] = useState(task.emoji);
 
   const [category, setCategory] = useState("");
+
+  const [date, setDate] = useState(
+    task.remindTime ? new Date(task.remindTime) : new Date()
+  );
+
+  const [showTimePicker, setShowTimePicker] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -126,6 +136,43 @@ const UpdateTask = ({ task }) => {
         />
       </View>
 
+      {remind ? (
+        <View style={[styles.row, styles.rowTimePicker]}>
+          <Text style={styles.text}>
+            When do you want to receive the remind
+          </Text>
+
+          <Ionicons
+            name="timer"
+            size={24}
+            color="black"
+            onPress={() =>
+              setShowTimePicker(
+                (previousShowTimePicker) => !previousShowTimePicker
+              )
+            }
+            style={styles.timePickerIcon}
+          />
+
+          {showTimePicker ? (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode={"time"}
+              textColor="black"
+              is24Hour={true}
+              display="default"
+              onChange={(event, value) => {
+                setShowTimePicker(false);
+
+                setDate(new Date(value));
+              }}
+              style={styles.datePicker}
+            />
+          ) : null}
+        </View>
+      ) : null}
+
       <View style={[styles.row, styles.rowCategory]}>
         <View style={styles.containerCategory}>
           <Text style={styles.textCategory}>Choose an emoji to your goal</Text>
@@ -159,11 +206,18 @@ const UpdateTask = ({ task }) => {
               await cancelPushNotification(_task.identifier);
 
             if (remind) {
-              identifier = await schedulePushNotification({
-                title: `Check your daily goal ${emoji.emoji}`,
-                body: text,
-                vibrate: true,
-              });
+              identifier = await schedulePushNotification(
+                {
+                  title: `Check your daily goal ${emoji.emoji}`,
+                  body: text,
+                  vibrate: true,
+                },
+                {
+                  hour: date.getHours(),
+                  minute: date.getMinutes(),
+                  repeats: true,
+                }
+              );
             }
 
             updateTask(task.id, {
@@ -171,6 +225,7 @@ const UpdateTask = ({ task }) => {
               text: text.trim(),
               remind,
               ...(remind ? { identifier } : {}),
+              ...(remind ? { remindTime: date.getTime() } : {}),
               increment,
               ...(increment ? { counter: 0 } : {}),
               emoji,
@@ -242,6 +297,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
   },
+  rowTimePicker: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+  },
+  timePickerIcon: {},
+  datePicker: {},
   rowCategory: {
     flexDirection: "column",
   },
@@ -258,7 +319,7 @@ const styles = StyleSheet.create({
   },
   textEmoji: {
     fontSize: 22,
-    marginLeft: 5,
+    marginLeft: 14,
   },
   rowButton: {
     height: 45,

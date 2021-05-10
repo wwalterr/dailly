@@ -225,6 +225,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
               text: text.trim(),
               remind,
               ...(remind ? { identifier } : {}),
+              ...(remind ? { remindTime: 1620646220921 } : {}),
               increment,
               ...(increment ? { counter: 0 } : {}),
               emoji,
@@ -334,7 +335,7 @@ const styles = StyleSheet.create({
   },
   textEmoji: {
     fontSize: 22,
-    marginLeft: 5,
+    marginLeft: 14,
   },
   rowButton: {
     height: 45,
