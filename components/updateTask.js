@@ -58,7 +58,11 @@ const UpdateTask = ({ task, navigation }) => {
 
   const [cardColor, setCardColor] = useState(task.cardColor);
 
+  const [showCardColor, setShowCardColor] = useState(false);
+
   const [cardFontColor, setCardFontColor] = useState(task.cardFontColor);
+
+  const [showCardFontColor, setShowCardFontColor] = useState(false);
 
   const [colorError, setColorError] = useState(false);
 
@@ -218,6 +222,7 @@ const UpdateTask = ({ task, navigation }) => {
       <View style={[styles.row, styles.rowCategory]}>
         <View style={styles.containerCategory}>
           <Text style={styles.textCategory}>Choose an emoji to your goal</Text>
+
           <Text style={[styles.textCategory, styles.textEmoji]}>
             {emoji.emoji}
           </Text>
@@ -232,18 +237,33 @@ const UpdateTask = ({ task, navigation }) => {
       </View>
 
       <View style={[styles.row, styles.rowCardColors]}>
-        <Text style={styles.text}>Choose a color to the card</Text>
+        <View style={styles.containerColor}>
+          <Text style={styles.text}>Choose a color to the card</Text>
 
-        <FlatList
-          data={theme.cards}
-          renderItem={renderCardColors(setCardColor, cardColor)}
-          keyExtractor={(item) => item}
-          horizontal={true}
-          maxToRenderPerBatch={5}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          style={styles.flatListColors}
-        />
+          <Ionicons
+            name="color-filter"
+            size={26}
+            color={theme.color.black.main}
+            onPress={() => {
+              setShowCardColor(
+                (previousShowCardColor) => !previousShowCardColor
+              );
+            }}
+          />
+        </View>
+
+        {showCardColor ? (
+          <FlatList
+            data={theme.cards}
+            renderItem={renderCardColors(setCardColor, cardColor)}
+            keyExtractor={(item) => item}
+            horizontal={true}
+            maxToRenderPerBatch={5}
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+            style={styles.flatListColors}
+          />
+        ) : null}
 
         {colorError ? (
           <Text style={styles.textError}>
@@ -253,18 +273,33 @@ const UpdateTask = ({ task, navigation }) => {
       </View>
 
       <View style={[styles.row, styles.rowFontColors]}>
-        <Text style={styles.text}>Choose a color to the card' text</Text>
+        <View style={styles.containerColor}>
+          <Text style={styles.text}>Choose a color to the card' text</Text>
 
-        <FlatList
-          data={theme.fonts}
-          renderItem={renderCardColors(setCardFontColor, cardFontColor)}
-          keyExtractor={(item) => item}
-          horizontal={true}
-          maxToRenderPerBatch={5}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          style={styles.flatListColors}
-        />
+          <Ionicons
+            name="color-filter"
+            size={26}
+            color={theme.color.black.main}
+            onPress={() => {
+              setShowCardFontColor(
+                (previousShowCardFontColor) => !previousShowCardFontColor
+              );
+            }}
+          />
+        </View>
+
+        {showCardFontColor ? (
+          <FlatList
+            data={theme.fonts}
+            renderItem={renderCardColors(setCardFontColor, cardFontColor)}
+            keyExtractor={(item) => item}
+            horizontal={true}
+            maxToRenderPerBatch={5}
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+            style={styles.flatListColors}
+          />
+        ) : null}
 
         {colorError ? (
           <Text style={styles.textError}>
@@ -417,6 +452,10 @@ const styles = StyleSheet.create({
     marginLeft: 14,
   },
   rowCardColors: {},
+  containerColor: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
   flatListColors: {},
   colorPick: {
     alignItems: "center",
