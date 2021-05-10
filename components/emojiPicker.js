@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   },
   emojiButton: {},
   emoji: {
-    fontSize: 25,
+    fontSize: 22,
     marginRight: 10,
   },
 });

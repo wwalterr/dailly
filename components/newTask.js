@@ -172,9 +172,13 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
       </View>
 
       <View style={[styles.row, styles.rowCategory]}>
-        <Text style={styles.textCategory}>
-          Choose an emoji to your goal {emoji.emoji}
-        </Text>
+        <View style={styles.containerCategory}>
+          <Text style={styles.textCategory}>Choose an emoji to your goal</Text>
+
+          <Text style={[styles.textCategory, styles.textEmoji]}>
+            {emoji.emoji}
+          </Text>
+        </View>
 
         <EmojiPicker
           emoji={emoji}
@@ -317,11 +321,20 @@ const styles = StyleSheet.create({
   rowCategory: {
     flexDirection: "column",
   },
+  containerCategory: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   textCategory: {
     marginBottom: 10,
     fontFamily: "Inter_400Regular",
     fontSize: 14,
     color: theme.color.black.main,
+  },
+  textEmoji: {
+    fontSize: 22,
+    marginLeft: 5,
   },
   rowButton: {
     height: 45,
