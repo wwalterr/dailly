@@ -66,32 +66,35 @@ const UpdateTask = ({ task, navigation }) => {
 
   const [colorError, setColorError] = useState(false);
 
-  const renderCardColors = (setter, value) => ({ item }) => (
-    <TouchableOpacity
-      onPress={() => {
-        setter(item);
-      }}
-      activeOpacity={0.8}
-      key={item}
-      style={[styles.colorPick, { backgroundColor: item }]}
-    >
-      {value === item ? (
-        <Text
-          style={[
-            styles.highlight,
-            {
-              color:
-                item === theme.color.white.main
-                  ? theme.color.black.main
-                  : theme.color.white.main,
-            },
-          ]}
+  const renderCardColors =
+    (setter, value) =>
+    ({ item }) =>
+      (
+        <TouchableOpacity
+          onPress={() => {
+            setter(item);
+          }}
+          activeOpacity={0.8}
+          key={item}
+          style={[styles.colorPick, { backgroundColor: item }]}
         >
-          •
-        </Text>
-      ) : null}
-    </TouchableOpacity>
-  );
+          {value === item ? (
+            <Text
+              style={[
+                styles.highlight,
+                {
+                  color:
+                    item === theme.color.white.main
+                      ? theme.color.black.main
+                      : theme.color.white.main,
+                },
+              ]}
+            >
+              •
+            </Text>
+          ) : null}
+        </TouchableOpacity>
+      );
 
   const resetFields = () => {
     Keyboard.dismiss();
@@ -156,7 +159,7 @@ const UpdateTask = ({ task, navigation }) => {
       </View>
 
       <View style={[styles.row, styles.rowRemind]}>
-        <Text style={styles.text}>Do you want to receive daily reminds?</Text>
+        <Text style={styles.text}>Do you want to receive reminds?</Text>
 
         <Switch
           activeText={activeText}
@@ -185,7 +188,7 @@ const UpdateTask = ({ task, navigation }) => {
       {remind ? (
         <View style={[styles.row, styles.rowTimePicker]}>
           <Text style={styles.text}>
-            When do you want to receive the remind
+            When do you want to receive the reminds
           </Text>
 
           <Ionicons
@@ -267,7 +270,7 @@ const UpdateTask = ({ task, navigation }) => {
 
         {colorError ? (
           <Text style={styles.textError}>
-            The card and the card' font can't be the same color!
+            The card and the card' text can't be the same color!
           </Text>
         ) : null}
       </View>
@@ -303,7 +306,7 @@ const UpdateTask = ({ task, navigation }) => {
 
         {colorError ? (
           <Text style={styles.textError}>
-            The card and the card' font can't be the same color!
+            The card and the card' text can't be the same color!
           </Text>
         ) : null}
       </View>

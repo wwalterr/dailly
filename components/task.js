@@ -28,7 +28,7 @@ const task_height = 145 + task_margin * 2;
 
 const messageRemoveGoal = "Goal removed!";
 
-const messageDecreaseCounter = "No negative numbers!";
+const messageDecreaseCounter = "No negative goal!";
 
 const Task = ({ task, index, y, navigation }) => {
   const { removeTask, updateTask } = useTasks();

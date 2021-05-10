@@ -145,7 +145,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
       </View>
 
       <View style={[styles.row, styles.rowRemind]}>
-        <Text style={styles.text}>Do you want to receive daily reminds?</Text>
+        <Text style={styles.text}>Do you want to receive reminds?</Text>
 
         <Switch
           activeText={activeText}
