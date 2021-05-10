@@ -25,6 +25,10 @@ const TasksProvider = ({ children }) => {
     await AsyncStorage.setItem(key, JSON.stringify(_tasks));
   };
 
+  const findTask = async (id) => {
+    return tasks.find((task) => task.id === id);
+  };
+
   const updateTask = async (id, task) => {
     const _tasks = tasks.map((__task) => (__task.id == id ? task : __task));
 
@@ -43,7 +47,14 @@ const TasksProvider = ({ children }) => {
 
   return (
     <TasksContext.Provider
-      value={{ tasks, startTasks, createTask, updateTask, removeTask }}
+      value={{
+        tasks,
+        startTasks,
+        createTask,
+        findTask,
+        updateTask,
+        removeTask,
+      }}
     >
       {children}
     </TasksContext.Provider>

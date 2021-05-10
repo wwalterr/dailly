@@ -26,7 +26,7 @@ const EmojiPicker = ({
         onPress={() => {
           setEmoji(item);
 
-          setEmojiError(false);
+          if (setEmojiError) setEmojiError(false);
 
           setCategory("");
         }}

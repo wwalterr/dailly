@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -8,12 +8,14 @@ import theme from "../theme";
 
 import HeaderGoBack from "../components/headerGoBack";
 
+import UpdateTask from "../components/updateTask";
+
 const TaskUpdateScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <HeaderGoBack navigation={navigation} />
 
-      <Text>{JSON.stringify(route.params)}</Text>
+      <UpdateTask task={route.params} />
     </SafeAreaView>
   );
 };

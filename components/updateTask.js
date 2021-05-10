@@ -1,4 +1,4 @@
-import React, { useState, memo } from "react";
+import React, { useState } from "react";
 
 import {
   View,
@@ -8,23 +8,19 @@ import {
   ToastAndroid,
   Platform,
   Keyboard,
-  Dimensions,
   StyleSheet,
 } from "react-native";
 
 import { Switch } from "react-native-switch";
 
-import { Animated } from "react-native";
-
-import { AntDesign } from "@expo/vector-icons";
-
 import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
 
-import generateRandomCode from "../utils/random";
-
-import { schedulePushNotification } from "../utils/notifications";
+import {
+  schedulePushNotification,
+  cancelPushNotification,
+} from "../utils/notifications";
 
 import EmojiPicker from "./emojiPicker";
 
@@ -32,66 +28,25 @@ const activeText = "Yes";
 
 const inActiveText = "No";
 
-const messageNewGoal = "Goal created!";
+const messageNewGoal = "Goal updated!";
 
-const defaultEmoji = {};
+const UpdateTask = ({ task }) => {
+  const { updateTask, findTask } = useTasks();
 
-const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
-  const { createTask } = useTasks();
-
-  const [text, setText] = useState("");
+  const [text, setText] = useState(task.text);
 
   const [textError, setTextError] = useState(false);
 
-  const [remind, setRemind] = useState(false);
+  const [remind, setRemind] = useState(task.remind);
 
-  const [increment, setIncrement] = useState(false);
+  const [increment, setIncrement] = useState(task.increment);
 
-  const [emoji, setEmoji] = useState(defaultEmoji);
-
-  const [emojiError, setEmojiError] = useState(false);
+  const [emoji, setEmoji] = useState(task.emoji);
 
   const [category, setCategory] = useState("");
 
-  const resetFields = () => {
-    Keyboard.dismiss();
-
-    setText("");
-
-    setTextError(false);
-
-    setRemind(false);
-
-    setIncrement(false);
-
-    setEmoji(defaultEmoji);
-
-    setEmojiError(false);
-
-    setCategory("");
-  };
-
   return (
-    <Animated.View
-      style={{
-        ...styles.container,
-        transform: [{ translateY: newTaskTranslateY }],
-      }}
-    >
-      <View style={styles.rowClose}>
-        <AntDesign
-          name="close"
-          size={20}
-          onPress={() => {
-            resetFields();
-
-            hideNewTask();
-          }}
-          color={theme.color.gray.dark}
-          style={styles.closeIcon}
-        />
-      </View>
-
+    <View style={styles.container}>
       <View style={[styles.row, styles.rowText]}>
         <TextInput
           placeholder="Describe your goal"
@@ -112,7 +67,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
         {textError ? (
           <Text style={styles.textError}>
-            To create a goal you need to describe it!
+            You can't have a empty goal, describe your goal!
           </Text>
         ) : null}
       </View>
@@ -179,16 +134,9 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
         <EmojiPicker
           emoji={emoji}
           setEmoji={setEmoji}
-          setEmojiError={setEmojiError}
           category={category}
           setCategory={setCategory}
         />
-
-        {emojiError ? (
-          <Text style={styles.textError}>
-            To create a goal you need to choose an emoji!
-          </Text>
-        ) : null}
       </View>
 
       <View style={[styles.row, styles.rowButton]}>
@@ -200,13 +148,12 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
               return;
             }
 
-            if (!Object.keys(emoji).length) {
-              setEmojiError(true);
-
-              return;
-            }
-
             let identifier;
+
+            const _task = await findTask(task.id);
+
+            if (_task.identifier)
+              await cancelPushNotification(_task.identifier);
 
             if (remind) {
               identifier = await schedulePushNotification({
@@ -216,15 +163,15 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
               });
             }
 
-            createTask({
-              id: generateRandomCode(),
+            updateTask(task.id, {
+              id: task.id,
               text: text.trim(),
               remind,
               ...(remind ? { identifier } : {}),
               increment,
               ...(increment ? { counter: 0 } : {}),
               emoji,
-              createdAt: new Date().toLocaleDateString(),
+              createdAt: task.createdAt,
             });
 
             if (Platform.OS != "android")
@@ -234,51 +181,29 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
               });
             else ToastAndroid.show(messageNewGoal, ToastAndroid.SHORT);
 
-            resetFields();
-
-            hideNewTask();
+            Keyboard.dismiss();
           }}
           activeOpacity={0.8}
           style={styles.button}
         >
-          <Text style={styles.buttonText}>Create goal</Text>
+          <Text style={styles.buttonText}>Update goal</Text>
         </TouchableOpacity>
       </View>
-    </Animated.View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: "space-around",
-    width: "100%",
-    height: "65%",
-    minHeight: Dimensions.get("window").height / 2,
-    zIndex: 999,
-    position: "absolute",
-    bottom: 0,
     paddingHorizontal: 32,
-    borderTopEndRadius: 20,
-    borderTopStartRadius: 20,
-    elevation: 15,
-    shadowColor: theme.color.black.main,
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 5,
-    backgroundColor: theme.color.white.main,
   },
   row: {
     alignItems: "flex-start",
     justifyContent: "center",
     padding: 2,
   },
-  rowClose: {
-    alignSelf: "flex-end",
-    justifyContent: "flex-end",
-    padding: 1,
-    borderRadius: 5,
-  },
-  closeIcon: {},
   rowText: {
     flexDirection: "column",
   },
@@ -341,4 +266,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(NewTask);
+export default UpdateTask;
