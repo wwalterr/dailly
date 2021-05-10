@@ -16,7 +16,7 @@ import { Switch } from "react-native-switch";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 import theme from "../theme";
 
@@ -240,8 +240,8 @@ const UpdateTask = ({ task, navigation }) => {
         <View style={styles.containerColor}>
           <Text style={styles.text}>Choose a color to the card</Text>
 
-          <Ionicons
-            name="color-filter"
+          <MaterialIcons
+            name="invert-colors-on"
             size={26}
             color={theme.color.black.main}
             onPress={() => {
@@ -276,8 +276,8 @@ const UpdateTask = ({ task, navigation }) => {
         <View style={styles.containerColor}>
           <Text style={styles.text}>Choose a color to the card' text</Text>
 
-          <Ionicons
-            name="color-filter"
+          <MaterialIcons
+            name="invert-colors-on"
             size={26}
             color={theme.color.black.main}
             onPress={() => {
