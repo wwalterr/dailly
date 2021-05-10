@@ -230,6 +230,8 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
               ...(increment ? { counter: 0 } : {}),
               emoji,
               createdAt: new Date().toLocaleDateString(),
+              cardColor: theme.color.black.main,
+              cardFontColor: theme.color.white.main,
             });
 
             if (Platform.OS != "android")

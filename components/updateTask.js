@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import {
   View,
   TextInput,
+  FlatList,
   Text,
   TouchableOpacity,
   ToastAndroid,
@@ -15,7 +16,7 @@ import { Switch } from "react-native-switch";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-import { createIconSetFromFontello, Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 import theme from "../theme";
 
@@ -34,7 +35,7 @@ const inActiveText = "No";
 
 const messageNewGoal = "Goal updated!";
 
-const UpdateTask = ({ task }) => {
+const UpdateTask = ({ task, navigation }) => {
   const { updateTask, findTask } = useTasks();
 
   const [text, setText] = useState(task.text);
@@ -54,6 +55,47 @@ const UpdateTask = ({ task }) => {
   );
 
   const [showTimePicker, setShowTimePicker] = useState(false);
+
+  const [cardColor, setCardColor] = useState(task.cardColor);
+
+  const [cardFontColor, setCardFontColor] = useState(task.cardFontColor);
+
+  const [colorError, setColorError] = useState(false);
+
+  const renderCardColors = (setter, value) => ({ item }) => (
+    <TouchableOpacity
+      onPress={() => {
+        setter(item);
+      }}
+      activeOpacity={0.8}
+      key={item}
+      style={[styles.colorPick, { backgroundColor: item }]}
+    >
+      {value === item ? (
+        <Text
+          style={[
+            styles.highlight,
+            {
+              color:
+                item === theme.color.white.main
+                  ? theme.color.black.main
+                  : theme.color.white.main,
+            },
+          ]}
+        >
+          •
+        </Text>
+      ) : null}
+    </TouchableOpacity>
+  );
+
+  const resetFields = () => {
+    Keyboard.dismiss();
+
+    setTextError(false);
+
+    setColorError(false);
+  };
 
   return (
     <View style={styles.container}>
@@ -144,8 +186,8 @@ const UpdateTask = ({ task }) => {
 
           <Ionicons
             name="timer"
-            size={24}
-            color="black"
+            size={26}
+            color={theme.color.black.main}
             onPress={() =>
               setShowTimePicker(
                 (previousShowTimePicker) => !previousShowTimePicker
@@ -159,7 +201,7 @@ const UpdateTask = ({ task }) => {
               testID="dateTimePicker"
               value={date}
               mode={"time"}
-              textColor="black"
+              textColor={theme.color.black.main}
               is24Hour={true}
               display="default"
               onChange={(event, value) => {
@@ -189,11 +231,59 @@ const UpdateTask = ({ task }) => {
         />
       </View>
 
+      <View style={[styles.row, styles.rowCardColors]}>
+        <Text style={styles.text}>Choose a color to the card</Text>
+
+        <FlatList
+          data={theme.cards}
+          renderItem={renderCardColors(setCardColor, cardColor)}
+          keyExtractor={(item) => item}
+          horizontal={true}
+          maxToRenderPerBatch={5}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          style={styles.flatListColors}
+        />
+
+        {colorError ? (
+          <Text style={styles.textError}>
+            The card and the card' font can't be the same color!
+          </Text>
+        ) : null}
+      </View>
+
+      <View style={[styles.row, styles.rowFontColors]}>
+        <Text style={styles.text}>Choose a color to the card' text</Text>
+
+        <FlatList
+          data={theme.fonts}
+          renderItem={renderCardColors(setCardFontColor, cardFontColor)}
+          keyExtractor={(item) => item}
+          horizontal={true}
+          maxToRenderPerBatch={5}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          style={styles.flatListColors}
+        />
+
+        {colorError ? (
+          <Text style={styles.textError}>
+            The card and the card' font can't be the same color!
+          </Text>
+        ) : null}
+      </View>
+
       <View style={[styles.row, styles.rowButton]}>
         <TouchableOpacity
           onPress={async () => {
             if (!text) {
               setTextError(true);
+
+              return;
+            }
+
+            if (cardColor === cardFontColor) {
+              setColorError(true);
 
               return;
             }
@@ -230,6 +320,8 @@ const UpdateTask = ({ task }) => {
               ...(increment ? { counter: 0 } : {}),
               emoji,
               createdAt: task.createdAt,
+              cardColor,
+              cardFontColor,
             });
 
             if (Platform.OS != "android")
@@ -239,7 +331,9 @@ const UpdateTask = ({ task }) => {
               });
             else ToastAndroid.show(messageNewGoal, ToastAndroid.SHORT);
 
-            Keyboard.dismiss();
+            resetFields();
+
+            navigation.goBack();
           }}
           activeOpacity={0.8}
           style={styles.button}
@@ -300,6 +394,7 @@ const styles = StyleSheet.create({
   rowTimePicker: {
     flexDirection: "row",
     justifyContent: "flex-start",
+    alignItems: "center",
   },
   timePickerIcon: {},
   datePicker: {},
@@ -321,6 +416,24 @@ const styles = StyleSheet.create({
     fontSize: 22,
     marginLeft: 14,
   },
+  rowCardColors: {},
+  flatListColors: {},
+  colorPick: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 26,
+    height: 26,
+    borderRadius: 5,
+    marginRight: 14,
+    marginTop: 8,
+    borderWidth: 1,
+    borderColor: theme.color.gray.light,
+  },
+  highlight: {
+    fontSize: 25,
+    color: theme.color.white.main,
+  },
+  rowFontColors: {},
   rowButton: {
     height: 45,
   },

@@ -15,7 +15,7 @@ const TaskUpdateScreen = ({ route, navigation }) => {
     <SafeAreaView style={styles.container}>
       <HeaderGoBack navigation={navigation} />
 
-      <UpdateTask task={route.params} />
+      <UpdateTask task={route.params} navigation={navigation} />
     </SafeAreaView>
   );
 };

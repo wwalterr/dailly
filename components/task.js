@@ -65,6 +65,8 @@ const Task = ({ task, index, y, navigation }) => {
     outputRange: [0.5, 1, 1, 0.5],
   });
 
+  const cardFontColor = { color: task.cardFontColor };
+
   return (
     <Animated.View
       style={[
@@ -73,11 +75,12 @@ const Task = ({ task, index, y, navigation }) => {
           height: task_height,
           opacity,
           transform: [{ translateY }, { scale }],
+          backgroundColor: task.cardColor,
         },
       ]}
     >
       <View style={styles.containerHeader}>
-        <Text style={styles.createdAt}>{task.createdAt}</Text>
+        <Text style={[styles.createdAt, cardFontColor]}>{task.createdAt}</Text>
 
         <TouchableOpacity
           onPress={() => {
@@ -131,7 +134,7 @@ const Task = ({ task, index, y, navigation }) => {
               style={styles.containerText}
               contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
             >
-              <Text style={styles.text}>{task.text}</Text>
+              <Text style={[styles.text, cardFontColor]}>{task.text}</Text>
             </ScrollView>
           </View>
 
@@ -155,9 +158,9 @@ const Task = ({ task, index, y, navigation }) => {
                 key={"remove"}
                 style={styles.removeButton}
               >
-                <Text style={styles.remove}>Remove</Text>
+                <Text style={[styles.remove, cardFontColor]}>Remove</Text>
 
-                <Text style={styles.highlight}>•</Text>
+                <Text style={[styles.highlight, cardFontColor]}>•</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -168,7 +171,7 @@ const Task = ({ task, index, y, navigation }) => {
                 key={"update"}
                 style={styles.updateButton}
               >
-                <Text style={styles.update}>Update</Text>
+                <Text style={[styles.update, cardFontColor]}>Update</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -187,10 +190,10 @@ const Task = ({ task, index, y, navigation }) => {
               key={"plus"}
               style={styles.counterPlus}
             >
-              <Text style={styles.plus}>+</Text>
+              <Text style={[styles.plus, cardFontColor]}>+</Text>
             </TouchableOpacity>
 
-            <Text style={styles.counter}>{task.counter}</Text>
+            <Text style={[styles.counter, cardFontColor]}>{task.counter}</Text>
 
             <TouchableOpacity
               onPress={() => {
@@ -216,7 +219,7 @@ const Task = ({ task, index, y, navigation }) => {
               key={"minus"}
               style={styles.counterMinus}
             >
-              <Text style={styles.minus}>-</Text>
+              <Text style={[styles.minus, cardFontColor]}>-</Text>
             </TouchableOpacity>
           </View>
         ) : null}

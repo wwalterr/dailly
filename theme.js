@@ -22,6 +22,8 @@ const theme = {
       main: "#fc1f3d",
     },
   },
+  cards: ["#ebf1fd", "#fcdb99", "#f1bdd3", "#000000"],
+  fonts: ["#ffffff", "#000000"],
 };
 
 export default theme;
