@@ -20,6 +20,8 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import { registerRootComponent } from "expo";
 
+import { enableScreens } from "react-native-screens";
+
 import theme from "./theme";
 
 import { TasksProvider } from "./contexts/tasks";
@@ -38,9 +40,8 @@ const registerForPushNotificationsAsync = async () => {
   let token;
 
   if (Constants.isDevice) {
-    const {
-      status: existingStatus,
-    } = await Notifications.getPermissionsAsync();
+    const { status: existingStatus } =
+      await Notifications.getPermissionsAsync();
 
     let finalStatus = existingStatus;
 
@@ -87,17 +88,15 @@ const Application = () => {
       // console.log(token);
     });
 
-    notificationListener.current = Notifications.addNotificationReceivedListener(
-      (notification) => {
+    notificationListener.current =
+      Notifications.addNotificationReceivedListener((notification) => {
         // console.log(notification);
-      }
-    );
+      });
 
-    responseListener.current = Notifications.addNotificationResponseReceivedListener(
-      (response) => {
+    responseListener.current =
+      Notifications.addNotificationResponseReceivedListener((response) => {
         // console.log(notification);
-      }
-    );
+      });
 
     return () => {
       Notifications.removeNotificationSubscription(
@@ -118,6 +117,8 @@ const Application = () => {
   });
 
   if (!fontsLoaded) return <AppLoading />;
+
+  enableScreens();
 
   return (
     <NavigationContainer>
