@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   View,
@@ -68,6 +68,18 @@ const Task = ({ task, index, y, navigation }) => {
   });
 
   const cardFontColor = { color: task.cardFontColor };
+
+  useEffect(() => {
+    let closeRemoveStatus;
+    if (removeStatus)
+      closeRemoveStatus = setTimeout(() => {
+        setRemoveStatus(false);
+      }, 2500);
+
+    return () => {
+      clearTimeout(closeRemoveStatus);
+    };
+  }, [removeStatus, setRemoveStatus]);
 
   return (
     <Animated.View
