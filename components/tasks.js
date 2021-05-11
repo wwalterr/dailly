@@ -1,46 +1,39 @@
-import React from "react";
+import React, { useRef } from "react";
 
-import { Animated, FlatList, StyleSheet } from "react-native";
+import { Animated, StyleSheet } from "react-native";
 
 import { useTasks } from "../contexts/tasks";
 
 import Task from "./task";
 
-const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
-
 const Tasks = ({ navigation }) => {
   const { tasks } = useTasks();
 
-  const y = new Animated.Value(0);
+  const scrollY = useRef(new Animated.Value(0)).current;
 
-  const onScroll = Animated.event(
-    [
-      {
-        nativeEvent: {
-          contentOffset: {
-            y,
-          },
-        },
-      },
-    ],
-    {
-      useNativeDriver: true,
-    }
+  const renderItem = ({ item, index }) => (
+    <Task task={item} index={index} scrollY={scrollY} navigation={navigation} />
   );
 
   return (
-    <AnimatedFlatList
+    <Animated.FlatList
       data={tasks}
-      renderItem={({ item, index }) => (
-        <Task task={item} index={index} y={y} navigation={navigation} />
-      )}
+      renderItem={renderItem}
       keyExtractor={(item, index) => item.id}
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}
       bounces={false}
-      scrollEventThrottle={16}
       maxToRenderPerBatch={4}
-      {...{ onScroll }}
+      onScroll={Animated.event(
+        [
+          {
+            nativeEvent: {
+              contentOffset: { y: scrollY },
+            },
+          },
+        ],
+        { useNativeDriver: true }
+      )}
       style={styles.flatList}
     />
   );

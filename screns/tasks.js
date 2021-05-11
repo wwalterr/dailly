@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 
 import { Dimensions, StyleSheet } from "react-native";
 
@@ -23,9 +23,9 @@ import NewTask from "../components/newTask";
 const TasksScreen = ({ navigation }) => {
   const { tasks } = useTasks();
 
-  const newTaskTranslateY = useState(
+  const newTaskTranslateY = useRef(
     new Animated.Value(Dimensions.get("window").height)
-  )[0];
+  ).current;
 
   const showNewTask = () =>
     Animated.timing(newTaskTranslateY, {

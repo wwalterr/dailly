@@ -2,12 +2,10 @@ import React, { useState, useEffect } from "react";
 
 import {
   View,
-  ScrollView,
   Text,
   Share,
-  Dimensions,
-  TouchableOpacity,
   Animated,
+  TouchableOpacity,
   ToastAndroid,
   Platform,
   StyleSheet,
@@ -21,11 +19,11 @@ import { useTasks } from "../contexts/tasks";
 
 import { cancelPushNotification } from "../utils/notifications";
 
-const height = Dimensions.get("window").height - 64;
+const taskMargin = 16;
 
-const task_margin = 16;
+const taskPadding = 20;
 
-const task_height = 145 + task_margin * 2;
+const taskHeight = 145 + taskMargin * 2;
 
 const messageRemoveGoal = "Goal removed!";
 
@@ -51,51 +49,41 @@ const onShare = async (message) => {
   }
 };
 
-const Task = ({ task, index, y, navigation }) => {
+const Task = ({ task, index, scrollY, navigation }) => {
   const { removeTask, updateTask } = useTasks();
 
   const [emojiCloud, setEmojiCloud] = useState(false);
 
   const [removeStatus, setRemoveStatus] = useState(false);
 
-  const position = Animated.subtract(index * task_height, y);
-
-  const isDisappearing = -task_height;
-
-  const isAppearing = height;
-
-  const isTop = 0;
-
-  const isBottom = height - task_height;
-
-  const translateY = Animated.add(
-    y,
-    y.interpolate({
-      inputRange: [0, 0.00001 + index * task_height],
-      outputRange: [0, -index * (task_height + 2 * task_margin)],
-      extrapolateRight: "clamp",
-    })
-  );
-
-  const scale = position.interpolate({
-    inputRange: [isDisappearing, isTop, isBottom, isAppearing],
-    outputRange: [0.5, 1, 1, 0.5],
-    extrapolateRight: "clamp",
-  });
-
-  const opacity = position.interpolate({
-    inputRange: [isDisappearing, isTop, isBottom, isAppearing],
-    outputRange: [0.5, 1, 1, 0.5],
-  });
-
   const cardFontColor = { color: task.cardFontColor };
+
+  // const translateY = Animated.add(
+  //   scrollY,
+  //   scrollY.interpolate({
+  //     inputRange: [0, taskHeight],
+  //     outputRange: [1, -(taskHeight + taskMargin + taskPadding)],
+  //     // extrapolateRight: "extend",
+  //   })
+  // );
+
+  const scale = scrollY.interpolate({
+    inputRange: [-1, 0, taskHeight * index, taskHeight * (index + 2)],
+    outputRange: [1, 1, 1, 0],
+  });
+
+  const opacity = scrollY.interpolate({
+    inputRange: [-1, 0, taskHeight * index, taskHeight * (index + 0.25)],
+    outputRange: [1, 1, 1, 0],
+  });
 
   useEffect(() => {
     let closeRemoveStatus;
+
     if (removeStatus)
       closeRemoveStatus = setTimeout(() => {
         setRemoveStatus(false);
-      }, 2500);
+      }, 1500);
 
     return () => {
       clearTimeout(closeRemoveStatus);
@@ -107,10 +95,9 @@ const Task = ({ task, index, y, navigation }) => {
       style={[
         styles.container,
         {
-          height: task_height,
-          opacity,
-          transform: [{ translateY }, { scale }],
           backgroundColor: task.cardColor,
+          transform: [{ scale }], // Before scale:{ translateY }
+          opacity,
         },
       ]}
     >
@@ -165,12 +152,9 @@ const Task = ({ task, index, y, navigation }) => {
       <View style={styles.containerOutsider}>
         <View style={styles.containerInsider}>
           <View style={styles.containerContent}>
-            <ScrollView
-              style={styles.containerText}
-              contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-            >
+            <View style={styles.containerText}>
               <Text style={[styles.text, cardFontColor]}>{task.text}</Text>
-            </ScrollView>
+            </View>
           </View>
 
           <View style={styles.containerActions}>
@@ -286,11 +270,12 @@ const Task = ({ task, index, y, navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
+    height: taskHeight,
     justifyContent: "space-between",
     marginHorizontal: 22,
-    marginVertical: task_margin,
+    marginVertical: taskMargin,
     borderRadius: 5,
-    padding: 20,
+    padding: taskPadding,
     backgroundColor: theme.color.black.main,
   },
   containerHeader: {
@@ -324,6 +309,7 @@ const styles = StyleSheet.create({
   },
   containerText: {
     flex: 1,
+    justifyContent: "center",
   },
   text: {
     fontFamily: "Inter_600SemiBold",
