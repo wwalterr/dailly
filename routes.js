@@ -6,8 +6,6 @@ import TasksScreen from "./screns/tasks";
 
 import TaskUpdateScreen from "./screns/taskUpdate";
 
-import PrivacyPolicyScreen from "./screns/privacyPolicy";
-
 import ContactScreen from "./screns/contact";
 
 import { useTasks } from "./contexts/tasks";
@@ -32,8 +30,6 @@ const Routes = () => {
       <Stack.Screen name="Tasks" component={TasksScreen} />
 
       <Stack.Screen name="Update Task" component={TaskUpdateScreen} />
-
-      <Stack.Screen name="Privacy Policy" component={PrivacyPolicyScreen} />
 
       <Stack.Screen name="Contact" component={ContactScreen} />
     </Stack.Navigator>

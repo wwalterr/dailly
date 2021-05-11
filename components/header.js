@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Linking,
+  StyleSheet,
+} from "react-native";
 
 import { Entypo } from "@expo/vector-icons";
 
@@ -45,7 +51,11 @@ const Header = ({ newTaskButton, navigation }) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("Privacy Policy")}
+            onPress={() =>
+              Linking.openURL(
+                "https://audaxly.com/privacy-policy?code=kojej1j04hvs8e"
+              ).catch((error) => console.error("Couldn't load page", error))
+            }
             activeOpacity={0.8}
             key={"privacy-policy"}
           >
