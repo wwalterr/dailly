@@ -34,7 +34,7 @@ const messageDecreaseCounter = "No negative numbers!";
 const onShare = async (message) => {
   try {
     const result = await Share.share({
-      message,
+      message: `My daily goal is ${message.toLowerCase()}`,
     });
 
     if (result.action === Share.sharedAction) {

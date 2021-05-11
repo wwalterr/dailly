@@ -68,12 +68,14 @@ const UpdateTask = ({ task, navigation }) => {
   const [colorError, setColorError] = useState(false);
 
   const renderCardColors =
-    (setter, value) =>
+    (setter, value, setterVisible) =>
     ({ item }) =>
       (
         <TouchableOpacity
           onPress={() => {
             setter(item);
+
+            if (setterVisible) setterVisible(false);
           }}
           activeOpacity={0.8}
           key={item}
@@ -260,7 +262,11 @@ const UpdateTask = ({ task, navigation }) => {
         {showCardColor ? (
           <FlatList
             data={theme.color.cards}
-            renderItem={renderCardColors(setCardColor, cardColor)}
+            renderItem={renderCardColors(
+              setCardColor,
+              cardColor,
+              setShowCardColor
+            )}
             keyExtractor={(item) => item}
             horizontal={true}
             maxToRenderPerBatch={5}
@@ -297,7 +303,11 @@ const UpdateTask = ({ task, navigation }) => {
         {showCardFontColor ? (
           <FlatList
             data={theme.color.fonts}
-            renderItem={renderCardColors(setCardFontColor, cardFontColor)}
+            renderItem={renderCardColors(
+              setCardFontColor,
+              cardFontColor,
+              setShowCardFontColor
+            )}
             keyExtractor={(item) => item}
             horizontal={true}
             maxToRenderPerBatch={5}
@@ -399,7 +409,7 @@ const styles = StyleSheet.create({
     marginBottom: 48,
   },
   rowText: {
-    marginTop: 28,
+    marginTop: 12,
     flexDirection: "column",
   },
   textInput: {
@@ -488,7 +498,7 @@ const styles = StyleSheet.create({
   rowFontColors: {},
   rowButton: {
     height: 45,
-    marginBottom: 0,
+    marginBottom: 12,
   },
   button: {
     flex: 1,
