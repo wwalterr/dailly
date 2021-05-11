@@ -4,6 +4,7 @@ import {
   View,
   ScrollView,
   Text,
+  Share,
   Dimensions,
   TouchableOpacity,
   Animated,
@@ -29,6 +30,26 @@ const task_height = 145 + task_margin * 2;
 const messageRemoveGoal = "Goal removed!";
 
 const messageDecreaseCounter = "No negative numbers!";
+
+const onShare = async (message) => {
+  try {
+    const result = await Share.share({
+      message,
+    });
+
+    if (result.action === Share.sharedAction) {
+      if (result.activityType) {
+        // Shared with activity type of result.activityType
+      } else {
+        // Shared
+      }
+    } else if (result.action === Share.dismissedAction) {
+      // Dismissed
+    }
+  } catch (error) {
+    alert(error.message);
+  }
+};
 
 const Task = ({ task, index, y, navigation }) => {
   const { removeTask, updateTask } = useTasks();
@@ -195,6 +216,19 @@ const Task = ({ task, index, y, navigation }) => {
               >
                 <Text style={[styles.update, cardFontColor]}>Update</Text>
               </TouchableOpacity>
+
+              <Text style={[styles.highlight, cardFontColor]}>•</Text>
+
+              <TouchableOpacity
+                onPress={async () => {
+                  onShare(task.text);
+                }}
+                activeOpacity={0.8}
+                key={"share"}
+                style={styles.shareButton}
+              >
+                <Text style={[styles.share, cardFontColor]}>Share</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -354,6 +388,13 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_300Light",
     fontSize: 12,
     color: theme.color.white.main,
+  },
+  shareButton: {},
+  share: {
+    fontFamily: "Inter_300Light",
+    fontSize: 12,
+    color: theme.color.white.main,
+    marginLeft: 8,
   },
 });
 
