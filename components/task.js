@@ -252,7 +252,6 @@ const Task = ({ task, index, y, navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-	  zIndex: 999999,
     justifyContent: "space-between",
     marginHorizontal: 22,
     marginVertical: task_margin,

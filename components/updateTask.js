@@ -399,6 +399,7 @@ const styles = StyleSheet.create({
     marginBottom: 48,
   },
   rowText: {
+    marginTop: 28,
     flexDirection: "column",
   },
   textInput: {
