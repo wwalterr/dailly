@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import {
   View,
+  ScrollView,
   TextInput,
   FlatList,
   Text,
@@ -105,7 +106,7 @@ const UpdateTask = ({ task, navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={[styles.row, styles.rowText]}>
         <TextInput
           placeholder="Describe your goal"
@@ -381,20 +382,21 @@ const UpdateTask = ({ task, navigation }) => {
           <Text style={styles.buttonText}>Update goal</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-around",
+    // justifyContent: "space-around",
     paddingHorizontal: 32,
   },
   row: {
     alignItems: "flex-start",
     justifyContent: "center",
     padding: 2,
+    marginBottom: 48,
   },
   rowText: {
     flexDirection: "column",
@@ -485,6 +487,7 @@ const styles = StyleSheet.create({
   rowFontColors: {},
   rowButton: {
     height: 45,
+    marginBottom: 0,
   },
   button: {
     flex: 1,
