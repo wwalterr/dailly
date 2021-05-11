@@ -35,6 +35,8 @@ const Task = ({ task, index, y, navigation }) => {
 
   const [emojiCloud, setEmojiCloud] = useState(false);
 
+  const [removeStatus, setRemoveStatus] = useState(false);
+
   const position = Animated.subtract(index * task_height, y);
 
   const isDisappearing = -task_height;
@@ -142,6 +144,12 @@ const Task = ({ task, index, y, navigation }) => {
             <View style={styles.actions}>
               <TouchableOpacity
                 onPress={async () => {
+                  if (!removeStatus) {
+                    setRemoveStatus(true);
+
+                    return;
+                  }
+
                   if (task.remind)
                     await cancelPushNotification(task.identifier);
 
@@ -158,10 +166,12 @@ const Task = ({ task, index, y, navigation }) => {
                 key={"remove"}
                 style={styles.removeButton}
               >
-                <Text style={[styles.remove, cardFontColor]}>Remove</Text>
-
-                <Text style={[styles.highlight, cardFontColor]}>•</Text>
+                <Text style={[styles.remove, cardFontColor]}>
+                  {removeStatus ? "Confirm removal" : "Remove"}
+                </Text>
               </TouchableOpacity>
+
+              <Text style={[styles.highlight, cardFontColor]}>•</Text>
 
               <TouchableOpacity
                 onPress={async () => {
