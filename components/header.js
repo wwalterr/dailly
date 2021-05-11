@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   columnPresentationContainer: {
     flex: 0.75,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-end",
   },
   textAmountTasks: {
     lineHeight: 90,

@@ -78,7 +78,7 @@ const EmojiPicker = ({
           renderItem={renderItem}
           keyExtractor={(item) => item.aliases[0]}
           horizontal={true}
-          maxToRenderPerBatch={5}
+          maxToRenderPerBatch={18}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
           style={styles.flatListEmojis}
