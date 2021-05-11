@@ -89,9 +89,7 @@ const EmojiPicker = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    height: 70,
-  },
+  container: {},
   containerChips: {
     height: 25,
     maxHeight: 25,
@@ -114,7 +112,7 @@ const styles = StyleSheet.create({
     color: theme.color.gray.main,
   },
   flatListEmojis: {
-    height: 45,
+    height: 35,
     maxWidth: "100%",
   },
   emojiButton: {},

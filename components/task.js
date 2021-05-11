@@ -28,7 +28,7 @@ const task_height = 145 + task_margin * 2;
 
 const messageRemoveGoal = "Goal removed!";
 
-const messageDecreaseCounter = "No negative goal!";
+const messageDecreaseCounter = "No negative numbers!";
 
 const Task = ({ task, index, y, navigation }) => {
   const { removeTask, updateTask } = useTasks();
@@ -252,6 +252,7 @@ const Task = ({ task, index, y, navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
+	  zIndex: 999999,
     justifyContent: "space-between",
     marginHorizontal: 22,
     marginVertical: task_margin,

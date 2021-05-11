@@ -245,19 +245,20 @@ const UpdateTask = ({ task, navigation }) => {
 
           <MaterialIcons
             name="invert-colors-on"
-            size={26}
+            size={24}
             color={theme.color.black.main}
             onPress={() => {
               setShowCardColor(
                 (previousShowCardColor) => !previousShowCardColor
               );
             }}
+            style={styles.colorIcon}
           />
         </View>
 
         {showCardColor ? (
           <FlatList
-            data={theme.cards}
+            data={theme.color.cards}
             renderItem={renderCardColors(setCardColor, cardColor)}
             keyExtractor={(item) => item}
             horizontal={true}
@@ -281,19 +282,20 @@ const UpdateTask = ({ task, navigation }) => {
 
           <MaterialIcons
             name="invert-colors-on"
-            size={26}
+            size={24}
             color={theme.color.black.main}
             onPress={() => {
               setShowCardFontColor(
                 (previousShowCardFontColor) => !previousShowCardFontColor
               );
             }}
+            style={styles.colorIcon}
           />
         </View>
 
         {showCardFontColor ? (
           <FlatList
-            data={theme.fonts}
+            data={theme.color.fonts}
             renderItem={renderCardColors(setCardFontColor, cardFontColor)}
             keyExtractor={(item) => item}
             horizontal={true}
@@ -458,6 +460,11 @@ const styles = StyleSheet.create({
   containerColor: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  colorIcon: {
+    backgroundColor: theme.color.black.main,
+    borderRadius: 50,
+    color: theme.color.white.main,
   },
   flatListColors: {},
   colorPick: {

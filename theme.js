@@ -20,20 +20,22 @@ const theme = {
     red: {
       main: "#fc1f3d",
     },
+    fonts: ["#ffffff", "#000000"],
+    cards: [
+      "#000000",
+      "#b0b6c7",
+      "#ebf1fd",
+      "#bac2bd",
+      "#cee8e0",
+      "#fc1f3d",
+      "#f27c57",
+      "#fcdb99",
+      "#7fe3fa",
+      "#73e8ac",
+      "#f1bdd3",
+      "#827ffa",
+    ],
   },
-  cards: [
-    "#000000",
-    "#b0b6c7",
-    "#ebf1fd",
-    "#ef5640",
-    "#f6991e",
-    "#fcdb99",
-    "#7fe3fa",
-    "#73e8ac",
-    "#f1bdd3",
-    "#827ffa",
-  ],
-  fonts: ["#ffffff", "#000000"],
 };
 
 export default theme;
