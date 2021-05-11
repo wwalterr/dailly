@@ -39,6 +39,7 @@ const Tasks = ({ navigation }) => {
       showsVerticalScrollIndicator={false}
       bounces={false}
       scrollEventThrottle={16}
+      maxToRenderPerBatch={4}
       {...{ onScroll }}
       style={styles.flatList}
     />
