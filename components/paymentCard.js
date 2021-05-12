@@ -88,14 +88,14 @@ const createPayment = async (
         setCoffeePrice("500");
       })
       .catch((error) => {
-        // console.log(error.message);
+        // console.log(error.response.data);
 
         if (Platform.OS != "android")
           Snackbar.show({
-            text: error.message,
+            text: error.response.data,
             duration: Snackbar.LENGTH_SHORT,
           });
-        else ToastAndroid.show(error.message, ToastAndroid.SHORT);
+        else ToastAndroid.show(error.response.data, ToastAndroid.SHORT);
 
         setCardInformation({ loading: false, token: null });
 
