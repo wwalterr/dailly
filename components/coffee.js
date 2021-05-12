@@ -35,15 +35,35 @@ const Coffee = () => {
             onValueChange={(itemValue, itemIndex) => setCoffeePrice(itemValue)}
             style={styles.picker}
           >
-            <Picker.Item label="Freshly Brewed 1$" value="100" />
+            <Picker.Item
+              label="Freshly Brewed 1$"
+              value="100"
+              style={styles.pickerItem}
+            />
 
-            <Picker.Item label="Frappuccino 2$" value="200" />
+            <Picker.Item
+              label="Frappuccino 2$"
+              value="200"
+              style={styles.pickerItem}
+            />
 
-            <Picker.Item label="Mocha Frappuccino 3$" value="300" />
+            <Picker.Item
+              label="Mocha Frappuccino 3$"
+              value="300"
+              style={styles.pickerItem}
+            />
 
-            <Picker.Item label="Iced Caramel Macchiato 4$" value="400" />
+            <Picker.Item
+              label="Iced Caramel Macchiato 4$"
+              value="400"
+              style={styles.pickerItem}
+            />
 
-            <Picker.Item label="Pumpkin Spice Latte 5$" value="500" />
+            <Picker.Item
+              label="Pumpkin Spice Latte 5$"
+              value="500"
+              style={styles.pickerItem}
+            />
           </Picker>
         </View>
       </View>
@@ -59,7 +79,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 32,
   },
   text: {
-    fontFamily: "Inter_500Medium",
+    fontFamily: "Inter_400Regular",
     fontSize: 14,
     marginTop: 16,
     textAlign: "justify",
@@ -86,6 +106,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_400Regular",
     fontSize: 14,
   },
+  pickerItem: {},
 });
 
 export default Coffee;
