@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
-import { View, StyleSheet } from "react-native";
+import { View, ToastAndroid, StyleSheet } from "react-native";
+
+import { AnimatedEmoji } from "react-native-animated-emoji";
 
 import { PaymentsStripe as Stripe } from "expo-payments-stripe";
 
@@ -9,6 +11,8 @@ import axios from "axios";
 import theme from "../theme";
 
 import PaymentButton from "./paymentButton";
+
+const messagePaymentCreated = "Payment created!";
 
 const processCardDetails = async (cardInformation, setCardInformation) => {
   try {
@@ -34,7 +38,14 @@ const processCardDetails = async (cardInformation, setCardInformation) => {
 
     setCardInformation({ loading: false, token });
   } catch (error) {
-    console.log(error.message);
+    // console.log(error.message);
+
+    if (Platform.OS != "android")
+      Snackbar.show({
+        text: error.message,
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    else ToastAndroid.show(error.message, ToastAndroid.SHORT);
 
     setCardInformation({ loading: false });
   }
@@ -57,23 +68,44 @@ const createPayment = async (
       url: `http://192.168.0.107:4000/api/payments/create?total=${coffeePrice}&token=${cardInformation.token.tokenId}`,
     })
       .then((response) => {
-        // console.log("Payment created");
+        // console.log("Payment created", response);
+
+        if (Platform.OS != "android")
+          Snackbar.show({
+            text: messagePaymentCreated,
+            duration: Snackbar.LENGTH_SHORT,
+          });
+        else ToastAndroid.show(messagePaymentCreated, ToastAndroid.SHORT);
 
         setCardInformation({ loading: false, token: null });
 
-        setCreatePaymentInformation({ loading: false });
+        setCreatePaymentInformation({ loading: false, created: true });
 
         setCoffeePrice("500");
       })
       .catch((error) => {
-        console.log(error.message);
+        // console.log(error.message);
+
+        if (Platform.OS != "android")
+          Snackbar.show({
+            text: error.message,
+            duration: Snackbar.LENGTH_SHORT,
+          });
+        else ToastAndroid.show(error.message, ToastAndroid.SHORT);
 
         setCardInformation({ loading: false, token: null });
 
         setCreatePaymentInformation({ loading: false });
       });
   } catch (error) {
-    console.log(error.message);
+    // console.log(error.message);
+
+    if (Platform.OS != "android")
+      Snackbar.show({
+        text: error.message,
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    else ToastAndroid.show(error.message, ToastAndroid.SHORT);
 
     setCreatePaymentInformation({ loading: false });
   }
@@ -113,6 +145,64 @@ const PaymentCard = ({ coffeePrice, setCoffeePrice }) => {
           }
           style={{ backgroundColor: theme.color.green.main }}
         />
+      ) : null}
+
+      {createPaymentInformation.created ? (
+        <>
+          <AnimatedEmoji
+            index={1}
+            style={{ bottom: -50 }}
+            name={"coffee"}
+            size={25}
+            duration={3500}
+            onAnimationCompleted={() => {}}
+          />
+
+          <AnimatedEmoji
+            index={1}
+            style={{ bottom: -100 }}
+            name={"coffee"}
+            size={30}
+            duration={3500}
+            onAnimationCompleted={() => {}}
+          />
+
+          <AnimatedEmoji
+            index={1}
+            style={{ bottom: -150 }}
+            name={"coffee"}
+            size={25}
+            duration={3500}
+            onAnimationCompleted={() => {}}
+          />
+
+          <AnimatedEmoji
+            index={1}
+            style={{ bottom: -200 }}
+            name={"coffee"}
+            size={35}
+            duration={3500}
+            onAnimationCompleted={() => {}}
+          />
+
+          <AnimatedEmoji
+            index={1}
+            style={{ bottom: -250 }}
+            name={"coffee"}
+            size={25}
+            duration={3500}
+            onAnimationCompleted={() => {}}
+          />
+
+          <AnimatedEmoji
+            index={1}
+            style={{ bottom: -300 }}
+            name={"coffee"}
+            size={30}
+            duration={3500}
+            onAnimationCompleted={() => {}}
+          />
+        </>
       ) : null}
     </View>
   );

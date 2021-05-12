@@ -23,8 +23,7 @@ const Coffee = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
-        Buy us a coffee so we can stay awake and create new features{" "}
-        <Text style={{ fontSize: 22 }}>☕</Text>
+        Buy us a coffee so we can stay awake and create new features
       </Text>
 
       <View style={styles.pickerQuestionContainer}>
