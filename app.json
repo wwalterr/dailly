@@ -2,7 +2,7 @@
   "expo": {
     "name": "dailly",
     "slug": "dailly",
-    "description": "Create and manage your daily goals",
+    "description": "Reach new goals",
     "entryPoint": "./application.js",
     "version": "2.0.0",
     "orientation": "portrait",
