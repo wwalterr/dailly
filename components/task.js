@@ -192,7 +192,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
               >
-                <Text style={styles.textModal}>{task.text.repeat(500)}</Text>
+                <Text style={styles.textModal}>{task.text}</Text>
               </ScrollView>
             </Modal>
           </View>
