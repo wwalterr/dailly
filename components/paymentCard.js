@@ -4,6 +4,8 @@ import { View, ToastAndroid, StyleSheet } from "react-native";
 
 import { AnimatedEmoji } from "react-native-animated-emoji";
 
+import { API_URL } from "@env";
+
 import { PaymentsStripe as Stripe } from "expo-payments-stripe";
 
 import axios from "axios";
@@ -65,7 +67,9 @@ const createPayment = async (
     axios({
       method: "POST",
       // Local host doesn't work, use the IP (ifconfig -a)
-      url: `http://192.168.0.107:4000/api/payments/create?total=${coffeePrice}&token=${cardInformation.token.tokenId}`,
+      url: `${API_URL}/api/payments/create?total=${parseInt(
+        coffeePrice
+      )}&token=${cardInformation.token.tokenId}`,
     })
       .then((response) => {
         // console.log("Payment created", response);

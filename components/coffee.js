@@ -48,10 +48,7 @@ const Coffee = () => {
         </View>
       </View>
 
-      <PaymentCard
-        coffeePrice={parseInt(coffeePrice)}
-        setCoffeePrice={setCoffeePrice}
-      />
+      <PaymentCard coffeePrice={coffeePrice} setCoffeePrice={setCoffeePrice} />
     </View>
   );
 };
