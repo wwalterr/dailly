@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import {
   View,
+  ScrollView,
   Text,
   Share,
   Animated,
@@ -13,11 +14,17 @@ import {
 
 import { AnimatedEmoji } from "react-native-animated-emoji";
 
+import Modal from "react-native-modal";
+
+import { AntDesign } from "@expo/vector-icons";
+
 import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
 
 import { cancelPushNotification } from "../utils/notifications";
+
+import { limitText } from "../utils/text";
 
 const taskMargin = 16;
 
@@ -55,6 +62,8 @@ const Task = ({ task, index, scrollY, navigation }) => {
   const [emojiCloud, setEmojiCloud] = useState(false);
 
   const [removeStatus, setRemoveStatus] = useState(false);
+
+  const [showTextModal, setShowTextModal] = useState(false);
 
   const cardFontColor = { color: task.cardFontColor };
 
@@ -153,8 +162,39 @@ const Task = ({ task, index, scrollY, navigation }) => {
         <View style={styles.containerInsider}>
           <View style={styles.containerContent}>
             <View style={styles.containerText}>
-              <Text style={[styles.text, cardFontColor]}>{task.text}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  if (task.text.length >= 34) setShowTextModal(true);
+                }}
+                activeOpacity={0.8}
+                key={"text"}
+                style={styles.textButton}
+              >
+                <Text style={[styles.text, cardFontColor]}>
+                  {limitText(task.text, 34)}
+                </Text>
+              </TouchableOpacity>
             </View>
+
+            <Modal isVisible={showTextModal} style={styles.containerModal}>
+              <AntDesign
+                name="close"
+                size={20}
+                onPress={() => {
+                  setShowTextModal(false);
+                }}
+                color={theme.color.gray.dark}
+                style={styles.closeIcon}
+              />
+
+              <ScrollView
+                style={styles.containerTextModal}
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}
+              >
+                <Text style={styles.textModal}>{task.text.repeat(500)}</Text>
+              </ScrollView>
+            </Modal>
           </View>
 
           <View style={styles.containerActions}>
@@ -311,10 +351,31 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
+  textButton: {},
   text: {
     fontFamily: "Inter_600SemiBold",
     fontSize: 26,
     color: theme.color.white.main,
+  },
+  containerModal: {
+    flex: 1,
+    backgroundColor: theme.color.white.main,
+    margin: 0,
+    paddingTop: 16,
+    paddingBottom: 0,
+    paddingHorizontal: 32,
+  },
+  containerTextModal: {},
+  closeIcon: {
+    alignSelf: "flex-end",
+    marginBottom: 14,
+    marginTop: 8,
+  },
+  textModal: {
+    fontFamily: "Inter_400Regular",
+    fontSize: 16,
+    color: theme.color.black.main,
+    textAlign: "justify",
   },
   containerCounter: {
     alignItems: "flex-end",

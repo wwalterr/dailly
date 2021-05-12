@@ -108,7 +108,11 @@ const UpdateTask = ({ task, navigation }) => {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
+    >
       <View style={[styles.row, styles.rowText]}>
         <TextInput
           placeholder="Describe your goal"
