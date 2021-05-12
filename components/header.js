@@ -17,7 +17,7 @@ import { useTasks } from "../contexts/tasks";
 const Header = ({ newTaskButton, navigation }) => {
   const { tasks } = useTasks();
 
-  const [options, setOptions] = useState();
+  const [options, setOptions] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -60,6 +60,14 @@ const Header = ({ newTaskButton, navigation }) => {
             key={"privacy-policy"}
           >
             <Text style={styles.textMenu}>Privacy Policy</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Coffee")}
+            activeOpacity={0.8}
+            key={"coffee"}
+          >
+            <Text style={styles.textMenu}>Buy us a coffee</Text>
           </TouchableOpacity>
         </View>
       ) : null}

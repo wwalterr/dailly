@@ -282,7 +282,7 @@ const UpdateTask = ({ task, navigation }) => {
 
         {colorError ? (
           <Text style={styles.textError}>
-            The card and the card' text can't be the same color!
+            The card and the card' text can't have the same color!
           </Text>
         ) : null}
       </View>
@@ -323,7 +323,7 @@ const UpdateTask = ({ task, navigation }) => {
 
         {colorError ? (
           <Text style={styles.textError}>
-            The card and the card' text can't be the same color!
+            The card and the card' text can't have the same color!
           </Text>
         ) : null}
       </View>
@@ -372,7 +372,9 @@ const UpdateTask = ({ task, navigation }) => {
               ...(remind ? { identifier } : {}),
               ...(remind ? { remindTime: date.getTime() } : {}),
               increment,
-              ...(increment ? { counter: 0 } : {}),
+              ...(increment
+                ? { counter: task.counter ? task.counter : 0 }
+                : {}),
               emoji,
               createdAt: task.createdAt,
               cardColor,

@@ -368,12 +368,12 @@ const styles = StyleSheet.create({
   containerTextModal: {},
   closeIcon: {
     alignSelf: "flex-end",
-    marginBottom: 14,
+    marginBottom: 24,
     marginTop: 8,
   },
   textModal: {
     fontFamily: "Inter_400Regular",
-    fontSize: 16,
+    fontSize: 24,
     color: theme.color.black.main,
     textAlign: "justify",
   },

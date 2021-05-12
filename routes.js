@@ -8,6 +8,8 @@ import TaskUpdateScreen from "./screns/taskUpdate";
 
 import ContactScreen from "./screns/contact";
 
+import CoffeeScreen from "./screns/coffee";
+
 import { useTasks } from "./contexts/tasks";
 
 const Stack = createStackNavigator();
@@ -32,6 +34,8 @@ const Routes = () => {
       <Stack.Screen name="Update Task" component={TaskUpdateScreen} />
 
       <Stack.Screen name="Contact" component={ContactScreen} />
+
+      <Stack.Screen name="Coffee" component={CoffeeScreen} />
     </Stack.Navigator>
   );
 };
