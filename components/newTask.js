@@ -225,7 +225,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
               text: text.trim(),
               remind,
               ...(remind ? { identifier } : {}),
-              ...(remind ? { remindTime: 1620646220921 } : {}),
+              ...(remind ? { remindTime: new Date().getTime() } : {}),
               increment,
               ...(increment ? { counter: 0 } : {}),
               emoji,
