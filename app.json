@@ -27,7 +27,8 @@
       },
       "softwareKeyboardLayoutMode": "resize",
       "allowBackup": false,
-      "package": "com.dailly.dailly"
+      "package": "com.dailly.dailly",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
