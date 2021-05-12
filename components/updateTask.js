@@ -410,7 +410,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "center",
     padding: 2,
-    marginBottom: 48,
+    marginBottom: 42,
   },
   rowText: {
     marginTop: 12,
