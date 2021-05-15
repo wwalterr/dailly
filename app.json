@@ -2,7 +2,7 @@
   "expo": {
     "name": "dailly",
     "slug": "dailly",
-    "description": "Reach new goals",
+    "description": "Daily allows you to create, manage, track and share your goals in a simple and beautiful way.",
     "entryPoint": "./application.js",
     "version": "2.0.0",
     "orientation": "portrait",
