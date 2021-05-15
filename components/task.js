@@ -301,6 +301,12 @@ const Task = ({ task, index, scrollY, navigation }) => {
             >
               <Text style={[styles.minus, cardFontColor]}>-</Text>
             </TouchableOpacity>
+
+            {task.incrementText ? (
+              <Text style={[styles.incrementText, cardFontColor]}>
+                {task.incrementText}
+              </Text>
+            ) : null}
           </View>
         ) : null}
       </View>
@@ -404,6 +410,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: theme.color.white.main,
     paddingRight: 2,
+  },
+  incrementText: {
+    fontFamily: "Inter_400Regular",
+    fontSize: 14,
+    color: theme.color.white.main,
   },
   containerActions: {
     flex: 0.15,

@@ -47,6 +47,10 @@ const UpdateTask = ({ task, navigation }) => {
 
   const [increment, setIncrement] = useState(task.increment);
 
+  const [incrementText, setIncrementText] = useState(
+    task.incrementText ? task.incrementText : ""
+  );
+
   const [emoji, setEmoji] = useState(task.emoji);
 
   const [category, setCategory] = useState("");
@@ -164,6 +168,26 @@ const UpdateTask = ({ task, navigation }) => {
           }}
         />
       </View>
+
+      {increment ? (
+        <View style={[styles.row, styles.rowIncrementText]}>
+          <TextInput
+            placeholder="Choose a label to the increment counter"
+            placeholderTextColor={theme.color.gray.main}
+            textAlign="left"
+            multiline={false}
+            spellCheck={true}
+            autoFocus={false}
+            maxLength={8}
+            underlineColorAndroid="transparent"
+            value={incrementText}
+            onChangeText={(text) => {
+              setIncrementText(text);
+            }}
+            style={styles.textInput}
+          />
+        </View>
+      ) : null}
 
       <View style={[styles.row, styles.rowRemind]}>
         <Text style={styles.text}>Do you want to receive reminds?</Text>
@@ -372,6 +396,7 @@ const UpdateTask = ({ task, navigation }) => {
               ...(remind ? { identifier } : {}),
               ...(remind ? { remindTime: date.getTime() } : {}),
               increment,
+              ...(increment ? { incrementText } : {}),
               ...(increment
                 ? { counter: task.counter ? task.counter : 0 }
                 : {}),
@@ -445,6 +470,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: theme.color.black.main,
   },
+  rowIncrementText: {},
   rowRemind: {
     flexDirection: "row",
     justifyContent: "flex-start",
