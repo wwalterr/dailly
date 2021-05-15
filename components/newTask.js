@@ -1,4 +1,4 @@
-import React, { useState, memo } from "react";
+import React, { useState, useEffect, memo } from "react";
 
 import {
   View,
@@ -53,6 +53,8 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
   const [category, setCategory] = useState("");
 
+  const [modalShown, setModalShown] = useState(false);
+
   const resetFields = () => {
     Keyboard.dismiss();
 
@@ -71,187 +73,212 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
     setCategory("");
   };
 
+  useEffect(() => {
+    newTaskTranslateY.addListener(async (value) => {
+      if (!value.value) setModalShown(true);
+
+      if (value.value) setModalShown(false);
+    });
+
+    return () => {
+      newTaskTranslateY.removeAllListeners();
+    };
+  }, []);
+
   return (
-    <Animated.View
-      style={{
-        ...styles.container,
-        transform: [{ translateY: newTaskTranslateY }],
-      }}
-    >
-      <View style={styles.rowClose}>
-        <AntDesign
-          name="close"
-          size={20}
-          onPress={() => {
-            resetFields();
-
-            hideNewTask();
+    <>
+      {modalShown ? (
+        <TouchableOpacity
+          style={{
+            ...StyleSheet.absoluteFill,
+            backgroundColor: "rgba(0, 0, 0, 0.75)",
           }}
-          color={theme.color.gray.dark}
-          style={styles.closeIcon}
-        />
-      </View>
+          onPress={hideNewTask}
+        ></TouchableOpacity>
+      ) : null}
+      <Animated.View
+        style={{
+          ...styles.container,
+          transform: [{ translateY: newTaskTranslateY }],
+        }}
+      >
+        <View style={styles.rowClose}>
+          <AntDesign
+            name="close"
+            size={20}
+            onPress={() => {
+              resetFields();
 
-      <View style={[styles.row, styles.rowText]}>
-        <TextInput
-          placeholder="Describe your goal"
-          placeholderTextColor={theme.color.gray.main}
-          textAlign="left"
-          multiline={true}
-          spellCheck={true}
-          autoFocus={false}
-          underlineColorAndroid="transparent"
-          value={text}
-          onChangeText={(_text) => {
-            setText(_text);
-
-            if (text) setTextError(false);
-          }}
-          style={styles.textInput}
-        />
-
-        {textError ? (
-          <Text style={styles.textError}>
-            To create a goal you need to describe it!
-          </Text>
-        ) : null}
-      </View>
-
-      <View style={[styles.row, styles.rowIncrement]}>
-        <Text style={styles.text}>Is your goal incremental?</Text>
-
-        <Switch
-          activeText={activeText}
-          inActiveText={inActiveText}
-          value={increment}
-          onValueChange={() => {
-            Keyboard.dismiss();
-
-            setIncrement((previousIncrement) => !previousIncrement);
-          }}
-          circleSize={18}
-          circleBorderWidth={0}
-          barHeight={25}
-          backgroundActive={theme.color.black.main}
-          backgroundInactive={theme.color.black.main}
-          circleActiveColor={theme.color.green.main}
-          circleInActiveColor={theme.color.red.main}
-          outerCircleStyle={{
-            backgroundColor: theme.color.black.main,
-            width: 50,
-            borderRadius: 50,
-          }}
-        />
-      </View>
-
-      <View style={[styles.row, styles.rowRemind]}>
-        <Text style={styles.text}>Do you want to receive reminds?</Text>
-
-        <Switch
-          activeText={activeText}
-          inActiveText={inActiveText}
-          value={remind}
-          onValueChange={() => {
-            Keyboard.dismiss();
-
-            setRemind((previousRemind) => !previousRemind);
-          }}
-          circleSize={18}
-          circleBorderWidth={0}
-          barHeight={25}
-          backgroundActive={theme.color.black.main}
-          backgroundInactive={theme.color.black.main}
-          circleActiveColor={theme.color.green.main}
-          circleInActiveColor={theme.color.red.main}
-          outerCircleStyle={{
-            backgroundColor: theme.color.black.main,
-            width: 50,
-            borderRadius: 50,
-          }}
-        />
-      </View>
-
-      <View style={[styles.row, styles.rowCategory]}>
-        <View style={styles.containerCategory}>
-          <Text style={styles.textCategory}>Choose an emoji to your goal</Text>
-
-          <Text style={[styles.textCategory, styles.textEmoji]}>
-            {emoji.emoji}
-          </Text>
+              hideNewTask();
+            }}
+            color={theme.color.gray.dark}
+            style={styles.closeIcon}
+          />
         </View>
 
-        <EmojiPicker
-          emoji={emoji}
-          setEmoji={setEmoji}
-          setEmojiError={setEmojiError}
-          category={category}
-          setCategory={setCategory}
-        />
+        <View style={[styles.row, styles.rowText]}>
+          <TextInput
+            placeholder="Describe your goal"
+            placeholderTextColor={theme.color.gray.main}
+            textAlign="left"
+            multiline={true}
+            spellCheck={true}
+            autoFocus={false}
+            underlineColorAndroid="transparent"
+            value={text}
+            onChangeText={(_text) => {
+              setText(_text);
 
-        {emojiError ? (
-          <Text style={styles.textError}>
-            To create a goal you need to choose an emoji!
-          </Text>
-        ) : null}
-      </View>
+              if (text) setTextError(false);
+            }}
+            style={styles.textInput}
+          />
 
-      <View style={[styles.row, styles.rowButton]}>
-        <TouchableOpacity
-          onPress={async () => {
-            if (!text) {
-              setTextError(true);
+          {textError ? (
+            <Text style={styles.textError}>
+              To create a goal you need to describe it!
+            </Text>
+          ) : null}
+        </View>
 
-              return;
-            }
+        <View style={[styles.row, styles.rowIncrement]}>
+          <Text style={styles.text}>Is your goal incremental?</Text>
 
-            if (!Object.keys(emoji).length) {
-              setEmojiError(true);
+          <Switch
+            activeText={activeText}
+            inActiveText={inActiveText}
+            value={increment}
+            onValueChange={() => {
+              Keyboard.dismiss();
 
-              return;
-            }
+              setIncrement((previousIncrement) => !previousIncrement);
+            }}
+            circleSize={18}
+            circleBorderWidth={0}
+            barHeight={25}
+            backgroundActive={theme.color.black.main}
+            backgroundInactive={theme.color.black.main}
+            circleActiveColor={theme.color.green.main}
+            circleInActiveColor={theme.color.red.main}
+            outerCircleStyle={{
+              backgroundColor: theme.color.black.main,
+              width: 50,
+              borderRadius: 50,
+            }}
+          />
+        </View>
 
-            let identifier;
+        <View style={[styles.row, styles.rowRemind]}>
+          <Text style={styles.text}>Do you want to receive reminds?</Text>
 
-            if (remind) {
-              identifier = await schedulePushNotification({
-                title: `Check your daily goal ${emoji.emoji}`,
-                body: text,
-                vibrate: true,
+          <Switch
+            activeText={activeText}
+            inActiveText={inActiveText}
+            value={remind}
+            onValueChange={() => {
+              Keyboard.dismiss();
+
+              setRemind((previousRemind) => !previousRemind);
+            }}
+            circleSize={18}
+            circleBorderWidth={0}
+            barHeight={25}
+            backgroundActive={theme.color.black.main}
+            backgroundInactive={theme.color.black.main}
+            circleActiveColor={theme.color.green.main}
+            circleInActiveColor={theme.color.red.main}
+            outerCircleStyle={{
+              backgroundColor: theme.color.black.main,
+              width: 50,
+              borderRadius: 50,
+            }}
+          />
+        </View>
+
+        <View style={[styles.row, styles.rowCategory]}>
+          <View style={styles.containerCategory}>
+            <Text style={styles.textCategory}>
+              Choose an emoji to your goal
+            </Text>
+
+            <Text style={[styles.textCategory, styles.textEmoji]}>
+              {emoji.emoji}
+            </Text>
+          </View>
+
+          <EmojiPicker
+            emoji={emoji}
+            setEmoji={setEmoji}
+            setEmojiError={setEmojiError}
+            category={category}
+            setCategory={setCategory}
+          />
+
+          {emojiError ? (
+            <Text style={styles.textError}>
+              To create a goal you need to choose an emoji!
+            </Text>
+          ) : null}
+        </View>
+
+        <View style={[styles.row, styles.rowButton]}>
+          <TouchableOpacity
+            onPress={async () => {
+              if (!text) {
+                setTextError(true);
+
+                return;
+              }
+
+              if (!Object.keys(emoji).length) {
+                setEmojiError(true);
+
+                return;
+              }
+
+              let identifier;
+
+              if (remind) {
+                identifier = await schedulePushNotification({
+                  title: `Check your daily goal ${emoji.emoji}`,
+                  body: text,
+                  vibrate: true,
+                });
+              }
+
+              createTask({
+                id: generateRandomCode(),
+                text: text.trim(),
+                remind,
+                ...(remind ? { identifier } : {}),
+                ...(remind ? { remindTime: new Date().getTime() } : {}),
+                increment,
+                ...(increment ? { counter: 0 } : {}),
+                emoji,
+                createdAt: new Date().toLocaleDateString(),
+                cardColor: theme.color.black.main,
+                cardFontColor: theme.color.white.main,
               });
-            }
 
-            createTask({
-              id: generateRandomCode(),
-              text: text.trim(),
-              remind,
-              ...(remind ? { identifier } : {}),
-              ...(remind ? { remindTime: new Date().getTime() } : {}),
-              increment,
-              ...(increment ? { counter: 0 } : {}),
-              emoji,
-              createdAt: new Date().toLocaleDateString(),
-              cardColor: theme.color.black.main,
-              cardFontColor: theme.color.white.main,
-            });
+              if (Platform.OS != "android")
+                Snackbar.show({
+                  text: messageNewGoal,
+                  duration: Snackbar.LENGTH_SHORT,
+                });
+              else ToastAndroid.show(messageNewGoal, ToastAndroid.SHORT);
 
-            if (Platform.OS != "android")
-              Snackbar.show({
-                text: messageNewGoal,
-                duration: Snackbar.LENGTH_SHORT,
-              });
-            else ToastAndroid.show(messageNewGoal, ToastAndroid.SHORT);
+              resetFields();
 
-            resetFields();
-
-            hideNewTask();
-          }}
-          activeOpacity={0.8}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Create goal</Text>
-        </TouchableOpacity>
-      </View>
-    </Animated.View>
+              hideNewTask();
+            }}
+            activeOpacity={0.8}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>Create goal</Text>
+          </TouchableOpacity>
+        </View>
+      </Animated.View>
+    </>
   );
 };
 

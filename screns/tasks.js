@@ -23,9 +23,7 @@ import NewTask from "../components/newTask";
 const TasksScreen = ({ navigation }) => {
   const { tasks } = useTasks();
 
-  const newTaskTranslateY = useRef(
-    new Animated.Value(Dimensions.get("window").height)
-  ).current;
+  const newTaskTranslateY = new Animated.Value(Dimensions.get("window").height);
 
   const showNewTask = () =>
     Animated.timing(newTaskTranslateY, {
