@@ -14,10 +14,13 @@ const Coffee = () => {
   const [coffeePrice, setCoffeePrice] = useState("500");
 
   useEffect(() => {
-    // Setup Stripe
-    Stripe.setOptionsAsync({
-      publishableKey: STRIPE_PUBLIC_KEY,
-    });
+    (async () => {
+      // Setup Stripe
+      Stripe.setOptionsAsync({
+        publishableKey: STRIPE_PUBLIC_KEY,
+        androidPayMode: "production",
+      });
+    })();
   }, []);
 
   return (
