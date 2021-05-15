@@ -258,7 +258,12 @@ const Task = ({ task, index, scrollY, navigation }) => {
         </View>
 
         {task.increment ? (
-          <View style={styles.containerCounter}>
+          <View
+            style={[
+              styles.containerCounter,
+              task.incrementText ? {} : { justifyContent: "center" },
+            ]}
+          >
             <TouchableOpacity
               onPress={() => {
                 updateTask(task.id, {
@@ -393,12 +398,12 @@ const styles = StyleSheet.create({
   },
   plus: {
     fontFamily: "Inter_500Medium",
-    fontSize: 24,
+    fontSize: 21,
     color: theme.color.white.main,
   },
   counter: {
     fontFamily: "Inter_500Medium",
-    fontSize: 24,
+    fontSize: 21,
     color: theme.color.white.main,
     paddingHorizontal: 6,
   },
@@ -407,7 +412,7 @@ const styles = StyleSheet.create({
   },
   minus: {
     fontFamily: "Inter_500Medium",
-    fontSize: 24,
+    fontSize: 21,
     color: theme.color.white.main,
     paddingRight: 2,
   },
