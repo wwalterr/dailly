@@ -2,6 +2,7 @@ const theme = {
   color: {
     black: {
       main: "#000000",
+      hover: "rgba(0, 0, 0, 0.75)",
     },
     white: {
       main: "#ffffff",

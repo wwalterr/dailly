@@ -91,7 +91,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
         <TouchableOpacity
           style={{
             ...StyleSheet.absoluteFill,
-            backgroundColor: "rgba(0, 0, 0, 0.75)",
+            backgroundColor: theme.color.black.hover,
           }}
           onPress={hideNewTask}
         ></TouchableOpacity>
