@@ -11,8 +11,8 @@
     "@expo-google-fonts/inter": "^0.1.0",
     "@expo/vector-icons": "^12.0.5",
     "@react-native-async-storage/async-storage": "^1.15.4",
-    "@react-native-community/datetimepicker": "3.4.7",
-    "@react-native-community/masked-view": "^0.1.11",
+    "@react-native-community/datetimepicker": "3.2.0",
+    "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
     "axios": "^0.21.1",
@@ -31,10 +31,12 @@
     "react-native-modal": "^11.10.0",
     "react-native-reanimated": "^2.1.0",
     "react-native-safe-area-context": "^3.2.0",
-    "react-native-screens": "~3.2.0",
+    "react-native-screens": "~3.0.0",
     "react-native-switch": "https://github.com/shahen94/react-native-switch",
     "react-native-web": "~0.14.13",
-    "react-native-windows": "^0.63.24"
+    "react-native-windows": "^0.63.24",
+    "resize-observer-polyfill": "^1.5.1",
+    "tipsi-stripe": "^9.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.2"
