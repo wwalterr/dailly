@@ -4,7 +4,7 @@
     "slug": "dailly",
     "description": "Daily allows you to create, manage, track and share your goals in a simple and beautiful way.",
     "entryPoint": "./application.js",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -28,7 +28,7 @@
       "softwareKeyboardLayoutMode": "resize",
       "allowBackup": false,
       "package": "com.dailly.dailly",
-      "versionCode": 2
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/favicon.png"
