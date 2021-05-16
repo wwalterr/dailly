@@ -121,7 +121,13 @@ const Task = ({ task, index, scrollY, navigation }) => {
               </TouchableOpacity>
             </View>
 
-            <Modal isVisible={showTextModal} style={styles.containerModal}>
+            <Modal
+              isVisible={showTextModal}
+              backdropColor={theme.color.white.main}
+              backdropOpacity={1}
+              useNativeDriverForBackdrop={true}
+              style={styles.containerModal}
+            >
               <AntDesign
                 name="close"
                 size={20}
