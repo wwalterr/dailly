@@ -1,27 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { View, Text, Picker, StyleSheet } from "react-native";
 
-import { PaymentsStripe as Stripe } from "expo-payments-stripe";
-
 import theme from "../theme";
-
-import { STRIPE_PUBLIC_KEY } from "@env";
 
 import PaymentCard from "./paymentCard";
 
 const Coffee = () => {
-  const [coffeePrice, setCoffeePrice] = useState("500");
-
-  useEffect(() => {
-    (async () => {
-      // Setup Stripe
-      Stripe.setOptionsAsync({
-        publishableKey: STRIPE_PUBLIC_KEY,
-        androidPayMode: "production",
-      });
-    })();
-  }, []);
+  const [coffeePrice, setCoffeePrice] = useState("100");
 
   return (
     <View style={styles.container}>
@@ -30,8 +16,6 @@ const Coffee = () => {
       </Text>
 
       <View style={styles.pickerQuestionContainer}>
-        <Text style={[styles.text, styles.textQuestion]}>Choose a coffee:</Text>
-
         <View style={styles.pickerContainer}>
           <Picker
             selectedValue={coffeePrice}
@@ -85,6 +69,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_400Regular",
     fontSize: 14,
     marginTop: 16,
+    marginBottom: 14,
     textAlign: "justify",
   },
   textEmoji: {
@@ -92,9 +77,6 @@ const styles = StyleSheet.create({
   },
   pickerQuestionContainer: {
     flexDirection: "column",
-  },
-  textQuestion: {
-    marginBottom: 8,
   },
   pickerContainer: {
     backgroundColor: theme.color.white.main,
