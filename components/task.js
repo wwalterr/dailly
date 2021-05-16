@@ -109,7 +109,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
             <View style={styles.containerText}>
               <TouchableOpacity
                 onPress={() => {
-                  if (task.text.length >= 34) setShowTextModal(true);
+                  setShowTextModal(true);
                 }}
                 activeOpacity={0.8}
                 key={"text"}

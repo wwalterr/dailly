@@ -23,6 +23,8 @@ import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
 
+import { limitText } from "../utils/text";
+
 import {
   schedulePushNotification,
   cancelPushNotification,
@@ -224,7 +226,7 @@ const UpdateTask = ({ task, navigation }) => {
 
           <MaterialCommunityIcons
             name="clock-time-ten"
-            size={26}
+            size={24}
             color={theme.color.black.main}
             onPress={() =>
               setShowTimePicker(
@@ -275,7 +277,7 @@ const UpdateTask = ({ task, navigation }) => {
 
           <MaterialIcons
             name="invert-colors-on"
-            size={24}
+            size={22}
             color={theme.color.black.main}
             onPress={() => {
               setShowCardColor(
@@ -316,7 +318,7 @@ const UpdateTask = ({ task, navigation }) => {
 
           <MaterialIcons
             name="invert-colors-on"
-            size={24}
+            size={22}
             color={theme.color.black.main}
             onPress={() => {
               setShowCardFontColor(
@@ -376,8 +378,8 @@ const UpdateTask = ({ task, navigation }) => {
             if (remind) {
               identifier = await schedulePushNotification(
                 {
-                  title: `Check your daily goal ${emoji.emoji}`,
-                  body: text,
+                  title: `${emoji.emoji} Check your daily goal`,
+                  body: limitText(text, 34),
                   vibrate: true,
                 },
                 {

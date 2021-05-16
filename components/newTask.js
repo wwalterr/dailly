@@ -22,6 +22,8 @@ import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
 
+import { limitText } from "../utils/text";
+
 import generateRandomCode from "../utils/random";
 
 import { schedulePushNotification } from "../utils/notifications";
@@ -213,8 +215,8 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
             if (remind) {
               identifier = await schedulePushNotification({
-                title: `Check your daily goal ${emoji.emoji}`,
-                body: text,
+                title: `${emoji.emoji} Check your daily goal`,
+                body: limitText(text, 34),
                 vibrate: true,
               });
             }
