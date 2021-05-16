@@ -10,6 +10,8 @@ import {
 
 import { Entypo } from "@expo/vector-icons";
 
+import { PRIVACY_POLICY } from "@env";
+
 import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
@@ -52,22 +54,14 @@ const Header = ({ newTaskButton, navigation }) => {
 
           <TouchableOpacity
             onPress={() =>
-              Linking.openURL(
-                "https://audaxly.com/privacy-policy?code=kojej1j04hvs8e"
-              ).catch((error) => console.error("Couldn't load page", error))
+              Linking.openURL(PRIVACY_POLICY).catch((error) =>
+                console.error("Couldn't load page", error)
+              )
             }
             activeOpacity={0.8}
             key={"privacy-policy"}
           >
             <Text style={styles.textMenu}>Privacy Policy</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Coffee")}
-            activeOpacity={0.8}
-            key={"coffee"}
-          >
-            <Text style={styles.textMenu}>Buy us a coffee</Text>
           </TouchableOpacity>
         </View>
       ) : null}

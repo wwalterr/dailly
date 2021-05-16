@@ -263,7 +263,6 @@ const UpdateTask = ({ task, navigation }) => {
         </View>
 
         <EmojiPicker
-          emoji={emoji}
           setEmoji={setEmoji}
           category={category}
           setCategory={setCategory}
@@ -297,7 +296,7 @@ const UpdateTask = ({ task, navigation }) => {
             )}
             keyExtractor={(item) => item}
             horizontal={true}
-            maxToRenderPerBatch={5}
+            maxToRenderPerBatch={4}
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
             style={styles.flatListColors}
@@ -338,7 +337,7 @@ const UpdateTask = ({ task, navigation }) => {
             )}
             keyExtractor={(item) => item}
             horizontal={true}
-            maxToRenderPerBatch={5}
+            maxToRenderPerBatch={4}
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
             style={styles.flatListColors}
@@ -430,7 +429,6 @@ const UpdateTask = ({ task, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: "space-around",
     paddingHorizontal: 32,
   },
   row: {

@@ -67,15 +67,6 @@ const Task = ({ task, index, scrollY, navigation }) => {
 
   const cardFontColor = { color: task.cardFontColor };
 
-  // const translateY = Animated.add(
-  //   scrollY,
-  //   scrollY.interpolate({
-  //     inputRange: [0, taskHeight],
-  //     outputRange: [1, -(taskHeight + taskMargin + taskPadding)],
-  //     // extrapolateRight: "extend",
-  //   })
-  // );
-
   const scale = scrollY.interpolate({
     inputRange: [-1, 0, taskHeight * index, taskHeight * (index + 2)],
     outputRange: [1, 1, 1, 0],
@@ -105,7 +96,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
         styles.container,
         {
           backgroundColor: task.cardColor,
-          transform: [{ scale }], // Before scale:{ translateY }
+          transform: [{ scale }],
           opacity,
         },
       ]}
@@ -232,7 +223,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
 
               <TouchableOpacity
                 onPress={async () => {
-                  navigation.navigate("Update Task", task);
+                  navigation.navigate("Update", task);
                 }}
                 activeOpacity={0.8}
                 key={"update"}

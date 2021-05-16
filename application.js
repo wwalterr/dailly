@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
-
-import Constants from "expo-constants";
+import React, { useState, useRef, useEffect } from "react";
 
 import * as Notifications from "expo-notifications";
+
+import Constants from "expo-constants";
 
 import {
   useFonts,
@@ -16,11 +16,11 @@ import {
 
 import AppLoading from "expo-app-loading";
 
+import { enableScreens } from "react-native-screens";
+
 import { NavigationContainer } from "@react-navigation/native";
 
 import { registerRootComponent } from "expo";
-
-import { enableScreens } from "react-native-screens";
 
 import theme from "./theme";
 
@@ -84,19 +84,13 @@ const Application = () => {
   useEffect(() => {
     registerForPushNotificationsAsync().then((token) => {
       setExpoPushToken(token);
-
-      // console.log(token);
     });
 
     notificationListener.current =
-      Notifications.addNotificationReceivedListener((notification) => {
-        // console.log(notification);
-      });
+      Notifications.addNotificationReceivedListener((notification) => {});
 
     responseListener.current =
-      Notifications.addNotificationResponseReceivedListener((response) => {
-        // console.log(notification);
-      });
+      Notifications.addNotificationResponseReceivedListener((response) => {});
 
     return () => {
       Notifications.removeNotificationSubscription(

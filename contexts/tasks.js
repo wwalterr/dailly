@@ -4,12 +4,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const key = "Tasks";
 
-const TasksDefaultState = [];
+const DefaultTasks = [];
 
-const TasksContext = createContext(TasksDefaultState);
+const TasksContext = createContext(DefaultTasks);
 
 const TasksProvider = ({ children }) => {
-  const [tasks, setTasks] = useState(TasksDefaultState);
+  const [tasks, setTasks] = useState(DefaultTasks);
 
   const startTasks = async () => {
     const _tasks = await AsyncStorage.getItem(key);

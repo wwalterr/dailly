@@ -2,9 +2,9 @@ import React, { useRef } from "react";
 
 import { Dimensions, StyleSheet } from "react-native";
 
-import { SafeAreaView } from "react-native-safe-area-context";
-
 import { Animated } from "react-native";
+
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import theme from "../theme";
 
@@ -23,7 +23,9 @@ import NewTask from "../components/newTask";
 const TasksScreen = ({ navigation }) => {
   const { tasks } = useTasks();
 
-  const newTaskTranslateY = new Animated.Value(Dimensions.get("window").height);
+  const newTaskTranslateY = useRef(
+    new Animated.Value(Dimensions.get("window").height)
+  ).current;
 
   const showNewTask = () =>
     Animated.timing(newTaskTranslateY, {

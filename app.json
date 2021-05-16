@@ -2,7 +2,7 @@
   "expo": {
     "name": "dailly",
     "slug": "dailly",
-    "description": "Daily allows you to create, manage, track and share your goals in a simple and beautiful way.",
+    "description": "Create, manage, track and share your daily goals in a simple and aesthetic way.",
     "entryPoint": "./application.js",
     "version": "3.0.0",
     "orientation": "portrait",
@@ -12,14 +12,11 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
-    "platforms": ["ios", "android"],
+    "platforms": ["android"],
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
-    "ios": {
-      "supportsTablet": true
-    },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -32,6 +29,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "permissions": [
+      "READ_EXTERNAL_STORAGE",
+      "WRITE_EXTERNAL_STORAGE",
+      "VIBRATE"
+    ]
   }
 }

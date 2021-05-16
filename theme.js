@@ -1,9 +1,5 @@
 const theme = {
   color: {
-    black: {
-      main: "#000000",
-      hover: "rgba(0, 0, 0, 0.75)",
-    },
     white: {
       main: "#ffffff",
     },
@@ -12,14 +8,18 @@ const theme = {
       main: "#9b9fab",
       dark: "#bcbcbc",
     },
+    black: {
+      main: "#000000",
+      hover: "rgba(0, 0, 0, 0.75)",
+    },
+    red: {
+      main: "#fc1f3d",
+    },
     green: {
       main: "#01ce89",
     },
     blue: {
       light: "#f1f5fe",
-    },
-    red: {
-      main: "#fc1f3d",
     },
     fonts: ["#ffffff", "#000000"],
     cards: [
@@ -31,8 +31,8 @@ const theme = {
       "#ee585d",
       "#f27c57",
       "#fcdb99",
-      "#7fe3fa",
       "#79e9c7",
+      "#7fe3fa",
       "#f1bdd3",
       "#827ffa",
     ],

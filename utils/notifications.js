@@ -6,17 +6,15 @@ const defaultTrigger = {
   repeats: true,
 };
 
-const content = {
+const defaultContent = {
   title: "You've got a new notification 👻",
-  // subtitle: "",
   body: "Here is the notification body",
-  // data: { data: "data" },
   vibrate: true,
 };
 
-const schedulePushNotification = async (content = content, trigger) => {
+const schedulePushNotification = async (content, trigger) => {
   const identifier = await Notifications.scheduleNotificationAsync({
-    content,
+    content: content ? content : defaultContent,
     trigger: trigger ? trigger : defaultTrigger,
   });
 

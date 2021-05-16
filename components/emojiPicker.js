@@ -13,13 +13,7 @@ import theme from "../theme";
 
 import { emojisCategorized, emojisCategories } from "../utils/emojis";
 
-const EmojiPicker = ({
-  emoji,
-  setEmoji,
-  setEmojiError,
-  category,
-  setCategory,
-}) => {
+const EmojiPicker = ({ setEmoji, setEmojiError, category, setCategory }) => {
   const renderItem = useCallback(
     ({ item }) => (
       <TouchableOpacity
@@ -78,7 +72,7 @@ const EmojiPicker = ({
           renderItem={renderItem}
           keyExtractor={(item) => item.aliases[0]}
           horizontal={true}
-          maxToRenderPerBatch={18}
+          maxToRenderPerBatch={16}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
           style={styles.flatListEmojis}

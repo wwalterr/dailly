@@ -10,7 +10,7 @@ import HeaderGoBack from "../components/headerGoBack";
 
 import UpdateTask from "../components/updateTask";
 
-const TaskUpdateScreen = ({ route, navigation }) => {
+const UpdateScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <HeaderGoBack navigation={navigation} />
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TaskUpdateScreen;
+export default UpdateScreen;
