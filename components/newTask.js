@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     borderTopEndRadius: 20,
     borderTopStartRadius: 20,
-    elevation: 15,
+    elevation: 14,
     shadowColor: theme.color.black.main,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.8,

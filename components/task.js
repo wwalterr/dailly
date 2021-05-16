@@ -39,7 +39,7 @@ const messageDecreaseCounter = "No negative goals!";
 const onShare = async (message) => {
   try {
     const result = await Share.share({
-      message: `My daily goal is ${message.toLowerCase()}`,
+      message: message.toLowerCase(),
     });
 
     if (result.action === Share.sharedAction) {
@@ -408,8 +408,8 @@ const styles = StyleSheet.create({
     paddingRight: 2,
   },
   incrementText: {
-    fontFamily: "Inter_400Regular",
-    fontSize: 14,
+    fontFamily: "Inter_300Light",
+    fontSize: 12,
     color: theme.color.white.main,
   },
   containerActions: {
