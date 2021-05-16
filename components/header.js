@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_500Medium",
     fontSize: 16,
     color: theme.color.black.main,
+    paddingRight: 4,
   },
   columnNewTaskContainer: {
     flex: 0.25,

@@ -34,7 +34,7 @@ const taskHeight = 145 + taskMargin * 2;
 
 const messageRemoveGoal = "Goal removed!";
 
-const messageDecreaseCounter = "No negative numbers!";
+const messageDecreaseCounter = "No negative goals!";
 
 const onShare = async (message) => {
   try {
@@ -372,12 +372,12 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     marginBottom: 24,
     marginTop: 8,
+    padding: 4,
   },
   textModal: {
     fontFamily: "Inter_400Regular",
     fontSize: 24,
     color: theme.color.black.main,
-    textAlign: "justify",
   },
   containerCounter: {
     alignItems: "flex-end",

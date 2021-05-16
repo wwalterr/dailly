@@ -19,7 +19,9 @@ const NewTaskButton = ({ showNewTask }) => {
 };
 
 const styles = StyleSheet.create({
-  button: {},
+  button: {
+    paddingTop: 12,
+  },
   buttonText: {
     fontFamily: "Inter_400Regular",
     fontSize: 14,

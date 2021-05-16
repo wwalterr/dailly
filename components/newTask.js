@@ -284,7 +284,9 @@ const styles = StyleSheet.create({
     padding: 1,
     borderRadius: 5,
   },
-  closeIcon: {},
+  closeIcon: {
+    padding: 4,
+  },
   rowText: {
     flexDirection: "column",
   },
