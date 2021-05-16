@@ -190,7 +190,7 @@ const UpdateTask = ({ task, navigation }) => {
       ) : null}
 
       <View style={[styles.row, styles.rowRemind]}>
-        <Text style={styles.text}>Do you want to receive reminds?</Text>
+        <Text style={styles.text}>Do you want to receive reminders?</Text>
 
         <Switch
           activeText={activeText}
@@ -219,7 +219,7 @@ const UpdateTask = ({ task, navigation }) => {
       {remind ? (
         <View style={[styles.row, styles.rowTimePicker]}>
           <Text style={styles.text}>
-            When do you want to receive the reminds
+            When do you want to receive the reminders
           </Text>
 
           <Ionicons
