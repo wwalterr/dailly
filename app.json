@@ -4,7 +4,7 @@
     "slug": "dailly",
     "description": "Create, manage, track and share your daily goals in a simple and aesthetic way.",
     "entryPoint": "./application.js",
-    "version": "3.0.0",
+    "version": "4.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -14,7 +14,8 @@
     },
     "platforms": ["android"],
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "enabled": true,
+      "fallbackToCacheTimeout": 1000
     },
     "assetBundlePatterns": ["**/*"],
     "android": {
@@ -25,15 +26,19 @@
       "softwareKeyboardLayoutMode": "resize",
       "allowBackup": false,
       "package": "com.dailly.dailly",
-      "versionCode": 3,
+      "versionCode": 4,
       "permissions": [
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE",
         "VIBRATE"
-      ]
+      ],
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.dailly.dailly"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "experiments": {
+      "turboModules": true
     }
   }
 }
