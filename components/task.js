@@ -12,8 +12,6 @@ import {
   StyleSheet,
 } from "react-native";
 
-import { AnimatedEmoji } from "react-native-animated-emoji";
-
 import Modal from "react-native-modal";
 
 import { AntDesign } from "@expo/vector-icons";
@@ -39,7 +37,7 @@ const messageDecreaseCounter = "No negative goals!";
 const onShare = async (message) => {
   try {
     const result = await Share.share({
-      message: message.toLowerCase(),
+      message,
     });
 
     if (result.action === Share.sharedAction) {
@@ -58,8 +56,6 @@ const onShare = async (message) => {
 
 const Task = ({ task, index, scrollY, navigation }) => {
   const { removeTask, updateTask } = useTasks();
-
-  const [emojiCloud, setEmojiCloud] = useState(false);
 
   const [removeStatus, setRemoveStatus] = useState(false);
 
@@ -104,49 +100,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
       <View style={styles.containerHeader}>
         <Text style={[styles.createdAt, cardFontColor]}>{task.createdAt}</Text>
 
-        <TouchableOpacity
-          onPress={() => {
-            setEmojiCloud(true);
-          }}
-          activeOpacity={0.8}
-          key={"emoji"}
-          style={styles.emojiButton}
-        >
-          <Text style={styles.emoji}>{task.emoji.emoji}</Text>
-        </TouchableOpacity>
-
-        {emojiCloud ? (
-          <>
-            <AnimatedEmoji
-              index={index}
-              style={{ bottom: 0 }}
-              name={task.emoji.aliases[0]}
-              size={25}
-              duration={3500}
-              onAnimationCompleted={() => {}}
-            />
-
-            <AnimatedEmoji
-              index={index + 1}
-              style={{ bottom: 40 }}
-              name={task.emoji.aliases[0]}
-              size={15}
-              duration={3500}
-              onAnimationCompleted={() => {}}
-            />
-
-            <AnimatedEmoji
-              index={index + 2}
-              style={{ bottom: -60 }}
-              name={task.emoji.aliases[0]}
-              size={25}
-              duration={3550}
-              onAnimationCompleted={() => {
-                setEmojiCloud(false);
-              }}
-            />
-          </>
-        ) : null}
+        <Text style={styles.emoji}>{task.emoji.emoji}</Text>
       </View>
 
       <View style={styles.containerOutsider}>
@@ -333,7 +287,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: theme.color.white.main,
   },
-  emojiButton: {},
   emoji: {
     fontSize: 22,
   },
