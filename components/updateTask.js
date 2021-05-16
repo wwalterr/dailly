@@ -17,7 +17,7 @@ import { Switch } from "react-native-switch";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import theme from "../theme";
 
@@ -172,13 +172,13 @@ const UpdateTask = ({ task, navigation }) => {
       {increment ? (
         <View style={[styles.row, styles.rowIncrementText]}>
           <TextInput
-            placeholder="Choose a label to the increment counter"
+            placeholder="Type a label for your counter"
             placeholderTextColor={theme.color.gray.main}
             textAlign="left"
             multiline={false}
             spellCheck={true}
             autoFocus={false}
-            maxLength={8}
+            maxLength={10}
             underlineColorAndroid="transparent"
             value={incrementText}
             onChangeText={(text) => {
@@ -222,8 +222,8 @@ const UpdateTask = ({ task, navigation }) => {
             When do you want to receive the reminders
           </Text>
 
-          <Ionicons
-            name="timer"
+          <MaterialCommunityIcons
+            name="clock-time-ten"
             size={26}
             color={theme.color.black.main}
             onPress={() =>
@@ -255,7 +255,7 @@ const UpdateTask = ({ task, navigation }) => {
 
       <View style={[styles.row, styles.rowCategory]}>
         <View style={styles.containerCategory}>
-          <Text style={styles.textCategory}>Choose an emoji to your goal</Text>
+          <Text style={styles.textCategory}>Choose an emoji for your goal</Text>
 
           <Text style={[styles.textCategory, styles.textEmoji]}>
             {emoji.emoji}
@@ -271,7 +271,7 @@ const UpdateTask = ({ task, navigation }) => {
 
       <View style={[styles.row, styles.rowCardColors]}>
         <View style={styles.containerColor}>
-          <Text style={styles.text}>Choose a color to the card</Text>
+          <Text style={styles.text}>Choose the card color</Text>
 
           <MaterialIcons
             name="invert-colors-on"
@@ -312,7 +312,7 @@ const UpdateTask = ({ task, navigation }) => {
 
       <View style={[styles.row, styles.rowFontColors]}>
         <View style={styles.containerColor}>
-          <Text style={styles.text}>Choose a color to the card' text</Text>
+          <Text style={styles.text}>Choose the card text color</Text>
 
           <MaterialIcons
             name="invert-colors-on"
@@ -463,7 +463,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
-    marginRight: 16,
+    marginRight: 14,
     fontFamily: "Inter_400Regular",
     fontSize: 14,
     color: theme.color.black.main,

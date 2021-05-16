@@ -79,7 +79,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
     if (removeStatus)
       closeRemoveStatus = setTimeout(() => {
         setRemoveStatus(false);
-      }, 1500);
+      }, 2500);
 
     return () => {
       clearTimeout(closeRemoveStatus);

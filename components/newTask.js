@@ -173,7 +173,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
       <View style={[styles.row, styles.rowCategory]}>
         <View style={styles.containerCategory}>
-          <Text style={styles.textCategory}>Choose an emoji to your goal</Text>
+          <Text style={styles.textCategory}>Choose an emoji for your goal</Text>
 
           <Text style={[styles.textCategory, styles.textEmoji]}>
             {emoji.emoji}
