@@ -175,7 +175,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
                 style={styles.removeButton}
               >
                 <Text style={[styles.remove, cardFontColor]}>
-                  {removeStatus ? "Confirm removal" : "Remove"}
+                  {removeStatus ? "Confirm" : "Remove"}
                 </Text>
               </TouchableOpacity>
 
