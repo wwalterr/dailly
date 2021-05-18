@@ -8157,4 +8157,6 @@ const emojisCategorized = {
 
 const emojisCategories = Object.keys(emojisCategorized);
 
-export { emojisCategorized, emojisCategories };
+const emojisCategoriesFlattened = Object.values(emojisCategorized).flat();
+
+export { emojisCategorized, emojisCategoriesFlattened, emojisCategories };

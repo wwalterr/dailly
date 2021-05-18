@@ -1,53 +1,144 @@
-import React, { useCallback, memo } from "react";
+import React, { useState, useEffect, memo } from "react";
 
 import {
   StyleSheet,
   TouchableOpacity,
   Text,
   View,
-  FlatList,
+  TextInput,
   ScrollView,
 } from "react-native";
 
+import { MaterialIcons, AntDesign, EvilIcons } from "@expo/vector-icons";
+
+import Modal from "react-native-modal";
+
 import theme from "../theme";
 
-import { emojisCategorized, emojisCategories } from "../utils/emojis";
+import {
+  emojisCategorized,
+  emojisCategoriesFlattened,
+  emojisCategories,
+} from "../utils/emojis";
 
-const EmojiPicker = ({ setEmoji, setEmojiError, category, setCategory }) => {
-  const renderItem = useCallback(
-    ({ item }) => (
-      <TouchableOpacity
-        onPress={() => {
-          setEmoji(item);
+const searchEmoji = (emojis, term) => {
+  return emojisCategoriesFlattened.find((item) => item.aliases.includes(term));
+};
 
-          if (setEmojiError) setEmojiError(false);
+const EmojiPicker = ({
+  emoji,
+  setEmoji,
+  setEmojiError,
+  category,
+  setCategory,
+}) => {
+  const [showEmojiModal, setShowEmojiModal] = useState(false);
 
-          setCategory("");
-        }}
-        activeOpacity={0.8}
-        key={item.aliases[0]}
-        style={styles.emojiButton}
-      >
-        <Text style={styles.emoji}>{item.emoji}</Text>
-      </TouchableOpacity>
-    ),
-    []
-  );
+  const [showEmojiSearch, setShowEmojiSearch] = useState(false);
+
+  const [emojiFilter, setEmojiFilter] = useState([]);
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const closeModal = () => {
+    setCategory("Smileys & Emotion");
+
+    setShowEmojiSearch(false);
+
+    setEmojiFilter([]);
+
+    setSearchTerm("");
+
+    setShowEmojiModal(false);
+  };
+
+  useEffect(() => {
+    if (searchTerm) {
+      const emoji = searchEmoji(emojisCategorized, searchTerm);
+
+      if (emoji) {
+        setEmojiFilter((previousEmojiFilter) => [
+          ...previousEmojiFilter,
+          ...emoji.aliases,
+        ]);
+
+        setCategory(emoji.category);
+      }
+    }
+  }, [searchTerm, setSearchTerm]);
 
   return (
-    <View style={[styles.container, { height: category ? 70 : 25 }]}>
-      <ScrollView
-        horizontal={true}
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-        style={styles.containerChips}
+    <View style={styles.container}>
+      <MaterialIcons
+        name="emoji-emotions"
+        size={24}
+        color={theme.color.black.main}
+        onPress={() => setShowEmojiModal(true)}
+      />
+
+      <Modal
+        isVisible={showEmojiModal}
+        backdropColor={theme.color.white.main}
+        backdropOpacity={1}
+        backdropTransitionOutTiming={0}
+        useNativeDriverForBackdrop={true}
+        style={{
+          flex: 1,
+          alignItems: "flex-start",
+          justifyContent: "flex-start",
+        }}
       >
-        {emojisCategories.map((_category) => {
-          return (
+        <View style={styles.containerActions}>
+          {showEmojiSearch ? null : (
+            <EvilIcons
+              name="search"
+              size={24}
+              color={theme.color.gray.dark}
+              onPress={() => setShowEmojiSearch(true)}
+              style={styles.searchIcon}
+            />
+          )}
+
+          {showEmojiSearch ? (
+            <TextInput
+              placeholder="Search"
+              placeholderTextColor={theme.color.gray.main}
+              textAlign="left"
+              multiline={false}
+              spellCheck={true}
+              autoFocus={true}
+              underlineColorAndroid="transparent"
+              value={searchTerm}
+              onChangeText={(_searchTerm) => {
+                setEmojiFilter([]);
+
+                setSearchTerm(_searchTerm);
+              }}
+              style={styles.textInput}
+            />
+          ) : null}
+
+          <Text style={styles.emoji}>{emoji.emoji}</Text>
+
+          <AntDesign
+            name="close"
+            size={20}
+            onPress={closeModal}
+            color={theme.color.gray.dark}
+            style={styles.closeIcon}
+          />
+        </View>
+
+        <ScrollView
+          horizontal={true}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          style={styles.containerChips}
+        >
+          {emojisCategories.map((_category) => (
             <TouchableOpacity
               onPress={() => {
-                if (category !== _category) setCategory(_category);
-                else setCategory("");
+                setCategory(_category);
               }}
               activeOpacity={0.8}
               key={_category}
@@ -62,36 +153,86 @@ const EmojiPicker = ({ setEmoji, setEmojiError, category, setCategory }) => {
             >
               <Text style={styles.chipText}>{_category}</Text>
             </TouchableOpacity>
-          );
-        })}
-      </ScrollView>
+          ))}
+        </ScrollView>
 
-      {category ? (
-        <FlatList
-          data={emojisCategorized[category]}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.aliases[0]}
-          horizontal={true}
-          maxToRenderPerBatch={16}
+        <ScrollView
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
-          style={styles.flatListEmojis}
-        />
-      ) : null}
+          contentContainerStyle={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            alignItems: "flex-start",
+            justifyContent: "space-between",
+          }}
+        >
+          {(searchTerm
+            ? emojisCategorized[category].filter((item) =>
+                emojiFilter.includes(item.aliases[0])
+              )
+            : emojisCategorized[category]
+          ).map((item) => (
+            <TouchableOpacity
+              onPress={() => {
+                setEmoji(item);
+
+                if (setEmojiError) setEmojiError(false);
+
+                closeModal();
+              }}
+              activeOpacity={0.8}
+              key={item.aliases[0]}
+              style={styles.emojiButton}
+            >
+              <Text style={styles.emoji}>{item.emoji}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </Modal>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {},
+  containerModal: {
+    justifyContent: "flex-start",
+  },
+  containerActions: {
+    minHeight: 35,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  textInput: {
+    height: 35,
+    width: "35%",
+    paddingHorizontal: 15,
+    borderRadius: 5,
+    fontFamily: "Inter_400Regular",
+    fontSize: 14,
+    color: theme.color.black.main,
+    backgroundColor: theme.color.blue.light,
+  },
+  searchIcon: {
+    padding: 4,
+  },
+  emoji: {
+    fontSize: 16,
+  },
+  closeIcon: {
+    padding: 4,
+  },
   containerChips: {
-    height: 25,
-    maxHeight: 25,
-    paddingVertical: 2,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
+    height: 40,
+    maxHeight: 40,
+    paddingBottom: 8,
+    marginBottom: 4,
   },
   chip: {
+    height: 25,
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 4,
@@ -105,14 +246,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: theme.color.gray.main,
   },
-  flatListEmojis: {
-    height: 35,
-    maxWidth: "100%",
-  },
   emojiButton: {},
   emoji: {
     fontSize: 22,
-    marginRight: 10,
+    padding: 8,
   },
 });
 

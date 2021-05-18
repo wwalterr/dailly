@@ -4,7 +4,6 @@ import {
   View,
   TextInput,
   Text,
-  TouchableOpacity,
   ToastAndroid,
   Platform,
   Keyboard,
@@ -55,7 +54,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
   const [emojiError, setEmojiError] = useState(false);
 
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("Smileys & Emotion");
 
   const resetFields = () => {
     Keyboard.dismiss();
@@ -72,7 +71,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
     setEmojiError(false);
 
-    setCategory("");
+    setCategory("Smileys & Emotion");
   };
 
   return (
@@ -179,17 +178,14 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
         <View style={styles.containerCategory}>
           <Text style={styles.textCategory}>Choose an emoji for your goal</Text>
 
-          <Text style={[styles.textCategory, styles.textEmoji]}>
-            {emoji.emoji}
-          </Text>
+          <EmojiPicker
+            emoji={emoji}
+            setEmoji={setEmoji}
+            setEmojiError={setEmojiError}
+            category={category}
+            setCategory={setCategory}
+          />
         </View>
-
-        <EmojiPicker
-          setEmoji={setEmoji}
-          setEmojiError={setEmojiError}
-          category={category}
-          setCategory={setCategory}
-        />
 
         {emojiError ? (
           <Text style={styles.textError}>
@@ -265,9 +261,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     paddingHorizontal: 32,
-    borderTopEndRadius: 20,
-    borderTopStartRadius: 20,
-    elevation: 14,
+    borderTopEndRadius: 24,
+    borderTopStartRadius: 24,
+    elevation: 15,
     shadowColor: theme.color.black.main,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.8,
@@ -332,14 +328,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textCategory: {
-    marginBottom: 10,
+    marginRight: 5,
     fontFamily: "Inter_400Regular",
     fontSize: 14,
     color: theme.color.black.main,
-  },
-  textEmoji: {
-    fontSize: 22,
-    marginLeft: 14,
   },
   rowButton: {
     height: 45,

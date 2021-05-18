@@ -139,7 +139,6 @@ const Task = ({ task, index, scrollY, navigation }) => {
               />
 
               <ScrollView
-                style={styles.containerTextModal}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
               >
@@ -175,7 +174,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
                 style={styles.removeButton}
               >
                 <Text style={[styles.remove, cardFontColor]}>
-                  {removeStatus ? "Confirm" : "Remove"}
+                  {removeStatus ? "Confirm removal" : "Remove"}
                 </Text>
               </TouchableOpacity>
 
@@ -326,7 +325,6 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     paddingHorizontal: 32,
   },
-  containerTextModal: {},
   closeIcon: {
     alignSelf: "flex-end",
     marginBottom: 24,

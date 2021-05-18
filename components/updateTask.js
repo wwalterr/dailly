@@ -17,7 +17,7 @@ import { Switch } from "react-native-switch";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 import theme from "../theme";
 
@@ -57,7 +57,7 @@ const UpdateTask = ({ task, navigation }) => {
 
   const [emoji, setEmoji] = useState(task.emoji);
 
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("Smileys & Emotion");
 
   const [date, setDate] = useState(
     task.remindTime ? new Date(task.remindTime) : new Date()
@@ -141,7 +141,7 @@ const UpdateTask = ({ task, navigation }) => {
 
         {textError ? (
           <Text style={styles.textError}>
-            You can't have an empty goal, describe your goal!
+            You can't have an empty goal. Describe your goal!
           </Text>
         ) : null}
       </View>
@@ -226,9 +226,9 @@ const UpdateTask = ({ task, navigation }) => {
             When do you want to receive the reminders
           </Text>
 
-          <MaterialCommunityIcons
-            name="clock-time-ten"
-            size={24}
+          <Ionicons
+            name="timer"
+            size={25}
             color={theme.color.black.main}
             onPress={() =>
               setShowTimePicker(
@@ -258,15 +258,10 @@ const UpdateTask = ({ task, navigation }) => {
       ) : null}
 
       <View style={[styles.row, styles.rowCategory]}>
-        <View style={styles.containerCategory}>
-          <Text style={styles.textCategory}>Choose an emoji for your goal</Text>
-
-          <Text style={[styles.textCategory, styles.textEmoji]}>
-            {emoji.emoji}
-          </Text>
-        </View>
+        <Text style={styles.textCategory}>Choose an emoji for your goal</Text>
 
         <EmojiPicker
+          emoji={emoji}
           setEmoji={setEmoji}
           category={category}
           setCategory={setCategory}
@@ -277,9 +272,9 @@ const UpdateTask = ({ task, navigation }) => {
         <View style={styles.containerColor}>
           <Text style={styles.text}>Choose the card color</Text>
 
-          <MaterialIcons
-            name="invert-colors-on"
-            size={22}
+          <Ionicons
+            name="md-color-filter-sharp"
+            size={17}
             color={theme.color.black.main}
             onPress={() => {
               setShowCardColor(
@@ -318,9 +313,9 @@ const UpdateTask = ({ task, navigation }) => {
         <View style={styles.containerColor}>
           <Text style={styles.text}>Choose the card text color</Text>
 
-          <MaterialIcons
-            name="invert-colors-on"
-            size={22}
+          <Ionicons
+            name="md-color-filter-sharp"
+            size={17}
             color={theme.color.black.main}
             onPress={() => {
               setShowCardFontColor(
@@ -429,7 +424,6 @@ const UpdateTask = ({ task, navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     paddingHorizontal: 32,
   },
   row: {
@@ -483,22 +477,15 @@ const styles = StyleSheet.create({
   timePickerIcon: {},
   datePicker: {},
   rowCategory: {
-    flexDirection: "column",
-  },
-  containerCategory: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
   },
   textCategory: {
-    marginBottom: 10,
+    marginRight: 14,
     fontFamily: "Inter_400Regular",
     fontSize: 14,
     color: theme.color.black.main,
-  },
-  textEmoji: {
-    fontSize: 22,
-    marginLeft: 14,
   },
   rowCardColors: {},
   containerColor: {
@@ -507,8 +494,9 @@ const styles = StyleSheet.create({
   },
   colorIcon: {
     backgroundColor: theme.color.black.main,
-    borderRadius: 50,
+    borderRadius: 25,
     color: theme.color.white.main,
+    padding: 2,
   },
   flatListColors: {},
   colorPick: {
