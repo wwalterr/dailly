@@ -405,11 +405,12 @@ const UpdateTask = ({ task, navigation }) => {
             });
 
             if (Platform.OS != "android")
-              Snackbar.show({
-                text: messageNewGoal,
-                duration: Snackbar.LENGTH_SHORT,
-              });
-            else ToastAndroid.show(messageNewGoal, ToastAndroid.SHORT);
+              ToastAndroid.show(messageNewGoal, ToastAndroid.SHORT);
+            // else
+            //   Snackbar.show({
+            //     text: messageNewGoal,
+            //     duration: Snackbar.LENGTH_SHORT,
+            //   });
 
             resetFields();
 

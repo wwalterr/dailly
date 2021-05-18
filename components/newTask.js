@@ -233,12 +233,13 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
               cardFontColor: theme.color.white.main,
             });
 
-            if (Platform.OS != "android")
-              Snackbar.show({
-                text: messageNewGoal,
-                duration: Snackbar.LENGTH_SHORT,
-              });
-            else ToastAndroid.show(messageNewGoal, ToastAndroid.SHORT);
+            if (Platform.OS === "android")
+              ToastAndroid.show(messageNewGoal, ToastAndroid.SHORT);
+            // else
+            //   Snackbar.show({
+            //     text: messageNewGoal,
+            //     duration: Snackbar.LENGTH_SHORT,
+            //   });
 
             resetFields();
 

@@ -162,12 +162,13 @@ const Task = ({ task, index, scrollY, navigation }) => {
 
                   removeTask(task.id);
 
-                  if (Platform.OS != "android")
-                    Snackbar.show({
-                      text: messageRemoveGoal,
-                      duration: Snackbar.LENGTH_SHORT,
-                    });
-                  else ToastAndroid.show(messageRemoveGoal, ToastAndroid.SHORT);
+                  if (Platform.OS === "android")
+                    ToastAndroid.show(messageRemoveGoal, ToastAndroid.SHORT);
+                  // else
+                  //   Snackbar.show({
+                  //     text: messageRemoveGoal,
+                  //     duration: Snackbar.LENGTH_SHORT,
+                  //   });
                 }}
                 activeOpacity={0.8}
                 key={"remove"}
@@ -238,16 +239,16 @@ const Task = ({ task, index, scrollY, navigation }) => {
                     counter: task.counter - 1,
                   });
                 } else {
-                  if (Platform.OS != "android")
-                    Snackbar.show({
-                      text: messageDecreaseCounter,
-                      duration: Snackbar.LENGTH_SHORT,
-                    });
-                  else
+                  if (Platform.OS === "android")
                     ToastAndroid.show(
                       messageDecreaseCounter,
                       ToastAndroid.SHORT
                     );
+                  // else
+                  //   Snackbar.show({
+                  //     text: messageDecreaseCounter,
+                  //     duration: Snackbar.LENGTH_SHORT,
+                  //   });
                 }
               }}
               activeOpacity={0.8}
