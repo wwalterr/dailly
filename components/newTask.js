@@ -30,6 +30,8 @@ import { schedulePushNotification } from "../utils/notifications";
 
 import EmojiPicker from "./emojiPicker";
 
+import Button from "./button";
+
 const activeText = "Yes";
 
 const inActiveText = "No";
@@ -197,7 +199,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
       </View>
 
       <View style={[styles.row, styles.rowButton]}>
-        <TouchableOpacity
+        <Button
           onPress={async () => {
             if (!text) {
               setTextError(true);
@@ -246,11 +248,8 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
             hideNewTask();
           }}
-          activeOpacity={0.8}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Create goal</Text>
-        </TouchableOpacity>
+          text="Create goal"
+        />
       </View>
     </Animated.View>
   );
@@ -344,19 +343,6 @@ const styles = StyleSheet.create({
   },
   rowButton: {
     height: 45,
-  },
-  button: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    borderRadius: 5,
-    backgroundColor: theme.color.black.main,
-  },
-  buttonText: {
-    fontFamily: "Inter_400Regular",
-    fontSize: 14,
-    color: theme.color.white.main,
   },
 });
 

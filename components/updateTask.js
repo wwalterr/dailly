@@ -32,6 +32,8 @@ import {
 
 import EmojiPicker from "./emojiPicker";
 
+import Button from "./button";
+
 const activeText = "Yes";
 
 const inActiveText = "No";
@@ -354,7 +356,7 @@ const UpdateTask = ({ task, navigation }) => {
       </View>
 
       <View style={[styles.row, styles.rowButton]}>
-        <TouchableOpacity
+        <Button
           onPress={async () => {
             if (!text) {
               setTextError(true);
@@ -418,11 +420,8 @@ const UpdateTask = ({ task, navigation }) => {
 
             navigation.goBack();
           }}
-          activeOpacity={0.8}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Update goal</Text>
-        </TouchableOpacity>
+          text="Update goal"
+        />
       </View>
     </ScrollView>
   );
