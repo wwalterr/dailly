@@ -71,9 +71,10 @@ const EmojiPicker = ({
     <View style={styles.container}>
       <MaterialIcons
         name="emoji-emotions"
-        size={24}
+        size={26}
         color={theme.color.black.main}
         onPress={() => setShowEmojiModal(true)}
+        style={styles.emojiOpener}
       />
 
       <Modal
@@ -177,8 +178,6 @@ const EmojiPicker = ({
                 setEmoji(item);
 
                 if (setEmojiError) setEmojiError(false);
-
-                closeModal();
               }}
               activeOpacity={0.8}
               key={item.aliases[0]}
@@ -195,6 +194,9 @@ const EmojiPicker = ({
 
 const styles = StyleSheet.create({
   container: {},
+  emojiOpener: {
+    padding: 2,
+  },
   containerModal: {
     justifyContent: "flex-start",
   },
