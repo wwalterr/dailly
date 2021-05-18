@@ -16,7 +16,7 @@ import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
 
-const Header = ({ newTaskButton, navigation }) => {
+const Header = ({ navigation, showNewTask }) => {
   const { tasks } = useTasks();
 
   const [options, setOptions] = useState(false);
@@ -76,7 +76,17 @@ const Header = ({ newTaskButton, navigation }) => {
             </Text>
           </View>
 
-          <View style={styles.columnNewTaskContainer}>{newTaskButton}</View>
+          <View style={styles.columnNewTaskContainer}>
+            <TouchableOpacity
+              onPress={() => {
+                showNewTask();
+              }}
+              activeOpacity={0.8}
+              style={styles.button}
+            >
+              <Text style={styles.buttonText}>New goal</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       ) : null}
     </View>
@@ -146,6 +156,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: theme.color.black.main,
     marginTop: 16,
+  },
+  button: {
+    paddingTop: 12,
+  },
+  buttonText: {
+    fontFamily: "Inter_400Regular",
+    fontSize: 14,
+    color: theme.color.black.main,
   },
 });
 

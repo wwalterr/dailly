@@ -16,8 +16,6 @@ import Tasks from "../components/tasks";
 
 import NoTask from "../components/noTask";
 
-import NewTaskButton from "../components/newTaskButton";
-
 import NewTask from "../components/newTask";
 
 const TasksScreen = ({ navigation }) => {
@@ -43,10 +41,7 @@ const TasksScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header
-        newTaskButton={<NewTaskButton showNewTask={showNewTask} />}
-        navigation={navigation}
-      />
+      <Header navigation={navigation} showNewTask={showNewTask} />
 
       {tasks.length ? <Tasks navigation={navigation} /> : <NoTask />}
 
