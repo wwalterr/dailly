@@ -164,11 +164,6 @@ const Task = ({ task, index, scrollY, navigation }) => {
 
                   if (Platform.OS === "android")
                     ToastAndroid.show(messageRemoveGoal, ToastAndroid.SHORT);
-                  // else
-                  //   Snackbar.show({
-                  //     text: messageRemoveGoal,
-                  //     duration: Snackbar.LENGTH_SHORT,
-                  //   });
                 }}
                 activeOpacity={0.8}
                 key={"remove"}
@@ -244,11 +239,6 @@ const Task = ({ task, index, scrollY, navigation }) => {
                       messageDecreaseCounter,
                       ToastAndroid.SHORT
                     );
-                  // else
-                  //   Snackbar.show({
-                  //     text: messageDecreaseCounter,
-                  //     duration: Snackbar.LENGTH_SHORT,
-                  //   });
                 }
               }}
               activeOpacity={0.8}

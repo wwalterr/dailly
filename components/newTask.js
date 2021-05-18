@@ -235,11 +235,6 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
             if (Platform.OS === "android")
               ToastAndroid.show(messageNewGoal, ToastAndroid.SHORT);
-            // else
-            //   Snackbar.show({
-            //     text: messageNewGoal,
-            //     duration: Snackbar.LENGTH_SHORT,
-            //   });
 
             resetFields();
 
