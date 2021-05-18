@@ -9,7 +9,12 @@ import {
   ScrollView,
 } from "react-native";
 
-import { MaterialIcons, AntDesign, EvilIcons } from "@expo/vector-icons";
+import {
+  MaterialIcons,
+  MaterialCommunityIcons,
+  AntDesign,
+  EvilIcons,
+} from "@expo/vector-icons";
 
 import Modal from "react-native-modal";
 
@@ -22,7 +27,9 @@ import {
 } from "../utils/emojis";
 
 const searchEmoji = (emojis, term) => {
-  return emojisCategoriesFlattened.find((item) => item.aliases.includes(term));
+  return emojisCategoriesFlattened.find((item) =>
+    item.aliases.includes(term.toLowerCase())
+  );
 };
 
 const EmojiPicker = ({
@@ -101,22 +108,36 @@ const EmojiPicker = ({
           )}
 
           {showEmojiSearch ? (
-            <TextInput
-              placeholder="Search"
-              placeholderTextColor={theme.color.gray.main}
-              textAlign="left"
-              multiline={false}
-              spellCheck={true}
-              autoFocus={true}
-              underlineColorAndroid="transparent"
-              value={searchTerm}
-              onChangeText={(_searchTerm) => {
-                setEmojiFilter([]);
+            <View style={styles.containerSearch}>
+              <TextInput
+                placeholder="Search"
+                placeholderTextColor={theme.color.gray.main}
+                textAlign="left"
+                multiline={false}
+                spellCheck={true}
+                autoFocus={true}
+                underlineColorAndroid="transparent"
+                value={searchTerm}
+                onChangeText={(_searchTerm) => {
+                  setEmojiFilter([]);
 
-                setSearchTerm(_searchTerm);
-              }}
-              style={styles.textInput}
-            />
+                  setSearchTerm(_searchTerm);
+                }}
+                style={styles.textInput}
+              />
+
+              <MaterialCommunityIcons
+                name="format-clear"
+                size={20}
+                color={theme.color.gray.dark}
+                onPress={() => {
+                  setEmojiFilter([]);
+
+                  setSearchTerm("");
+                }}
+                style={styles.iconClearSearch}
+              />
+            </View>
           ) : null}
 
           <Text style={styles.emoji}>{emoji.emoji}</Text>
@@ -178,6 +199,12 @@ const EmojiPicker = ({
                 setEmoji(item);
 
                 if (setEmojiError) setEmojiError(false);
+
+                setEmojiFilter([]);
+
+                setSearchTerm("");
+
+                setShowEmojiSearch(false);
               }}
               activeOpacity={0.8}
               key={item.aliases[0]}
@@ -208,18 +235,29 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 20,
   },
+  searchIcon: {
+    padding: 4,
+  },
+  containerSearch: {
+    width: "35%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: theme.color.blue.light,
+  },
   textInput: {
     height: 35,
-    width: "35%",
+    width: "75%",
     paddingHorizontal: 15,
     borderRadius: 5,
     fontFamily: "Inter_400Regular",
     fontSize: 14,
     color: theme.color.black.main,
-    backgroundColor: theme.color.blue.light,
   },
-  searchIcon: {
-    padding: 4,
+  iconClearSearch: {
+    padding: 6,
   },
   closeIcon: {
     padding: 4,

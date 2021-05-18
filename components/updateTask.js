@@ -140,9 +140,7 @@ const UpdateTask = ({ task, navigation }) => {
         />
 
         {textError ? (
-          <Text style={styles.textError}>
-            You can't have an empty goal. Describe your goal!
-          </Text>
+          <Text style={styles.textError}>You can't turn your goal empty</Text>
         ) : null}
       </View>
 
