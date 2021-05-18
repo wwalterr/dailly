@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
+import { Platform } from "react-native";
+
 import * as Notifications from "expo-notifications";
 
 import Constants from "expo-constants";
