@@ -28,11 +28,7 @@
       "allowBackup": false,
       "package": "com.dailly.dailly",
       "versionCode": 4,
-      "permissions": [
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE",
-        "VIBRATE"
-      ],
+      "permissions": ["VIBRATE"],
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.dailly.dailly"
     },
     "web": {
