@@ -53,6 +53,8 @@ Open [localhost:19002](http://localhost:19002/) where a QR code can be scanned u
 
 > Optionally you start the application server to run directly in a device using `yarn android`
 
+To build the application see [reference](https://docs.expo.io/distribution/building-standalone-apps/#3-start-the-build).
+
 ## Roadmap
 
 Check the [project board](https://github.com/hydroxion/dailly/projects).
