@@ -205,6 +205,8 @@ const EmojiPicker = ({
                 setSearchTerm("");
 
                 setShowEmojiSearch(false);
+
+                setShowEmojiModal(false);
               }}
               activeOpacity={0.8}
               key={item.aliases[0]}

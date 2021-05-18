@@ -17,7 +17,7 @@ import { Switch } from "react-native-switch";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 import theme from "../theme";
 
@@ -87,7 +87,13 @@ const UpdateTask = ({ task, navigation }) => {
           }}
           activeOpacity={0.8}
           key={item}
-          style={[styles.colorPick, { backgroundColor: item }]}
+          style={[
+            styles.colorPick,
+            {
+              backgroundColor: item,
+              borderWidth: item === theme.color.white.main ? 2 : 0,
+            },
+          ]}
         >
           {value === item ? (
             <Text
@@ -145,7 +151,9 @@ const UpdateTask = ({ task, navigation }) => {
       </View>
 
       <View style={[styles.row, styles.rowIncrement]}>
-        <Text style={styles.text}>Is your goal incremental?</Text>
+        <Text style={[styles.text, styles.switchText]}>
+          Is your goal incremental?
+        </Text>
 
         <Switch
           activeText={activeText}
@@ -174,7 +182,7 @@ const UpdateTask = ({ task, navigation }) => {
       {increment ? (
         <View style={[styles.row, styles.rowIncrementText]}>
           <TextInput
-            placeholder="Type a label for your counter"
+            placeholder="What is the increment label"
             placeholderTextColor={theme.color.gray.main}
             textAlign="left"
             multiline={false}
@@ -192,7 +200,9 @@ const UpdateTask = ({ task, navigation }) => {
       ) : null}
 
       <View style={[styles.row, styles.rowRemind]}>
-        <Text style={styles.text}>Do you want to receive reminders?</Text>
+        <Text style={[styles.text, styles.switchText]}>
+          Do you want to receive reminders?
+        </Text>
 
         <Switch
           activeText={activeText}
@@ -226,7 +236,7 @@ const UpdateTask = ({ task, navigation }) => {
 
           <Ionicons
             name="timer"
-            size={25}
+            size={26}
             color={theme.color.black.main}
             onPress={() =>
               setShowTimePicker(
@@ -270,9 +280,9 @@ const UpdateTask = ({ task, navigation }) => {
         <View style={styles.containerColor}>
           <Text style={styles.text}>Choose the card color</Text>
 
-          <Ionicons
-            name="md-color-filter-sharp"
-            size={17}
+          <MaterialIcons
+            name="invert-colors"
+            size={21}
             color={theme.color.black.main}
             onPress={() => {
               setShowCardColor(
@@ -311,9 +321,9 @@ const UpdateTask = ({ task, navigation }) => {
         <View style={styles.containerColor}>
           <Text style={styles.text}>Choose the card text color</Text>
 
-          <Ionicons
-            name="md-color-filter-sharp"
-            size={17}
+          <MaterialIcons
+            name="invert-colors"
+            size={21}
             color={theme.color.black.main}
             onPress={() => {
               setShowCardFontColor(
@@ -452,10 +462,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
-    marginRight: 14,
+    marginRight: 5,
     fontFamily: "Inter_400Regular",
     fontSize: 14,
     color: theme.color.black.main,
+  },
+  switchText: {
+    marginRight: 16,
   },
   rowIncrementText: {},
   rowRemind: {
@@ -476,7 +489,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textCategory: {
-    marginRight: 14,
+    marginRight: 5,
     fontFamily: "Inter_400Regular",
     fontSize: 14,
     color: theme.color.black.main,
@@ -490,7 +503,8 @@ const styles = StyleSheet.create({
     backgroundColor: theme.color.black.main,
     borderRadius: 25,
     color: theme.color.white.main,
-    padding: 2,
+    padding: 1,
+    marginLeft: 4,
   },
   flatListColors: {},
   colorPick: {
@@ -499,9 +513,8 @@ const styles = StyleSheet.create({
     width: 26,
     height: 26,
     borderRadius: 5,
-    marginRight: 14,
+    marginRight: 18,
     marginTop: 8,
-    borderWidth: 1,
     borderColor: theme.color.gray.light,
   },
   highlight: {
