@@ -219,9 +219,6 @@ const styles = StyleSheet.create({
   searchIcon: {
     padding: 4,
   },
-  emoji: {
-    fontSize: 16,
-  },
   closeIcon: {
     padding: 4,
   },

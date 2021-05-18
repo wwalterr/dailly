@@ -404,7 +404,7 @@ const UpdateTask = ({ task, navigation }) => {
               cardFontColor,
             });
 
-            if (Platform.OS != "android")
+            if (Platform.OS !== "android")
               ToastAndroid.show(messageNewGoal, ToastAndroid.SHORT);
 
             resetFields();
