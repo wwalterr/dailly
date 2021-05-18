@@ -30,7 +30,7 @@ const TasksProvider = ({ children }) => {
   };
 
   const updateTask = async (id, task) => {
-    const _tasks = tasks.map((__task) => (__task.id == id ? task : __task));
+    const _tasks = tasks.map((__task) => (__task.id === id ? task : __task));
 
     setTasks(_tasks);
 
