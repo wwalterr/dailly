@@ -1,5 +1,6 @@
 const theme = {
   color: {
+    transparent: "transparent",
     white: {
       main: "#ffffff",
     },

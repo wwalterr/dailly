@@ -4,7 +4,6 @@ import {
   View,
   ScrollView,
   TextInput,
-  FlatList,
   Text,
   TouchableOpacity,
   ToastAndroid,
@@ -17,7 +16,7 @@ import { Switch } from "react-native-switch";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 import theme from "../theme";
 
@@ -31,6 +30,8 @@ import {
 } from "../utils/notifications";
 
 import EmojiPicker from "./emojiPicker";
+
+import ColorPicker from "./colorPicker";
 
 import Button from "./button";
 
@@ -135,7 +136,7 @@ const UpdateTask = ({ task, navigation }) => {
           multiline={true}
           spellCheck={true}
           autoFocus={false}
-          underlineColorAndroid="transparent"
+          underlineColorAndroid={theme.color.transparent}
           value={text}
           onChangeText={(_text) => {
             setText(_text);
@@ -189,7 +190,7 @@ const UpdateTask = ({ task, navigation }) => {
             spellCheck={true}
             autoFocus={false}
             maxLength={10}
-            underlineColorAndroid="transparent"
+            underlineColorAndroid={theme.color.transparent}
             value={incrementText}
             onChangeText={(text) => {
               setIncrementText(text);
@@ -277,44 +278,14 @@ const UpdateTask = ({ task, navigation }) => {
       </View>
 
       <View style={[styles.row, styles.rowCardColors]}>
-        <View style={styles.containerColor}>
-          <Text style={styles.text}>Choose the card color</Text>
-
-          <TouchableOpacity
-            onPress={() => {
-              setShowCardColor(
-                (previousShowCardColor) => !previousShowCardColor
-              );
-            }}
-            activeOpacity={0.8}
-            key={"card-color"}
-            style={styles.buttonColor}
-          >
-            <MaterialIcons
-              name="invert-colors"
-              size={21}
-              color={theme.color.black.main}
-              style={styles.colorIcon}
-            />
-          </TouchableOpacity>
-        </View>
-
-        {showCardColor ? (
-          <FlatList
-            data={theme.color.cards}
-            renderItem={renderCardColors(
-              setCardColor,
-              cardColor,
-              setShowCardColor
-            )}
-            keyExtractor={(item) => item}
-            horizontal={true}
-            maxToRenderPerBatch={4}
-            showsVerticalScrollIndicator={false}
-            showsHorizontalScrollIndicator={false}
-            style={styles.flatListColors}
-          />
-        ) : null}
+        <ColorPicker
+          text="Choose the card color"
+          showPicker={showCardColor}
+          showPickerSetter={setShowCardColor}
+          color={cardColor}
+          colorSetter={setCardColor}
+          colors={theme.color.cards}
+        />
 
         {colorError ? (
           <Text style={styles.textError}>
@@ -324,44 +295,14 @@ const UpdateTask = ({ task, navigation }) => {
       </View>
 
       <View style={[styles.row, styles.rowFontColors]}>
-        <View style={styles.containerColor}>
-          <Text style={styles.text}>Choose the card text color</Text>
-
-          <TouchableOpacity
-            onPress={() => {
-              setShowCardFontColor(
-                (previousShowCardFontColor) => !previousShowCardFontColor
-              );
-            }}
-            activeOpacity={0.8}
-            key={"card-font-color"}
-            style={styles.buttonColor}
-          >
-            <MaterialIcons
-              name="invert-colors"
-              size={21}
-              color={theme.color.black.main}
-              style={styles.colorIcon}
-            />
-          </TouchableOpacity>
-        </View>
-
-        {showCardFontColor ? (
-          <FlatList
-            data={theme.color.fonts}
-            renderItem={renderCardColors(
-              setCardFontColor,
-              cardFontColor,
-              setShowCardFontColor
-            )}
-            keyExtractor={(item) => item}
-            horizontal={true}
-            maxToRenderPerBatch={4}
-            showsVerticalScrollIndicator={false}
-            showsHorizontalScrollIndicator={false}
-            style={styles.flatListColors}
-          />
-        ) : null}
+        <ColorPicker
+          text="Choose the card text color"
+          showPicker={showCardFontColor}
+          showPickerSetter={setShowCardFontColor}
+          color={cardFontColor}
+          colorSetter={setCardFontColor}
+          colors={theme.color.fonts}
+        />
 
         {colorError ? (
           <Text style={styles.textError}>
@@ -511,36 +452,6 @@ const styles = StyleSheet.create({
     color: theme.color.black.main,
   },
   rowCardColors: {},
-  containerColor: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  buttonColor: {
-    paddingVertical: 8,
-    paddingRight: 12,
-  },
-  colorIcon: {
-    backgroundColor: theme.color.black.main,
-    borderRadius: 25,
-    color: theme.color.white.main,
-    padding: 1,
-    marginLeft: 4,
-  },
-  flatListColors: {},
-  colorPick: {
-    alignItems: "center",
-    justifyContent: "center",
-    width: 26,
-    height: 26,
-    borderRadius: 5,
-    marginRight: 18,
-    marginTop: 8,
-    borderColor: theme.color.gray.light,
-  },
-  highlight: {
-    fontSize: 25,
-    color: theme.color.white.main,
-  },
   rowFontColors: {},
   rowButton: {
     height: 45,

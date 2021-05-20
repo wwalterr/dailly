@@ -12,13 +12,14 @@ import {
 import {
   MaterialIcons,
   MaterialCommunityIcons,
-  AntDesign,
   EvilIcons,
 } from "@expo/vector-icons";
 
 import Modal from "react-native-modal";
 
 import theme from "../theme";
+
+import Close from "./close";
 
 import {
   emojisCategorized,
@@ -95,7 +96,7 @@ const EmojiPicker = ({
           {showEmojiSearch ? null : (
             <EvilIcons
               name="search"
-              size={24}
+              size={26}
               color={theme.color.gray.dark}
               onPress={() => setShowEmojiSearch(true)}
               style={styles.searchIcon}
@@ -111,7 +112,7 @@ const EmojiPicker = ({
                 multiline={false}
                 spellCheck={true}
                 autoFocus={true}
-                underlineColorAndroid="transparent"
+                underlineColorAndroid={theme.color.transparent}
                 value={searchTerm}
                 onChangeText={(_searchTerm) => {
                   setEmojiFilter([]);
@@ -139,13 +140,7 @@ const EmojiPicker = ({
 
           <Text style={styles.emoji}>{emoji.emoji}</Text>
 
-          <AntDesign
-            name="close"
-            size={20}
-            onPress={closeModal}
-            color={theme.color.gray.dark}
-            style={styles.closeIcon}
-          />
+          <Close hide={closeModal} />
         </View>
 
         <ScrollView
@@ -263,10 +258,6 @@ const styles = StyleSheet.create({
   },
   iconClearSearch: {
     padding: 6,
-  },
-  closeIcon: {
-    padding: 12,
-    paddingRight: 0,
   },
   containerChips: {
     height: 40,

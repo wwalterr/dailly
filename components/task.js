@@ -14,8 +14,6 @@ import {
 
 import Modal from "react-native-modal";
 
-import { AntDesign } from "@expo/vector-icons";
-
 import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
@@ -23,6 +21,8 @@ import { useTasks } from "../contexts/tasks";
 import { cancelPushNotification } from "../utils/notifications";
 
 import { limitText } from "../utils/text";
+
+import Close from "./close";
 
 const taskMargin = 16;
 
@@ -130,15 +130,13 @@ const Task = ({ task, index, scrollY, navigation }) => {
               useNativeDriverForBackdrop={true}
               style={styles.containerModal}
             >
-              <AntDesign
-                name="close"
-                size={20}
-                onPress={() => {
-                  setShowTextModal(false);
-                }}
-                color={theme.color.gray.dark}
-                style={styles.closeIcon}
-              />
+              <View style={styles.containerModalActions}>
+                <Close
+                  hide={() => {
+                    setShowTextModal(false);
+                  }}
+                />
+              </View>
 
               <ScrollView
                 showsVerticalScrollIndicator={false}
@@ -318,12 +316,10 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     paddingHorizontal: 32,
   },
-  closeIcon: {
-    alignSelf: "flex-end",
-    marginBottom: 24,
-    marginTop: 8,
-    padding: 12,
-    paddingRight: 0,
+  containerModalActions: {
+    alignItems: "flex-end",
+    justifyContent: "center",
+    marginBottom: 8,
   },
   textModal: {
     fontFamily: "Inter_400Regular",

@@ -15,8 +15,6 @@ import { Switch } from "react-native-switch";
 
 import { Animated } from "react-native";
 
-import { AntDesign } from "@expo/vector-icons";
-
 import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
@@ -26,6 +24,8 @@ import { limitText } from "../utils/text";
 import generateRandomCode from "../utils/random";
 
 import { schedulePushNotification } from "../utils/notifications";
+
+import Close from "./close";
 
 import EmojiPicker from "./emojiPicker";
 
@@ -82,17 +82,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
       }}
     >
       <View style={styles.rowClose}>
-        <AntDesign
-          name="close"
-          size={20}
-          onPress={() => {
-            resetFields();
-
-            hideNewTask();
-          }}
-          color={theme.color.gray.dark}
-          style={styles.closeIcon}
-        />
+        <Close hide={hideNewTask} reset={resetFields} />
       </View>
 
       <View style={[styles.row, styles.rowText]}>
@@ -103,7 +93,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
           multiline={true}
           spellCheck={true}
           autoFocus={false}
-          underlineColorAndroid="transparent"
+          underlineColorAndroid={theme.color.transparent}
           value={text}
           onChangeText={(_text) => {
             setText(_text);
@@ -276,10 +266,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     padding: 1,
     borderRadius: 5,
-  },
-  closeIcon: {
-    padding: 12,
-    paddingRight: 0,
   },
   rowText: {
     flexDirection: "column",

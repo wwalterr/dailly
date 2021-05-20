@@ -6,7 +6,7 @@ import { useTasks } from "./contexts/tasks";
 
 import TasksScreen from "./screns/tasks";
 
-import UpdateScreen from "./screns/taskUpdate";
+import UpdateScreen from "./screns/update";
 
 import ContactScreen from "./screns/contact";
 
