@@ -320,7 +320,8 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     marginBottom: 24,
     marginTop: 8,
-    padding: 4,
+    padding: 12,
+    paddingRight: 0,
   },
   textModal: {
     fontFamily: "Inter_400Regular",
@@ -373,6 +374,7 @@ const styles = StyleSheet.create({
   },
   removeButton: {
     flexDirection: "row",
+    paddingVertical: 12,
   },
   remove: {
     fontFamily: "Inter_300Light",
@@ -385,13 +387,16 @@ const styles = StyleSheet.create({
   },
   updateButton: {
     marginLeft: 8,
+    paddingVertical: 12,
   },
   update: {
     fontFamily: "Inter_300Light",
     fontSize: 12,
     color: theme.color.white.main,
   },
-  shareButton: {},
+  shareButton: {
+    paddingVertical: 12,
+  },
   share: {
     fontFamily: "Inter_300Light",
     fontSize: 12,

@@ -224,7 +224,9 @@ const EmojiPicker = ({
 const styles = StyleSheet.create({
   container: {},
   emojiOpener: {
-    padding: 2,
+    paddingVertical: 8,
+    paddingLeft: 2,
+    paddingRight: 12,
   },
   containerModal: {
     justifyContent: "flex-start",
@@ -238,7 +240,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   searchIcon: {
-    padding: 4,
+    padding: 12,
+    paddingLeft: 0,
   },
   containerSearch: {
     width: "35%",
@@ -262,7 +265,8 @@ const styles = StyleSheet.create({
     padding: 6,
   },
   closeIcon: {
-    padding: 4,
+    padding: 12,
+    paddingRight: 0,
   },
   containerChips: {
     height: 40,

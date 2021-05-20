@@ -280,17 +280,23 @@ const UpdateTask = ({ task, navigation }) => {
         <View style={styles.containerColor}>
           <Text style={styles.text}>Choose the card color</Text>
 
-          <MaterialIcons
-            name="invert-colors"
-            size={21}
-            color={theme.color.black.main}
+          <TouchableOpacity
             onPress={() => {
               setShowCardColor(
                 (previousShowCardColor) => !previousShowCardColor
               );
             }}
-            style={styles.colorIcon}
-          />
+            activeOpacity={0.8}
+            key={"card-color"}
+            style={styles.buttonColor}
+          >
+            <MaterialIcons
+              name="invert-colors"
+              size={21}
+              color={theme.color.black.main}
+              style={styles.colorIcon}
+            />
+          </TouchableOpacity>
         </View>
 
         {showCardColor ? (
@@ -312,7 +318,7 @@ const UpdateTask = ({ task, navigation }) => {
 
         {colorError ? (
           <Text style={styles.textError}>
-            The card and the card' text can't have the same color!
+            The card and the card text can't have the same color!
           </Text>
         ) : null}
       </View>
@@ -321,17 +327,23 @@ const UpdateTask = ({ task, navigation }) => {
         <View style={styles.containerColor}>
           <Text style={styles.text}>Choose the card text color</Text>
 
-          <MaterialIcons
-            name="invert-colors"
-            size={21}
-            color={theme.color.black.main}
+          <TouchableOpacity
             onPress={() => {
               setShowCardFontColor(
                 (previousShowCardFontColor) => !previousShowCardFontColor
               );
             }}
-            style={styles.colorIcon}
-          />
+            activeOpacity={0.8}
+            key={"card-font-color"}
+            style={styles.buttonColor}
+          >
+            <MaterialIcons
+              name="invert-colors"
+              size={21}
+              color={theme.color.black.main}
+              style={styles.colorIcon}
+            />
+          </TouchableOpacity>
         </View>
 
         {showCardFontColor ? (
@@ -353,7 +365,7 @@ const UpdateTask = ({ task, navigation }) => {
 
         {colorError ? (
           <Text style={styles.textError}>
-            The card and the card' text can't have the same color!
+            The card and the card text can't have the same color!
           </Text>
         ) : null}
       </View>
@@ -481,7 +493,11 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
   },
-  timePickerIcon: {},
+  timePickerIcon: {
+    paddingVertical: 8,
+    paddingLeft: 2,
+    paddingRight: 12,
+  },
   datePicker: {},
   rowCategory: {
     flexDirection: "row",
@@ -498,6 +514,10 @@ const styles = StyleSheet.create({
   containerColor: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  buttonColor: {
+    paddingVertical: 8,
+    paddingRight: 12,
   },
   colorIcon: {
     backgroundColor: theme.color.black.main,

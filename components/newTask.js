@@ -278,7 +278,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   closeIcon: {
-    padding: 4,
+    padding: 12,
+    paddingRight: 0,
   },
   rowText: {
     flexDirection: "column",
