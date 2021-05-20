@@ -28,7 +28,7 @@ import {
 
 const searchEmoji = (emojis, term) => {
   return emojisCategoriesFlattened.find((item) =>
-    item.aliases.includes(term.toLowerCase())
+    item.aliases.includes(term.toLowerCase().trim())
   );
 };
 
@@ -48,8 +48,6 @@ const EmojiPicker = ({
   const [searchTerm, setSearchTerm] = useState("");
 
   const closeModal = () => {
-    setCategory("Smileys & Emotion");
-
     setShowEmojiSearch(false);
 
     setEmojiFilter([]);
@@ -88,13 +86,10 @@ const EmojiPicker = ({
         isVisible={showEmojiModal}
         backdropColor={theme.color.white.main}
         backdropOpacity={1}
-        backdropTransitionOutTiming={0}
+        backdropTransitionInTiming={350}
+        backdropTransitionOutTiming={250}
         useNativeDriverForBackdrop={true}
-        style={{
-          flex: 1,
-          alignItems: "flex-start",
-          justifyContent: "flex-start",
-        }}
+        style={styles.containerModal}
       >
         <View style={styles.containerActions}>
           {showEmojiSearch ? null : (
@@ -131,9 +126,11 @@ const EmojiPicker = ({
                 size={20}
                 color={theme.color.gray.dark}
                 onPress={() => {
-                  setEmojiFilter([]);
+                  if (searchTerm) {
+                    setEmojiFilter([]);
 
-                  setSearchTerm("");
+                    setSearchTerm("");
+                  }
                 }}
                 style={styles.iconClearSearch}
               />
@@ -229,7 +226,10 @@ const styles = StyleSheet.create({
     paddingRight: 12,
   },
   containerModal: {
+    flex: 1,
+    alignItems: "flex-start",
     justifyContent: "flex-start",
+    backgroundColor: theme.color.white.main,
   },
   containerActions: {
     minHeight: 35,
