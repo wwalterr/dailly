@@ -1,21 +1,23 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const key = "Tasks";
 
-const DefaultTasks = [];
+const defaultTasks = [];
 
-const TasksContext = createContext(DefaultTasks);
+const TasksContext = createContext(defaultTasks);
 
 const TasksProvider = ({ children }) => {
-  const [tasks, setTasks] = useState(DefaultTasks);
+  const [tasks, setTasks] = useState(defaultTasks);
 
-  const startTasks = async () => {
-    const _tasks = await AsyncStorage.getItem(key);
+  useEffect(() => {
+    (async () => {
+      const _tasks = await AsyncStorage.getItem(key);
 
-    if (_tasks) setTasks(JSON.parse(_tasks));
-  };
+      if (_tasks) setTasks(JSON.parse(_tasks));
+    })();
+  }, []);
 
   const createTask = async (task) => {
     const _tasks = [task, ...tasks];
@@ -49,7 +51,6 @@ const TasksProvider = ({ children }) => {
     <TasksContext.Provider
       value={{
         tasks,
-        startTasks,
         createTask,
         findTask,
         updateTask,

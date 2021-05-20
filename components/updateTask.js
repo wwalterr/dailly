@@ -146,7 +146,7 @@ const UpdateTask = ({ task, navigation }) => {
         />
 
         {textError ? (
-          <Text style={styles.textError}>You can't turn your goal empty</Text>
+          <Text style={styles.textError}>You can't turn your goal empty!</Text>
         ) : null}
       </View>
 
@@ -182,7 +182,7 @@ const UpdateTask = ({ task, navigation }) => {
       {increment ? (
         <View style={[styles.row, styles.rowIncrementText]}>
           <TextInput
-            placeholder="What is the increment label"
+            placeholder="What's the increment label"
             placeholderTextColor={theme.color.gray.main}
             textAlign="left"
             multiline={false}

@@ -39,7 +39,7 @@ yarn
 
 Use the IDE [Android Studio](https://developer.android.com/studio/install) to create a virtual device or [Expo Go](https://expo.io/client), to run the application while in development.
 
-> Notice that some APIs are only available in real devices, i.e trhough binary installation, Expo Go or USB connection
+> Notice that some APIs are only available in real devices, i.e through binary installation, Expo Go or USB connection
 
 ## Usage
 
@@ -53,7 +53,7 @@ Open [localhost:19002](http://localhost:19002/) where a QR code can be scanned u
 
 > Optionally you start the application server to run directly in a device using `yarn android`
 
-To build the application see [reference](https://docs.expo.io/distribution/building-standalone-apps/#3-start-the-build).
+To build the application see the [reference](https://docs.expo.io/distribution/building-standalone-apps/#3-start-the-build).
 
 ## Roadmap
 
@@ -61,7 +61,7 @@ Check the [project board](https://github.com/hydroxion/dailly/projects).
 
 ## Contributing
 
-Pull requests are welcome. Please, consider the following:.
+Pull requests are welcome. Please, consider the following.
 
 1. To merge your change, create an issue and a PR related to that issue
 2. Describe which interface changed, which bug was fixed or what new feature was created

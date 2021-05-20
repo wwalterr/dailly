@@ -12,28 +12,18 @@ import ContactScreen from "./screns/contact";
 
 const Stack = createStackNavigator();
 
-const Routes = () => {
-  const { startTasks } = useTasks();
+const Routes = () => (
+  <Stack.Navigator
+    screenOptions={{
+      headerShown: false,
+    }}
+  >
+    <Stack.Screen name="Tasks" component={TasksScreen} />
 
-  useEffect(() => {
-    (async () => {
-      startTasks();
-    })();
-  }, []);
+    <Stack.Screen name="Update" component={UpdateScreen} />
 
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="Tasks" component={TasksScreen} />
-
-      <Stack.Screen name="Update" component={UpdateScreen} />
-
-      <Stack.Screen name="Contact" component={ContactScreen} />
-    </Stack.Navigator>
-  );
-};
+    <Stack.Screen name="Contact" component={ContactScreen} />
+  </Stack.Navigator>
+);
 
 export default Routes;
