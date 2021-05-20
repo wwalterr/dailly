@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { createStackNavigator } from "@react-navigation/stack";
-
-import { useTasks } from "./contexts/tasks";
 
 import TasksScreen from "./screns/tasks";
 
 import UpdateScreen from "./screns/update";
 
 import ContactScreen from "./screns/contact";
+
+import SettingsScreen from "./screns/settings";
 
 const Stack = createStackNavigator();
 
@@ -23,6 +23,8 @@ const Routes = () => (
     <Stack.Screen name="Update" component={UpdateScreen} />
 
     <Stack.Screen name="Contact" component={ContactScreen} />
+
+    <Stack.Screen name="Settings" component={SettingsScreen} />
   </Stack.Navigator>
 );
 

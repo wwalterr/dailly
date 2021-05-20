@@ -26,6 +26,8 @@ import { registerRootComponent } from "expo";
 
 import theme from "./theme";
 
+import { SettingsProvider } from "./contexts/settings";
+
 import { TasksProvider } from "./contexts/tasks";
 
 import Routes from "./routes";
@@ -118,9 +120,11 @@ const Application = () => {
 
   return (
     <NavigationContainer>
-      <TasksProvider>
-        <Routes />
-      </TasksProvider>
+      <SettingsProvider>
+        <TasksProvider>
+          <Routes />
+        </TasksProvider>
+      </SettingsProvider>
     </NavigationContainer>
   );
 };

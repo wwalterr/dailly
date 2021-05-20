@@ -14,7 +14,7 @@ import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
 
-import { limitText } from "../utils/text";
+import { limitText, capitalize } from "../utils/text";
 
 import {
   schedulePushNotification,
@@ -137,7 +137,7 @@ const UpdateTask = ({ task, navigation }) => {
               identifier = await schedulePushNotification(
                 {
                   title: `Check your goal ${emoji.emoji}`,
-                  body: limitText(text, 34),
+                  body: capitalize(limitText(text, 34)),
                   vibrate: true,
                 },
                 {
@@ -181,6 +181,7 @@ const UpdateTask = ({ task, navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 16,
     paddingHorizontal: 32,
   },
   row: {

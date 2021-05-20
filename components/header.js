@@ -53,6 +53,14 @@ const Header = ({ navigation, showNewTask }) => {
           </TouchableOpacity>
 
           <TouchableOpacity
+            onPress={() => navigation.navigate("Settings")}
+            activeOpacity={0.8}
+            key={"settings"}
+          >
+            <Text style={styles.textMenu}>Settings</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
             onPress={() =>
               Linking.openURL(PROJECT_URL).catch((error) =>
                 console.error("Couldn't load page", error)

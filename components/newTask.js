@@ -19,7 +19,7 @@ import theme from "../theme";
 
 import { useTasks } from "../contexts/tasks";
 
-import { limitText } from "../utils/text";
+import { limitText, capitalize } from "../utils/text";
 
 import generateRandomCode from "../utils/random";
 
@@ -204,7 +204,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
             if (remind) {
               identifier = await schedulePushNotification({
                 title: `Check your goal ${emoji.emoji}`,
-                body: limitText(text, 34),
+                body: capitalize(limitText(text, 34)),
                 vibrate: true,
               });
             }

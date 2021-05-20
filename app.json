@@ -6,10 +6,10 @@
     "entryPoint": "./application.js",
     "version": "4.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/application/icon.png",
     "githubUrl": "https://github.com/hydroxion/dailly",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/application/splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
@@ -21,7 +21,7 @@
     "assetBundlePatterns": ["**/*"],
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/application/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "softwareKeyboardLayoutMode": "resize",
@@ -32,7 +32,7 @@
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.dailly.dailly"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/application/favicon.png"
     },
     "experiments": {
       "turboModules": true

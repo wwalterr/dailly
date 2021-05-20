@@ -22,6 +22,9 @@ const theme = {
     blue: {
       light: "#f1f5fe",
     },
+    yellow: {
+      main: "#fdcb6c",
+    },
     fonts: ["#000000", "#ffffff"],
     cards: [
       "#000000",
@@ -39,8 +42,8 @@ const theme = {
       "#f27415",
       "#f48c39",
       "#f59859",
-      "#fbb82c",
       "#ffd339",
+      "#fdcb6c",
       "#fcdb99",
       "#e0ea88",
       "#79e9c7",
