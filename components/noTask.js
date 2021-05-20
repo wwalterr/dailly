@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
   },
   text: {
+    color: theme.color.black.main,
     fontFamily: "Inter_500Medium",
     fontSize: 14,
     marginTop: 15,

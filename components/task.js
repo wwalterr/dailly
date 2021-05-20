@@ -125,6 +125,8 @@ const Task = ({ task, index, scrollY, navigation }) => {
               isVisible={showTextModal}
               backdropColor={theme.color.white.main}
               backdropOpacity={1}
+              backdropTransitionInTiming={350}
+              backdropTransitionOutTiming={250}
               useNativeDriverForBackdrop={true}
               style={styles.containerModal}
             >
