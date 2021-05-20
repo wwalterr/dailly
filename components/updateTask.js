@@ -3,20 +3,12 @@ import React, { useState } from "react";
 import {
   View,
   ScrollView,
-  TextInput,
   Text,
-  TouchableOpacity,
   ToastAndroid,
   Platform,
   Keyboard,
   StyleSheet,
 } from "react-native";
-
-import { Switch } from "react-native-switch";
-
-import DateTimePicker from "@react-native-community/datetimepicker";
-
-import { Ionicons } from "@expo/vector-icons";
 
 import theme from "../theme";
 
@@ -29,15 +21,11 @@ import {
   cancelPushNotification,
 } from "../utils/notifications";
 
-import EmojiPicker from "./emojiPicker";
-
-import ColorPicker from "./colorPicker";
-
 import Button from "./button";
 
-const activeText = "Yes";
+import Information from "./information";
 
-const inActiveText = "No";
+import Design from "./design";
 
 const messageNewGoal = "Goal updated!";
 
@@ -76,44 +64,6 @@ const UpdateTask = ({ task, navigation }) => {
 
   const [colorError, setColorError] = useState(false);
 
-  const renderCardColors =
-    (setter, value, setterVisible) =>
-    ({ item }) =>
-      (
-        <TouchableOpacity
-          onPress={() => {
-            setter(item);
-
-            if (setterVisible) setterVisible(false);
-          }}
-          activeOpacity={0.8}
-          key={item}
-          style={[
-            styles.colorPick,
-            {
-              backgroundColor: item,
-              borderWidth: item === theme.color.white.main ? 2 : 0,
-            },
-          ]}
-        >
-          {value === item ? (
-            <Text
-              style={[
-                styles.highlight,
-                {
-                  color:
-                    item === theme.color.white.main
-                      ? theme.color.black.main
-                      : theme.color.white.main,
-                },
-              ]}
-            >
-              •
-            </Text>
-          ) : null}
-        </TouchableOpacity>
-      );
-
   const resetFields = () => {
     Keyboard.dismiss();
 
@@ -128,188 +78,38 @@ const UpdateTask = ({ task, navigation }) => {
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
     >
-      <View style={[styles.row, styles.rowText]}>
-        <TextInput
-          placeholder="Describe your goal"
-          placeholderTextColor={theme.color.gray.main}
-          textAlign="left"
-          multiline={true}
-          spellCheck={true}
-          autoFocus={false}
-          underlineColorAndroid={theme.color.transparent}
-          value={text}
-          onChangeText={(_text) => {
-            setText(_text);
+      <Information
+        text={text}
+        setText={setText}
+        textError={textError}
+        setTextError={setTextError}
+        remind={remind}
+        setRemind={setRemind}
+        increment={increment}
+        setIncrement={setIncrement}
+        incrementText={incrementText}
+        setIncrementText={setIncrementText}
+        date={date}
+        setDate={setDate}
+        showTimePicker={showTimePicker}
+        setShowTimePicker={setShowTimePicker}
+      />
 
-            if (text) setTextError(false);
-          }}
-          style={styles.textInput}
-        />
-
-        {textError ? (
-          <Text style={styles.textError}>You can't turn your goal empty!</Text>
-        ) : null}
-      </View>
-
-      <View style={[styles.row, styles.rowIncrement]}>
-        <Text style={[styles.text, styles.switchText]}>
-          Is your goal incremental?
-        </Text>
-
-        <Switch
-          activeText={activeText}
-          inActiveText={inActiveText}
-          value={increment}
-          onValueChange={() => {
-            Keyboard.dismiss();
-
-            setIncrement((previousIncrement) => !previousIncrement);
-          }}
-          circleSize={18}
-          circleBorderWidth={0}
-          barHeight={25}
-          backgroundActive={theme.color.black.main}
-          backgroundInactive={theme.color.black.main}
-          circleActiveColor={theme.color.green.main}
-          circleInActiveColor={theme.color.red.main}
-          outerCircleStyle={{
-            backgroundColor: theme.color.black.main,
-            width: 50,
-            borderRadius: 50,
-          }}
-        />
-      </View>
-
-      {increment ? (
-        <View style={[styles.row, styles.rowIncrementText]}>
-          <TextInput
-            placeholder="What's the increment label"
-            placeholderTextColor={theme.color.gray.main}
-            textAlign="left"
-            multiline={false}
-            spellCheck={true}
-            autoFocus={false}
-            maxLength={10}
-            underlineColorAndroid={theme.color.transparent}
-            value={incrementText}
-            onChangeText={(text) => {
-              setIncrementText(text);
-            }}
-            style={styles.textInput}
-          />
-        </View>
-      ) : null}
-
-      <View style={[styles.row, styles.rowRemind]}>
-        <Text style={[styles.text, styles.switchText]}>
-          Do you want to receive reminders?
-        </Text>
-
-        <Switch
-          activeText={activeText}
-          inActiveText={inActiveText}
-          value={remind}
-          onValueChange={() => {
-            Keyboard.dismiss();
-
-            setRemind((previousRemind) => !previousRemind);
-          }}
-          circleSize={18}
-          circleBorderWidth={0}
-          barHeight={25}
-          backgroundActive={theme.color.black.main}
-          backgroundInactive={theme.color.black.main}
-          circleActiveColor={theme.color.green.main}
-          circleInActiveColor={theme.color.red.main}
-          outerCircleStyle={{
-            backgroundColor: theme.color.black.main,
-            width: 50,
-            borderRadius: 50,
-          }}
-        />
-      </View>
-
-      {remind ? (
-        <View style={[styles.row, styles.rowTimePicker]}>
-          <Text style={styles.text}>
-            When do you want to receive the reminders
-          </Text>
-
-          <Ionicons
-            name="timer"
-            size={26}
-            color={theme.color.black.main}
-            onPress={() =>
-              setShowTimePicker(
-                (previousShowTimePicker) => !previousShowTimePicker
-              )
-            }
-            style={styles.timePickerIcon}
-          />
-
-          {showTimePicker ? (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode={"time"}
-              textColor={theme.color.black.main}
-              is24Hour={true}
-              display="default"
-              onChange={(event, value) => {
-                setShowTimePicker(false);
-
-                setDate(new Date(value));
-              }}
-              style={styles.datePicker}
-            />
-          ) : null}
-        </View>
-      ) : null}
-
-      <View style={[styles.row, styles.rowCategory]}>
-        <Text style={styles.textCategory}>Choose an emoji for your goal</Text>
-
-        <EmojiPicker
-          emoji={emoji}
-          setEmoji={setEmoji}
-          category={category}
-          setCategory={setCategory}
-        />
-      </View>
-
-      <View style={[styles.row, styles.rowCardColors]}>
-        <ColorPicker
-          text="Choose the card color"
-          showPicker={showCardColor}
-          showPickerSetter={setShowCardColor}
-          color={cardColor}
-          colorSetter={setCardColor}
-          colors={theme.color.cards}
-        />
-
-        {colorError ? (
-          <Text style={styles.textError}>
-            The card and the card text can't have the same color!
-          </Text>
-        ) : null}
-      </View>
-
-      <View style={[styles.row, styles.rowFontColors]}>
-        <ColorPicker
-          text="Choose the card text color"
-          showPicker={showCardFontColor}
-          showPickerSetter={setShowCardFontColor}
-          color={cardFontColor}
-          colorSetter={setCardFontColor}
-          colors={theme.color.fonts}
-        />
-
-        {colorError ? (
-          <Text style={styles.textError}>
-            The card and the card text can't have the same color!
-          </Text>
-        ) : null}
-      </View>
+      <Design
+        category={category}
+        setCategory={setCategory}
+        emoji={emoji}
+        setEmoji={setEmoji}
+        cardColor={cardColor}
+        setCardColor={setCardColor}
+        showCardColor={showCardColor}
+        setShowCardColor={setShowCardColor}
+        cardFontColor={cardFontColor}
+        setCardFontColor={setCardFontColor}
+        showCardFontColor={showCardFontColor}
+        setShowCardFontColor={setShowCardFontColor}
+        colorError={colorError}
+      />
 
       <View style={[styles.row, styles.rowButton]}>
         <Button
@@ -389,70 +189,6 @@ const styles = StyleSheet.create({
     padding: 2,
     marginBottom: 42,
   },
-  rowText: {
-    marginTop: 12,
-    flexDirection: "column",
-  },
-  textInput: {
-    height: 45,
-    width: "100%",
-    paddingHorizontal: 15,
-    borderRadius: 5,
-    fontFamily: "Inter_400Regular",
-    fontSize: 14,
-    color: theme.color.black.main,
-    backgroundColor: theme.color.blue.light,
-  },
-  textError: {
-    paddingTop: 5,
-    fontFamily: "Inter_300Light",
-    fontSize: 10,
-    color: theme.color.red.main,
-  },
-  rowIncrement: {
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-  },
-  text: {
-    marginRight: 5,
-    fontFamily: "Inter_400Regular",
-    fontSize: 14,
-    color: theme.color.black.main,
-  },
-  switchText: {
-    marginRight: 16,
-  },
-  rowIncrementText: {},
-  rowRemind: {
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-  },
-  rowTimePicker: {
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-  },
-  timePickerIcon: {
-    paddingVertical: 8,
-    paddingLeft: 2,
-    paddingRight: 12,
-  },
-  datePicker: {},
-  rowCategory: {
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-  },
-  textCategory: {
-    marginRight: 5,
-    fontFamily: "Inter_400Regular",
-    fontSize: 14,
-    color: theme.color.black.main,
-  },
-  rowCardColors: {},
-  rowFontColors: {},
   rowButton: {
     height: 45,
     marginBottom: 12,

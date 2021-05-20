@@ -207,7 +207,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
           <View
             style={[
               styles.containerCounter,
-              task.incrementText ? {} : { justifyContent: "center" },
+              task.incrementText ? {} : { justifyContent: "flex-end" },
             ]}
           >
             <TouchableOpacity

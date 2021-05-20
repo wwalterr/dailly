@@ -17,7 +17,7 @@ const HeaderGoBack = ({ navigation }) => {
       >
         <AntDesign
           name="arrowleft"
-          size={24}
+          size={22}
           color={theme.color.black.main}
           style={styles.icon}
         />
@@ -30,10 +30,9 @@ const HeaderGoBack = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 8,
     paddingHorizontal: 32,
-    paddingTop: 16,
-    paddingBottom: 16,
+    paddingVertical: 20,
+    marginTop: 8,
   },
   button: {
     alignItems: "center",
