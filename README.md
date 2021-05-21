@@ -74,6 +74,14 @@ Pull requests are welcome. Please, consider the following.
 
 [MIT](./LICENSE.md)
 
+## Stores
+
+[Play Store](https://play.google.com/store/apps/details?id=com.dailly.dailly)
+
+[G2](https://www.g2.com/products/dailly/reviews)
+
+[Expo](https://expo.io/@sphinxs/projects/dailly)
+
 ## Privacy
 
 For privacy issues read the application [Privacy Policy](https://audaxly.com/privacy-policy?code=kojej1j04hvs8e).
