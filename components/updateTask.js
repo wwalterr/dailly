@@ -12,6 +12,8 @@ import {
 
 import theme from "../theme";
 
+import { useSettings } from "../contexts/settings";
+
 import { useTasks } from "../contexts/tasks";
 
 import { limitText, capitalize } from "../utils/text";
@@ -30,6 +32,8 @@ import Design from "./design";
 const messageNewGoal = "Goal updated!";
 
 const UpdateTask = ({ task, navigation }) => {
+  const { isDark } = useSettings();
+
   const { updateTask, findTask } = useTasks();
 
   const [text, setText] = useState(task.text);
@@ -173,6 +177,7 @@ const UpdateTask = ({ task, navigation }) => {
             navigation.goBack();
           }}
           text="Update goal"
+          style={isDark ? { backgroundColor: theme.color.black.light } : {}}
         />
       </View>
     </ScrollView>

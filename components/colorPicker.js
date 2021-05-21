@@ -31,7 +31,11 @@ const ColorPicker = ({
   return (
     <View style={styles.container}>
       <View style={styles.question}>
-        <Text style={styles.text}>{text}</Text>
+        <Text
+          style={[styles.text, isDark ? { color: theme.color.white.main } : {}]}
+        >
+          {text}
+        </Text>
 
         <TouchableOpacity
           onPress={() => {
@@ -44,7 +48,15 @@ const ColorPicker = ({
             name="invert-colors"
             size={21}
             color={theme.color.black.main}
-            style={styles.colorIcon}
+            style={[
+              styles.colorIcon,
+              isDark
+                ? {
+                    backgroundColor: theme.color.white.main,
+                    color: theme.color.black.main,
+                  }
+                : {},
+            ]}
           />
         </TouchableOpacity>
       </View>
@@ -56,7 +68,10 @@ const ColorPicker = ({
         backdropTransitionInTiming={350}
         backdropTransitionOutTiming={250}
         useNativeDriverForBackdrop={true}
-        style={styles.containerModal}
+        style={[
+          styles.containerModal,
+          isDark ? { backgroundColor: theme.color.black.main } : {},
+        ]}
       >
         <View style={styles.containerActions}>
           <Close
@@ -91,6 +106,9 @@ const ColorPicker = ({
                   backgroundColor: item,
                   borderWidth: item === theme.color.white.main ? 1 : 0,
                 },
+                isDark && item === theme.color.black.main
+                  ? { borderWidth: 0.75, borderColor: theme.color.black.light }
+                  : {},
               ]}
             >
               {color === item ? (
