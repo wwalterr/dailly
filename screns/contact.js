@@ -12,15 +12,31 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import theme from "../theme";
 
+import { useSettings } from "../contexts/settings";
+
 import HeaderGoBack from "../components/headerGoBack";
 
 const ContactScreen = ({ navigation }) => {
+  const { isDark } = useSettings();
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={[
+        styles.container,
+        isDark ? { backgroundColor: theme.color.black.main } : {},
+      ]}
+    >
       <HeaderGoBack navigation={navigation} />
 
       <View style={styles.containerEmail}>
-        <Text style={styles.emailText}>Contact us at</Text>
+        <Text
+          style={[
+            styles.emailText,
+            isDark ? { color: theme.color.white.main } : {},
+          ]}
+        >
+          Contact us at
+        </Text>
 
         <TouchableOpacity
           onPress={() => Linking.openURL("mailto:hello.dailly@gmail.com")}
@@ -28,7 +44,14 @@ const ContactScreen = ({ navigation }) => {
           key={"contact"}
           style={styles.button}
         >
-          <Text style={styles.buttonText}>hello.dailly@gmail.com</Text>
+          <Text
+            style={[
+              styles.buttonText,
+              isDark ? { color: theme.color.white.main } : {},
+            ]}
+          >
+            hello.dailly@gmail.com
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

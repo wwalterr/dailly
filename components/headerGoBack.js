@@ -22,7 +22,7 @@ const HeaderGoBack = ({ navigation }) => {
         <AntDesign
           name="arrowleft"
           size={22}
-          color={isDark?theme.color.black.main}
+          color={isDark ? theme.color.white.main : theme.color.black.main}
           style={styles.arrowIcon}
         />
 
