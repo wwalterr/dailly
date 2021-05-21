@@ -284,6 +284,7 @@ const styles = StyleSheet.create({
   },
   containerChips: {
     height: 40,
+	minHeight: 40,
     maxHeight: 40,
     paddingBottom: 8,
     marginBottom: 4,

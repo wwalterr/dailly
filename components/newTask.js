@@ -85,7 +85,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
           ...styles.container,
           transform: [{ translateY: newTaskTranslateY }],
         },
-        isDark ? { backgroundColor: theme.color.black.dark } : {},
+        isDark ? { backgroundColor: theme.color.black.light } : {},
       ]}
     >
       <View style={styles.rowClose}>
