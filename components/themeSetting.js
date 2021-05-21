@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
   buttonImage: {
     alignItems: "center",
     justifyContent: "center",
-    height: "100%",
-    width: 55,
+    height: 50,
+    width: 50,
     marginRight: 20,
     borderRadius: 50,
     backgroundColor: theme.color.black.main,

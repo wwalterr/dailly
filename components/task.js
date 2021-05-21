@@ -97,7 +97,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
         {
           backgroundColor: isDark
             ? task.cardColor === theme.color.black.main
-              ? theme.color.black.soft
+              ? theme.color.black.light
               : task.cardColor
             : task.cardColor,
           transform: [{ scale }],

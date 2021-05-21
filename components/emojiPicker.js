@@ -162,6 +162,9 @@ const EmojiPicker = ({
           horizontal={true}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            alignItems: "center",
+          }}
           style={[
             styles.containerChips,
             isDark ? { backgroundColor: theme.color.black.main } : {},
@@ -284,13 +287,13 @@ const styles = StyleSheet.create({
   },
   containerChips: {
     height: 40,
-	minHeight: 40,
+    minHeight: 40,
     maxHeight: 40,
     paddingBottom: 8,
     marginBottom: 4,
   },
   chip: {
-    height: 25,
+    height: 22,
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 4,
