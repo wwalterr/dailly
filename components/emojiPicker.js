@@ -133,7 +133,7 @@ const EmojiPicker = ({
                     setSearchTerm("");
                   }
                 }}
-                style={styles.iconClearSearch}
+                style={styles.clearSearchIcon}
               />
             </View>
           ) : null}
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: theme.color.black.main,
   },
-  iconClearSearch: {
+  clearSearchIcon: {
     padding: 6,
   },
   containerChips: {

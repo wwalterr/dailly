@@ -264,7 +264,6 @@ const styles = StyleSheet.create({
   rowClose: {
     alignSelf: "flex-end",
     justifyContent: "flex-end",
-    padding: 1,
     borderRadius: 5,
   },
   rowText: {

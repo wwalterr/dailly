@@ -84,7 +84,7 @@ const ColorPicker = ({
               styles.colorPick,
               {
                 backgroundColor: item,
-                borderWidth: item === theme.color.white.main ? 2 : 0,
+                borderWidth: item === theme.color.white.main ? 1 : 0,
               },
             ]}
           >

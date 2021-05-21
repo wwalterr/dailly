@@ -13,6 +13,12 @@ const SettingsContext = createContext(defaultSettings);
 const SettingsProvider = ({ children }) => {
   const [settings, setSettings] = useState(defaultSettings);
 
+  const [isDark, setIsDark] = useState(settings.theme === "dark");
+
+  useEffect(() => {
+    setIsDark(settings.theme === "dark");
+  }, [settings, setSettings]);
+
   useEffect(() => {
     (async () => {
       const _settings = await AsyncStorage.getItem(key);
@@ -41,6 +47,8 @@ const SettingsProvider = ({ children }) => {
         settings,
         updateSettings,
         resetSettings,
+        isDark,
+        setIsDark,
       }}
     >
       {children}

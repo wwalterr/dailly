@@ -36,6 +36,7 @@ const Header = ({ navigation, showNewTask }) => {
           name="dots-three-horizontal"
           size={24}
           color={theme.color.black.main}
+          style={styles.dotsIcon}
           onPress={() => {
             setOptions((previousOptions) => !previousOptions);
           }}
@@ -121,6 +122,7 @@ const styles = StyleSheet.create({
     minHeight: 175,
     paddingHorizontal: 32,
     paddingVertical: 8,
+    marginBottom: 4,
   },
   column: {
     flex: 1,
@@ -136,6 +138,9 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_700Bold",
     fontSize: 24,
     color: theme.color.black.main,
+  },
+  dotsIcon: {
+    marginTop: 2,
   },
   columnPresentation: {
     flexDirection: "column",
