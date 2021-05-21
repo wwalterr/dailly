@@ -6,16 +6,24 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 import theme from "../theme";
 
+import { useSettings } from "../contexts/settings";
+
 const NoTask = () => {
+  const { isDark } = useSettings();
+
   return (
     <View style={styles.container}>
       <MaterialIcons
         name="emoji-flags"
         size={68}
-        color={theme.color.black.main}
+        color={isDark ? theme.color.white.main : theme.color.black.main}
       />
 
-      <Text style={styles.text}>You don't have any goals</Text>
+      <Text
+        style={[styles.text, isDark ? { color: theme.color.white.main } : {}]}
+      >
+        You don't have any goals
+      </Text>
     </View>
   );
 };
