@@ -29,6 +29,8 @@ import {
   emojisCategories,
 } from "../utils/emojis";
 
+const defaultEmoji = {};
+
 const searchEmoji = (emojis, term) => {
   return emojisCategoriesFlattened.find((item) =>
     item.aliases.includes(term.toLowerCase().trim())
@@ -38,7 +40,6 @@ const searchEmoji = (emojis, term) => {
 const EmojiPicker = ({
   emoji,
   setEmoji,
-  setEmojiError,
   category,
   setCategory,
 }) => {
@@ -153,7 +154,15 @@ const EmojiPicker = ({
             </View>
           ) : null}
 
-          <Text style={styles.emoji}>{emoji.emoji}</Text>
+          <TouchableOpacity
+            onPress={() => {
+              setEmoji(defaultEmoji);
+            }}
+            activeOpacity={0.8}
+            key={"emoji-selected"}
+          >
+            <Text style={styles.emoji}>{emoji.emoji}</Text>
+          </TouchableOpacity>
 
           <Close hide={closeModal} />
         </View>
@@ -215,8 +224,6 @@ const EmojiPicker = ({
             <TouchableOpacity
               onPress={() => {
                 setEmoji(item);
-
-                if (setEmojiError) setEmojiError(false);
 
                 setEmojiFilter([]);
 
