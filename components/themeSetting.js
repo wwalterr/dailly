@@ -18,21 +18,19 @@ import { capitalize } from "../utils/text";
 const messageTheme = "theme enabled!";
 
 const ThemeSetting = () => {
-  const { settings, updateSettings } = useSettings();
+  const { settings, updateSettings, isDark } = useSettings();
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => {
           updateSettings({
-            theme: settings.theme === "light" ? "dark" : "light",
+            theme: isDark ? "light" : "dark",
           });
 
           if (Platform.OS === "android")
             ToastAndroid.show(
-              `${capitalize(
-                settings.theme === "light" ? "dark" : "light"
-              )} ${messageTheme}`,
+              `${capitalize(isDark ? "light" : "dark")} ${messageTheme}`,
               ToastAndroid.SHORT
             );
         }}
@@ -43,7 +41,7 @@ const ThemeSetting = () => {
             backgroundColor:
               settings.theme === "light"
                 ? theme.color.yellow.main
-                : theme.color.black.main,
+                : theme.color.black.light,
           },
         ]}
       >
@@ -54,7 +52,14 @@ const ThemeSetting = () => {
       </TouchableOpacity>
 
       <View style={styles.containerContent}>
-        <Text style={styles.title}>Theme</Text>
+        <Text
+          style={[
+            styles.title,
+            isDark ? { color: theme.color.white.main } : {},
+          ]}
+        >
+          Theme
+        </Text>
 
         <Text style={styles.description}>
           Enable dark theme to reduce eye strain

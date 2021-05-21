@@ -10,6 +10,7 @@ const theme = {
       dark: "#bcbcbc",
     },
     black: {
+      light: "#333333",
       main: "#000000",
       hover: "rgba(0, 0, 0, 0.75)",
     },

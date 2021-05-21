@@ -6,13 +6,22 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import theme from "../theme";
 
+import { useSettings } from "../contexts/settings";
+
 import HeaderGoBack from "../components/headerGoBack";
 
 import ThemeSetting from "../components/themeSetting";
 
 const SettingsScreen = ({ navigation }) => {
+  const { isDark } = useSettings();
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={[
+        styles.container,
+        isDark ? { backgroundColor: theme.color.black.main } : {},
+      ]}
+    >
       <HeaderGoBack navigation={navigation} />
 
       <ScrollView
