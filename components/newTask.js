@@ -17,6 +17,8 @@ import { Animated } from "react-native";
 
 import theme from "../theme";
 
+import { useSettings } from "../contexts/settings";
+
 import { useTasks } from "../contexts/tasks";
 
 import { limitText, capitalize } from "../utils/text";
@@ -40,6 +42,8 @@ const messageNewGoal = "Goal created!";
 const defaultEmoji = {};
 
 const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
+  const { isDark } = useSettings();
+
   const { createTask } = useTasks();
 
   const [text, setText] = useState("");
@@ -76,10 +80,13 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
   return (
     <Animated.View
-      style={{
-        ...styles.container,
-        transform: [{ translateY: newTaskTranslateY }],
-      }}
+      style={[
+        {
+          ...styles.container,
+          transform: [{ translateY: newTaskTranslateY }],
+        },
+        isDark ? { backgroundColor: theme.color.black.dark } : {},
+      ]}
     >
       <View style={styles.rowClose}>
         <Close hide={hideNewTask} reset={resetFields} />
@@ -111,7 +118,11 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
       </View>
 
       <View style={[styles.row, styles.rowIncrement]}>
-        <Text style={styles.text}>Is your goal incremental?</Text>
+        <Text
+          style={[styles.text, isDark ? { color: theme.color.white.main } : {}]}
+        >
+          Is your goal incremental?
+        </Text>
 
         <Switch
           activeText={activeText}
@@ -138,7 +149,11 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
       </View>
 
       <View style={[styles.row, styles.rowRemind]}>
-        <Text style={styles.text}>Do you want to receive reminders?</Text>
+        <Text
+          style={[styles.text, isDark ? { color: theme.color.white.main } : {}]}
+        >
+          Do you want to receive reminders?
+        </Text>
 
         <Switch
           activeText={activeText}
@@ -166,7 +181,14 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
       <View style={[styles.row, styles.rowCategory]}>
         <View style={styles.containerCategory}>
-          <Text style={styles.textCategory}>Choose an emoji for your goal</Text>
+          <Text
+            style={[
+              styles.textCategory,
+              isDark ? { color: theme.color.white.main } : {},
+            ]}
+          >
+            Choose an emoji for your goal
+          </Text>
 
           <EmojiPicker
             emoji={emoji}

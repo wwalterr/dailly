@@ -14,9 +14,13 @@ import { PRIVACY_POLICY, PROJECT_URL } from "@env";
 
 import theme from "../theme";
 
+import { useSettings } from "../contexts/settings";
+
 import { useTasks } from "../contexts/tasks";
 
 const Header = ({ navigation, showNewTask }) => {
+  const { isDark } = useSettings();
+
   const { tasks } = useTasks();
 
   const [options, setOptions] = useState(false);
@@ -25,17 +29,38 @@ const Header = ({ navigation, showNewTask }) => {
     <View style={styles.container}>
       <View style={[styles.column, styles.columnSlogan]}>
         <View style={styles.columnSloganTexts}>
-          <Text style={styles.textSlogan}>Plan /</Text>
+          <Text
+            style={[
+              styles.textSlogan,
+              isDark ? { color: theme.color.white.main } : {},
+            ]}
+          >
+            Plan /
+          </Text>
 
-          <Text style={styles.textSlogan}>Work /</Text>
+          <Text
+            style={[
+              styles.textSlogan,
+              isDark ? { color: theme.color.white.main } : {},
+            ]}
+          >
+            Work /
+          </Text>
 
-          <Text style={styles.textSlogan}>Relax /</Text>
+          <Text
+            style={[
+              styles.textSlogan,
+              isDark ? { color: theme.color.white.main } : {},
+            ]}
+          >
+            Relax /
+          </Text>
         </View>
 
         <Entypo
           name="dots-three-horizontal"
           size={24}
-          color={theme.color.black.main}
+          color={isDark ? theme.color.white.main : theme.color.black.main}
           style={styles.dotsIcon}
           onPress={() => {
             setOptions((previousOptions) => !previousOptions);
@@ -50,7 +75,18 @@ const Header = ({ navigation, showNewTask }) => {
             activeOpacity={0.8}
             key={"contact"}
           >
-            <Text style={styles.textMenu}>Contact</Text>
+            <Text
+              style={[
+                styles.textMenu,
+                isDark
+                  ? {
+                      color: theme.color.white.main,
+                    }
+                  : {},
+              ]}
+            >
+              Contact
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -58,7 +94,18 @@ const Header = ({ navigation, showNewTask }) => {
             activeOpacity={0.8}
             key={"settings"}
           >
-            <Text style={styles.textMenu}>Settings</Text>
+            <Text
+              style={[
+                styles.textMenu,
+                isDark
+                  ? {
+                      color: theme.color.white.main,
+                    }
+                  : {},
+              ]}
+            >
+              Settings
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -70,7 +117,18 @@ const Header = ({ navigation, showNewTask }) => {
             activeOpacity={0.8}
             key={"open-source"}
           >
-            <Text style={styles.textMenu}>Open Source</Text>
+            <Text
+              style={[
+                styles.textMenu,
+                isDark
+                  ? {
+                      color: theme.color.white.main,
+                    }
+                  : {},
+              ]}
+            >
+              Open Source
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -82,7 +140,18 @@ const Header = ({ navigation, showNewTask }) => {
             activeOpacity={0.8}
             key={"privacy-policy"}
           >
-            <Text style={styles.textMenu}>Privacy Policy</Text>
+            <Text
+              style={[
+                styles.textMenu,
+                isDark
+                  ? {
+                      color: theme.color.white.main,
+                    }
+                  : {},
+              ]}
+            >
+              Privacy Policy
+            </Text>
           </TouchableOpacity>
         </View>
       ) : null}
@@ -90,14 +159,43 @@ const Header = ({ navigation, showNewTask }) => {
       {!options ? (
         <View style={[styles.column, styles.columnPresentation]}>
           <View style={styles.columnPresentationContainer}>
-            <Text style={styles.textAmountTasks}>{tasks.length}</Text>
+            <Text
+              style={[
+                styles.textAmountTasks,
+                isDark
+                  ? {
+                      color: theme.color.white.main,
+                    }
+                  : {},
+              ]}
+            >
+              {tasks.length}
+            </Text>
 
-            <Text style={styles.textAmountTasksDescription}>
+            <Text
+              style={[
+                styles.textAmountTasksDescription,
+                isDark
+                  ? {
+                      color: theme.color.white.main,
+                    }
+                  : {},
+              ]}
+            >
               {tasks.length === 1 ? "Goal" : "Goals"}
             </Text>
           </View>
 
-          <View style={styles.columnNewTaskContainer}>
+          <View
+            style={[
+              styles.columnNewTaskContainer,
+              isDark
+                ? {
+                    borderBottomColor: theme.color.white.main,
+                  }
+                : {},
+            ]}
+          >
             <TouchableOpacity
               onPress={() => {
                 showNewTask();
@@ -105,7 +203,18 @@ const Header = ({ navigation, showNewTask }) => {
               activeOpacity={0.8}
               style={styles.button}
             >
-              <Text style={styles.buttonText}>New goal</Text>
+              <Text
+                style={[
+                  styles.buttonText,
+                  isDark
+                    ? {
+                        color: theme.color.white.main,
+                      }
+                    : {},
+                ]}
+              >
+                New goal
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -167,7 +276,7 @@ const styles = StyleSheet.create({
   columnNewTaskContainer: {
     flex: 0.25,
     justifyContent: "flex-end",
-    paddingBottom: 2,
+    paddingBottom: 4,
     borderBottomWidth: 2,
     borderBottomColor: theme.color.black.main,
   },

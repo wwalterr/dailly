@@ -19,6 +19,8 @@ import Modal from "react-native-modal";
 
 import theme from "../theme";
 
+import { useSettings } from "../contexts/settings";
+
 import Close from "./close";
 
 import {
@@ -40,6 +42,8 @@ const EmojiPicker = ({
   category,
   setCategory,
 }) => {
+  const { isDark } = useSettings();
+
   const [showEmojiModal, setShowEmojiModal] = useState(false);
 
   const [showEmojiSearch, setShowEmojiSearch] = useState(false);
@@ -78,21 +82,29 @@ const EmojiPicker = ({
       <MaterialIcons
         name="emoji-emotions"
         size={26}
-        color={theme.color.black.main}
+        color={isDark ? theme.color.white.main : theme.color.black.main}
         onPress={() => setShowEmojiModal(true)}
         style={styles.emojiOpener}
       />
 
       <Modal
         isVisible={showEmojiModal}
-        backdropColor={theme.color.white.main}
+        backdropColor={isDark ? theme.color.black.main : theme.color.white.main}
         backdropOpacity={1}
         backdropTransitionInTiming={350}
         backdropTransitionOutTiming={250}
         useNativeDriverForBackdrop={true}
-        style={styles.containerModal}
+        style={[
+          styles.containerModal,
+          isDark ? { backgroundColor: theme.color.black.main } : {},
+        ]}
       >
-        <View style={styles.containerActions}>
+        <View
+          style={[
+            styles.containerActions,
+            isDark ? { backgroundColor: theme.color.black.main } : {},
+          ]}
+        >
           {showEmojiSearch ? null : (
             <EvilIcons
               name="search"
@@ -119,7 +131,10 @@ const EmojiPicker = ({
 
                   setSearchTerm(_searchTerm);
                 }}
-                style={styles.textInput}
+                style={[
+                  styles.textInput,
+                  isDark ? { color: theme.color.white.main } : {},
+                ]}
               />
 
               <MaterialCommunityIcons
@@ -147,7 +162,10 @@ const EmojiPicker = ({
           horizontal={true}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
-          style={styles.containerChips}
+          style={[
+            styles.containerChips,
+            isDark ? { backgroundColor: theme.color.black.main } : {},
+          ]}
         >
           {emojisCategories.map((_category) => (
             <TouchableOpacity
@@ -160,7 +178,11 @@ const EmojiPicker = ({
                 styles.chip,
                 {
                   ...(category === _category
-                    ? { backgroundColor: theme.color.blue.light }
+                    ? {
+                        backgroundColor: isDark
+                          ? theme.color.black.light
+                          : theme.color.blue.light,
+                      }
                     : {}),
                 },
               ]}
@@ -179,6 +201,7 @@ const EmojiPicker = ({
             alignItems: "flex-start",
             justifyContent: "space-between",
           }}
+          style={isDark ? { backgroundColor: theme.color.black.main } : {}}
         >
           {(searchTerm
             ? emojisCategorized[category].filter((item) =>
@@ -248,7 +271,7 @@ const styles = StyleSheet.create({
     borderColor: theme.color.blue.light,
   },
   textInput: {
-    height: 35,
+    height: 30,
     width: "75%",
     paddingHorizontal: 15,
     borderRadius: 5,

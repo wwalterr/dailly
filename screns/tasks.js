@@ -8,6 +8,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import theme from "../theme";
 
+import { useSettings } from "../contexts/settings";
+
 import { useTasks } from "../contexts/tasks";
 
 import Header from "../components/header";
@@ -19,6 +21,8 @@ import NoTask from "../components/noTask";
 import NewTask from "../components/newTask";
 
 const TasksScreen = ({ navigation }) => {
+  const { isDark } = useSettings();
+
   const { tasks } = useTasks();
 
   const newTaskTranslateY = useRef(
@@ -40,7 +44,16 @@ const TasksScreen = ({ navigation }) => {
     }).start();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={[
+        styles.container,
+        isDark
+          ? {
+              backgroundColor: theme.color.black.main,
+            }
+          : {},
+      ]}
+    >
       <Header navigation={navigation} showNewTask={showNewTask} />
 
       {tasks.length ? <Tasks navigation={navigation} /> : <NoTask />}

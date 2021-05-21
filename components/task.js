@@ -16,6 +16,8 @@ import Modal from "react-native-modal";
 
 import theme from "../theme";
 
+import { useSettings } from "../contexts/settings";
+
 import { useTasks } from "../contexts/tasks";
 
 import { cancelPushNotification } from "../utils/notifications";
@@ -55,6 +57,8 @@ const onShare = async (message) => {
 };
 
 const Task = ({ task, index, scrollY, navigation }) => {
+  const { isDark } = useSettings();
+
   const { removeTask, updateTask } = useTasks();
 
   const [removeStatus, setRemoveStatus] = useState(false);
@@ -91,7 +95,11 @@ const Task = ({ task, index, scrollY, navigation }) => {
       style={[
         styles.container,
         {
-          backgroundColor: task.cardColor,
+          backgroundColor: isDark
+            ? task.cardColor === theme.color.black.main
+              ? theme.color.black.light
+              : task.cardColor
+            : task.cardColor,
           transform: [{ scale }],
           opacity,
         },
@@ -123,12 +131,17 @@ const Task = ({ task, index, scrollY, navigation }) => {
 
             <Modal
               isVisible={showTextModal}
-              backdropColor={theme.color.white.main}
+              backdropColor={
+                isDark ? theme.color.black.main : theme.color.white.main
+              }
               backdropOpacity={1}
               backdropTransitionInTiming={350}
               backdropTransitionOutTiming={250}
               useNativeDriverForBackdrop={true}
-              style={styles.containerModal}
+              style={[
+                styles.containerModal,
+                isDark ? { backgroundColor: theme.color.black.main } : {},
+              ]}
             >
               <View style={styles.containerModalActions}>
                 <Close
@@ -142,7 +155,14 @@ const Task = ({ task, index, scrollY, navigation }) => {
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
               >
-                <Text style={styles.textModal}>{task.text}</Text>
+                <Text
+                  style={[
+                    styles.textModal,
+                    isDark ? { color: theme.color.white.main } : {},
+                  ]}
+                >
+                  {task.text}
+                </Text>
               </ScrollView>
             </Modal>
           </View>

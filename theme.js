@@ -12,6 +12,7 @@ const theme = {
     black: {
       light: "#333333",
       main: "#000000",
+      dark: "#111111",
       hover: "rgba(0, 0, 0, 0.75)",
     },
     red: {
@@ -29,8 +30,8 @@ const theme = {
     fonts: ["#000000", "#ffffff"],
     cards: [
       "#000000",
-      "#2e384e",
-      "#292b39",
+      "#333333",
+      "#111111",
       "#b0b6c7",
       "#ebf1fd",
       "#eff2fa",
