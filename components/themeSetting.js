@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   ToastAndroid,
+  Platform,
   StyleSheet,
 } from "react-native";
 
