@@ -2,21 +2,21 @@
 
 Create, manage and track your daily goals.
 
-<details>
-  <summary>Screenshots</summary>
-
-  <img src="./visual/mockups/createFramed.png" width="250px" />
-  
-  <img src="./visual/mockups/goalsFramed.png" width="250px" />
-  
-  <img src="./visual/mockups/updateFramed.png" width="250px" />
-</details>
-
 [![](https://i.imgur.com/LAKxpYE.png)](https://play.google.com/store/apps/details?id=com.dailly.dailly)
 
 ## About
 
 The main goal of this application is privacy and simplicity. No trackers, no ADS and no databases.
+
+## Stores
+
+[Play Store](https://play.google.com/store/apps/details?id=com.dailly.dailly)
+
+[G2](https://www.g2.com/products/dailly/reviews)
+
+[Expo](https://expo.io/@sphinxs/projects/dailly)
+
+[Alternative To](https://alternativeto.net/software/dailly/about/)
 
 ## Metrics
 
@@ -73,16 +73,6 @@ Pull requests are welcome. Please, consider the following.
 ## License
 
 [MIT](./LICENSE.md)
-
-## Stores
-
-[Play Store](https://play.google.com/store/apps/details?id=com.dailly.dailly)
-
-[G2](https://www.g2.com/products/dailly/reviews)
-
-[Expo](https://expo.io/@sphinxs/projects/dailly)
-
-[Alternative To](https://alternativeto.net/software/dailly/about/)
 
 ## Privacy
 
