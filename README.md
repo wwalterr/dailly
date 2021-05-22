@@ -2,21 +2,21 @@
 
 Create, manage and track your daily goals.
 
-<details>
-  <summary>Screenshots</summary>
-
-  <img src="./visual/mockups/createFramed.png" width="250px" />
-  
-  <img src="./visual/mockups/goalsFramed.png" width="250px" />
-  
-  <img src="./visual/mockups/updateFramed.png" width="250px" />
-</details>
-
 [![](https://i.imgur.com/LAKxpYE.png)](https://play.google.com/store/apps/details?id=com.dailly.dailly)
 
 ## About
 
 The main goal of this application is privacy and simplicity. No trackers, no ADS and no databases.
+
+## Stores
+
+[Play Store](https://play.google.com/store/apps/details?id=com.dailly.dailly)
+
+[G2](https://www.g2.com/products/dailly/reviews)
+
+[Expo](https://expo.io/@sphinxs/projects/dailly)
+
+[Alternative To](https://alternativeto.net/software/dailly/about/)
 
 ## Metrics
 
@@ -39,7 +39,7 @@ yarn
 
 Use the IDE [Android Studio](https://developer.android.com/studio/install) to create a virtual device or [Expo Go](https://expo.io/client), to run the application while in development.
 
-> Notice that some APIs are only available in real devices, i.e through binary installation, Expo Go or USB connection
+> Notice that some APIs are only available in real devices, i.e through binary installation or USB connection
 
 ## Usage
 
@@ -51,7 +51,7 @@ yarn start
 
 Open [localhost:19002](http://localhost:19002/) where a QR code can be scanned using Expo Go or launch the application in a virtual or real device, by pressing `a` in the CLI.
 
-> Optionally you start the application server to run directly in a device using `yarn android`
+> Optionally you can start the application server directly in a device `yarn android`
 
 To build the application see the [reference](https://docs.expo.io/distribution/building-standalone-apps/#3-start-the-build).
 
@@ -73,14 +73,6 @@ Pull requests are welcome. Please, consider the following.
 ## License
 
 [MIT](./LICENSE.md)
-
-## Stores
-
-[Play Store](https://play.google.com/store/apps/details?id=com.dailly.dailly)
-
-[G2](https://www.g2.com/products/dailly/reviews)
-
-[Expo](https://expo.io/@sphinxs/projects/dailly)
 
 ## Privacy
 
