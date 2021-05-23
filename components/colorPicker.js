@@ -63,6 +63,9 @@ const ColorPicker = ({
 
       <Modal
         isVisible={showPicker}
+        onBackButtonPress={() => {
+          showPickerSetter(false);
+        }}
         backdropColor={isDark ? theme.color.black.main : theme.color.white.main}
         backdropOpacity={1}
         backdropTransitionInTiming={350}

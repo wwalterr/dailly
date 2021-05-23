@@ -131,6 +131,9 @@ const Task = ({ task, index, scrollY, navigation }) => {
 
             <Modal
               isVisible={showTextModal}
+              onBackButtonPress={() => {
+                setShowTextModal(false);
+              }}
               backdropColor={
                 isDark ? theme.color.black.main : theme.color.white.main
               }

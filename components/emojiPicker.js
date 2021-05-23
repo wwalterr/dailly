@@ -37,12 +37,7 @@ const searchEmoji = (emojis, term) => {
   );
 };
 
-const EmojiPicker = ({
-  emoji,
-  setEmoji,
-  category,
-  setCategory,
-}) => {
+const EmojiPicker = ({ emoji, setEmoji, category, setCategory }) => {
   const { isDark } = useSettings();
 
   const [showEmojiModal, setShowEmojiModal] = useState(false);
@@ -90,6 +85,9 @@ const EmojiPicker = ({
 
       <Modal
         isVisible={showEmojiModal}
+        onBackButtonPress={() => {
+          setShowEmojiModal(false);
+        }}
         backdropColor={isDark ? theme.color.black.main : theme.color.white.main}
         backdropOpacity={1}
         backdropTransitionInTiming={350}
