@@ -52,8 +52,6 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
   const [remind, setRemind] = useState(false);
 
-  const [increment, setIncrement] = useState(false);
-
   const [emoji, setEmoji] = useState(defaultEmoji);
 
   const [category, setCategory] = useState("Smileys & Emotion");
@@ -66,8 +64,6 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
     setTextError(false);
 
     setRemind(false);
-
-    setIncrement(false);
 
     setEmoji(defaultEmoji);
 
@@ -111,37 +107,6 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
             To create a goal you need to describe it!
           </Text>
         ) : null}
-      </View>
-
-      <View style={[styles.row, styles.rowIncrement]}>
-        <Text
-          style={[styles.text, isDark ? { color: theme.color.white.main } : {}]}
-        >
-          Is your goal incremental?
-        </Text>
-
-        <Switch
-          activeText={activeText}
-          inActiveText={inActiveText}
-          value={increment}
-          onValueChange={() => {
-            Keyboard.dismiss();
-
-            setIncrement((previousIncrement) => !previousIncrement);
-          }}
-          circleSize={18}
-          circleBorderWidth={0}
-          barHeight={25}
-          backgroundActive={theme.color.black.main}
-          backgroundInactive={theme.color.black.main}
-          circleActiveColor={theme.color.green.main}
-          circleInActiveColor={theme.color.red.main}
-          outerCircleStyle={{
-            backgroundColor: theme.color.black.main,
-            width: 50,
-            borderRadius: 50,
-          }}
-        />
       </View>
 
       <View style={[styles.row, styles.rowRemind]}>
@@ -198,7 +163,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
       <View style={[styles.row, styles.rowButton]}>
         <Button
           onPress={async () => {
-            if (!text) {
+            if (!text.trim()) {
               setTextError(true);
 
               return;
@@ -220,8 +185,6 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
               remind,
               ...(remind ? { identifier } : {}),
               ...(remind ? { remindTime: new Date().getTime() } : {}),
-              increment,
-              ...(increment ? { counter: 0 } : {}),
               emoji,
               createdAt: new Date().toLocaleDateString(),
               cardColor: theme.color.black.main,
@@ -246,7 +209,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "space-around",
     width: "100%",
-    height: "65%",
+    height: "55%",
     minHeight: Dimensions.get("window").height / 2,
     zIndex: 999,
     position: "absolute",
@@ -289,11 +252,6 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_300Light",
     fontSize: 10,
     color: theme.color.red.main,
-  },
-  rowIncrement: {
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
   },
   text: {
     marginRight: 16,

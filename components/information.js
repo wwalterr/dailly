@@ -23,10 +23,6 @@ const Information = ({
   setTextError,
   remind,
   setRemind,
-  increment,
-  setIncrement,
-  incrementText,
-  setIncrementText,
   date,
   setDate,
   showTimePicker,
@@ -58,67 +54,6 @@ const Information = ({
           <Text style={styles.textError}>You can't have an empty!</Text>
         ) : null}
       </View>
-
-      <View style={[styles.row, styles.rowIncrement]}>
-        <Text
-          style={[
-            styles.text,
-            styles.switchText,
-            isDark ? { color: theme.color.white.main } : {},
-          ]}
-        >
-          Is your goal incremental?
-        </Text>
-
-        <Switch
-          activeText={activeText}
-          inActiveText={inActiveText}
-          value={increment}
-          onValueChange={() => {
-            Keyboard.dismiss();
-
-            setIncrement((previousIncrement) => !previousIncrement);
-          }}
-          circleSize={18}
-          circleBorderWidth={0}
-          barHeight={25}
-          backgroundActive={
-            isDark ? theme.color.black.light : theme.color.black.main
-          }
-          backgroundInactive={
-            isDark ? theme.color.black.light : theme.color.black.main
-          }
-          circleActiveColor={theme.color.green.main}
-          circleInActiveColor={theme.color.red.main}
-          outerCircleStyle={{
-            backgroundColor: isDark
-              ? theme.color.black.light
-              : theme.color.black.main,
-            width: 50,
-            borderRadius: 50,
-          }}
-        />
-      </View>
-
-      {increment ? (
-        <View style={[styles.row, styles.rowIncrementText]}>
-          <TextInput
-            placeholder="Type an increment label"
-            placeholderTextColor={theme.color.gray.main}
-            textAlign="left"
-            multiline={false}
-            spellCheck={true}
-            autoFocus={false}
-            maxLength={10}
-            underlineColorAndroid={theme.color.transparent}
-            value={incrementText}
-            onChangeText={(text) => {
-              setIncrementText(text);
-            }}
-            style={styles.textInput}
-          />
-        </View>
-      ) : null}
 
       <View style={[styles.row, styles.rowRemind]}>
         <Text
@@ -232,11 +167,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: theme.color.red.main,
   },
-  rowIncrement: {
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-  },
+
   text: {
     marginRight: 5,
     fontFamily: "Inter_400Regular",
@@ -246,7 +177,6 @@ const styles = StyleSheet.create({
   switchText: {
     marginRight: 16,
   },
-  rowIncrementText: {},
   rowRemind: {
     flexDirection: "row",
     justifyContent: "flex-start",

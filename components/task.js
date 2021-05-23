@@ -34,8 +34,6 @@ const taskHeight = 145 + taskMargin * 2;
 
 const messageRemoveGoal = "Goal removed!";
 
-const messageDecreaseCounter = "No negative goals!";
-
 const onShare = async (message) => {
   try {
     const result = await Share.share({
@@ -225,59 +223,6 @@ const Task = ({ task, index, scrollY, navigation }) => {
             </View>
           </View>
         </View>
-
-        {task.increment ? (
-          <View
-            style={[
-              styles.containerCounter,
-              task.incrementText ? {} : { justifyContent: "flex-end" },
-            ]}
-          >
-            <TouchableOpacity
-              onPress={() => {
-                updateTask(task.id, {
-                  ...task,
-                  counter: task.counter + 1,
-                });
-              }}
-              activeOpacity={0.8}
-              key={"plus"}
-              style={styles.counterPlus}
-            >
-              <Text style={[styles.plus, cardFontColor]}>+</Text>
-            </TouchableOpacity>
-
-            <Text style={[styles.counter, cardFontColor]}>{task.counter}</Text>
-
-            <TouchableOpacity
-              onPress={() => {
-                if (task.counter >= 1) {
-                  updateTask(task.id, {
-                    ...task,
-                    counter: task.counter - 1,
-                  });
-                } else {
-                  if (Platform.OS === "android")
-                    ToastAndroid.show(
-                      messageDecreaseCounter,
-                      ToastAndroid.SHORT
-                    );
-                }
-              }}
-              activeOpacity={0.8}
-              key={"minus"}
-              style={styles.counterMinus}
-            >
-              <Text style={[styles.minus, cardFontColor]}>-</Text>
-            </TouchableOpacity>
-
-            {task.incrementText ? (
-              <Text style={[styles.incrementText, cardFontColor]}>
-                {task.incrementText}
-              </Text>
-            ) : null}
-          </View>
-        ) : null}
       </View>
     </Animated.View>
   );
@@ -348,39 +293,6 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_400Regular",
     fontSize: 24,
     color: theme.color.black.main,
-  },
-  containerCounter: {
-    alignItems: "flex-end",
-    justifyContent: "flex-end",
-    paddingLeft: 4,
-  },
-  counterPlus: {
-    paddingHorizontal: 6,
-  },
-  plus: {
-    fontFamily: "Inter_500Medium",
-    fontSize: 21,
-    color: theme.color.white.main,
-  },
-  counter: {
-    fontFamily: "Inter_500Medium",
-    fontSize: 21,
-    color: theme.color.white.main,
-    paddingHorizontal: 6,
-  },
-  counterMinus: {
-    paddingHorizontal: 6,
-  },
-  minus: {
-    fontFamily: "Inter_500Medium",
-    fontSize: 21,
-    color: theme.color.white.main,
-    paddingRight: 2,
-  },
-  incrementText: {
-    fontFamily: "Inter_300Light",
-    fontSize: 12,
-    color: theme.color.white.main,
   },
   containerActions: {
     flex: 0.15,

@@ -98,6 +98,81 @@ const EmojiPicker = ({ emoji, setEmoji, category, setCategory }) => {
           isDark ? { backgroundColor: theme.color.black.main } : {},
         ]}
       >
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            alignItems: "flex-start",
+            justifyContent: "space-between",
+          }}
+          style={isDark ? { backgroundColor: theme.color.black.main } : {}}
+        >
+          {(searchTerm
+            ? emojisCategorized[category].filter((item) =>
+                emojiFilter.includes(item.aliases[0])
+              )
+            : emojisCategorized[category]
+          ).map((item) => (
+            <TouchableOpacity
+              onPress={() => {
+                setEmoji(item);
+
+                setEmojiFilter([]);
+
+                setSearchTerm("");
+
+                setShowEmojiSearch(false);
+
+                setShowEmojiModal(false);
+              }}
+              activeOpacity={0.8}
+              key={item.aliases[0]}
+              style={styles.emojiButton}
+            >
+              <Text style={styles.emoji}>{item.emoji}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+
+        <ScrollView
+          horizontal={true}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            alignItems: "center",
+          }}
+          style={[
+            styles.containerChips,
+            isDark ? { backgroundColor: theme.color.black.main } : {},
+          ]}
+        >
+          {emojisCategories.map((_category) => (
+            <TouchableOpacity
+              onPress={() => {
+                setCategory(_category);
+              }}
+              activeOpacity={0.8}
+              key={_category}
+              style={[
+                styles.chip,
+                {
+                  ...(category === _category
+                    ? {
+                        backgroundColor: isDark
+                          ? theme.color.black.light
+                          : theme.color.blue.light,
+                      }
+                    : {}),
+                },
+              ]}
+            >
+              <Text style={styles.chipText}>{_category}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+
         <View
           style={[
             styles.containerActions,
@@ -164,81 +239,6 @@ const EmojiPicker = ({ emoji, setEmoji, category, setCategory }) => {
 
           <Close hide={closeModal} />
         </View>
-
-        <ScrollView
-          horizontal={true}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{
-            alignItems: "center",
-          }}
-          style={[
-            styles.containerChips,
-            isDark ? { backgroundColor: theme.color.black.main } : {},
-          ]}
-        >
-          {emojisCategories.map((_category) => (
-            <TouchableOpacity
-              onPress={() => {
-                setCategory(_category);
-              }}
-              activeOpacity={0.8}
-              key={_category}
-              style={[
-                styles.chip,
-                {
-                  ...(category === _category
-                    ? {
-                        backgroundColor: isDark
-                          ? theme.color.black.light
-                          : theme.color.blue.light,
-                      }
-                    : {}),
-                },
-              ]}
-            >
-              <Text style={styles.chipText}>{_category}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            alignItems: "flex-start",
-            justifyContent: "space-between",
-          }}
-          style={isDark ? { backgroundColor: theme.color.black.main } : {}}
-        >
-          {(searchTerm
-            ? emojisCategorized[category].filter((item) =>
-                emojiFilter.includes(item.aliases[0])
-              )
-            : emojisCategorized[category]
-          ).map((item) => (
-            <TouchableOpacity
-              onPress={() => {
-                setEmoji(item);
-
-                setEmojiFilter([]);
-
-                setSearchTerm("");
-
-                setShowEmojiSearch(false);
-
-                setShowEmojiModal(false);
-              }}
-              activeOpacity={0.8}
-              key={item.aliases[0]}
-              style={styles.emojiButton}
-            >
-              <Text style={styles.emoji}>{item.emoji}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
       </Modal>
     </View>
   );
@@ -263,7 +263,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 20,
   },
   searchIcon: {
     padding: 12,
@@ -294,8 +293,8 @@ const styles = StyleSheet.create({
     height: 40,
     minHeight: 40,
     maxHeight: 40,
-    paddingBottom: 8,
-    marginBottom: 4,
+    paddingTop: 8,
+    marginTop: 4,
   },
   chip: {
     height: 22,

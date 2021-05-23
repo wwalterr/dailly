@@ -45,12 +45,6 @@ const UpdateTask = ({ task, navigation }) => {
 
   const [remind, setRemind] = useState(task.remind);
 
-  const [increment, setIncrement] = useState(task.increment);
-
-  const [incrementText, setIncrementText] = useState(
-    task.incrementText ? task.incrementText : ""
-  );
-
   const [emoji, setEmoji] = useState(task.emoji);
 
   const [category, setCategory] = useState("Smileys & Emotion");
@@ -151,12 +145,29 @@ const UpdateTask = ({ task, navigation }) => {
                 Information
               </Text>
 
-              <Ionicons
-                name="md-arrow-forward"
-                size={24}
-                color={isDark ? theme.color.white.main : theme.color.black.main}
-                style={styles.cardIcon}
-              />
+              <View style={styles.cardIndicator}>
+                <Text
+                  style={[
+                    styles.cardIndicatorTitle,
+                    isDark
+                      ? {
+                          color: theme.color.white.main,
+                        }
+                      : {},
+                  ]}
+                >
+                  Scroll
+                </Text>
+
+                <Ionicons
+                  name="md-arrow-forward"
+                  size={24}
+                  color={
+                    isDark ? theme.color.white.main : theme.color.black.main
+                  }
+                  style={styles.cardIcon}
+                />
+              </View>
             </View>
 
             <Information
@@ -166,10 +177,6 @@ const UpdateTask = ({ task, navigation }) => {
               setTextError={setTextError}
               remind={remind}
               setRemind={setRemind}
-              increment={increment}
-              setIncrement={setIncrement}
-              incrementText={incrementText}
-              setIncrementText={setIncrementText}
               date={date}
               setDate={setDate}
               showTimePicker={showTimePicker}
@@ -183,7 +190,14 @@ const UpdateTask = ({ task, navigation }) => {
             showsVerticalScrollIndicator={false}
           >
             <View style={styles.cardInformation}>
-              <Text style={styles.cardTitle}>Style</Text>
+              <Text
+                style={[
+                  styles.cardTitle,
+                  isDark ? { color: theme.color.white.main } : {},
+                ]}
+              >
+                Style
+              </Text>
             </View>
 
             <Design
@@ -247,11 +261,6 @@ const UpdateTask = ({ task, navigation }) => {
                 remind,
                 ...(remind ? { identifier } : {}),
                 ...(remind ? { remindTime: date.getTime() } : {}),
-                increment,
-                ...(increment ? { incrementText } : {}),
-                ...(increment
-                  ? { counter: task.counter ? task.counter : 0 }
-                  : {}),
                 emoji,
                 createdAt: task.createdAt,
                 cardColor,
@@ -317,6 +326,16 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontFamily: "Inter_500Medium",
     fontSize: 20,
+    color: theme.color.black.main,
+  },
+  cardIndicator: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  cardIndicatorTitle: {
+    marginRight: 8,
+    fontFamily: "Inter_300Light",
+    fontSize: 16,
     color: theme.color.black.main,
   },
   cardIcon: {},

@@ -69,7 +69,11 @@ const Header = ({ navigation, showNewTask }) => {
       {options ? (
         <View style={[styles.column, styles.columnMenu]}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Settings")}
+            onPress={() => {
+              setOptions((previousOptions) => !previousOptions);
+
+              navigation.navigate("Settings");
+            }}
             activeOpacity={0.8}
             key={"settings"}
           >
