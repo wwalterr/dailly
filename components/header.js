@@ -111,29 +111,6 @@ const Header = ({ navigation, showNewTask }) => {
               Open Source
             </Text>
           </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() =>
-              Linking.openURL(PRIVACY_POLICY).catch((error) =>
-                console.error("Couldn't load page", error)
-              )
-            }
-            activeOpacity={0.8}
-            key={"privacy-policy"}
-          >
-            <Text
-              style={[
-                styles.textMenu,
-                isDark
-                  ? {
-                      color: theme.color.white.main,
-                    }
-                  : {},
-              ]}
-            >
-              Privacy Policy
-            </Text>
-          </TouchableOpacity>
         </View>
       ) : null}
 
