@@ -2,8 +2,6 @@
 
 Create, manage and track your daily goals.
 
-[![](https://i.imgur.com/LAKxpYE.png)](https://play.google.com/store/apps/details?id=com.dailly.dailly)
-
 ## About
 
 The main goal of this application is privacy and simplicity. No trackers, no ADS and no databases.
