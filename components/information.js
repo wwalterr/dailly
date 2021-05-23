@@ -55,7 +55,7 @@ const Information = ({
         />
 
         {textError ? (
-          <Text style={styles.textError}>You can't turn your goal empty!</Text>
+          <Text style={styles.textError}>You can't have an empty!</Text>
         ) : null}
       </View>
 
@@ -103,7 +103,7 @@ const Information = ({
       {increment ? (
         <View style={[styles.row, styles.rowIncrementText]}>
           <TextInput
-            placeholder="What's the increment label"
+            placeholder="Type an increment label"
             placeholderTextColor={theme.color.gray.main}
             textAlign="left"
             multiline={false}
@@ -169,7 +169,7 @@ const Information = ({
               isDark ? { color: theme.color.white.main } : {},
             ]}
           >
-            When do you want to receive the reminders
+            When to send you the reminders
           </Text>
 
           <Ionicons
