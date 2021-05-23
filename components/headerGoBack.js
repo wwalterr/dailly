@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     flexDirection: "row",
   },
-  arrowIcon: { marginRight: 8 },
+  arrowIcon: { marginRight: 16 },
   text: {
     fontFamily: "Inter_600SemiBold",
     fontSize: 14,

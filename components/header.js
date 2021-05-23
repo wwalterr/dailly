@@ -10,8 +10,6 @@ import {
 
 import { Entypo } from "@expo/vector-icons";
 
-import { PRIVACY_POLICY, PROJECT_URL } from "@env";
-
 import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
@@ -86,29 +84,6 @@ const Header = ({ navigation, showNewTask }) => {
               ]}
             >
               Settings
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() =>
-              Linking.openURL(PROJECT_URL).catch((error) =>
-                console.error("Couldn't load page", error)
-              )
-            }
-            activeOpacity={0.8}
-            key={"open-source"}
-          >
-            <Text
-              style={[
-                styles.textMenu,
-                isDark
-                  ? {
-                      color: theme.color.white.main,
-                    }
-                  : {},
-              ]}
-            >
-              Open Source
             </Text>
           </TouchableOpacity>
         </View>
