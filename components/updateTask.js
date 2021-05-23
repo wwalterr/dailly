@@ -263,7 +263,7 @@ const UpdateTask = ({ task, navigation }) => {
 
               resetFields();
 
-              navigation.goBack();
+              if (navigation.canGoBack()) navigation.goBack();
             }}
             text="Update goal"
             style={isDark ? { backgroundColor: theme.color.black.light } : {}}

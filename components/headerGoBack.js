@@ -14,7 +14,9 @@ const HeaderGoBack = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() => navigation.goBack()}
+        onPress={() => {
+          if (navigation.canGoBack()) navigation.goBack();
+        }}
         activeOpacity={0.8}
         key={"go-back"}
         style={styles.button}
