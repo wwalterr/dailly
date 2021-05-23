@@ -22,8 +22,6 @@ import { enableScreens } from "react-native-screens";
 
 import { NavigationContainer } from "@react-navigation/native";
 
-import { registerRootComponent } from "expo";
-
 import theme from "./theme";
 
 import { SettingsProvider } from "./contexts/settings";
@@ -78,7 +76,7 @@ const registerForPushNotificationsAsync = async () => {
   return token;
 };
 
-const Application = () => {
+const App = () => {
   const [expoPushToken, setExpoPushToken] = useState("");
 
   const notificationListener = useRef();
@@ -129,4 +127,4 @@ const Application = () => {
   );
 };
 
-export default registerRootComponent(Application);
+export default App;

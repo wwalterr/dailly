@@ -3,7 +3,6 @@
     "name": "dailly",
     "slug": "dailly",
     "description": "Create, manage, track and share your daily goals in a simple and aesthetic way.",
-    "entryPoint": "./application.js",
     "version": "5.0.0",
     "orientation": "portrait",
     "icon": "./assets/application/icon.png",
