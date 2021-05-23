@@ -71,25 +71,6 @@ const Header = ({ navigation, showNewTask }) => {
       {options ? (
         <View style={[styles.column, styles.columnMenu]}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Contact")}
-            activeOpacity={0.8}
-            key={"contact"}
-          >
-            <Text
-              style={[
-                styles.textMenu,
-                isDark
-                  ? {
-                      color: theme.color.white.main,
-                    }
-                  : {},
-              ]}
-            >
-              Contact
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
             onPress={() => navigation.navigate("Settings")}
             activeOpacity={0.8}
             key={"settings"}
