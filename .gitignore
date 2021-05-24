@@ -9,8 +9,10 @@ local.properties
 *.iml
 *.hprof
 
-# Keys
-gradle.properties
+# Release setting
+android/gradle.properties
+android/app/build.gradle
+*.jks
 
 # Node
 
