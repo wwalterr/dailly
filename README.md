@@ -12,7 +12,7 @@ The main goal of this application is privacy and simplicity. No trackers, no ADS
 
 [G2](https://www.g2.com/products/dailly/reviews)
 
-[Expo](https://expo.io/@sphinxs/projects/dailly)
+[Product Hunt](https://www.producthunt.com/posts/dailly)
 
 [Alternative To](https://alternativeto.net/software/dailly/about/)
 
