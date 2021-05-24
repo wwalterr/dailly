@@ -14,6 +14,10 @@ android/gradle.properties
 android/app/build.gradle
 *.jks
 
+# Expo
+.expo
+.expo-shared
+
 # Node
 
 #Build

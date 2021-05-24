@@ -10,11 +10,11 @@ The main goal of this application is privacy and simplicity. No trackers, no ADS
 
 [Play Store](https://play.google.com/store/apps/details?id=com.dailly.dailly)
 
-[G2](https://www.g2.com/products/dailly/reviews)
-
 [Product Hunt](https://www.producthunt.com/posts/dailly)
 
 [Alternative To](https://alternativeto.net/software/dailly/about/)
+
+[G2](https://www.g2.com/products/dailly/reviews)
 
 ## Metrics
 
@@ -25,7 +25,7 @@ The main goal of this application is privacy and simplicity. No trackers, no ADS
 - [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [React](https://reactjs.org/)
 - [React Native](https://reactnative.dev/)
-- [Expo](https://expo.io/) (managed workflow)
+- [Expo](https://expo.io/)
 
 ## Installation
 
@@ -35,11 +35,17 @@ Use the package manager [Yarn](https://yarnpkg.com/getting-started/install) to i
 yarn
 ```
 
-Use the IDE [Android Studio](https://developer.android.com/studio/install) to create a virtual device or [Expo Go](https://expo.io/client), to run the application while in development.
+Use the IDE [Android Studio](https://developer.android.com/studio/install) to create a virtual device or connect your device via USB, in developer mode.
 
 > Notice that some APIs are only available in real devices, i.e through binary installation or USB connection
 
 ## Usage
+
+Generate a build.
+
+```sh
+yarn android
+```
 
 Start the application server.
 
@@ -47,11 +53,7 @@ Start the application server.
 yarn start
 ```
 
-Open [localhost:19002](http://localhost:19002/) where a QR code can be scanned using Expo Go or launch the application in a virtual or real device, by pressing `a` in the CLI.
-
-> Optionally you can start the application server directly in a device `yarn android`
-
-To build the application see the [reference](https://docs.expo.io/distribution/building-standalone-apps/#3-start-the-build) or [reference](https://reactnative.dev/docs/signed-apk-android#generating-the-release-aab) for a pure [signed](https://www.decoide.org/react-native/docs/signed-apk-android.html) React Native build.
+To build the application see the [reference](https://reactnative.dev/docs/signed-apk-android#generating-the-release-aab). To sign the app see the [reference](https://www.decoide.org/react-native/docs/signed-apk-android.html).
 
 ## Roadmap
 
