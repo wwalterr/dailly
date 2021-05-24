@@ -51,7 +51,7 @@ Open [localhost:19002](http://localhost:19002/) where a QR code can be scanned u
 
 > Optionally you can start the application server directly in a device `yarn android`
 
-To build the application see the [reference](https://docs.expo.io/distribution/building-standalone-apps/#3-start-the-build) or [reference](https://reactnative.dev/docs/signed-apk-android#generating-the-release-aab) for a pure React Native build.
+To build the application see the [reference](https://docs.expo.io/distribution/building-standalone-apps/#3-start-the-build) or [reference](https://reactnative.dev/docs/signed-apk-android#generating-the-release-aab) for a pure [signed](https://www.decoide.org/react-native/docs/signed-apk-android.html) React Native build.
 
 ## Roadmap
 

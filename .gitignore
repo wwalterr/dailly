@@ -1,22 +1,33 @@
 # Editor
 .vscode
 
-# Node
-node_modules/**/*
+# Android / IntelliJ
+build
+.idea
+.gradle
+local.properties
+*.iml
+*.hprof
 
-# Yarn
-yarn.lock
+# Keys
+gradle.properties
+
+# Node
+
+#Build
+node_modules
 yarn-error.log
+yarn.lock
+
+# Buck
+buck-out
+\.buckd
+*.keystore
+!debug.keystore
+
+# Bundle artifacts
+*.jsbundle
 
 # Expo
-.expo/*
-
-# Binary
-*.jks
-*.p8
-*.p12
-*.key
-*.orig.*
-
-# Build
+.expo
 web-build

@@ -35,6 +35,9 @@
     },
     "experiments": {
       "turboModules": true
+    },
+    "ios": {
+      "bundleIdentifier": "com.dailly.dailly"
     }
   }
 }
