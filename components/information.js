@@ -4,13 +4,17 @@ import { View, Text, TextInput, Keyboard, StyleSheet } from "react-native";
 
 import { Switch } from "react-native-switch";
 
-import DateTimePicker from "@react-native-community/datetimepicker";
+import Modal from "react-native-modal";
+
+import DatePicker from "react-native-date-picker";
 
 import { Ionicons } from "@expo/vector-icons";
 
 import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
+
+import Close from "./close";
 
 const activeText = "Yes";
 
@@ -119,22 +123,34 @@ const Information = ({
             style={styles.timePickerIcon}
           />
 
-          {showTimePicker ? (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode={"time"}
-              textColor={theme.color.black.main}
-              is24Hour={true}
-              display="default"
-              onChange={(event, value) => {
-                setShowTimePicker(false);
+          <Modal
+            isVisible={showTimePicker}
+            onBackButtonPress={() => {
+              setShowTimePicker(false);
+            }}
+            backdropColor={
+              isDark ? theme.color.black.main : theme.color.white.main
+            }
+            backdropOpacity={1}
+            backdropTransitionInTiming={350}
+            backdropTransitionOutTiming={250}
+            useNativeDriverForBackdrop={true}
+            style={[
+              styles.containerModal,
+              isDark ? { backgroundColor: theme.color.black.main } : {},
+            ]}
+          >
+            <Close hide={() => setShowTimePicker(false)} />
 
-                setDate(new Date(value));
-              }}
-              style={styles.datePicker}
-            />
-          ) : null}
+            <View style={styles.containerDatePicker}>
+              <DatePicker
+                date={date}
+                onDateChange={setDate}
+                androidVariant="iosClone"
+                mode="time"
+              />
+            </View>
+          </Modal>
         </View>
       ) : null}
     </>
@@ -186,6 +202,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
+  },
+  containerModal: {
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+  },
+  containerDatePicker: {
+    flex: 1,
+    justifyContent: "center",
+    alignSelf: "center",
   },
   timePickerIcon: {
     paddingVertical: 8,
