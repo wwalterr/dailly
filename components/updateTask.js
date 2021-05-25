@@ -238,6 +238,7 @@ const UpdateTask = ({ task, navigation }) => {
               showWeekNumbers={false}
               hideExtraDays={true}
               hideDayNames={false}
+              minDate={moment(task.createdAt).format("YYYY-MM-DD")}
               theme={{
                 backgroundColor: theme.color.transparent,
                 calendarBackground: theme.color.transparent,
