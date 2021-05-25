@@ -263,6 +263,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginTop: 8,
   },
   searchIcon: {
     padding: 12,
@@ -278,7 +279,7 @@ const styles = StyleSheet.create({
     borderColor: theme.color.blue.light,
   },
   textInput: {
-    height: 30,
+    height: 38,
     width: "75%",
     paddingHorizontal: 15,
     borderRadius: 5,

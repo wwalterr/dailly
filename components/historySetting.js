@@ -30,7 +30,7 @@ const HistorySetting = () => {
           if (Platform.OS === "android")
             ToastAndroid.show(
               `${messageHistory} ${
-                !settings.history ? "enabled" : "deactivated"
+                !settings.history ? "enabled" : "disabled"
               }!`,
               ToastAndroid.SHORT
             );

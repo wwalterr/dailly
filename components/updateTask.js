@@ -77,16 +77,16 @@ const UpdateTask = ({ task, navigation }) => {
     (accumulator, currentValue) => ({
       ...accumulator,
       [currentValue]: {
+        textColor: theme.color.black.main,
         selected: true,
-        marked: false,
-        activeOpacity: 1,
-        disableTouchEvent: false,
-        disabled: false,
         selectedColor: isDark
           ? theme.color.white.main
           : theme.color.black.light,
-        textColor: theme.color.black.main,
+        marked: false,
         dotColor: isDark ? theme.color.white.main : theme.color.black.light,
+        disabled: false,
+        disableTouchEvent: false,
+        activeOpacity: 1,
       },
     }),
     {}

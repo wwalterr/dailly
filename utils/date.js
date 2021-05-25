@@ -1,4 +1,4 @@
 const convertYearMonthDay = (date) =>
-  new Date(key).toISOString().slice(0, 10).replace(/-/g, "-");
+  new Date(date).toISOString().split("T")[0].replace(/-/g, "-");
 
 export default convertYearMonthDay;
