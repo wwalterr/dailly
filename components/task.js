@@ -36,6 +36,8 @@ const taskHeight = 145 + taskMargin * 2;
 
 const messageRemoveGoal = "Goal removed!";
 
+const messageComplete = "Yay, goal achieved!";
+
 const onShare = async (message) => {
   try {
     const result = await Share.share({
@@ -230,7 +232,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
 
             <TouchableOpacity
               onPress={async () => {
-                if (!task.completed[today])
+                if (!task.completed[today]) {
                   updateTask(task.id, {
                     ...task,
                     completed: {
@@ -238,6 +240,16 @@ const Task = ({ task, index, scrollY, navigation }) => {
                       [moment().format("YYYY-MM-DD")]: true,
                     },
                   });
+
+                  if (Platform.OS === "android")
+                    ToastAndroid.show(messageComplete, ToastAndroid.SHORT);
+                } else {
+                  if (Platform.OS === "android")
+                    ToastAndroid.show(
+                      "Goal already achieved!",
+                      ToastAndroid.LONG
+                    );
+                }
               }}
               activeOpacity={0.8}
               key={"complete"}
