@@ -14,6 +14,8 @@ import {
 
 import Modal from "react-native-modal";
 
+import moment from "moment";
+
 import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
@@ -75,7 +77,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
     outputRange: [1, 1, 1, 0],
   });
 
-  const today = new Date().toLocaleDateString();
+  const today = moment().format("YYYY-MM-DD");
 
   useEffect(() => {
     let closeRemoveStatus;
@@ -106,7 +108,9 @@ const Task = ({ task, index, scrollY, navigation }) => {
       ]}
     >
       <View style={styles.containerHeader}>
-        <Text style={[styles.createdAt, cardFontColor]}>{task.createdAt}</Text>
+        <Text style={[styles.createdAt, cardFontColor]}>
+          {moment(task.createdAt).format("MM/DD/YYYY")}
+        </Text>
 
         <Text style={styles.emoji}>{task.emoji.emoji}</Text>
       </View>
@@ -231,7 +235,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
                     ...task,
                     completed: {
                       ...task.completed,
-                      [new Date().toLocaleDateString()]: true,
+                      [moment().format("YYYY-MM-DD")]: true,
                     },
                   });
               }}

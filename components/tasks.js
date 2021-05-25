@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 
 import { Animated, StyleSheet } from "react-native";
 
+import moment from "moment";
+
 import { useTasks } from "../contexts/tasks";
 
 import { useSettings } from "../contexts/settings";
@@ -19,7 +21,7 @@ const Tasks = ({ navigation }) => {
     <Task task={item} index={index} scrollY={scrollY} navigation={navigation} />
   );
 
-  const today = new Date().toLocaleDateString();
+  const today = moment().format("YYYY-MM-DD");
 
   return (
     <Animated.FlatList

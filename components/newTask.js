@@ -187,7 +187,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
               ...(remind ? { remindTime: new Date().getTime() } : {}),
               emoji,
               completed: {},
-              createdAt: new Date().toLocaleDateString(),
+              createdAt: new Date().getTime(),
               cardColor: theme.color.black.main,
               cardFontColor: theme.color.white.main,
             });

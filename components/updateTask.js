@@ -15,6 +15,8 @@ import { Calendar } from "react-native-calendars";
 
 import { Ionicons } from "@expo/vector-icons";
 
+import moment from "moment";
+
 import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
@@ -22,8 +24,6 @@ import { useSettings } from "../contexts/settings";
 import { useTasks } from "../contexts/tasks";
 
 import { limitText, capitalize } from "../utils/text";
-
-import convertYearMonthDay from "../utils/date";
 
 import {
   schedulePushNotification,
@@ -70,7 +70,7 @@ const UpdateTask = ({ task, navigation }) => {
   const [colorError, setColorError] = useState(false);
 
   const dates = Object.keys(task.completed).map((key) =>
-    convertYearMonthDay(key)
+    moment(key).format("YYYY-MM-DD")
   );
 
   const calendarDates = dates.reduce(
