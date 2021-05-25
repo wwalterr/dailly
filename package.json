@@ -24,6 +24,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "~0.63.4",
+    "react-native-calendars": "^1.1262.0",
     "react-native-date-picker": "^3.3.0",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-modal": "^11.10.0",

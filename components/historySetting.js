@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   ToastAndroid,
   Platform,
-  StatusBar,
   StyleSheet,
 } from "react-native";
 
@@ -15,47 +14,42 @@ import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
 
-import { capitalize } from "../utils/text";
+const messageHistory = "History";
 
-const messageTheme = "theme enabled!";
-
-const ThemeSetting = () => {
-  const { settings, updateSettings, isDark } = useSettings();
+const HistorySetting = () => {
+  const { settings, isDark, updateSettings } = useSettings();
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => {
           updateSettings({
-            theme: isDark ? "light" : "dark",
+            history: !settings.history,
           });
 
           if (Platform.OS === "android")
             ToastAndroid.show(
-              `${capitalize(isDark ? "light" : "dark")} ${messageTheme}`,
+              `${messageHistory} ${
+                !settings.history ? "enabled" : "deactivated"
+              }!`,
               ToastAndroid.SHORT
             );
-
-          if (isDark) {
-            StatusBar.setBarStyle("light-content", true);
-          } else {
-            StatusBar.setBarStyle("dark-content", true);
-          }
         }}
         activeOpacity={0.8}
         style={[
           styles.buttonImage,
           {
-            backgroundColor:
-              settings.theme === "light"
-                ? theme.color.black.main
-                : theme.color.green.main,
+            backgroundColor: settings.history
+              ? theme.color.green.main
+              : isDark
+              ? theme.color.black.light
+              : theme.color.black.main,
           },
         ]}
       >
         <Image
           style={styles.image}
-          source={require("../assets/settings/light.png")}
+          source={require("../assets/settings/clock.png")}
         />
       </TouchableOpacity>
 
@@ -66,11 +60,11 @@ const ThemeSetting = () => {
             isDark ? { color: theme.color.white.main } : {},
           ]}
         >
-          Theme
+          History
         </Text>
 
         <Text style={styles.description}>
-          Enable dark theme to reduce eye strain
+          Enable history to see completed goals
         </Text>
       </View>
     </View>
@@ -83,7 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     height: 60,
-    marginTop: 16,
+    marginTop: 32,
   },
   buttonImage: {
     alignItems: "center",
@@ -114,4 +108,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ThemeSetting;
+export default HistorySetting;

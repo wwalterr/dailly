@@ -12,6 +12,8 @@ import HeaderGoBack from "../components/headerGoBack";
 
 import ThemeSetting from "../components/themeSetting";
 
+import HistorySetting from "../components/historySetting";
+
 const SettingsScreen = ({ navigation }) => {
   const { isDark } = useSettings();
 
@@ -32,6 +34,8 @@ const SettingsScreen = ({ navigation }) => {
         }}
       >
         <ThemeSetting />
+
+        <HistorySetting />
       </ScrollView>
     </SafeAreaView>
   );

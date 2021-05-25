@@ -11,6 +11,8 @@ import {
   StyleSheet,
 } from "react-native";
 
+import { Calendar } from "react-native-calendars";
+
 import { Ionicons } from "@expo/vector-icons";
 
 import theme from "../theme";
@@ -20,6 +22,8 @@ import { useSettings } from "../contexts/settings";
 import { useTasks } from "../contexts/tasks";
 
 import { limitText, capitalize } from "../utils/text";
+
+import convertYearMonthDay from "../utils/date";
 
 import {
   schedulePushNotification,
@@ -64,6 +68,29 @@ const UpdateTask = ({ task, navigation }) => {
   const [showCardFontColor, setShowCardFontColor] = useState(false);
 
   const [colorError, setColorError] = useState(false);
+
+  const dates = Object.keys(task.completed).map((key) =>
+    convertYearMonthDay(key)
+  );
+
+  const calendarDates = dates.reduce(
+    (accumulator, currentValue) => ({
+      ...accumulator,
+      [currentValue]: {
+        selected: true,
+        marked: false,
+        activeOpacity: 1,
+        disableTouchEvent: false,
+        disabled: false,
+        selectedColor: isDark
+          ? theme.color.white.main
+          : theme.color.black.light,
+        textColor: theme.color.black.main,
+        dotColor: isDark ? theme.color.white.main : theme.color.black.light,
+      },
+    }),
+    {}
+  );
 
   const resetFields = () => {
     Keyboard.dismiss();
@@ -185,6 +212,70 @@ const UpdateTask = ({ task, navigation }) => {
           </ScrollView>
 
           <ScrollView
+            style={styles.card}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+          >
+            <View style={styles.cardInformation}>
+              <Text
+                style={[
+                  styles.cardTitle,
+                  isDark
+                    ? {
+                        color: theme.color.white.main,
+                      }
+                    : {},
+                ]}
+              >
+                History
+              </Text>
+            </View>
+
+            <Calendar
+              markedDates={calendarDates}
+              enableSwipeMonths={false}
+              disableAllTouchEventsForDisabledDays={false}
+              showWeekNumbers={false}
+              hideExtraDays={true}
+              hideDayNames={false}
+              theme={{
+                backgroundColor: theme.color.transparent,
+                calendarBackground: theme.color.transparent,
+                textSectionTitleColor: theme.color.gray.main,
+                selectedDayBackgroundColor: isDark
+                  ? theme.color.white.main
+                  : theme.color.black.main,
+                selectedDayTextColor: isDark
+                  ? theme.color.black.main
+                  : theme.color.white.main,
+                todayTextColor: theme.color.blue.main,
+                dayTextColor: isDark
+                  ? theme.color.white.main
+                  : theme.color.black.main,
+                textDisabledColor: theme.color.gray.soft,
+                dotColor: isDark
+                  ? theme.color.white.main
+                  : theme.color.black.light,
+                selectedDotColor: theme.color.white.main,
+                arrowColor: theme.color.gray.main,
+                disabledArrowColor: theme.color.gray.light,
+                monthTextColor: isDark
+                  ? theme.color.white.main
+                  : theme.color.black.main,
+                textDayFontFamily: "Inter_400Regular",
+                textMonthFontFamily: "Inter_400Regular",
+                textDayHeaderFontFamily: "Inter_400Regular",
+                textDayFontWeight: "200",
+                textMonthFontWeight: "bold",
+                textDayHeaderFontWeight: "200",
+                textDayFontSize: 13,
+                textMonthFontSize: 16,
+                textDayHeaderFontSize: 14,
+              }}
+            />
+          </ScrollView>
+
+          <ScrollView
             style={[styles.card, { marginRight: 0 }]}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
@@ -261,6 +352,7 @@ const UpdateTask = ({ task, navigation }) => {
                 remind,
                 ...(remind ? { identifier } : {}),
                 ...(remind ? { remindTime: date.getTime() } : {}),
+                completed: task.completed,
                 emoji,
                 createdAt: task.createdAt,
                 cardColor,
@@ -309,12 +401,11 @@ const styles = StyleSheet.create({
     backgroundColor: theme.color.white.main,
   },
   cards: {},
-
   card: {
     paddingTop: 38,
     height: "100%",
     width: Dimensions.get("window").width - 64,
-    marginRight: 64,
+    marginRight: 96,
     marginBottom: 16,
   },
   cardInformation: {

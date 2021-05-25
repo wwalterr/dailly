@@ -75,6 +75,8 @@ const Task = ({ task, index, scrollY, navigation }) => {
     outputRange: [1, 1, 1, 0],
   });
 
+  const today = new Date().toLocaleDateString();
+
   useEffect(() => {
     let closeRemoveStatus;
 
@@ -221,6 +223,26 @@ const Task = ({ task, index, scrollY, navigation }) => {
                 <Text style={[styles.share, cardFontColor]}>Share</Text>
               </TouchableOpacity>
             </View>
+
+            <TouchableOpacity
+              onPress={async () => {
+                if (!task.completed[today])
+                  updateTask(task.id, {
+                    ...task,
+                    completed: {
+                      ...task.completed,
+                      [new Date().toLocaleDateString()]: true,
+                    },
+                  });
+              }}
+              activeOpacity={0.8}
+              key={"complete"}
+              style={styles.completeButton}
+            >
+              <Text style={[styles.complete, cardFontColor]}>
+                {task.completed[today] ? "Completed" : "Complete"}
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -298,6 +320,7 @@ const styles = StyleSheet.create({
     flex: 0.15,
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
   },
   actions: {
     flex: 1,
@@ -335,6 +358,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: theme.color.white.main,
     marginLeft: 8,
+  },
+  completeButton: {},
+  complete: {
+    fontFamily: "Inter_300Light",
+    fontSize: 12,
+    color: theme.color.white.main,
   },
 });
 

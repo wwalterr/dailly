@@ -5,7 +5,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const key = "Settings";
 
 const defaultSettings = {
-  theme: "light",
+  theme: "light", // Define the theme. Options: light or dark
+  history: false, // Define if completed goals should be shown. Options: true or false
 };
 
 const SettingsContext = createContext(defaultSettings);
