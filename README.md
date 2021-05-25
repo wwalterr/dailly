@@ -16,10 +16,6 @@ The main goal of this application is privacy and simplicity. No trackers, no ADS
 
 [G2](https://www.g2.com/products/dailly/reviews)
 
-## Metrics
-
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/cb1e669938fe45c38c39c2a4b1d650f8)](https://www.codacy.com?utm_source=github.com&utm_medium=referral&utm_content=hydroxion/dailly&utm_campaign=Badge_Grade)
-
 ## Built with
 
 - [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
