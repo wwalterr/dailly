@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   ToastAndroid,
   Platform,
-  StatusBar,
   StyleSheet,
 } from "react-native";
 
@@ -35,12 +34,6 @@ const ThemeSetting = () => {
               `${capitalize(isDark ? "light" : "dark")} ${messageTheme}`,
               ToastAndroid.SHORT
             );
-
-          if (isDark) {
-            StatusBar.setBarStyle("light-content", true);
-          } else {
-            StatusBar.setBarStyle("dark-content", true);
-          }
         }}
         activeOpacity={0.8}
         style={[

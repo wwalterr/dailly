@@ -17,24 +17,26 @@ const Stack = createStackNavigator();
 const Routes = () => {
   const { isDark } = useSettings();
 
-  if (isDark) {
-    StatusBar.setBarStyle("light-content", true);
-  } else {
-    StatusBar.setBarStyle("dark-content", true);
-  }
-
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="Tasks" component={TasksScreen} />
+    <>
+      {isDark ? (
+        <StatusBar backgroundColor="black" barStyle="light-content" />
+      ) : (
+        <StatusBar backgroundColor="white" barStyle="dark-content" />
+      )}
 
-      <Stack.Screen name="Update" component={UpdateScreen} />
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Tasks" component={TasksScreen} />
 
-      <Stack.Screen name="Settings" component={SettingsScreen} />
-    </Stack.Navigator>
+        <Stack.Screen name="Update" component={UpdateScreen} />
+
+        <Stack.Screen name="Settings" component={SettingsScreen} />
+      </Stack.Navigator>
+    </>
   );
 };
 
