@@ -29,6 +29,8 @@ import { useTasks } from "../contexts/tasks";
 
 import { cancelPushNotification } from "../utils/notifications";
 
+import removeObjectKey from "../utils/objects";
+
 import { limitText } from "../utils/text";
 
 import Close from "./close";
@@ -41,7 +43,9 @@ const taskHeight = 145 + taskMargin * 2;
 
 const messageRemoveGoal = "Goal removed!";
 
-const messageComplete = "Goal achieved!";
+const messageComplete = "Goal completed!";
+
+const messageIncomplete = "Goal incomplete!";
 
 const messageCopyGoal = "Goal copied!";
 
@@ -319,11 +323,20 @@ const Task = ({ task, index, scrollY, navigation }) => {
                   if (Platform.OS === "android")
                     ToastAndroid.show(messageComplete, ToastAndroid.SHORT);
                 } else {
+                  if (Object.keys(task.completed).length) {
+                    updateTask(task.id, {
+                      ...task,
+                      completed: removeObjectKey(
+                        moment().format("YYYY-MM-DD"),
+                        task.completed
+                      ),
+                    });
+                  }
+
+                  // React Native looses reference if this call
+                  // is made inside the if above, scope problem
                   if (Platform.OS === "android")
-                    ToastAndroid.show(
-                      "Goal already achieved!",
-                      ToastAndroid.LONG
-                    );
+                    ToastAndroid.show(messageIncomplete, ToastAndroid.SHORT);
                 }
               }}
               activeOpacity={0.8}
