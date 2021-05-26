@@ -142,8 +142,6 @@ const Information = ({
               isDark ? { backgroundColor: theme.color.black.main } : {},
             ]}
           >
-            <Close hide={() => setShowTimePicker(false)} />
-
             <View style={styles.containerDatePicker}>
               <DatePicker
                 date={date}
@@ -158,6 +156,8 @@ const Information = ({
                 }
               />
             </View>
+
+            <Close hide={() => setShowTimePicker(false)} />
           </Modal>
         </View>
       ) : null}
@@ -214,6 +214,7 @@ const styles = StyleSheet.create({
   containerModal: {
     alignItems: "flex-end",
     justifyContent: "space-between",
+    paddingHorizontal: 16,
   },
   containerDatePicker: {
     flex: 1,
