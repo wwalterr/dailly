@@ -301,10 +301,10 @@ const styles = StyleSheet.create({
     height: 22,
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 4,
     marginRight: 10,
     borderRadius: 5,
     borderWidth: 1,
+    paddingHorizontal: 6,
     borderColor: theme.color.blue.light,
   },
   chipText: {
@@ -312,12 +312,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: theme.color.gray.main,
   },
-  emojiButton: {},
+  emojiButton: {
+    padding: 8,
+  },
   emoji: {
     fontSize: 22,
-    padding: 8,
-	opacity: 1,
-	color: "#000000"
+    opacity: 1,
+    color: "#000000",
   },
 });
 
