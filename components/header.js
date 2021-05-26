@@ -90,6 +90,27 @@ const Header = ({ navigation, showNewTask }) => {
               Settings
             </Text>
           </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => {
+              Linking.openURL("https://buy.stripe.com/fZe01e3TD87YgmcaEE");
+            }}
+            activeOpacity={0.8}
+            key={"coffee"}
+          >
+            <Text
+              style={[
+                styles.textMenu,
+                isDark
+                  ? {
+                      color: theme.color.white.main,
+                    }
+                  : {},
+              ]}
+            >
+              Buy us a coffee
+            </Text>
+          </TouchableOpacity>
         </View>
       ) : null}
 
