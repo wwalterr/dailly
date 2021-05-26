@@ -14,7 +14,7 @@ import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
 
-const messageCard = "Card";
+const messageCard = "Card mode";
 
 const CardSetting = () => {
   const { settings, isDark, updateSettings } = useSettings();
@@ -29,9 +29,7 @@ const CardSetting = () => {
 
           if (Platform.OS === "android")
             ToastAndroid.show(
-              `${messageCard} ${
-                !settings.card ? "enabled" : "disabled"
-              }!`,
+              `${messageCard} ${!settings.card ? "enabled" : "disabled"}!`,
               ToastAndroid.SHORT
             );
         }}
