@@ -15,6 +15,8 @@ import { Switch } from "react-native-switch";
 
 import { Animated } from "react-native";
 
+import moment from "moment";
+
 import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
@@ -55,6 +57,8 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
   const [emoji, setEmoji] = useState(defaultEmoji);
 
   const [category, setCategory] = useState("Smileys & Emotion");
+
+  const today = moment().format("YYYY-MM-DD");
 
   const resetFields = () => {
     Keyboard.dismiss();
@@ -186,7 +190,9 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
               ...(remind ? { identifier } : {}),
               ...(remind ? { remindTime: new Date().getTime() } : {}),
               emoji,
-              completed: {},
+              completed: {
+                [today]: false,
+              },
               createdAt: new Date().getTime(),
               cardColor: theme.color.black.main,
               cardFontColor: theme.color.white.main,

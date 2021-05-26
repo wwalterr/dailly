@@ -6,6 +6,8 @@ import { Animated } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import moment from "moment";
+
 import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
@@ -20,8 +22,10 @@ import NoTask from "../components/noTask";
 
 import NewTask from "../components/newTask";
 
+import TasksAchieved from "../components/tasksAchieved";
+
 const TasksScreen = ({ navigation }) => {
-  const { isDark } = useSettings();
+  const { settings, isDark } = useSettings();
 
   const { tasks } = useTasks();
 
@@ -43,6 +47,8 @@ const TasksScreen = ({ navigation }) => {
       useNativeDriver: true,
     }).start();
 
+  const today = moment().format("YYYY-MM-DD");
+
   return (
     <SafeAreaView
       style={[
@@ -56,7 +62,15 @@ const TasksScreen = ({ navigation }) => {
     >
       <Header navigation={navigation} showNewTask={showNewTask} />
 
-      {tasks.length ? <Tasks navigation={navigation} /> : <NoTask />}
+      {tasks.length ? (
+        tasks.every((task) => task.completed[today] && !settings.history) ? (
+          <TasksAchieved />
+        ) : (
+          <Tasks navigation={navigation} />
+        )
+      ) : (
+        <NoTask />
+      )}
 
       <NewTask
         newTaskTranslateY={newTaskTranslateY}

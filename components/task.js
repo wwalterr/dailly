@@ -220,14 +220,6 @@ const Task = ({ task, index, scrollY, navigation }) => {
                 isDark ? { backgroundColor: theme.color.black.main } : {},
               ]}
             >
-              <View style={styles.containerModalActions}>
-                <Close
-                  hide={() => {
-                    setShowTextModal(false);
-                  }}
-                />
-              </View>
-
               <ScrollView
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
@@ -252,6 +244,14 @@ const Task = ({ task, index, scrollY, navigation }) => {
                   </Text>
                 </TouchableOpacity>
               </ScrollView>
+
+              <View style={styles.containerModalActions}>
+                <Close
+                  hide={() => {
+                    setShowTextModal(false);
+                  }}
+                />
+              </View>
             </Modal>
           </View>
 
@@ -415,7 +415,7 @@ const styles = StyleSheet.create({
   containerModalActions: {
     alignItems: "flex-end",
     justifyContent: "center",
-    marginBottom: 8,
+    marginBottom: 14,
   },
   textModal: {
     fontFamily: "Inter_400Regular",

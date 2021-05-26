@@ -76,14 +76,6 @@ const ColorPicker = ({
           isDark ? { backgroundColor: theme.color.black.main } : {},
         ]}
       >
-        <View style={styles.containerActions}>
-          <Close
-            hide={() => {
-              showPickerSetter(false);
-            }}
-          />
-        </View>
-
         <ScrollView
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
@@ -132,6 +124,14 @@ const ColorPicker = ({
             </TouchableOpacity>
           ))}
         </ScrollView>
+
+        <View style={styles.containerActions}>
+          <Close
+            hide={() => {
+              showPickerSetter(false);
+            }}
+          />
+        </View>
       </Modal>
     </View>
   );
@@ -163,7 +163,8 @@ const styles = StyleSheet.create({
   containerActions: {
     alignItems: "flex-end",
     justifyContent: "center",
-    marginBottom: 8,
+    marginTop: 14,
+	paddingRight: 4,
   },
   flatListColors: {
     maxWidth: "100%",
