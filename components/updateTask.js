@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import {
   View,
@@ -8,6 +8,7 @@ import {
   Platform,
   Keyboard,
   Dimensions,
+  Animated,
   StyleSheet,
 } from "react-native";
 
@@ -66,6 +67,18 @@ const UpdateTask = ({ task, navigation }) => {
   const [showCardFontColor, setShowCardFontColor] = useState(false);
 
   const [colorError, setColorError] = useState(false);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
+
+  const slidesReference = useRef();
+
+  const scrollX = useRef(new Animated.Value(0)).current;
+
+  const viewableItemsChanged = useRef(({ viewableItems }) => {
+    setCurrentIndex(viewableItems[0].index);
+  }).current;
 
   const resetFields = () => {
     Keyboard.dismiss();
@@ -126,6 +139,24 @@ const UpdateTask = ({ task, navigation }) => {
             alignItems: "center",
             justifyContent: "space-around",
           }}
+          onScroll={Animated.event(
+            [
+              {
+                nativeEvent: {
+                  contentOffset: {
+                    x: scrollX,
+                  },
+                },
+              },
+            ],
+            // If set to true the scroll position will be always 0
+            { useNativeDriver: false }
+          )}
+          onViewableItemsChanged={viewableItemsChanged}
+          ref={slidesReference}
+          pagingEnabled
+          scrollEventThrottle={Dimensions.get("window").width - 64}
+          viewabilityConfig={viewConfig}
           style={styles.cards}
         >
           <ScrollView
@@ -210,7 +241,7 @@ const UpdateTask = ({ task, navigation }) => {
           </ScrollView>
 
           <ScrollView
-            style={[styles.card, { marginRight: 0 }]}
+            style={styles.card}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
           >
@@ -338,7 +369,7 @@ const styles = StyleSheet.create({
     paddingTop: 38,
     height: "100%",
     width: Dimensions.get("window").width - 64,
-    marginRight: 96,
+    marginRight: 32,
     marginBottom: 16,
   },
   cardInformation: {
