@@ -40,6 +40,5 @@
     "@babel/core": "^7.14.2"
   },
   "private": true,
-  "name": "dailly",
-  "version": "6.0.0"
+  "name": "dailly"
 }
