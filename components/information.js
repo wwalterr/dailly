@@ -148,6 +148,12 @@ const Information = ({
                 onDateChange={setDate}
                 androidVariant="iosClone"
                 mode="time"
+                textColor={
+                  isDark ? theme.color.white.main : theme.color.black.main
+                }
+                fadeToColor={
+                  isDark ? theme.color.black.main : theme.color.white.main
+                }
               />
             </View>
           </Modal>

@@ -155,7 +155,7 @@ const UpdateTask = ({ task, navigation }) => {
           onViewableItemsChanged={viewableItemsChanged}
           ref={slidesReference}
           pagingEnabled
-          scrollEventThrottle={Dimensions.get("window").width - 64}
+          scrollEventThrottle={16}
           viewabilityConfig={viewConfig}
           style={styles.cards}
         >
