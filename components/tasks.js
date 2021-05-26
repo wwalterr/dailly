@@ -42,7 +42,15 @@ const Tasks = ({ navigation }) => {
         ],
         { useNativeDriver: true }
       )}
-      style={styles.flatList}
+      style={[
+        styles.flatList,
+        settings.card
+          ? {
+              marginTop: 20,
+              width: "100%",
+            }
+          : {},
+      ]}
     />
   );
 };

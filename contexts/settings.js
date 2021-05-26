@@ -7,6 +7,7 @@ const key = "Settings";
 const defaultSettings = {
   theme: "light", // Define the theme. Options: light or dark
   history: false, // Define if completed goals should be shown. Options: true or false
+  card: false, // Define the goal card mode. Options: true or false
 };
 
 const SettingsContext = createContext(defaultSettings);

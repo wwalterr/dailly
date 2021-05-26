@@ -12,6 +12,8 @@ import HeaderGoBack from "../components/headerGoBack";
 
 import ThemeSetting from "../components/themeSetting";
 
+import CardSetting from "../components/cardSetting";
+
 import HistorySetting from "../components/historySetting";
 
 const SettingsScreen = ({ navigation }) => {
@@ -34,6 +36,8 @@ const SettingsScreen = ({ navigation }) => {
         }}
       >
         <ThemeSetting />
+
+        <CardSetting />
 
         <HistorySetting />
       </ScrollView>

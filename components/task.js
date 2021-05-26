@@ -7,6 +7,7 @@ import {
   Share,
   Animated,
   TouchableOpacity,
+  Dimensions,
   ToastAndroid,
   Platform,
   StyleSheet,
@@ -63,7 +64,7 @@ const onShare = async (message) => {
 };
 
 const Task = ({ task, index, scrollY, navigation }) => {
-  const { isDark } = useSettings();
+  const { settings, isDark } = useSettings();
 
   const { removeTask, updateTask } = useTasks();
 
@@ -73,13 +74,18 @@ const Task = ({ task, index, scrollY, navigation }) => {
 
   const cardFontColor = { color: task.cardFontColor };
 
+  const taskHeightCardSetting =
+    Dimensions.get("window").height / 4 + taskMargin * 2;
+
+  const _taskHeight = settings.card ? taskHeightCardSetting : taskHeight;
+
   const scale = scrollY.interpolate({
-    inputRange: [-1, 0, taskHeight * index, taskHeight * (index + 2)],
+    inputRange: [-1, 0, _taskHeight * index, _taskHeight * (index + 2)],
     outputRange: [1, 1, 1, 0],
   });
 
   const opacity = scrollY.interpolate({
-    inputRange: [-1, 0, taskHeight * index, taskHeight * (index + 0.25)],
+    inputRange: [-1, 0, _taskHeight * index, _taskHeight * (index + 0.25)],
     outputRange: [1, 1, 1, 0],
   });
 
@@ -111,6 +117,15 @@ const Task = ({ task, index, scrollY, navigation }) => {
           transform: [{ scale }],
           opacity,
         },
+        settings.card
+          ? {
+              marginHorizontal: 0,
+              marginVertical: 0,
+              borderRadius: 0,
+              minHeight: taskHeight,
+              height: taskHeightCardSetting,
+            }
+          : {},
       ]}
     >
       <View style={styles.containerHeader}>
@@ -306,8 +321,8 @@ const styles = StyleSheet.create({
   },
   emoji: {
     fontSize: 22,
-	opacity: 1,
-	color: "#000000"
+    opacity: 1,
+    color: "#000000",
   },
   containerOutsider: {
     flex: 1,
