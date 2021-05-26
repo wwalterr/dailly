@@ -14,6 +14,8 @@ import {
 
 import Modal from "react-native-modal";
 
+import Clipboard from "@react-native-community/clipboard";
+
 import moment from "moment";
 
 import theme from "../theme";
@@ -37,6 +39,8 @@ const taskHeight = 145 + taskMargin * 2;
 const messageRemoveGoal = "Goal removed!";
 
 const messageComplete = "Goal achieved!";
+
+const messageCopyGoal = "Goal copied!";
 
 const onShare = async (message) => {
   try {
@@ -164,14 +168,25 @@ const Task = ({ task, index, scrollY, navigation }) => {
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
               >
-                <Text
-                  style={[
-                    styles.textModal,
-                    isDark ? { color: theme.color.white.main } : {},
-                  ]}
+                <TouchableOpacity
+                  onPress={() => {
+                    Clipboard.setString(task.text);
+
+                    if (Platform.OS === "android")
+                      ToastAndroid.show(messageCopyGoal, ToastAndroid.SHORT);
+                  }}
+                  activeOpacity={0.8}
+                  key={"text-modal-copy"}
                 >
-                  {task.text}
-                </Text>
+                  <Text
+                    style={[
+                      styles.textModal,
+                      isDark ? { color: theme.color.white.main } : {},
+                    ]}
+                  >
+                    {task.text}
+                  </Text>
+                </TouchableOpacity>
               </ScrollView>
             </Modal>
           </View>
