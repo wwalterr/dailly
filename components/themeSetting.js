@@ -14,9 +14,7 @@ import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
 
-import { capitalize } from "../utils/text";
-
-const messageTheme = "theme enabled!";
+const messageTheme = "Dark theme";
 
 const ThemeSetting = () => {
   const { settings, updateSettings, isDark } = useSettings();
@@ -31,7 +29,7 @@ const ThemeSetting = () => {
 
           if (Platform.OS === "android")
             ToastAndroid.show(
-              `${capitalize(isDark ? "light" : "dark")} ${messageTheme}`,
+              `${messageTheme} ${isDark ? "disabled" : "enabled"} !`,
               ToastAndroid.SHORT
             );
         }}
