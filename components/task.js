@@ -17,6 +17,8 @@ import Modal from "react-native-modal";
 
 import Clipboard from "@react-native-community/clipboard";
 
+import { AnimatedEmoji } from "react-native-animated-emoji";
+
 import moment from "moment";
 
 import theme from "../theme";
@@ -71,6 +73,8 @@ const Task = ({ task, index, scrollY, navigation }) => {
   const [removeStatus, setRemoveStatus] = useState(false);
 
   const [showTextModal, setShowTextModal] = useState(false);
+
+  const [emojiCloud, setEmojiCloud] = useState(false);
 
   const cardFontColor = { color: task.cardFontColor };
 
@@ -133,7 +137,48 @@ const Task = ({ task, index, scrollY, navigation }) => {
           {moment(task.createdAt).format("MM/DD/YYYY")}
         </Text>
 
-        <Text style={styles.emoji}>{task.emoji.emoji}</Text>
+        <TouchableOpacity
+          onPress={() => {
+            setEmojiCloud(true);
+          }}
+          activeOpacity={0.8}
+          key={"emoji"}
+        >
+          <Text style={styles.emoji}>{task.emoji.emoji}</Text>
+        </TouchableOpacity>
+
+        {emojiCloud ? (
+          <>
+            <AnimatedEmoji
+              index={index}
+              style={{ bottom: 0 }}
+              name={task.emoji.aliases[0]}
+              size={25}
+              duration={3500}
+              onAnimationCompleted={() => {}}
+            />
+
+            <AnimatedEmoji
+              index={index + 1}
+              style={{ bottom: 40 }}
+              name={task.emoji.aliases[0]}
+              size={15}
+              duration={3500}
+              onAnimationCompleted={() => {}}
+            />
+
+            <AnimatedEmoji
+              index={index + 2}
+              style={{ bottom: -60 }}
+              name={task.emoji.aliases[0]}
+              size={25}
+              duration={3550}
+              onAnimationCompleted={() => {
+                setEmojiCloud(false);
+              }}
+            />
+          </>
+        ) : null}
       </View>
 
       <View style={styles.containerOutsider}>
@@ -149,7 +194,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
                 style={styles.textButton}
               >
                 <Text style={[styles.text, cardFontColor]}>
-                  {limitText(task.text, 34)}
+                  {limitText(task.text, settings.card ? 44 : 34)}
                 </Text>
               </TouchableOpacity>
             </View>
