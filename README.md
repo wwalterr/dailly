@@ -51,6 +51,8 @@ yarn start
 
 To build the application see the [reference](https://reactnative.dev/docs/signed-apk-android#generating-the-release-aab). To sign the app see the [reference](https://www.decoide.org/react-native/docs/signed-apk-android.html).
 
+> Check the [package](./package.json) for helper scripts
+
 ## Roadmap
 
 Check the [project board](https://github.com/hydroxion/dailly/projects).
