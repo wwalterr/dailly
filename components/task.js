@@ -306,6 +306,8 @@ const styles = StyleSheet.create({
   },
   emoji: {
     fontSize: 22,
+	opacity: 1,
+	color: "#000000"
   },
   containerOutsider: {
     flex: 1,

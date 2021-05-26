@@ -316,6 +316,8 @@ const styles = StyleSheet.create({
   emoji: {
     fontSize: 22,
     padding: 8,
+	opacity: 1,
+	color: "#000000"
   },
 });
 
