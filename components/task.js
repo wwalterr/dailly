@@ -36,7 +36,7 @@ const taskHeight = 145 + taskMargin * 2;
 
 const messageRemoveGoal = "Goal removed!";
 
-const messageComplete = "Yay, goal achieved!";
+const messageComplete = "Goal achieved!";
 
 const onShare = async (message) => {
   try {

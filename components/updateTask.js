@@ -11,11 +11,7 @@ import {
   StyleSheet,
 } from "react-native";
 
-import { Calendar } from "react-native-calendars";
-
 import { Ionicons } from "@expo/vector-icons";
-
-import moment from "moment";
 
 import theme from "../theme";
 
@@ -31,6 +27,8 @@ import {
 } from "../utils/notifications";
 
 import Button from "./button";
+
+import History from "./history";
 
 import Information from "./information";
 
@@ -68,29 +66,6 @@ const UpdateTask = ({ task, navigation }) => {
   const [showCardFontColor, setShowCardFontColor] = useState(false);
 
   const [colorError, setColorError] = useState(false);
-
-  const dates = Object.keys(task.completed).map((key) =>
-    moment(key).format("YYYY-MM-DD")
-  );
-
-  const calendarDates = dates.reduce(
-    (accumulator, currentValue) => ({
-      ...accumulator,
-      [currentValue]: {
-        textColor: theme.color.black.main,
-        selected: true,
-        selectedColor: isDark
-          ? theme.color.white.main
-          : theme.color.black.light,
-        marked: false,
-        dotColor: isDark ? theme.color.white.main : theme.color.black.light,
-        disabled: false,
-        disableTouchEvent: false,
-        activeOpacity: 1,
-      },
-    }),
-    {}
-  );
 
   const resetFields = () => {
     Keyboard.dismiss();
@@ -169,7 +144,7 @@ const UpdateTask = ({ task, navigation }) => {
                     : {},
                 ]}
               >
-                Information
+                History
               </Text>
 
               <View style={styles.cardIndicator}>
@@ -197,18 +172,7 @@ const UpdateTask = ({ task, navigation }) => {
               </View>
             </View>
 
-            <Information
-              text={text}
-              setText={setText}
-              textError={textError}
-              setTextError={setTextError}
-              remind={remind}
-              setRemind={setRemind}
-              date={date}
-              setDate={setDate}
-              showTimePicker={showTimePicker}
-              setShowTimePicker={setShowTimePicker}
-            />
+            <History task={task} />
           </ScrollView>
 
           <ScrollView
@@ -227,52 +191,21 @@ const UpdateTask = ({ task, navigation }) => {
                     : {},
                 ]}
               >
-                History
+                Information
               </Text>
             </View>
 
-            <Calendar
-              markedDates={calendarDates}
-              enableSwipeMonths={false}
-              disableAllTouchEventsForDisabledDays={false}
-              showWeekNumbers={false}
-              hideExtraDays={true}
-              hideDayNames={false}
-              minDate={moment(task.createdAt).format("YYYY-MM-DD")}
-              theme={{
-                backgroundColor: theme.color.transparent,
-                calendarBackground: theme.color.transparent,
-                textSectionTitleColor: theme.color.gray.main,
-                selectedDayBackgroundColor: isDark
-                  ? theme.color.white.main
-                  : theme.color.black.main,
-                selectedDayTextColor: isDark
-                  ? theme.color.black.main
-                  : theme.color.white.main,
-                todayTextColor: theme.color.blue.main,
-                dayTextColor: isDark
-                  ? theme.color.white.main
-                  : theme.color.black.main,
-                textDisabledColor: theme.color.gray.soft,
-                dotColor: isDark
-                  ? theme.color.white.main
-                  : theme.color.black.light,
-                selectedDotColor: theme.color.white.main,
-                arrowColor: theme.color.gray.main,
-                disabledArrowColor: theme.color.gray.light,
-                monthTextColor: isDark
-                  ? theme.color.white.main
-                  : theme.color.black.main,
-                textDayFontFamily: "Inter_400Regular",
-                textMonthFontFamily: "Inter_400Regular",
-                textDayHeaderFontFamily: "Inter_400Regular",
-                textDayFontWeight: "200",
-                textMonthFontWeight: "bold",
-                textDayHeaderFontWeight: "200",
-                textDayFontSize: 13,
-                textMonthFontSize: 16,
-                textDayHeaderFontSize: 14,
-              }}
+            <Information
+              text={text}
+              setText={setText}
+              textError={textError}
+              setTextError={setTextError}
+              remind={remind}
+              setRemind={setRemind}
+              date={date}
+              setDate={setDate}
+              showTimePicker={showTimePicker}
+              setShowTimePicker={setShowTimePicker}
             />
           </ScrollView>
 
