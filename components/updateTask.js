@@ -313,12 +313,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between",
-    marginTop: 16,
-    paddingHorizontal: 32,
+    marginTop: 8,
+    paddingLeft: 32,
   },
   header: {
     justifyContent: "center",
-    flex: 0.3,
+    flex: 0.25,
   },
   title: {
     fontFamily: "Inter_700Bold",
@@ -326,12 +326,11 @@ const styles = StyleSheet.create({
     color: theme.color.black.main,
   },
   containerCards: {
-    flex: 0.65,
+    flex: 0.75,
     flexDirection: "column",
     alignItems: "stretch",
     justifyContent: "space-evenly",
-    borderRadius: 5,
-    marginBottom: 32,
+    marginBottom: 16,
     backgroundColor: theme.color.white.main,
   },
   cards: {},
@@ -366,6 +365,7 @@ const styles = StyleSheet.create({
   cardIcon: {},
   rowButton: {
     height: 45,
+    marginRight: 32,
   },
   button: {
     flex: 1,

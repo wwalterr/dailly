@@ -36,7 +36,7 @@ const Design = ({
             isDark ? { color: theme.color.white.main } : {},
           ]}
         >
-          Choose the card emoji
+          Choose an emoji for your goal
         </Text>
 
         <EmojiPicker
