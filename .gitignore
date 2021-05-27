@@ -1,26 +1,19 @@
 # Editor
 .vscode
 
-# Android / IntelliJ
+# Android
 build
-.idea
 .gradle
 local.properties
 *.iml
 *.hprof
 
-# Release setting
+# Release settings
 android/gradle.properties
 android/app/build.gradle
 *.jks
 
-# Expo
-.expo
-.expo-shared
-
-# Node
-
-#Build
+# Build
 node_modules
 yarn-error.log
 yarn.lock
@@ -36,4 +29,5 @@ buck-out
 
 # Expo
 .expo
+.expo-shared
 web-build
