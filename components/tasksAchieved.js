@@ -15,6 +15,7 @@ const TasksAchieved = () => {
     <View style={styles.container}>
       <Image
         source={require("../assets/tasks/mobPsycho.gif")}
+		fadeDuration={100}
         style={[
           styles.image,
           isDark

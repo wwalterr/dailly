@@ -110,7 +110,7 @@ const Information = ({
               isDark ? { color: theme.color.white.main } : {},
             ]}
           >
-            When to send you the reminders
+            When to send you reminders
           </Text>
 
           <Ionicons
