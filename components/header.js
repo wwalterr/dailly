@@ -70,6 +70,48 @@ const Header = ({ navigation, showNewTask }) => {
         <View style={[styles.column, styles.columnMenu]}>
           <TouchableOpacity
             onPress={() => {
+              Linking.openURL("https://buy.stripe.com/fZe01e3TD87YgmcaEE");
+            }}
+            activeOpacity={0.8}
+            key={"coffee"}
+            style={styles.buttonAction}
+          >
+            <Text
+              style={[
+                styles.textMenu,
+                isDark
+                  ? {
+                      color: theme.color.white.main,
+                    }
+                  : {},
+              ]}
+            >
+              Coffee
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Contact")}
+            activeOpacity={0.8}
+            key={"contact"}
+            style={styles.buttonAction}
+          >
+            <Text
+              style={[
+                styles.textMenu,
+                isDark
+                  ? {
+                      color: theme.color.white.main,
+                    }
+                  : {},
+              ]}
+            >
+              Contact
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => {
               setOptions((previousOptions) => !previousOptions);
 
               navigation.navigate("Settings");
@@ -89,28 +131,6 @@ const Header = ({ navigation, showNewTask }) => {
               ]}
             >
               Settings
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => {
-              Linking.openURL("https://buy.stripe.com/fZe01e3TD87YgmcaEE");
-            }}
-            activeOpacity={0.8}
-            key={"coffee"}
-            style={styles.buttonAction}
-          >
-            <Text
-              style={[
-                styles.textMenu,
-                isDark
-                  ? {
-                      color: theme.color.white.main,
-                    }
-                  : {},
-              ]}
-            >
-              Buy us a coffee
             </Text>
           </TouchableOpacity>
         </View>
@@ -262,7 +282,7 @@ const styles = StyleSheet.create({
   buttonAction: {
     width: "100%",
     alignItems: "flex-end",
-    marginTop: 10,
+    marginTop: 4,
   },
 });
 

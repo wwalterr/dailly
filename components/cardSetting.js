@@ -62,7 +62,7 @@ const CardSetting = () => {
         </Text>
 
         <Text style={styles.description}>
-          Enable card to see the cards in full size
+          Enable card to see cards in full size
         </Text>
       </View>
     </View>
