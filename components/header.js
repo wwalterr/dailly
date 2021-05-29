@@ -76,6 +76,7 @@ const Header = ({ navigation, showNewTask }) => {
             }}
             activeOpacity={0.8}
             key={"settings"}
+            style={styles.buttonAction}
           >
             <Text
               style={[
@@ -97,6 +98,7 @@ const Header = ({ navigation, showNewTask }) => {
             }}
             activeOpacity={0.8}
             key={"coffee"}
+            style={styles.buttonAction}
           >
             <Text
               style={[
@@ -256,6 +258,11 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_400Regular",
     fontSize: 14,
     color: theme.color.black.main,
+  },
+  buttonAction: {
+    width: "100%",
+    alignItems: "flex-end",
+    marginTop: 10,
   },
 });
 

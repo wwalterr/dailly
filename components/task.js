@@ -408,14 +408,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.color.white.main,
     margin: 0,
-    paddingTop: 16,
+    paddingTop: 24,
     paddingBottom: 0,
     paddingHorizontal: 32,
   },
   containerModalActions: {
     alignItems: "flex-end",
     justifyContent: "center",
-    marginBottom: 14,
+    marginVertical: 14,
   },
   textModal: {
     fontFamily: "Inter_400Regular",
@@ -465,7 +465,9 @@ const styles = StyleSheet.create({
     color: theme.color.white.main,
     marginLeft: 8,
   },
-  completeButton: {},
+  completeButton: {
+    paddingVertical: 12,
+  },
   complete: {
     fontFamily: "Inter_300Light",
     fontSize: 12,
