@@ -117,7 +117,11 @@ const EmojiPicker = ({ emoji, setEmoji, category, setCategory }) => {
           ).map((item) => (
             <TouchableOpacity
               onPress={() => {
-                if (item.aliases[0] == emoji.aliases[0]) return;
+                if (
+                  Object.keys(emoji).length &&
+                  item.aliases[0] == emoji.aliases[0]
+                )
+                  return;
 
                 setEmoji(item);
 
@@ -153,7 +157,7 @@ const EmojiPicker = ({ emoji, setEmoji, category, setCategory }) => {
           {emojisCategories.map((_category) => (
             <TouchableOpacity
               onPress={() => {
-                if (_category === category) return;
+                if (category && _category === category) return;
 
                 setCategory(_category);
               }}
