@@ -15,6 +15,10 @@ import { Switch } from "react-native-switch";
 
 import { Animated } from "react-native";
 
+import Modal from "react-native-modal";
+
+import DatePicker from "react-native-date-picker";
+
 import moment from "moment";
 
 import theme from "../theme";
@@ -53,6 +57,10 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
   const [textError, setTextError] = useState(false);
 
   const [remind, setRemind] = useState(false);
+
+  const [showTimePicker, setShowTimePicker] = useState(false);
+
+  const [date, setDate] = useState(new Date());
 
   const [emoji, setEmoji] = useState(defaultEmoji);
 
@@ -128,6 +136,8 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
             Keyboard.dismiss();
 
             setRemind((previousRemind) => !previousRemind);
+
+            if (!remind) setShowTimePicker(true);
           }}
           circleSize={18}
           circleBorderWidth={0}
@@ -142,6 +152,41 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
             borderRadius: 50,
           }}
         />
+
+        <Modal
+          isVisible={showTimePicker}
+          onBackButtonPress={() => {
+            setShowTimePicker(false);
+          }}
+          backdropColor={
+            isDark ? theme.color.black.main : theme.color.white.main
+          }
+          backdropOpacity={1}
+          backdropTransitionInTiming={350}
+          backdropTransitionOutTiming={250}
+          useNativeDriverForBackdrop={true}
+          style={[
+            styles.containerModal,
+            isDark ? { backgroundColor: theme.color.black.main } : {},
+          ]}
+        >
+          <View style={styles.containerDatePicker}>
+            <DatePicker
+              date={date}
+              onDateChange={setDate}
+              androidVariant="iosClone"
+              mode="time"
+              textColor={
+                isDark ? theme.color.white.main : theme.color.black.main
+              }
+              fadeToColor={
+                isDark ? theme.color.black.main : theme.color.white.main
+              }
+            />
+          </View>
+
+          <Close hide={() => setShowTimePicker(false)} />
+        </Modal>
       </View>
 
       <View style={[styles.row, styles.rowCategory]}>
@@ -176,11 +221,18 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
             let identifier;
 
             if (remind) {
-              identifier = await schedulePushNotification({
-                title: `Check your goal ${emoji.emoji ? emoji.emoji : ""}`,
-                body: capitalize(limitText(text, 34)),
-                vibrate: true,
-              });
+              identifier = await schedulePushNotification(
+                {
+                  title: `Check your goal ${emoji.emoji ? emoji.emoji : ""}`,
+                  body: capitalize(limitText(text, 34)),
+                  vibrate: true,
+                },
+                {
+                  hour: date.getHours(),
+                  minute: date.getMinutes(),
+                  repeats: true,
+                }
+              );
             }
 
             createTask({
@@ -188,7 +240,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
               text: text.trim(),
               remind,
               ...(remind ? { identifier } : {}),
-              ...(remind ? { remindTime: new Date().getTime() } : {}),
+              ...(remind ? { remindTime: date.getTime() } : {}),
               emoji,
               completed: {
                 [today]: false,
@@ -270,6 +322,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
+  },
+  containerModal: {
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+  },
+  containerDatePicker: {
+    flex: 1,
+    justifyContent: "center",
+    alignSelf: "center",
   },
   rowCategory: {
     flexDirection: "column",
