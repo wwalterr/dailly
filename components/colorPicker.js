@@ -160,11 +160,13 @@ const styles = StyleSheet.create({
     padding: 1,
     marginLeft: 4,
   },
+  containerModal: {
+    marginBottom: 8,
+  },
   containerActions: {
     alignItems: "flex-end",
     justifyContent: "center",
-    marginTop: 14,
-	paddingRight: 4,
+    paddingRight: 4,
   },
   flatListColors: {
     maxWidth: "100%",
@@ -179,7 +181,7 @@ const styles = StyleSheet.create({
     borderColor: theme.color.gray.light,
   },
   highlight: {
-    fontSize: 25,
+    fontSize: 30,
     color: theme.color.white.main,
   },
 });
