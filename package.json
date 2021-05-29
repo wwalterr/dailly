@@ -40,8 +40,7 @@
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "~3.0.0",
     "react-native-switch": "https://github.com/shahen94/react-native-switch",
-    "react-native-unimodules": "~0.13.3",
-    "react-native-web": "~0.14.13"
+    "react-native-unimodules": "~0.13.3"
   },
   "devDependencies": {
     "@babel/core": "^7.14.2"

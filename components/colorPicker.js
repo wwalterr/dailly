@@ -167,6 +167,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "center",
     paddingRight: 4,
+    marginTop: 4,
   },
   flatListColors: {
     maxWidth: "100%",
