@@ -344,7 +344,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
               style={styles.completeButton}
             >
               <Text style={[styles.complete, cardFontColor]}>
-                {task.completed[today] ? "Completed" : "Complete"}
+                {task.completed[today] ? "Mark as incomplete" : "Complete"}
               </Text>
             </TouchableOpacity>
           </View>

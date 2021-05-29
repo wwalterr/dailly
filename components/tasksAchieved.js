@@ -6,34 +6,30 @@ import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
 
-const defaultMessage = "All goals completed!";
-
-const messages = [
-  {
-    uri: "https://media.giphy.com/media/ZO8ZYFEnvIfrEF6AAZ/giphy.gif",
-    text: "Your resilience it's over 9000!",
-  },
-];
+const defaultMessage = "All goals 100% completed!";
 
 const TasksAchieved = () => {
   const { isDark } = useSettings();
 
-  const message = messages[Math.floor(Math.random() * messages.length)];
-
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: message.uri }}
+        source={require("../assets/tasks/mobPsycho.gif")}
         style={[
           styles.image,
-          isDark ? { overlayColor: theme.color.black.main } : {},
+          isDark
+            ? {
+                overlayColor: theme.color.black.main,
+                borderColor: theme.color.black.main,
+              }
+            : {},
         ]}
       />
 
       <Text
         style={[styles.text, isDark ? { color: theme.color.white.main } : {}]}
       >
-        {defaultMessage} {message.text}
+        {defaultMessage}
       </Text>
     </View>
   );
@@ -51,8 +47,9 @@ const styles = StyleSheet.create({
     width: 95,
     height: 185,
     borderRadius: 1000,
-    marginBottom: 16,
+    marginBottom: 20,
     overlayColor: theme.color.white.main,
+    borderColor: theme.color.white.main,
   },
   text: {
     maxWidth: "55%",
