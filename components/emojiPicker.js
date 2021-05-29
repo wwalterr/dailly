@@ -117,6 +117,8 @@ const EmojiPicker = ({ emoji, setEmoji, category, setCategory }) => {
           ).map((item) => (
             <TouchableOpacity
               onPress={() => {
+                if (item.aliases[0] == emoji.aliases[0]) return;
+
                 setEmoji(item);
 
                 setEmojiFilter([]);
@@ -151,6 +153,8 @@ const EmojiPicker = ({ emoji, setEmoji, category, setCategory }) => {
           {emojisCategories.map((_category) => (
             <TouchableOpacity
               onPress={() => {
+                if (_category === category) return;
+
                 setCategory(_category);
               }}
               activeOpacity={0.8}
@@ -280,6 +284,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 38,
+    minHeight: 38,
     width: "75%",
     paddingHorizontal: 15,
     borderRadius: 5,
