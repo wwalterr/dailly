@@ -22,7 +22,7 @@ const ThemeSetting = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() => {
+        onPress={async () => {
           updateSettings({
             theme: isDark ? "light" : "dark",
           });

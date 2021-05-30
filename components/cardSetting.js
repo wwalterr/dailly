@@ -22,7 +22,7 @@ const CardSetting = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() => {
+        onPress={async () => {
           updateSettings({
             card: !settings.card,
           });

@@ -22,7 +22,7 @@ const HistorySetting = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() => {
+        onPress={async () => {
           updateSettings({
             history: !settings.history,
           });

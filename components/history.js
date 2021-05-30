@@ -8,10 +8,12 @@ import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
 
-const History = ({ task }) => {
+import { useTasks } from "../contexts/tasks";
+
+const History = ({ createdAt, completed, setCompleted }) => {
   const { isDark } = useSettings();
 
-  const dates = Object.keys(task.completed).map((key) =>
+  const dates = Object.keys(completed).map((key) =>
     moment(key).format("YYYY-MM-DD")
   );
 
@@ -42,7 +44,16 @@ const History = ({ task }) => {
       showWeekNumbers={false}
       hideExtraDays={true}
       hideDayNames={false}
-      minDate={moment(task.createdAt).format("YYYY-MM-DD")}
+      minDate={moment(createdAt).format("YYYY-MM-DD")}
+      onDayPress={(day) => {
+        if (completed[day.dateString]) {
+          const { [day.dateString]: omit, ..._completed } = completed;
+
+          setCompleted(_completed);
+        } else {
+          setCompleted({ ...completed, [day.dateString]: true });
+        }
+      }}
       theme={{
         backgroundColor: theme.color.transparent,
         calendarBackground: theme.color.transparent,

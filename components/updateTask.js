@@ -42,6 +42,8 @@ const UpdateTask = ({ task, navigation }) => {
 
   const { updateTask, findTask } = useTasks();
 
+  const [completed, setCompleted] = useState(task.completed);
+
   const [text, setText] = useState(task.text);
 
   const [textError, setTextError] = useState(false);
@@ -203,7 +205,12 @@ const UpdateTask = ({ task, navigation }) => {
               </View>
             </View>
 
-            <History task={task} />
+            <History
+              task={task}
+              createdAt={task.createdAt}
+              completed={completed}
+              setCompleted={setCompleted}
+            />
           </ScrollView>
 
           <ScrollView
@@ -317,7 +324,7 @@ const UpdateTask = ({ task, navigation }) => {
                 remind,
                 ...(remind ? { identifier } : {}),
                 ...(remind ? { remindTime: date.getTime() } : {}),
-                completed: task.completed,
+                completed,
                 emoji,
                 createdAt: task.createdAt,
                 cardColor,

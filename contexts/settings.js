@@ -18,7 +18,9 @@ const SettingsProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(settings.theme === "dark");
 
   useEffect(() => {
-    setIsDark(settings.theme === "dark");
+    (async () => {
+      setIsDark(settings.theme === "dark");
+    })();
   }, [settings, setSettings]);
 
   useEffect(() => {
