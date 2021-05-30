@@ -8,8 +8,6 @@ import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
 
-import { useTasks } from "../contexts/tasks";
-
 const History = ({ createdAt, completed, setCompleted }) => {
   const { isDark } = useSettings();
 
@@ -21,30 +19,48 @@ const History = ({ createdAt, completed, setCompleted }) => {
     (accumulator, currentValue) => ({
       ...accumulator,
       [currentValue]: {
-        textColor: theme.color.black.main,
         selected: true,
         selectedColor: isDark
           ? theme.color.white.main
           : theme.color.black.light,
         marked: false,
-        dotColor: isDark ? theme.color.white.main : theme.color.black.light,
-        disabled: false,
-        disableTouchEvent: false,
-        activeOpacity: 1,
       },
     }),
     {}
   );
 
+  const createdAtParsed = moment(createdAt).format("YYYY-MM-DD");
+
   return (
     <Calendar
-      markedDates={calendarDates}
+      markedDates={{
+        ...calendarDates,
+        [createdAtParsed]: {
+          marked: true,
+          ...(createdAtParsed in completed && completed[createdAtParsed]
+            ? {
+                selected: true,
+                selectedColor: isDark
+                  ? theme.color.white.main
+                  : theme.color.black.light,
+                dotColor: isDark
+                  ? theme.color.black.main
+                  : theme.color.white.main,
+              }
+            : {}),
+          customStyles: {
+            text: {
+              fontWeight: "bold",
+            },
+          },
+        },
+      }}
       enableSwipeMonths={false}
       disableAllTouchEventsForDisabledDays={false}
       showWeekNumbers={false}
       hideExtraDays={true}
       hideDayNames={false}
-      minDate={moment(createdAt).format("YYYY-MM-DD")}
+      minDate={createdAtParsed}
       onDayPress={(day) => {
         if (completed[day.dateString]) {
           const { [day.dateString]: omit, ..._completed } = completed;
@@ -64,11 +80,17 @@ const History = ({ createdAt, completed, setCompleted }) => {
         selectedDayTextColor: isDark
           ? theme.color.black.main
           : theme.color.white.main,
-        todayTextColor: theme.color.blue.main,
-        dayTextColor: isDark ? theme.color.white.main : theme.color.black.main,
-        textDisabledColor: theme.color.gray.soft,
+        todayTextColor: isDark
+          ? theme.color.white.main
+          : theme.color.black.main,
+        dayTextColor: isDark ? theme.color.white.main : theme.color.black.soft,
+        textDisabledColor: isDark
+          ? theme.color.gray.dark
+          : theme.color.gray.soft,
         dotColor: isDark ? theme.color.white.main : theme.color.black.light,
-        selectedDotColor: theme.color.white.main,
+        selectedDotColor: isDark
+          ? theme.color.white.main
+          : theme.color.black.main,
         arrowColor: theme.color.gray.main,
         disabledArrowColor: theme.color.gray.light,
         monthTextColor: isDark
