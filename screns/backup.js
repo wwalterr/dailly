@@ -94,7 +94,7 @@ const BackupScreen = ({ navigation }) => {
               isDark ? { color: theme.color.white.main } : {},
             ]}
           >
-            Press the export export to copy your goals
+            Press the export button to copy your goals
           </Text>
 
           <TouchableOpacity

@@ -41,7 +41,7 @@ const BackupSetting = ({ navigation }) => {
           Backup
         </Text>
 
-        <Text style={styles.description}>Secure and control your data</Text>
+        <Text style={styles.description}>Control and secure your goals</Text>
       </View>
     </View>
   );

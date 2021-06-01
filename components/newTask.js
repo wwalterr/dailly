@@ -71,6 +71,8 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
   const resetFields = () => {
     Keyboard.dismiss();
 
+    setDate(new Date());
+
     setText("");
 
     setTextError(false);
