@@ -41,7 +41,7 @@ const HeaderGoBack = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 32,
-    paddingVertical: 20,
+    paddingVertical: 16,
     marginTop: 8,
   },
   button: {

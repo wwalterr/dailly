@@ -16,6 +16,8 @@ import CardSetting from "../components/cardSetting";
 
 import HistorySetting from "../components/historySetting";
 
+import BackupSetting from "../components/backupSetting";
+
 const SettingsScreen = ({ navigation }) => {
   const { isDark } = useSettings();
 
@@ -40,6 +42,8 @@ const SettingsScreen = ({ navigation }) => {
         <CardSetting />
 
         <HistorySetting />
+
+        <BackupSetting navigation={navigation} />
       </ScrollView>
     </SafeAreaView>
   );

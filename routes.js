@@ -12,6 +12,8 @@ import UpdateScreen from "./screns/update";
 
 import ContactScreen from "./screns/contact";
 
+import BackupScreen from "./screns/backup";
+
 import SettingsScreen from "./screns/settings";
 
 const Stack = createStackNavigator();
@@ -37,6 +39,8 @@ const Routes = () => {
         <Stack.Screen name="Update" component={UpdateScreen} />
 
         <Stack.Screen name="Contact" component={ContactScreen} />
+
+        <Stack.Screen name="Backup" component={BackupScreen} />
 
         <Stack.Screen name="Settings" component={SettingsScreen} />
       </Stack.Navigator>
