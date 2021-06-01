@@ -85,15 +85,15 @@ const Task = ({ task, index, scrollY, navigation }) => {
   const taskHeightCardSetting =
     Dimensions.get("window").height / 4 + taskMargin * 2;
 
-  const _taskHeight = settings.card ? taskHeightCardSetting : taskHeight;
+  const taskHeighCard = settings.card ? taskHeightCardSetting : taskHeight;
 
   const scale = scrollY.interpolate({
-    inputRange: [-1, 0, _taskHeight * index, _taskHeight * (index + 2)],
+    inputRange: [-1, 0, taskHeighCard * index, taskHeighCard * (index + 2)],
     outputRange: [1, 1, 1, 0],
   });
 
   const opacity = scrollY.interpolate({
-    inputRange: [-1, 0, _taskHeight * index, _taskHeight * (index + 0.25)],
+    inputRange: [-1, 0, taskHeighCard * index, taskHeighCard * (index + 0.25)],
     outputRange: [1, 1, 1, 0],
   });
 
@@ -130,6 +130,8 @@ const Task = ({ task, index, scrollY, navigation }) => {
               marginHorizontal: 0,
               marginVertical: 0,
               borderRadius: 0,
+              paddingHorizontal: 32,
+			  marginTop: -2,
               minHeight: taskHeight,
               height: taskHeightCardSetting,
             }
