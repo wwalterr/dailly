@@ -35,6 +35,7 @@ const theme = {
       "#000000",
       "#111111",
       "#1f1f1f",
+      "#ffffff",
       "#b0b6c7",
       "#ebf1fd",
       "#eff2fa",
