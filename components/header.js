@@ -92,6 +92,30 @@ const Header = ({ navigation, showNewTask }) => {
 
           <TouchableOpacity
             onPress={() => {
+              Linking.openURL(
+                "https://audaxly.com/privacy-policy?code=kojej1j04hvs8e"
+              );
+            }}
+            activeOpacity={0.8}
+            key={"privacy"}
+            style={styles.buttonAction}
+          >
+            <Text
+              style={[
+                styles.textMenu,
+                isDark
+                  ? {
+                      color: theme.color.white.main,
+                    }
+                  : {},
+              ]}
+            >
+              Privacy
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => {
               setOptions((previousOptions) => !previousOptions);
 
               navigation.navigate("Contact");
