@@ -26,11 +26,10 @@ const theme = {
       light: "#f1f5fe",
     },
     cards: [
-      "#adaeb1",
-      "#2c2c2f",
       "#000000",
       "#111111",
       "#1f1f1f",
+      "#2c2c2f",
       "#ffffff",
       "#b0b6c7",
       "#ebf1fd",

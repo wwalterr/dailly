@@ -13,19 +13,13 @@ const TasksAchieved = () => {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require("../assets/tasks/mobPsycho.gif")}
-		fadeDuration={100}
-        style={[
-          styles.image,
-          isDark
-            ? {
-                overlayColor: theme.color.black.main,
-                borderColor: theme.color.black.main,
-              }
-            : {},
-        ]}
-      />
+      <View style={styles.containerImage}>
+        <Image
+          source={require("../assets/tasks/mobPsycho.gif")}
+          resizeMode="cover"
+          style={styles.image}
+        />
+      </View>
 
       <Text
         style={[styles.text, isDark ? { color: theme.color.white.main } : {}]}
@@ -44,13 +38,19 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 32,
   },
-  image: {
+  containerImage: {
     width: 95,
     height: 185,
-    borderRadius: 1000,
+    borderRadius: 40,
+    overflow: "hidden",
     marginBottom: 20,
-    overlayColor: theme.color.white.main,
-    borderColor: theme.color.white.main,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 40,
+    justifyContent: "center",
+    alignSelf: "center",
   },
   text: {
     maxWidth: "55%",
