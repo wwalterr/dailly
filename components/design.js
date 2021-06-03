@@ -71,7 +71,7 @@ const Design = ({
           showPickerSetter={setShowCardFontColor}
           color={cardFontColor}
           colorSetter={setCardFontColor}
-          colors={theme.color.fonts}
+          colors={theme.color.cards}
         />
 
         {colorError ? (

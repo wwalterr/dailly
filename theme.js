@@ -30,7 +30,6 @@ const theme = {
     yellow: {
       main: "#fdcb6c",
     },
-    fonts: ["#000000", "#ffffff"],
     cards: [
       "#000000",
       "#111111",
