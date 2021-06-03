@@ -402,8 +402,9 @@ const styles = StyleSheet.create({
   },
   textButton: {},
   text: {
-    fontFamily: "Inter_600SemiBold",
+    fontFamily: "Inter_500Medium",
     fontSize: 26,
+    letterSpacing: 1,
     color: theme.color.white.main,
   },
   containerModal: {

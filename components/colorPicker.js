@@ -179,6 +179,7 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 5,
     marginVertical: 14,
+    borderWidth: 1,
     borderColor: theme.color.gray.light,
   },
   highlight: {

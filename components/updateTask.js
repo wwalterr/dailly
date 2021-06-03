@@ -359,7 +359,7 @@ const styles = StyleSheet.create({
     flex: 0.25,
   },
   title: {
-    fontFamily: "Inter_700Bold",
+    fontFamily: "Inter_600SemiBold",
     fontSize: 40,
     color: theme.color.black.main,
   },

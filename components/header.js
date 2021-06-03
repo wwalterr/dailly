@@ -290,14 +290,14 @@ const styles = StyleSheet.create({
   },
   columnMenu: {
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
     alignItems: "flex-end",
   },
   textMenu: {
     fontFamily: "Inter_400Regular",
     fontSize: 14,
     color: theme.color.black.main,
-    marginTop: 16,
+    marginTop: 8,
   },
   button: {
     paddingTop: 12,
