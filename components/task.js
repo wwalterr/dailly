@@ -39,7 +39,7 @@ const taskMargin = 16;
 
 const taskPadding = 20;
 
-const taskHeight = 145 + taskMargin * 2;
+const taskHeight = 150 + taskMargin * 2;
 
 const messageRemoveGoal = "Goal removed!";
 

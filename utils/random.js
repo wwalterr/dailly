@@ -1,3 +1,5 @@
-const generateRandomCode = () => Math.random().toString(36).substring(7);
+import uuid from 'react-native-uuid';
+
+const generateRandomCode = () => uuid.v4();
 
 export default generateRandomCode;
