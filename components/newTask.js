@@ -39,6 +39,8 @@ import EmojiPicker from "./emojiPicker";
 
 import Button from "./button";
 
+import ColorPicker from "./colorPicker";
+
 const activeText = "Yes";
 
 const inActiveText = "No";
@@ -66,6 +68,16 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
   const [category, setCategory] = useState("Smileys & Emotion");
 
+  const [cardColor, setCardColor] = useState(theme.color.black.main);
+
+  const [showCardColor, setShowCardColor] = useState(false);
+
+  const [cardFontColor, setCardFontColor] = useState(theme.color.white.main);
+
+  const [showCardFontColor, setShowCardFontColor] = useState(false);
+
+  const [colorError, setColorError] = useState(false);
+
   const today = moment().format("YYYY-MM-DD");
 
   const resetFields = () => {
@@ -78,6 +90,10 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
     setTextError(false);
 
     setRemind(false);
+
+    setCardColor(theme.color.black.main);
+
+    setCardFontColor(theme.color.white.main);
 
     setEmoji(defaultEmoji);
 
@@ -211,6 +227,40 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
         </View>
       </View>
 
+      <View style={[styles.row, styles.rowCardColor]}>
+        <ColorPicker
+          text="Choose the card color"
+          showPicker={showCardColor}
+          showPickerSetter={setShowCardColor}
+          color={cardColor}
+          colorSetter={setCardColor}
+          colors={theme.color.cards}
+        />
+
+        {colorError ? (
+          <Text style={styles.textError}>
+            The card and the card text can't have the same color
+          </Text>
+        ) : null}
+      </View>
+
+      <View style={[styles.row, styles.rowCardTextColor]}>
+        <ColorPicker
+          text="Choose the card text color"
+          showPicker={showCardFontColor}
+          showPickerSetter={setShowCardFontColor}
+          color={cardFontColor}
+          colorSetter={setCardFontColor}
+          colors={theme.color.cards}
+        />
+
+        {colorError ? (
+          <Text style={styles.textError}>
+            The card and the card text can't have the same color
+          </Text>
+        ) : null}
+      </View>
+
       <View style={[styles.row, styles.rowButton]}>
         <Button
           onPress={async () => {
@@ -248,8 +298,8 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
                 [today]: false,
               },
               createdAt: new Date().getTime(),
-              cardColor: theme.color.black.main,
-              cardFontColor: theme.color.white.main,
+              cardColor,
+              cardFontColor,
             });
 
             if (Platform.OS === "android")
@@ -270,8 +320,8 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "space-around",
     width: "100%",
-    height: "55%",
-    minHeight: Dimensions.get("window").height / 2,
+    height: "75%",
+    minHeight: Dimensions.get("window").height / 2 + 64,
     zIndex: 999,
     position: "absolute",
     bottom: 0,
@@ -349,6 +399,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: theme.color.black.main,
   },
+  rowCardColor: {},
+  rowCardTextColor: {},
   rowButton: {
     height: 45,
   },
