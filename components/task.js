@@ -39,7 +39,7 @@ const taskMargin = 16;
 
 const taskPadding = 20;
 
-const taskHeight = 150 + taskMargin * 2;
+const taskHeight = 155 + taskMargin * 2;
 
 const messageRemoveGoal = "Goal removed";
 
@@ -280,7 +280,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
                 style={styles.removeButton}
               >
                 <Text style={[styles.remove, cardFontColor]}>
-                  {removeStatus ? "Confirm removal" : "Remove"}
+                  {removeStatus ? "Confirm" : "Remove"}
                 </Text>
               </TouchableOpacity>
 

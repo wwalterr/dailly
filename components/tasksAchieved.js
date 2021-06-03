@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
   },
   containerImage: {
-    width: 95,
+    width: 85,
     height: 185,
     borderRadius: 40,
     overflow: "hidden",
