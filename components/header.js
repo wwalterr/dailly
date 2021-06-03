@@ -91,7 +91,11 @@ const Header = ({ navigation, showNewTask }) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("Contact")}
+            onPress={() => {
+              setOptions((previousOptions) => !previousOptions);
+
+              navigation.navigate("Contact");
+            }}
             activeOpacity={0.8}
             key={"contact"}
             style={styles.buttonAction}
