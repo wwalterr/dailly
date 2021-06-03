@@ -29,7 +29,7 @@ const ThemeSetting = () => {
 
           if (Platform.OS === "android")
             ToastAndroid.show(
-              `${messageTheme} ${isDark ? "disabled" : "enabled"}!`,
+              `${messageTheme} ${isDark ? "disabled" : "enabled"}`,
               ToastAndroid.SHORT
             );
         }}

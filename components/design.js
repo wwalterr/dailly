@@ -59,7 +59,7 @@ const Design = ({
 
         {colorError ? (
           <Text style={styles.textError}>
-            The card and the card text can't have the same color!
+            The card and the card text can't have the same color
           </Text>
         ) : null}
       </View>
@@ -76,7 +76,7 @@ const Design = ({
 
         {colorError ? (
           <Text style={styles.textError}>
-            The card and the card text can't have the same color!
+            The card and the card text can't have the same color
           </Text>
         ) : null}
       </View>

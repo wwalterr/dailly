@@ -29,7 +29,7 @@ const CardSetting = () => {
 
           if (Platform.OS === "android")
             ToastAndroid.show(
-              `${messageCard} ${!settings.card ? "enabled" : "disabled"}!`,
+              `${messageCard} ${!settings.card ? "enabled" : "disabled"}`,
               ToastAndroid.SHORT
             );
         }}

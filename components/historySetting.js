@@ -31,7 +31,7 @@ const HistorySetting = () => {
             ToastAndroid.show(
               `${messageHistory} ${
                 !settings.history ? "enabled" : "disabled"
-              }!`,
+              }`,
               ToastAndroid.SHORT
             );
         }}

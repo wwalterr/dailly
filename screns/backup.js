@@ -30,9 +30,9 @@ import { useTasks } from "../contexts/tasks";
 
 import HeaderGoBack from "../components/headerGoBack";
 
-const messageCopyGoals = "Goals exported!";
+const messageCopyGoals = "Goals exported";
 
-const messagePasteGoals = "Goals imported!";
+const messagePasteGoals = "Goals imported";
 
 const BackupScreen = ({ navigation }) => {
   const { isDark } = useSettings();

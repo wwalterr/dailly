@@ -57,7 +57,7 @@ const Information = ({
         />
 
         {textError ? (
-          <Text style={styles.textError}>You can't have an empty!</Text>
+          <Text style={styles.textError}>You can't have an empty</Text>
         ) : null}
       </View>
 

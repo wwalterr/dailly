@@ -41,13 +41,13 @@ const taskPadding = 20;
 
 const taskHeight = 150 + taskMargin * 2;
 
-const messageRemoveGoal = "Goal removed!";
+const messageRemoveGoal = "Goal removed";
 
-const messageComplete = "Goal completed!";
+const messageComplete = "Goal completed";
 
-const messageIncomplete = "Goal marked as incomplete!";
+const messageIncomplete = "Goal marked as incomplete";
 
-const messageCopyGoal = "Goal copied!";
+const messageCopyGoal = "Goal copied";
 
 const onShare = async (message) => {
   try {

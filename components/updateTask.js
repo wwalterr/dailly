@@ -35,7 +35,7 @@ import Information from "./information";
 
 import Design from "./design";
 
-const messageNewGoal = "Goal updated!";
+const messageNewGoal = "Goal updated";
 
 const UpdateTask = ({ task, navigation }) => {
   const { isDark } = useSettings();

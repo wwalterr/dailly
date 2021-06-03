@@ -43,7 +43,7 @@ const activeText = "Yes";
 
 const inActiveText = "No";
 
-const messageNewGoal = "Goal created!";
+const messageNewGoal = "Goal created";
 
 const defaultEmoji = {};
 
@@ -118,7 +118,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
         {textError ? (
           <Text style={styles.textError}>
-            To create a goal you need to describe it!
+            To create a goal you need to describe it
           </Text>
         ) : null}
       </View>

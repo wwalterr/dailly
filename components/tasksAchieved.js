@@ -6,7 +6,7 @@ import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
 
-const defaultMessage = "All goals 100% completed!";
+const defaultMessage = "All goals 100% completed";
 
 const TasksAchieved = () => {
   const { isDark } = useSettings();
