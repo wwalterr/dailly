@@ -29,9 +29,7 @@ const HistorySetting = () => {
 
           if (Platform.OS === "android")
             ToastAndroid.show(
-              `${messageHistory} ${
-                !settings.history ? "enabled" : "disabled"
-              }`,
+              `${messageHistory} ${!settings.history ? "enabled" : "disabled"}`,
               ToastAndroid.SHORT
             );
         }}
@@ -63,9 +61,7 @@ const HistorySetting = () => {
           History
         </Text>
 
-        <Text style={styles.description}>
-          Enable history to see completed goals
-        </Text>
+        <Text style={styles.description}>See completed goals</Text>
       </View>
     </View>
   );

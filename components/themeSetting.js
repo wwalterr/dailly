@@ -14,7 +14,7 @@ import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
 
-const messageTheme = "Dark theme";
+const messageTheme = "Theme";
 
 const ThemeSetting = () => {
   const { settings, updateSettings, isDark } = useSettings();
@@ -60,9 +60,7 @@ const ThemeSetting = () => {
           Theme
         </Text>
 
-        <Text style={styles.description}>
-          Enable dark theme to reduce eye strain
-        </Text>
+        <Text style={styles.description}>See the application in dark</Text>
       </View>
     </View>
   );

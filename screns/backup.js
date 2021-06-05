@@ -241,35 +241,6 @@ const BackupScreen = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
         </View>
-
-        <View style={styles.openSource}>
-          <Text
-            style={[
-              styles.textOpenSource,
-              isDark ? { color: theme.color.white.main } : {},
-            ]}
-          >
-            See how your data is processed on
-          </Text>
-
-          <TouchableOpacity
-            onPress={() =>
-              Linking.openURL("https://github.com/hydroxion/dailly")
-            }
-            activeOpacity={0.8}
-            key={"openSource"}
-            style={styles.buttonOpenSource}
-          >
-            <Text
-              style={[
-                styles.textButtonOpenSource,
-                isDark ? { color: theme.color.white.main } : {},
-              ]}
-            >
-              Github
-            </Text>
-          </TouchableOpacity>
-        </View>
       </View>
     </SafeAreaView>
   );
@@ -326,24 +297,6 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_400Regular",
     fontSize: 14,
     color: theme.color.white.main,
-  },
-  openSource: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  textOpenSource: {
-    fontFamily: "Inter_400Regular",
-    fontSize: 14,
-    color: theme.color.gray.main,
-  },
-  buttonOpenSource: {
-    marginLeft: 4,
-  },
-  textButtonOpenSource: {
-    fontFamily: "Inter_400Regular",
-    fontSize: 14,
-    color: theme.color.gray.main,
-    textDecorationLine: "underline",
   },
 });
 

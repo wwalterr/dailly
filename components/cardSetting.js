@@ -14,7 +14,7 @@ import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
 
-const messageCard = "Card mode";
+const messageCard = "Card";
 
 const CardSetting = () => {
   const { settings, isDark, updateSettings } = useSettings();
@@ -61,9 +61,7 @@ const CardSetting = () => {
           Card
         </Text>
 
-        <Text style={styles.description}>
-          Enable card to see cards in full size
-        </Text>
+        <Text style={styles.description}>See cards in full size</Text>
       </View>
     </View>
   );

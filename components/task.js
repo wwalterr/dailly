@@ -45,7 +45,7 @@ const messageRemoveGoal = "Goal removed";
 
 const messageComplete = "Goal completed";
 
-const messageIncomplete = "Goal marked as incomplete";
+const messageIncomplete = "Goal incomplete";
 
 const messageCopyGoal = "Goal copied";
 
