@@ -33,7 +33,7 @@ Use the package manager [Yarn](https://yarnpkg.com/getting-started/install) to i
 yarn
 ```
 
-Use the IDE [Android Studio](https://developer.android.com/studio/install) to create a virtual device or connect your device via USB, in developer mode.
+Use the IDE [Android Studio](https://developer.android.com/studio/install) to create a virtual device, using ADB, or connect to your device via USB, in developer mode.
 
 > Notice that some APIs are only available in real devices, i.e through binary installation or USB connection
 
@@ -51,33 +51,22 @@ Start the application server.
 yarn start
 ```
 
-To build the application see the [reference](https://reactnative.dev/docs/signed-apk-android#generating-the-release-aab). To sign the app see the [reference](https://www.decoide.org/react-native/docs/signed-apk-android.html).
+Open the application using a virtual or real device.
 
-> Check the [package](./package.json) for helper scripts
-
-## Roadmap
-
-Check the [project board](https://github.com/hydroxion/dailly/projects).
+> Check the [package](./package.json) for helper scripts and [React Native](https://reactnative.dev/docs/signed-apk-android) for ABB and APK build reference, aside from [Decoide](https://www.decoide.org/react-native/docs/signed-apk-android.html) for singing the build
 
 ## Contributing
 
 Pull requests are welcome. Please, consider the following.
 
-1. To merge your change, create an issue and a PR related to that issue
-2. Describe which interface changed, which bug was fixed or what new feature was created
-3. Check the quality and performance of your code
-4. If you're stuck in a problem, create a question in the [discussions](https://github.com/hydroxion/dailly/discussions) area
+1. Make sure you code have quality, a.k.a standards
+2. Make sure your code is secure
+3. Make sure your code has no performance issues
+4. Make sure your code is documented, if necessary
+5. Describe the changes that were done
 
-> No issue or PR template required, but try to be informative
+> No issue or PR template required, but be informative
 
 ## License
 
 [MIT](./LICENSE.md)
-
-## Privacy
-
-For privacy issues read the application [Privacy Policy](https://audaxly.com/privacy-policy?code=kojej1j04hvs8e).
-
-## Contact
-
-Contact at <a href="mailto:hello.dailly@gmail.com">hello.dailly@gmail.com</a>.

@@ -1,11 +1,13 @@
 {
+  "private": true,
+  "name": "dailly",
   "scripts": {
     "start": "react-native start",
     "android": "react-native run-android",
-    "android:production": "react-native run-android --variant=release",
+    "android:production:simulation": "react-native run-android --variant=release",
     "ios": "react-native run-ios",
-    "key:create": "keytool -genkeypair -v -storetype PKCS12 -keystore dailly.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000",
     "gradle:clean": "cd android && ./gradlew clean && cd ..",
+    "key:create": "keytool -genkeypair -v -storetype PKCS12 -keystore dailly.keystore -alias dailly -keyalg RSA -keysize 2048 -validity 10000",
     "bundle:create": "cd android && ./gradlew clean && ./gradlew bundleRelease && cd .. && cp ./android/app/build/outputs/bundle/release/*.aab ./",
     "apk:create": "cd android && ./gradlew clean && ./gradlew assembleRelease && cd .. && cp ./android/app/build/outputs/apk/release/*.apk ./"
   },
@@ -44,7 +46,5 @@
   },
   "devDependencies": {
     "@babel/core": "^7.14.2"
-  },
-  "private": true,
-  "name": "dailly"
+  }
 }

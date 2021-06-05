@@ -2,11 +2,10 @@
   "expo": {
     "name": "dailly",
     "slug": "dailly",
-    "description": "Create, manage, track and share your daily goals in a simple and aesthetic way.",
+    "description": "Create, manage and track your daily goals.",
     "version": "9.0.0",
     "orientation": "portrait",
     "icon": "./assets/application/icon.png",
-    "githubUrl": "https://github.com/hydroxion/dailly",
     "splash": {
       "image": "./assets/application/splash.png",
       "resizeMode": "cover",
@@ -14,8 +13,7 @@
     },
     "platforms": ["android"],
     "updates": {
-      "enabled": true,
-      "fallbackToCacheTimeout": 1000
+      "enabled": false
     },
     "assetBundlePatterns": ["**/*"],
     "android": {
@@ -27,8 +25,7 @@
       "allowBackup": false,
       "package": "com.dailly.dailly",
       "versionCode": 9,
-      "permissions": ["VIBRATE"],
-      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.dailly.dailly"
+      "permissions": ["VIBRATE"]
     },
     "web": {
       "favicon": "./assets/application/favicon.png"
