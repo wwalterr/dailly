@@ -6,7 +6,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 import theme from "../theme";
 
-const Close = ({ hide, reset }) => {
+const Close = ({ hide, reset, iconStyle = {} }) => {
   return (
     <AntDesign
       name="close"
@@ -17,7 +17,7 @@ const Close = ({ hide, reset }) => {
         if (reset) reset();
       }}
       color={theme.color.gray.dark}
-      style={styles.closeIcon}
+      style={[styles.closeIcon, iconStyle]}
     />
   );
 };

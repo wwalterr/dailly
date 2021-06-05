@@ -35,19 +35,13 @@ import { schedulePushNotification } from "../utils/notifications";
 
 import Close from "./close";
 
-import EmojiPicker from "./emojiPicker";
-
 import Button from "./button";
-
-import ColorPicker from "./colorPicker";
 
 const activeText = "Yes";
 
 const inActiveText = "No";
 
 const messageNewGoal = "Goal created";
-
-const defaultEmoji = {};
 
 const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
   const { isDark } = useSettings();
@@ -64,26 +58,10 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
   const [date, setDate] = useState(new Date());
 
-  const [emoji, setEmoji] = useState(defaultEmoji);
-
-  const [category, setCategory] = useState("Smileys & Emotion");
-
-  const [cardColor, setCardColor] = useState(theme.color.black.main);
-
-  const [showCardColor, setShowCardColor] = useState(false);
-
-  const [cardFontColor, setCardFontColor] = useState(theme.color.white.main);
-
-  const [showCardFontColor, setShowCardFontColor] = useState(false);
-
-  const [colorError, setColorError] = useState(false);
-
   const today = moment().format("YYYY-MM-DD");
 
   const resetFields = () => {
     Keyboard.dismiss();
-
-    setDate(new Date());
 
     setText("");
 
@@ -91,13 +69,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
     setRemind(false);
 
-    setCardColor(theme.color.black.main);
-
-    setCardFontColor(theme.color.white.main);
-
-    setEmoji(defaultEmoji);
-
-    setCategory("Smileys & Emotion");
+    setDate(new Date());
   };
 
   return (
@@ -111,7 +83,11 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
       ]}
     >
       <View style={styles.rowClose}>
-        <Close hide={hideNewTask} reset={resetFields} />
+        <Close
+          hide={hideNewTask}
+          reset={resetFields}
+          iconStyle={{ paddingVertical: 0 }}
+        />
       </View>
 
       <View style={[styles.row, styles.rowText]}>
@@ -207,60 +183,6 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
         </Modal>
       </View>
 
-      <View style={[styles.row, styles.rowCategory]}>
-        <View style={styles.containerCategory}>
-          <Text
-            style={[
-              styles.textCategory,
-              isDark ? { color: theme.color.white.main } : {},
-            ]}
-          >
-            Choose an emoji for your goal
-          </Text>
-
-          <EmojiPicker
-            emoji={emoji}
-            setEmoji={setEmoji}
-            category={category}
-            setCategory={setCategory}
-          />
-        </View>
-      </View>
-
-      <View style={[styles.row, styles.rowCardColor]}>
-        <ColorPicker
-          text="Choose the card color"
-          showPicker={showCardColor}
-          showPickerSetter={setShowCardColor}
-          color={cardColor}
-          colorSetter={setCardColor}
-          colors={theme.color.cards}
-        />
-
-        {colorError ? (
-          <Text style={styles.textError}>
-            The card and the card text can't have the same color
-          </Text>
-        ) : null}
-      </View>
-
-      <View style={[styles.row, styles.rowCardTextColor]}>
-        <ColorPicker
-          text="Choose the card text color"
-          showPicker={showCardFontColor}
-          showPickerSetter={setShowCardFontColor}
-          color={cardFontColor}
-          colorSetter={setCardFontColor}
-          colors={theme.color.cards}
-        />
-
-        {colorError ? (
-          <Text style={styles.textError}>
-            The card and the card text can't have the same color
-          </Text>
-        ) : null}
-      </View>
-
       <View style={[styles.row, styles.rowButton]}>
         <Button
           onPress={async () => {
@@ -275,8 +197,8 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
             if (remind) {
               identifier = await schedulePushNotification(
                 {
-                  title: `Check your goal ${emoji.emoji ? emoji.emoji : ""}`,
-                  body: capitalize(limitText(text, 34)),
+                  title: `Achieve your goal`,
+                  body: capitalize(limitText(text, 44)),
                   vibrate: true,
                 },
                 {
@@ -293,13 +215,13 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
               remind,
               ...(remind ? { identifier } : {}),
               ...(remind ? { remindTime: date.getTime() } : {}),
-              emoji,
+              emoji: {},
               completed: {
                 [today]: false,
               },
               createdAt: new Date().getTime(),
-              cardColor,
-              cardFontColor,
+              cardColor: theme.color.black.main,
+              cardFontColor: theme.color.white.main,
             });
 
             if (Platform.OS === "android")
@@ -318,10 +240,10 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     width: "100%",
-    height: "75%",
-    minHeight: Dimensions.get("window").height / 2 + 64,
+    height: "35%",
+    minHeight: Dimensions.get("window").height / 2,
     zIndex: 999,
     position: "absolute",
     bottom: 0,
@@ -385,22 +307,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
   },
-  rowCategory: {
-    flexDirection: "column",
-  },
-  containerCategory: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  textCategory: {
-    marginRight: 5,
-    fontFamily: "Inter_400Regular",
-    fontSize: 14,
-    color: theme.color.black.main,
-  },
-  rowCardColor: {},
-  rowCardTextColor: {},
   rowButton: {
     height: 45,
   },

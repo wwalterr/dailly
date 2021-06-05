@@ -196,7 +196,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
                 style={styles.textButton}
               >
                 <Text style={[styles.text, cardFontColor]}>
-                  {limitText(task.text, 34)}
+                  {limitText(task.text, 36)}
                 </Text>
               </TouchableOpacity>
             </View>

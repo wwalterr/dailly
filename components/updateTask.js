@@ -306,8 +306,8 @@ const UpdateTask = ({ task, navigation }) => {
               if (remind) {
                 identifier = await schedulePushNotification(
                   {
-                    title: `Check your goal ${emoji.emoji ? emoji.emoji : ""}`,
-                    body: capitalize(limitText(text, 34)),
+                    title: `Achieve your goal ${emoji.emoji ? emoji.emoji : ""}`,
+                    body: capitalize(limitText(text, 44)),
                     vibrate: true,
                   },
                   {

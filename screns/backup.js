@@ -186,10 +186,10 @@ const BackupScreen = ({ navigation }) => {
                   // review the notification API
                   schedulePushNotification(
                     {
-                      title: `Check your goal ${
+                      title: `Achieve your goal ${
                         task.emoji.emoji ? task.emoji.emoji : ""
                       }`,
-                      body: capitalize(limitText(task.text, 34)),
+                      body: capitalize(limitText(task.text, 36)),
                       vibrate: true,
                     },
                     {
