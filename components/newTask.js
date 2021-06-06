@@ -7,6 +7,7 @@ import {
   ToastAndroid,
   Platform,
   Keyboard,
+  TouchableOpacity,
   Dimensions,
   StyleSheet,
 } from "react-native";
@@ -43,7 +44,7 @@ const inActiveText = "No";
 
 const messageNewGoal = "Goal created";
 
-const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
+const NewTask = ({ newTaskTranslateY, hideNewTask, showModalBackground }) => {
   const { isDark } = useSettings();
 
   const { createTask } = useTasks();
@@ -73,168 +74,191 @@ const NewTask = ({ newTaskTranslateY, hideNewTask }) => {
   };
 
   return (
-    <Animated.View
-      style={[
-        {
-          ...styles.container,
-          transform: [{ translateY: newTaskTranslateY }],
-        },
-        isDark ? { backgroundColor: theme.color.black.light } : {},
-      ]}
-    >
-      <View style={styles.rowClose}>
-        <Close
-          hide={hideNewTask}
-          reset={resetFields}
-          iconStyle={{ paddingVertical: 0 }}
-        />
-      </View>
-
-      <View style={[styles.row, styles.rowText]}>
-        <TextInput
-          placeholder="Describe your goal"
-          placeholderTextColor={theme.color.gray.main}
-          textAlign="left"
-          multiline={true}
-          spellCheck={true}
-          autoFocus={false}
-          underlineColorAndroid={theme.color.transparent}
-          value={text}
-          onChangeText={(_text) => {
-            setText(_text);
-
-            if (text) setTextError(false);
+    <>
+      {isDark && showModalBackground ? (
+        <TouchableOpacity
+          onPress={hideNewTask}
+          style={{
+            ...StyleSheet.absoluteFill,
+            backgroundColor: theme.color.black.hover,
           }}
-          style={styles.textInput}
-        />
+          key="modal-shadow"
+        ></TouchableOpacity>
+      ) : null}
 
-        {textError ? (
-          <Text style={styles.textError}>
-            To create a goal you need to describe it
+      <Animated.View
+        style={[
+          {
+            ...styles.container,
+            transform: [{ translateY: newTaskTranslateY }],
+          },
+          isDark ? { backgroundColor: theme.color.black.main } : {},
+        ]}
+      >
+        <View style={styles.rowClose}>
+          <Close
+            hide={hideNewTask}
+            reset={resetFields}
+            iconStyle={{ paddingVertical: 0 }}
+          />
+        </View>
+
+        <View style={[styles.row, styles.rowText]}>
+          <TextInput
+            placeholder="Describe your goal"
+            placeholderTextColor={theme.color.gray.main}
+            textAlign="left"
+            multiline={true}
+            spellCheck={true}
+            autoFocus={false}
+            underlineColorAndroid={theme.color.transparent}
+            value={text}
+            onChangeText={(_text) => {
+              setText(_text);
+
+              if (text) setTextError(false);
+            }}
+            style={styles.textInput}
+          />
+
+          {textError ? (
+            <Text style={styles.textError}>
+              To create a goal you need to describe it
+            </Text>
+          ) : null}
+        </View>
+
+        <View style={[styles.row, styles.rowRemind]}>
+          <Text
+            style={[
+              styles.text,
+              isDark ? { color: theme.color.white.main } : {},
+            ]}
+          >
+            Do you want to receive reminders?
           </Text>
-        ) : null}
-      </View>
 
-      <View style={[styles.row, styles.rowRemind]}>
-        <Text
-          style={[styles.text, isDark ? { color: theme.color.white.main } : {}]}
-        >
-          Do you want to receive reminders?
-        </Text>
+          <Switch
+            activeText={activeText}
+            inActiveText={inActiveText}
+            value={remind}
+            onValueChange={() => {
+              Keyboard.dismiss();
 
-        <Switch
-          activeText={activeText}
-          inActiveText={inActiveText}
-          value={remind}
-          onValueChange={() => {
-            Keyboard.dismiss();
+              setRemind((previousRemind) => !previousRemind);
 
-            setRemind((previousRemind) => !previousRemind);
-
-            if (!remind) setShowTimePicker(true);
-          }}
-          circleSize={18}
-          circleBorderWidth={0}
-          barHeight={25}
-          backgroundActive={theme.color.black.main}
-          backgroundInactive={theme.color.black.main}
-          circleActiveColor={theme.color.green.main}
-          circleInActiveColor={theme.color.red.main}
-          outerCircleStyle={{
-            backgroundColor: theme.color.black.main,
-            width: 50,
-            borderRadius: 50,
-          }}
-        />
-
-        <Modal
-          isVisible={showTimePicker}
-          onBackButtonPress={() => {
-            setShowTimePicker(false);
-          }}
-          backdropColor={
-            isDark ? theme.color.black.main : theme.color.white.main
-          }
-          backdropOpacity={1}
-          backdropTransitionInTiming={350}
-          backdropTransitionOutTiming={250}
-          useNativeDriverForBackdrop={true}
-          style={[
-            styles.containerModal,
-            isDark ? { backgroundColor: theme.color.black.main } : {},
-          ]}
-        >
-          <View style={styles.containerDatePicker}>
-            <DatePicker
-              date={date}
-              onDateChange={setDate}
-              androidVariant="iosClone"
-              mode="time"
-              textColor={
-                isDark ? theme.color.white.main : theme.color.black.main
-              }
-              fadeToColor={
-                isDark ? theme.color.black.main : theme.color.white.main
-              }
-            />
-          </View>
-
-          <Close hide={() => setShowTimePicker(false)} />
-        </Modal>
-      </View>
-
-      <View style={[styles.row, styles.rowButton]}>
-        <Button
-          onPress={async () => {
-            if (!text.trim()) {
-              setTextError(true);
-
-              return;
+              if (!remind) setShowTimePicker(true);
+            }}
+            circleSize={18}
+            circleBorderWidth={0}
+            barHeight={25}
+            backgroundActive={
+              isDark ? theme.color.black.light : theme.color.black.main
             }
+            backgroundInactive={
+              isDark ? theme.color.black.light : theme.color.black.main
+            }
+            circleActiveColor={theme.color.green.main}
+            circleInActiveColor={theme.color.red.main}
+            outerCircleStyle={{
+              backgroundColor: isDark
+                ? theme.color.black.light
+                : theme.color.black.main,
+              width: 50,
+              borderRadius: 50,
+            }}
+          />
 
-            let identifier;
-
-            if (remind) {
-              identifier = await schedulePushNotification(
-                {
-                  title: `Achieve your goal`,
-                  body: capitalize(limitText(text, 44)),
-                  vibrate: true,
-                },
-                {
-                  hour: date.getHours(),
-                  minute: date.getMinutes(),
-                  repeats: true,
+          <Modal
+            isVisible={showTimePicker}
+            onBackButtonPress={() => {
+              setShowTimePicker(false);
+            }}
+            backdropColor={
+              isDark ? theme.color.black.main : theme.color.white.main
+            }
+            backdropOpacity={1}
+            backdropTransitionInTiming={350}
+            backdropTransitionOutTiming={250}
+            useNativeDriverForBackdrop={true}
+            style={[
+              styles.containerModal,
+              isDark ? { backgroundColor: theme.color.black.main } : {},
+            ]}
+          >
+            <View style={styles.containerDatePicker}>
+              <DatePicker
+                date={date}
+                onDateChange={setDate}
+                androidVariant="iosClone"
+                mode="time"
+                textColor={
+                  isDark ? theme.color.white.main : theme.color.black.main
                 }
-              );
-            }
+                fadeToColor={
+                  isDark ? theme.color.black.main : theme.color.white.main
+                }
+              />
+            </View>
 
-            createTask({
-              id: generateRandomCode(),
-              text: text.trim(),
-              remind,
-              ...(remind ? { identifier } : {}),
-              ...(remind ? { remindTime: date.getTime() } : {}),
-              emoji: {},
-              completed: {
-                [today]: false,
-              },
-              createdAt: new Date().getTime(),
-              cardColor: theme.color.black.main,
-              cardFontColor: theme.color.white.main,
-            });
+            <Close hide={() => setShowTimePicker(false)} />
+          </Modal>
+        </View>
 
-            if (Platform.OS === "android")
-              ToastAndroid.show(messageNewGoal, ToastAndroid.SHORT);
+        <View style={[styles.row, styles.rowButton]}>
+          <Button
+            style={isDark ? { backgroundColor: theme.color.black.light } : {}}
+            onPress={async () => {
+              if (!text.trim()) {
+                setTextError(true);
 
-            resetFields();
+                return;
+              }
 
-            hideNewTask();
-          }}
-          text="Create goal"
-        />
-      </View>
-    </Animated.View>
+              let identifier;
+
+              if (remind) {
+                identifier = await schedulePushNotification(
+                  {
+                    title: `Achieve your goal`,
+                    body: capitalize(limitText(text, 44)),
+                    vibrate: true,
+                  },
+                  {
+                    hour: date.getHours(),
+                    minute: date.getMinutes(),
+                    repeats: true,
+                  }
+                );
+              }
+
+              createTask({
+                id: generateRandomCode(),
+                text: text.trim(),
+                remind,
+                ...(remind ? { identifier } : {}),
+                ...(remind ? { remindTime: date.getTime() } : {}),
+                emoji: {},
+                completed: {
+                  [today]: false,
+                },
+                createdAt: new Date().getTime(),
+                cardColor: theme.color.black.main,
+                cardFontColor: theme.color.white.main,
+              });
+
+              if (Platform.OS === "android")
+                ToastAndroid.show(messageNewGoal, ToastAndroid.SHORT);
+
+              resetFields();
+
+              hideNewTask();
+            }}
+            text="Create goal"
+          />
+        </View>
+      </Animated.View>
+    </>
   );
 };
 

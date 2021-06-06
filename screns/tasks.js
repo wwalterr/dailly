@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 import { Dimensions, StyleSheet } from "react-native";
 
@@ -29,6 +29,8 @@ const TasksScreen = ({ navigation }) => {
 
   const { tasks } = useTasks();
 
+  const [showModalBackground, setShowModalBackground] = useState(false);
+
   const newTaskTranslateY = useRef(
     new Animated.Value(Dimensions.get("window").height)
   ).current;
@@ -48,6 +50,23 @@ const TasksScreen = ({ navigation }) => {
     }).start();
 
   const today = moment().format("YYYY-MM-DD");
+
+  useEffect(() => {
+    newTaskTranslateY.addListener((value) => {
+      if (value.value === 0) setShowModalBackground(true);
+      else {
+        setShowModalBackground(false);
+      }
+
+      // Optimized version for the else statement
+      //   if (value.value === Dimensions.get("window").height)
+      //     setShowModalBackground(false);
+    });
+
+    return () => {
+      newTaskTranslateY.removeAllListeners();
+    };
+  }, []);
 
   return (
     <SafeAreaView
@@ -75,6 +94,7 @@ const TasksScreen = ({ navigation }) => {
       <NewTask
         newTaskTranslateY={newTaskTranslateY}
         hideNewTask={hideNewTask}
+        showModalBackground={showModalBackground}
       />
     </SafeAreaView>
   );
