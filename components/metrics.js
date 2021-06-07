@@ -65,6 +65,7 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
   //
   // const height = 64;
 
+  console.log();
   return (
     <Modal
       isVisible={showMetricsModal}
@@ -161,7 +162,10 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
                 isDark ? { color: theme.color.white.main } : {},
               ]}
             >
-              {goalsIncompleteDays}
+              {createdAt.format("MM/DD/YYYY") === today.format("MM/DD/YYYY") &&
+              goalsIncompleteDays === 1
+                ? 0
+                : goalsIncompleteDays}
             </Text>{" "}
             {goalsIncompleteDays === 1 ? "time" : "times"}
           </Text>
@@ -309,7 +313,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: theme.color.black.main,
   },
-
   containerRank: {
     width: "100%",
     height: 64,
@@ -320,21 +323,21 @@ const styles = StyleSheet.create({
   containerRankPosition: {
     flex: 0.5,
     alignItems: "center",
-    padding: 2,
+    padding: 6,
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
     backgroundColor: theme.color.black.main,
   },
   rankPosition: {
     fontFamily: "Inter_300Light",
-    fontSize: 16,
+    fontSize: 15,
     color: theme.color.white.main,
   },
   containerRankTitle: {
     flex: 0.5,
     alignItems: "center",
     paddingHorizontal: 2,
-    paddingVertical: 2,
+    paddingVertical: 5,
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
     borderWidth: 1,
@@ -345,7 +348,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: theme.color.black.main,
   },
-
   containerHistory: {
     marginTop: 32,
   },
