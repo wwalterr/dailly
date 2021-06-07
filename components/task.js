@@ -146,7 +146,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
           activeOpacity={0.8}
           key={"metrics"}
         >
-          <Text style={[styles.createdAt, cardFontColor]}>Metrics</Text>
+          <Text style={[styles.metrics, cardFontColor]}>Metrics</Text>
         </TouchableOpacity>
 
         <Metrics
@@ -384,7 +384,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
-  createdAt: {
+  metrics: {
     paddingHorizontal: 4,
     paddingVertical: 2,
     fontFamily: "Inter_300Light",
@@ -416,7 +416,6 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "Inter_500Medium",
     fontSize: 26,
-    letterSpacing: 1,
     color: theme.color.white.main,
   },
   containerModal: {
