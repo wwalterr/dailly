@@ -134,8 +134,8 @@ android {
         applicationId 'com.dailly.dailly'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 9
-        versionName "9.0.0"
+        versionCode 10
+        versionName "10.0.0"
     }
     splits {
         abi {

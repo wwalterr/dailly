@@ -3,7 +3,7 @@
     "name": "dailly",
     "slug": "dailly",
     "description": "Create, manage and track your daily goals.",
-    "version": "9.0.0",
+    "version": "10.0.0",
     "orientation": "portrait",
     "icon": "./assets/application/icon.png",
     "splash": {
@@ -24,7 +24,7 @@
       "softwareKeyboardLayoutMode": "resize",
       "allowBackup": false,
       "package": "com.dailly.dailly",
-      "versionCode": 9,
+      "versionCode": 10,
       "permissions": ["VIBRATE"]
     },
     "web": {
