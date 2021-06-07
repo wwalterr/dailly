@@ -65,7 +65,6 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
   //
   // const height = 64;
 
-  console.log();
   return (
     <Modal
       isVisible={showMetricsModal}
