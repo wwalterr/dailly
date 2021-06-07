@@ -8,7 +8,12 @@ import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
 
-const History = ({ createdAt, completed, setCompleted }) => {
+const History = ({
+  createdAt,
+  completed,
+  setCompleted = (value) => {},
+  disableDayPressEvent = false,
+}) => {
   const { isDark } = useSettings();
 
   const dates = Object.keys(completed).map((key) =>
@@ -56,12 +61,14 @@ const History = ({ createdAt, completed, setCompleted }) => {
         },
       }}
       enableSwipeMonths={false}
-      disableAllTouchEventsForDisabledDays={false}
+      disableAllTouchEventsForDisabledDays={true}
       showWeekNumbers={false}
       hideExtraDays={true}
       hideDayNames={false}
       minDate={createdAtParsed}
       onDayPress={(day) => {
+        if (disableDayPressEvent) return;
+
         if (completed[day.dateString]) {
           const { [day.dateString]: omit, ..._completed } = completed;
 

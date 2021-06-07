@@ -35,6 +35,8 @@ import { limitText } from "../utils/text";
 
 import Close from "./close";
 
+import Metrics from "./metrics";
+
 const taskMargin = 16;
 
 const taskPadding = 20;
@@ -77,6 +79,8 @@ const Task = ({ task, index, scrollY, navigation }) => {
   const [removeStatus, setRemoveStatus] = useState(false);
 
   const [showTextModal, setShowTextModal] = useState(false);
+
+  const [showMetricsModal, setShowMetricsModal] = useState(false);
 
   const [emojiCloud, setEmojiCloud] = useState(false);
 
@@ -135,9 +139,21 @@ const Task = ({ task, index, scrollY, navigation }) => {
       ]}
     >
       <View style={styles.containerHeader}>
-        <Text style={[styles.createdAt, cardFontColor]}>
-          {moment(task.createdAt).format("MM/DD/YYYY")}
-        </Text>
+        <TouchableOpacity
+          onPress={() => {
+            setShowMetricsModal(true);
+          }}
+          activeOpacity={0.8}
+          key={"metrics"}
+        >
+          <Text style={[styles.createdAt, cardFontColor]}>Metrics</Text>
+        </TouchableOpacity>
+
+        <Metrics
+          task={task}
+          showMetricsModal={showMetricsModal}
+          setShowMetricsModal={setShowMetricsModal}
+        />
 
         <TouchableOpacity
           onPress={() => {
@@ -372,7 +388,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
     paddingVertical: 2,
     fontFamily: "Inter_300Light",
-    fontSize: 14,
+    fontSize: 12,
     color: theme.color.white.main,
   },
   emoji: {
