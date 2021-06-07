@@ -12,7 +12,7 @@ import {
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 import Clipboard from "@react-native-community/clipboard";
 
@@ -111,8 +111,8 @@ const BackupScreen = ({ navigation }) => {
               isDark ? { backgroundColor: theme.color.black.light } : {},
             ]}
           >
-            <MaterialCommunityIcons
-              name="export-variant"
+            <Ionicons
+              name="arrow-up"
               size={22}
               color={isDark ? theme.color.white.main : theme.color.black.main}
               style={styles.buttonIcon}
@@ -224,8 +224,8 @@ const BackupScreen = ({ navigation }) => {
               isDark ? { backgroundColor: theme.color.black.light } : {},
             ]}
           >
-            <MaterialCommunityIcons
-              name="import"
+            <Ionicons
+              name="arrow-down"
               size={22}
               color={isDark ? theme.color.white.main : theme.color.black.main}
               style={styles.buttonIcon}

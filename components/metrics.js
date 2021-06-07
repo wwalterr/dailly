@@ -3,7 +3,7 @@ import React from "react";
 import {
   View,
   ScrollView,
-  Dimensions,
+  // Dimensions,
   Image,
   Text,
   StyleSheet,
