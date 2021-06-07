@@ -40,7 +40,8 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
     ([key, value]) => value
   ).length;
 
-  const goalsIncompleteDays = daysSinceCreated - goalsCompletedDays;
+  const goalsIncompleteDays =
+    Object.keys(task.completed).length - goalsCompletedDays;
 
   // const fontSize = 34;
   //
