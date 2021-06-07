@@ -19,6 +19,8 @@ import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
 
+import { useTasks } from "../contexts/tasks";
+
 import Modal from "react-native-modal";
 
 // import { limitText } from "../utils/text";
@@ -29,6 +31,8 @@ import History from "./history";
 
 const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
   const { isDark } = useSettings();
+
+  const { tasks } = useTasks();
 
   const createdAt = moment(new Date(task.createdAt), "DD-MM-YYYY");
 
@@ -42,6 +46,18 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
 
   const goalsIncompleteDays =
     Object.keys(task.completed).length - goalsCompletedDays;
+
+  const rank = tasks.map((_task) => ({
+    [_task.id]: Object.keys(_task.completed).length,
+    count: Object.keys(_task.completed).length,
+  }));
+
+  const rankSorted = rank.sort(function (a, b) {
+    return b.count - a.count;
+  });
+
+  const rankGoal =
+    rankSorted.findIndex((_task) => Object.keys(_task)[0] === task.id) + 1;
 
   // const fontSize = 34;
   //
@@ -181,6 +197,30 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
           </Text>
         </View>
 
+        <View style={styles.containerRank}>
+          <View style={styles.containerRankPosition}>
+            <Text
+              style={[
+                styles.rankPosition,
+                isDark ? { color: theme.color.white.main } : {},
+              ]}
+            >
+              {rankGoal}º
+            </Text>
+          </View>
+
+          <View style={styles.containerRankTitle}>
+            <Text
+              style={[
+                styles.rankTitle,
+                isDark ? { color: theme.color.white.main } : {},
+              ]}
+            >
+              Most completed goal
+            </Text>
+          </View>
+        </View>
+
         <View style={styles.containerHistory}>
           <Text
             style={[
@@ -220,7 +260,7 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
     borderBottomWidth: 2,
     borderBottomColor: theme.color.black.main,
-    marginBottom: 14,
+    marginBottom: 8,
   },
   createdTitle: {
     fontFamily: "Inter_300Light",
@@ -269,6 +309,43 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: theme.color.black.main,
   },
+
+  containerRank: {
+    width: "100%",
+    height: 64,
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 16,
+  },
+  containerRankPosition: {
+    flex: 0.5,
+    alignItems: "center",
+    padding: 2,
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+    backgroundColor: theme.color.black.main,
+  },
+  rankPosition: {
+    fontFamily: "Inter_300Light",
+    fontSize: 16,
+    color: theme.color.white.main,
+  },
+  containerRankTitle: {
+    flex: 0.5,
+    alignItems: "center",
+    paddingHorizontal: 2,
+    paddingVertical: 2,
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5,
+    borderWidth: 1,
+    borderColor: theme.color.black.main,
+  },
+  rankTitle: {
+    fontFamily: "Inter_300Light",
+    fontSize: 14,
+    color: theme.color.black.main,
+  },
+
   containerHistory: {
     marginTop: 32,
   },
@@ -276,7 +353,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_400Regular",
     fontSize: 20,
     color: theme.color.black.main,
-    marginBottom: 16,
+    marginBottom: 20,
   },
 });
 
