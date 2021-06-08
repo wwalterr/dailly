@@ -10,11 +10,17 @@ import EmojiPicker from "./emojiPicker";
 
 import ColorPicker from "./colorPicker";
 
+import FontPicker from "./fontPicker";
+
 const Design = ({
   category,
   setCategory,
   emoji,
   setEmoji,
+  font,
+  setFont,
+  showFont,
+  setShowFont,
   cardColor,
   setCardColor,
   showCardColor,
@@ -64,6 +70,17 @@ const Design = ({
         ) : null}
       </View>
 
+      <View style={[styles.row, styles.rowCardFont]}>
+        <FontPicker
+          text="Choose the card font"
+          font={font}
+          fontSetter={setFont}
+          fonts={theme.fonts}
+          showPicker={showFont}
+          showPickerSetter={setShowFont}
+        />
+      </View>
+
       <View style={[styles.row, styles.rowFontColors]}>
         <ColorPicker
           text="Choose the card text color"
@@ -109,6 +126,7 @@ const styles = StyleSheet.create({
     color: theme.color.black.main,
   },
   rowCardColors: {},
+  rowCardFont: {},
   rowFontColors: {},
 });
 

@@ -50,6 +50,7 @@ const theme = {
       "#f65446",
       "#ee585d",
       "#ef7376",
+      "#f15c45",
       "#fe7b31",
       "#f09a1c",
       "#f59859",
@@ -68,6 +69,14 @@ const theme = {
       "#2c2c2f",
     ],
   },
+  fonts: [
+    "Inter_300Light",
+    "Inter_400Regular",
+    "Inter_500Medium",
+    "Inter_600SemiBold",
+    "Inter_700Bold",
+    "Inter_900Black",
+  ],
 };
 
 export default theme;

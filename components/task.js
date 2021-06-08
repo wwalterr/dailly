@@ -211,7 +211,13 @@ const Task = ({ task, index, scrollY, navigation }) => {
                 key={"text"}
                 style={styles.textButton}
               >
-                <Text style={[styles.text, cardFontColor]}>
+                <Text
+                  style={[
+                    styles.text,
+                    cardFontColor,
+                    { fontFamily: task.font },
+                  ]}
+                >
                   {limitText(task.text, 36)}
                 </Text>
               </TouchableOpacity>

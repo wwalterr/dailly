@@ -52,6 +52,10 @@ const UpdateTask = ({ task, navigation }) => {
 
   const [emoji, setEmoji] = useState(task.emoji);
 
+  const [font, setFont] = useState(task.font ? task.font : "Inter_600SemiBold");
+
+  const [showFont, setShowFont] = useState(false);
+
   const [category, setCategory] = useState("Smileys & Emotion");
 
   const [date, setDate] = useState(
@@ -268,6 +272,10 @@ const UpdateTask = ({ task, navigation }) => {
               setCategory={setCategory}
               emoji={emoji}
               setEmoji={setEmoji}
+              font={font}
+              setFont={setFont}
+              showFont={showFont}
+              setShowFont={setShowFont}
               cardColor={cardColor}
               setCardColor={setCardColor}
               showCardColor={showCardColor}
@@ -306,7 +314,9 @@ const UpdateTask = ({ task, navigation }) => {
               if (remind) {
                 identifier = await schedulePushNotification(
                   {
-                    title: `Achieve your goal ${emoji.emoji ? emoji.emoji : ""}`,
+                    title: `Achieve your goal ${
+                      emoji.emoji ? emoji.emoji : ""
+                    }`,
                     body: capitalize(limitText(text, 48)),
                     vibrate: true,
                   },
@@ -326,6 +336,7 @@ const UpdateTask = ({ task, navigation }) => {
                 ...(remind ? { remindTime: date.getTime() } : {}),
                 completed,
                 emoji,
+                font,
                 createdAt: task.createdAt,
                 cardColor,
                 cardFontColor,

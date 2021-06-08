@@ -10,7 +10,7 @@ import {
 
 import Modal from "react-native-modal";
 
-import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 import theme from "../theme";
 
@@ -18,13 +18,13 @@ import { useSettings } from "../contexts/settings";
 
 import Close from "./close";
 
-const ColorPicker = ({
+const FontPicker = ({
   text,
+  font,
+  fontSetter,
+  fonts,
   showPicker,
   showPickerSetter,
-  color,
-  colorSetter,
-  colors,
 }) => {
   const { isDark } = useSettings();
 
@@ -44,12 +44,12 @@ const ColorPicker = ({
           activeOpacity={0.8}
           style={styles.buttonColor}
         >
-          <MaterialIcons
-            name="invert-colors"
-            size={21}
+          <FontAwesome
+            name="font"
+            size={16}
             color={theme.color.black.main}
             style={[
-              styles.colorIcon,
+              styles.fontIcon,
               isDark
                 ? {
                     backgroundColor: theme.color.white.main,
@@ -86,41 +86,37 @@ const ColorPicker = ({
             justifyContent: "space-between",
           }}
         >
-          {colors.map((item) => (
+          {fonts.map((item) => (
             <TouchableOpacity
               onPress={() => {
-                colorSetter(item);
+                fontSetter(item);
 
                 showPickerSetter(false);
               }}
               activeOpacity={0.8}
               key={item}
-              style={[
-                styles.colorPick,
-                {
-                  backgroundColor: item,
-                  borderWidth: item === theme.color.white.main ? 1 : 0,
-                },
-                isDark && item === theme.color.black.main
-                  ? { borderWidth: 0.75, borderColor: theme.color.black.light }
-                  : {},
-              ]}
+              style={[styles.fontPicker]}
             >
-              {color === item ? (
-                <Text
-                  style={[
-                    styles.highlight,
-                    {
-                      color:
-                        item === theme.color.white.main
-                          ? theme.color.black.main
-                          : theme.color.white.main,
-                    },
-                  ]}
-                >
-                  •
-                </Text>
-              ) : null}
+              <Text
+                style={[
+                  styles.textGoal,
+                  {
+                    color:
+                      item === font
+                        ? // Selected font
+                          isDark
+                          ? theme.color.black.light
+                          : theme.color.gray.dark
+                        : // Other fonts
+                        isDark
+                        ? theme.color.white.main
+                        : theme.color.black.main,
+                    fontFamily: item,
+                  },
+                ]}
+              >
+                Your goal text
+              </Text>
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -153,11 +149,11 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingRight: 12,
   },
-  colorIcon: {
+  fontIcon: {
     backgroundColor: theme.color.black.main,
     borderRadius: 25,
     color: theme.color.white.main,
-    padding: 1,
+    padding: 4,
     marginLeft: 4,
   },
   containerModal: {
@@ -169,20 +165,17 @@ const styles = StyleSheet.create({
     paddingRight: 4,
     marginTop: 4,
   },
-  colorPick: {
+  fontPicker: {
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
     height: 48,
-    borderRadius: 5,
     marginVertical: 14,
-    borderWidth: 1,
-    borderColor: theme.color.gray.light,
   },
-  highlight: {
+  textGoal: {
     fontSize: 30,
     color: theme.color.white.main,
   },
 });
 
-export default ColorPicker;
+export default FontPicker;
