@@ -307,7 +307,7 @@ const UpdateTask = ({ task, navigation }) => {
                 identifier = await schedulePushNotification(
                   {
                     title: `Achieve your goal ${emoji.emoji ? emoji.emoji : ""}`,
-                    body: capitalize(limitText(text, 44)),
+                    body: capitalize(limitText(text, 48)),
                     vibrate: true,
                   },
                   {

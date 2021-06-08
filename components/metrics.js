@@ -1,17 +1,8 @@
 import React from "react";
 
-import {
-  View,
-  ScrollView,
-  // Dimensions,
-  Image,
-  Text,
-  StyleSheet,
-} from "react-native";
+import { View, ScrollView, Image, Text, StyleSheet } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
-
-// import Svg, { Text as TextSvg } from "react-native-svg";
 
 import moment from "moment";
 
@@ -22,8 +13,6 @@ import { useSettings } from "../contexts/settings";
 import { useTasks } from "../contexts/tasks";
 
 import Modal from "react-native-modal";
-
-// import { limitText } from "../utils/text";
 
 import Close from "./close";
 
@@ -44,8 +33,7 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
     ([key, value]) => value
   ).length;
 
-  const goalsIncompleteDays =
-    Object.keys(task.completed).length - goalsCompletedDays;
+  const goalsIncompleteDays = daysSinceCreated - goalsCompletedDays;
 
   const rank = tasks.map((_task) => ({
     [_task.id]: Object.keys(_task.completed).length,
@@ -58,12 +46,6 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
 
   const rankGoal =
     rankSorted.findIndex((_task) => Object.keys(_task)[0] === task.id) + 1;
-
-  // const fontSize = 34;
-  //
-  // const width = Dimensions.get("window").width - 64;
-  //
-  // const height = 64;
 
   return (
     <Modal
@@ -89,21 +71,6 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
           <Close hide={() => setShowMetricsModal(false)} />
         </View>
 
-        {/* <View>
-          <Svg height="74" width="100%">
-            <TextSvg
-              stroke={theme.color.black.main}
-              strokeWidth="1"
-              fill="white"
-              color={theme.color.white.main}
-              fontSize="34"
-              y="34"
-            >
-              {limitText(task.text, 16)}
-            </TextSvg>
-          </Svg>
-        </View> */}
-
         <View
           style={[
             styles.containerCreated,
@@ -123,9 +90,11 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
                 isDark ? { color: theme.color.white.main } : {},
               ]}
             >
-              {daysSinceCreated}
+              {daysSinceCreated === 0 ? "today" : daysSinceCreated}
             </Text>{" "}
-            {daysSinceCreated === 1 ? "day" : "days"} ago
+            {daysSinceCreated !== 0
+              ? `${daysSinceCreated === 1 ? "day" : "days"} ago`
+              : ""}
           </Text>
 
           <Image
@@ -154,17 +123,14 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
               isDark ? { color: theme.color.white.main } : {},
             ]}
           >
-            Failed to complete{" "}
+            Incomplete{" "}
             <Text
               style={[
                 styles.highlight,
                 isDark ? { color: theme.color.white.main } : {},
               ]}
             >
-              {createdAt.format("MM/DD/YYYY") === today.format("MM/DD/YYYY") &&
-              goalsIncompleteDays === 1
-                ? 0
-                : goalsIncompleteDays}
+              {goalsIncompleteDays > 0 ? goalsIncompleteDays : 0}
             </Text>{" "}
             {goalsIncompleteDays === 1 ? "time" : "times"}
           </Text>
@@ -201,7 +167,12 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
         </View>
 
         <View style={styles.containerRank}>
-          <View style={styles.containerRankPosition}>
+          <View
+            style={[
+              styles.containerRankPosition,
+              isDark ? { backgroundColor: theme.color.black.light } : {},
+            ]}
+          >
             <Text
               style={[
                 styles.rankPosition,
@@ -212,14 +183,19 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
             </Text>
           </View>
 
-          <View style={styles.containerRankTitle}>
+          <View
+            style={[
+              styles.containerRankTitle,
+              isDark ? { borderColor: theme.color.black.light } : {},
+            ]}
+          >
             <Text
               style={[
                 styles.rankTitle,
                 isDark ? { color: theme.color.white.main } : {},
               ]}
             >
-              Most completed goal
+              {goalsCompletedDays ? "Most" : "Less"} completed goal
             </Text>
           </View>
         </View>
@@ -328,7 +304,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.color.black.main,
   },
   rankPosition: {
-    fontFamily: "Inter_300Light",
+    fontFamily: "Inter_900Black",
     fontSize: 15,
     color: theme.color.white.main,
   },
@@ -336,7 +312,7 @@ const styles = StyleSheet.create({
     flex: 0.5,
     alignItems: "center",
     paddingHorizontal: 2,
-    paddingVertical: 5,
+    paddingVertical: 6,
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
     borderWidth: 1,

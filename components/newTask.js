@@ -221,7 +221,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask, showModalBackground }) => {
                 identifier = await schedulePushNotification(
                   {
                     title: `Achieve your goal`,
-                    body: capitalize(limitText(text, 44)),
+                    body: capitalize(limitText(text, 48)),
                     vibrate: true,
                   },
                   {
