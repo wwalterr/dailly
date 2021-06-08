@@ -16,6 +16,34 @@ import {
   Inter_900Black,
 } from "@expo-google-fonts/inter";
 
+import {
+  Maitree_200ExtraLight,
+  Maitree_300Light,
+  Maitree_400Regular,
+  Maitree_500Medium,
+  Maitree_600SemiBold,
+  Maitree_700Bold,
+} from "@expo-google-fonts/maitree";
+
+import {
+  Oxanium_200ExtraLight,
+  Oxanium_300Light,
+  Oxanium_400Regular,
+  Oxanium_500Medium,
+  Oxanium_600SemiBold,
+  Oxanium_700Bold,
+  Oxanium_800ExtraBold,
+} from "@expo-google-fonts/oxanium";
+
+import {
+  DMMono_300Light,
+  DMMono_300Light_Italic,
+  DMMono_400Regular,
+  DMMono_400Regular_Italic,
+  DMMono_500Medium,
+  DMMono_500Medium_Italic,
+} from "@expo-google-fonts/dm-mono";
+
 import AppLoading from "expo-app-loading";
 
 import { enableScreens } from "react-native-screens";
@@ -103,13 +131,37 @@ const App = () => {
     };
   }, []);
 
+  // Add the new fonts here and in the theme
   const [fontsLoaded] = useFonts({
+    // Inter
     Inter_300Light,
     Inter_400Regular,
     Inter_500Medium,
     Inter_600SemiBold,
     Inter_700Bold,
     Inter_900Black,
+    // Maitree
+    Maitree_200ExtraLight,
+    Maitree_300Light,
+    Maitree_400Regular,
+    Maitree_500Medium,
+    Maitree_600SemiBold,
+    Maitree_700Bold,
+    // Oxanium
+    Oxanium_200ExtraLight,
+    Oxanium_300Light,
+    Oxanium_400Regular,
+    Oxanium_500Medium,
+    Oxanium_600SemiBold,
+    Oxanium_700Bold,
+    Oxanium_800ExtraBold,
+    // Mono
+    DMMono_300Light,
+    DMMono_300Light_Italic,
+    DMMono_400Regular,
+    DMMono_400Regular_Italic,
+    DMMono_500Medium,
+    DMMono_500Medium_Italic,
   });
 
   if (!fontsLoaded) return <AppLoading />;

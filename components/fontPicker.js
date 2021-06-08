@@ -86,7 +86,7 @@ const FontPicker = ({
             justifyContent: "space-between",
           }}
         >
-          {fonts.map((item) => (
+          {fonts.map((item, index) => (
             <TouchableOpacity
               onPress={() => {
                 fontSetter(item);
@@ -115,7 +115,7 @@ const FontPicker = ({
                   },
                 ]}
               >
-                Your goal text
+                #{index} Goal font
               </Text>
             </TouchableOpacity>
           ))}
