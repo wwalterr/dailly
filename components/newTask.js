@@ -75,12 +75,14 @@ const NewTask = ({ newTaskTranslateY, hideNewTask, showModalBackground }) => {
 
   return (
     <>
-      {isDark && showModalBackground ? (
+      {showModalBackground ? (
         <TouchableOpacity
           onPress={hideNewTask}
           style={{
             ...StyleSheet.absoluteFill,
-            backgroundColor: theme.color.black.hover,
+            backgroundColor: isDark
+              ? theme.color.black.hover
+              : theme.color.white.hover,
           }}
           key="modal-shadow"
         ></TouchableOpacity>

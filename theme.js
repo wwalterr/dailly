@@ -3,6 +3,7 @@ const theme = {
     transparent: "transparent",
     white: {
       main: "#ffffff",
+      hover: "rgba(255, 255, 255, 0.25)",
     },
     gray: {
       soft: "#e5e5e5",
@@ -15,7 +16,7 @@ const theme = {
       light: "#141414",
       main: "#000000",
       dark: "#111111",
-      hover: "rgba(0, 0, 0, 0.75)",
+      hover: "rgba(0, 0, 0, 0.25)",
     },
     red: {
       main: "#fc1f3d",
