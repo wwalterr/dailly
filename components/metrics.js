@@ -23,15 +23,15 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
 
   const { tasks } = useTasks();
 
-  const createdAt = moment(new Date(task.createdAt), "DD-MM-YYYY");
-
-  const today = moment();
-
-  const daysSinceCreated = today.diff(createdAt, "days");
+  const createdAt = moment(new Date(task.createdAt), "YYYY-MM-DD");
 
   const goalsCompletedDays = Object.entries(task.completed).filter(
     ([key, value]) => value
   ).length;
+
+  const daysSinceCreated = Math.floor(
+    (new Date() - new Date(task.createdAt)) / (1000 * 60 * 60 * 24)
+  );
 
   const goalsIncompleteDays = daysSinceCreated - goalsCompletedDays;
 
@@ -90,11 +90,9 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
                 isDark ? { color: theme.color.white.main } : {},
               ]}
             >
-              {daysSinceCreated === 0 ? "today" : daysSinceCreated}
+              {createdAt.fromNow(true)}
             </Text>{" "}
-            {daysSinceCreated !== 0
-              ? `${daysSinceCreated === 1 ? "day" : "days"} ago`
-              : ""}
+            ago
           </Text>
 
           <Image
@@ -130,7 +128,7 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
                 isDark ? { color: theme.color.white.main } : {},
               ]}
             >
-              {goalsIncompleteDays > 0 ? goalsIncompleteDays : 0}
+              {goalsIncompleteDays < 0 ? 0 : goalsIncompleteDays}
             </Text>{" "}
             {goalsIncompleteDays === 1 ? "time" : "times"}
           </Text>

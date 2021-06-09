@@ -70,17 +70,6 @@ const Design = ({
         ) : null}
       </View>
 
-      <View style={[styles.row, styles.rowCardFont]}>
-        <FontPicker
-          text="Choose the card font"
-          font={font}
-          fontSetter={setFont}
-          fonts={theme.fonts}
-          showPicker={showFont}
-          showPickerSetter={setShowFont}
-        />
-      </View>
-
       <View style={[styles.row, styles.rowFontColors]}>
         <ColorPicker
           text="Choose the card text color"
@@ -96,6 +85,17 @@ const Design = ({
             The card and the card text can't have the same color
           </Text>
         ) : null}
+      </View>
+
+      <View style={[styles.row, styles.rowCardFont]}>
+        <FontPicker
+          text="Choose the card font"
+          font={font}
+          fontSetter={setFont}
+          fonts={theme.fonts}
+          showPicker={showFont}
+          showPickerSetter={setShowFont}
+        />
       </View>
     </>
   );
