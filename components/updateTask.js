@@ -38,7 +38,7 @@ import Design from "./design";
 const messageNewGoal = "Goal updated";
 
 const UpdateTask = ({ task, navigation }) => {
-  const { isDark } = useSettings();
+  const { settings, isDark } = useSettings();
 
   const { updateTask, findTask } = useTasks();
 
@@ -52,7 +52,9 @@ const UpdateTask = ({ task, navigation }) => {
 
   const [emoji, setEmoji] = useState(task.emoji);
 
-  const [font, setFont] = useState(task.font ? task.font : "Inter_600SemiBold");
+  const [font, setFont] = useState(
+    task.font ? task.font : settings.font ? settings.font : "Inter_600SemiBold"
+  );
 
   const [showFont, setShowFont] = useState(false);
 

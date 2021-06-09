@@ -45,7 +45,7 @@ const inActiveText = "No";
 const messageNewGoal = "Goal created";
 
 const NewTask = ({ newTaskTranslateY, hideNewTask, showModalBackground }) => {
-  const { isDark } = useSettings();
+  const { settings, isDark } = useSettings();
 
   const { createTask } = useTasks();
 
@@ -242,9 +242,10 @@ const NewTask = ({ newTaskTranslateY, hideNewTask, showModalBackground }) => {
                 completed: {
                   [today]: false,
                 },
-                createdAt: new Date().getTime(),
+                font: settings.font ? settings.font : "Inter_600SemiBold",
                 cardColor: theme.color.black.main,
                 cardFontColor: theme.color.white.main,
+                createdAt: new Date().getTime(),
               });
 
               if (Platform.OS === "android")

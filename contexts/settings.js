@@ -8,6 +8,7 @@ const defaultSettings = {
   theme: "light", // Define the theme. Options: light or dark
   history: false, // Define if completed goals should be shown. Options: true or false
   card: true, // Define the goal card full size. Options: true or false
+  font: "Inter_600SemiBold",
 };
 
 const SettingsContext = createContext(defaultSettings);

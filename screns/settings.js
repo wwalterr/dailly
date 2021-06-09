@@ -14,6 +14,8 @@ import ThemeSetting from "../components/themeSetting";
 
 import CardSetting from "../components/cardSetting";
 
+import FontSetting from "../components/fontSetting";
+
 import HistorySetting from "../components/historySetting";
 
 import BackupSetting from "../components/backupSetting";
@@ -40,6 +42,8 @@ const SettingsScreen = ({ navigation }) => {
         <ThemeSetting />
 
         <CardSetting />
+
+        <FontSetting />
 
         <HistorySetting />
 

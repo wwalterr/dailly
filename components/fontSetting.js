@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   View,
@@ -14,32 +14,30 @@ import theme from "../theme";
 
 import { useSettings } from "../contexts/settings";
 
-const messageHistory = "History";
+import FontPicker from "../components/fontPicker";
 
-const HistorySetting = () => {
+const messageFont = "Font updated";
+
+const FontSetting = () => {
   const { settings, isDark, updateSettings } = useSettings();
+
+  const [font, setFont] = useState(
+    settings.font ? settings.font : "Inter_600SemiBold"
+  );
+
+  const [showFont, setShowFont] = useState(false);
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
         onPress={async () => {
-          updateSettings({
-            history: !settings.history,
-          });
-
-          if (Platform.OS === "android")
-            ToastAndroid.show(
-              `${messageHistory} ${!settings.history ? "enabled" : "disabled"}`,
-              ToastAndroid.SHORT
-            );
+          setShowFont(true);
         }}
         activeOpacity={0.8}
         style={[
           styles.buttonImage,
           {
-            backgroundColor: settings.history
-              ? theme.color.green.main
-              : isDark
+            backgroundColor: isDark
               ? theme.color.black.light
               : theme.color.black.main,
           },
@@ -47,7 +45,7 @@ const HistorySetting = () => {
       >
         <Image
           style={styles.image}
-          source={require("../assets/settings/clock.png")}
+          source={require("../assets/settings/font.png")}
         />
       </TouchableOpacity>
 
@@ -58,10 +56,24 @@ const HistorySetting = () => {
             isDark ? { color: theme.color.white.main } : {},
           ]}
         >
-          History
+          Font
         </Text>
 
-        <Text style={styles.description}>See the completed goals</Text>
+        <Text style={styles.description}>Choose the default card font</Text>
+
+        <FontPicker
+          font={font}
+          fontSetter={(font) => {
+            updateSettings({ font });
+
+            if (Platform.OS === "android")
+              ToastAndroid.show(messageFont, ToastAndroid.SHORT);
+          }}
+          fonts={theme.fonts}
+          showPicker={showFont}
+          showPickerSetter={setShowFont}
+          hideQuestion={true}
+        />
       </View>
     </View>
   );
@@ -85,8 +97,8 @@ const styles = StyleSheet.create({
     backgroundColor: theme.color.black.main,
   },
   image: {
-    width: 25,
-    height: 25,
+    width: 22,
+    height: 22,
   },
   containerContent: {
     flex: 1,
@@ -104,4 +116,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HistorySetting;
+export default FontSetting;

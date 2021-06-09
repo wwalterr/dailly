@@ -19,47 +19,53 @@ import { useSettings } from "../contexts/settings";
 import Close from "./close";
 
 const FontPicker = ({
-  text,
+  text = "",
   font,
   fontSetter,
   fonts,
   showPicker,
   showPickerSetter,
+  hideQuestion = false,
 }) => {
   const { isDark } = useSettings();
 
   return (
     <View style={styles.container}>
-      <View style={styles.question}>
-        <Text
-          style={[styles.text, isDark ? { color: theme.color.white.main } : {}]}
-        >
-          {text}
-        </Text>
-
-        <TouchableOpacity
-          onPress={() => {
-            showPickerSetter((previousShowPicker) => !previousShowPicker);
-          }}
-          activeOpacity={0.8}
-          style={styles.buttonColor}
-        >
-          <FontAwesome
-            name="font"
-            size={16}
-            color={theme.color.black.main}
+      {hideQuestion ? null : (
+        <View style={styles.question}>
+          <Text
             style={[
-              styles.fontIcon,
-              isDark
-                ? {
-                    backgroundColor: theme.color.white.main,
-                    color: theme.color.black.main,
-                  }
-                : {},
+              styles.text,
+              isDark ? { color: theme.color.white.main } : {},
             ]}
-          />
-        </TouchableOpacity>
-      </View>
+          >
+            {text}
+          </Text>
+
+          <TouchableOpacity
+            onPress={() => {
+              showPickerSetter((previousShowPicker) => !previousShowPicker);
+            }}
+            activeOpacity={0.8}
+            style={styles.buttonColor}
+          >
+            <FontAwesome
+              name="font"
+              size={16}
+              color={theme.color.black.main}
+              style={[
+                styles.fontIcon,
+                isDark
+                  ? {
+                      backgroundColor: theme.color.white.main,
+                      color: theme.color.black.main,
+                    }
+                  : {},
+              ]}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
 
       <Modal
         isVisible={showPicker}
