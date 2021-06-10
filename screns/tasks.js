@@ -6,6 +6,8 @@ import { Animated } from "react-native";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import InAppReview from "react-native-in-app-review";
+
 import moment from "moment";
 
 import theme from "../theme";
@@ -25,7 +27,7 @@ import NewTask from "../components/newTask";
 import TasksAchieved from "../components/tasksAchieved";
 
 const TasksScreen = ({ navigation }) => {
-  const { settings, isDark } = useSettings();
+  const { settings, isDark, updateSettings } = useSettings();
 
   const { tasks } = useTasks();
 
@@ -66,6 +68,28 @@ const TasksScreen = ({ navigation }) => {
     return () => {
       newTaskTranslateY.removeAllListeners();
     };
+  }, []);
+
+  useEffect(() => {
+    if (!settings.review && tasks.length >= 4) {
+      InAppReview.RequestInAppReview()
+        .then((hasFlowFinishedSuccessfully) => {
+          // console.log(
+          //   "User finished / closed the review flow",
+          //   hasFlowFinishedSuccessfully
+          // );
+        })
+        .catch((error) => {
+          // Continue the application flow.
+          //
+          // An error could happen while lanuching the application review.
+          //
+          // Check table for errors and code number that can return in catch.
+          // console.log(error);
+        });
+
+      updateSettings({ review: true });
+    }
   }, []);
 
   return (
