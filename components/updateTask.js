@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import {
   View,
@@ -8,6 +8,7 @@ import {
   Platform,
   Keyboard,
   Dimensions,
+  TouchableOpacity,
   Animated,
   StyleSheet,
 } from "react-native";
@@ -37,10 +38,12 @@ import Design from "./design";
 
 const messageNewGoal = "Goal updated";
 
+const messageRemoveGoal = "Goal removed";
+
 const UpdateTask = ({ task, navigation }) => {
   const { settings, isDark } = useSettings();
 
-  const { updateTask, findTask } = useTasks();
+  const { updateTask, removeTask, findTask } = useTasks();
 
   const [completed, setCompleted] = useState(task.completed);
 
@@ -76,6 +79,8 @@ const UpdateTask = ({ task, navigation }) => {
 
   const [colorError, setColorError] = useState(false);
 
+  const [removeStatus, setRemoveStatus] = useState(false);
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
@@ -95,6 +100,19 @@ const UpdateTask = ({ task, navigation }) => {
 
     setColorError(false);
   };
+
+  useEffect(() => {
+    let closeRemoveStatus;
+
+    if (removeStatus)
+      closeRemoveStatus = setTimeout(() => {
+        setRemoveStatus(false);
+      }, 2500);
+
+    return () => {
+      clearTimeout(closeRemoveStatus);
+    };
+  }, [removeStatus, setRemoveStatus]);
 
   return (
     <View
@@ -289,6 +307,62 @@ const UpdateTask = ({ task, navigation }) => {
               colorError={colorError}
             />
           </ScrollView>
+
+          <ScrollView
+            style={styles.card}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+          >
+            <View style={styles.cardInformation}>
+              <Text
+                style={[
+                  styles.cardTitle,
+                  isDark ? { color: theme.color.white.main } : {},
+                ]}
+              >
+                Remove
+              </Text>
+            </View>
+
+            <TouchableOpacity
+              onPress={async () => {
+                if (!removeStatus) {
+                  setRemoveStatus(true);
+
+                  return;
+                }
+
+                if (task.remind) await cancelPushNotification(task.identifier);
+
+                removeTask(task.id);
+
+                if (Platform.OS === "android")
+                  ToastAndroid.show(messageRemoveGoal, ToastAndroid.SHORT);
+
+                if (navigation.canGoBack()) navigation.goBack();
+              }}
+              activeOpacity={0.8}
+              key={"remove"}
+              style={styles.removeButton}
+            >
+              <Text
+                style={[
+                  styles.remove,
+                  removeStatus
+                    ? { color: theme.color.red.main }
+                    : {
+                        color: isDark
+                          ? theme.color.white.main
+                          : theme.color.black.main,
+                      },
+                ]}
+              >
+                {removeStatus
+                  ? "Confirm removal"
+                  : "Press here to remove this goal"}
+              </Text>
+            </TouchableOpacity>
+          </ScrollView>
         </ScrollView>
 
         <View style={styles.rowButton}>
@@ -414,6 +488,16 @@ const styles = StyleSheet.create({
     color: theme.color.black.main,
   },
   cardIcon: {},
+  removeButton: {
+    flexDirection: "row",
+    paddingVertical: 12,
+  },
+  remove: {
+    marginRight: 5,
+    fontFamily: "Inter_400Regular",
+    fontSize: 14,
+    color: theme.color.black.main,
+  },
   rowButton: {
     height: 45,
     marginRight: 32,

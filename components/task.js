@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import {
   View,
@@ -27,8 +27,6 @@ import { useSettings } from "../contexts/settings";
 
 import { useTasks } from "../contexts/tasks";
 
-import { cancelPushNotification } from "../utils/notifications";
-
 import removeObjectKey from "../utils/objects";
 
 import { limitText } from "../utils/text";
@@ -42,8 +40,6 @@ const taskMargin = 16;
 const taskPadding = 20;
 
 const taskHeight = 155 + taskMargin * 2;
-
-const messageRemoveGoal = "Goal removed";
 
 const messageComplete = "Goal completed";
 
@@ -74,9 +70,7 @@ const onShare = async (message) => {
 const Task = ({ task, index, scrollY, navigation }) => {
   const { settings, isDark } = useSettings();
 
-  const { removeTask, updateTask } = useTasks();
-
-  const [removeStatus, setRemoveStatus] = useState(false);
+  const { updateTask } = useTasks();
 
   const [showTextModal, setShowTextModal] = useState(false);
 
@@ -102,19 +96,6 @@ const Task = ({ task, index, scrollY, navigation }) => {
   });
 
   const today = moment().format("YYYY-MM-DD");
-
-  useEffect(() => {
-    let closeRemoveStatus;
-
-    if (removeStatus)
-      closeRemoveStatus = setTimeout(() => {
-        setRemoveStatus(false);
-      }, 2500);
-
-    return () => {
-      clearTimeout(closeRemoveStatus);
-    };
-  }, [removeStatus, setRemoveStatus]);
 
   return (
     <Animated.View
@@ -279,33 +260,6 @@ const Task = ({ task, index, scrollY, navigation }) => {
             <View style={styles.actions}>
               <TouchableOpacity
                 onPress={async () => {
-                  if (!removeStatus) {
-                    setRemoveStatus(true);
-
-                    return;
-                  }
-
-                  if (task.remind)
-                    await cancelPushNotification(task.identifier);
-
-                  removeTask(task.id);
-
-                  if (Platform.OS === "android")
-                    ToastAndroid.show(messageRemoveGoal, ToastAndroid.SHORT);
-                }}
-                activeOpacity={0.8}
-                key={"remove"}
-                style={styles.removeButton}
-              >
-                <Text style={[styles.remove, cardFontColor]}>
-                  {removeStatus ? "Confirm" : "Remove"}
-                </Text>
-              </TouchableOpacity>
-
-              <Text style={[styles.highlight, cardFontColor]}>•</Text>
-
-              <TouchableOpacity
-                onPress={async () => {
                   navigation.navigate("Update", task);
                 }}
                 activeOpacity={0.8}
@@ -454,21 +408,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
   },
-  removeButton: {
-    flexDirection: "row",
-    paddingVertical: 12,
-  },
-  remove: {
-    fontFamily: "Inter_300Light",
-    fontSize: 12,
-    color: theme.color.white.main,
-  },
   highlight: {
     marginLeft: 8,
     color: theme.color.white.main,
   },
   updateButton: {
-    marginLeft: 8,
     paddingVertical: 12,
   },
   update: {
