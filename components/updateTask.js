@@ -201,7 +201,7 @@ const UpdateTask = ({ task, navigation }) => {
                     : {},
                 ]}
               >
-                History
+                Information
               </Text>
 
               <View style={styles.cardIndicator}>
@@ -229,11 +229,17 @@ const UpdateTask = ({ task, navigation }) => {
               </View>
             </View>
 
-            <History
-              task={task}
-              createdAt={task.createdAt}
-              completed={completed}
-              setCompleted={setCompleted}
+            <Information
+              text={text}
+              setText={setText}
+              textError={textError}
+              setTextError={setTextError}
+              remind={remind}
+              setRemind={setRemind}
+              date={date}
+              setDate={setDate}
+              showTimePicker={showTimePicker}
+              setShowTimePicker={setShowTimePicker}
             />
           </ScrollView>
 
@@ -253,21 +259,15 @@ const UpdateTask = ({ task, navigation }) => {
                     : {},
                 ]}
               >
-                Information
+                History
               </Text>
             </View>
 
-            <Information
-              text={text}
-              setText={setText}
-              textError={textError}
-              setTextError={setTextError}
-              remind={remind}
-              setRemind={setRemind}
-              date={date}
-              setDate={setDate}
-              showTimePicker={showTimePicker}
-              setShowTimePicker={setShowTimePicker}
+            <History
+              task={task}
+              createdAt={task.createdAt}
+              completed={completed}
+              setCompleted={setCompleted}
             />
           </ScrollView>
 
@@ -357,9 +357,7 @@ const UpdateTask = ({ task, navigation }) => {
                       },
                 ]}
               >
-                {removeStatus
-                  ? "Confirm removal"
-                  : "Remove this goal"}
+                {removeStatus ? "Confirm removal" : "Remove this goal"}
               </Text>
             </TouchableOpacity>
           </ScrollView>
