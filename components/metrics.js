@@ -104,6 +104,40 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
           />
         </View>
 
+        <View style={styles.containerRank}>
+          <View
+            style={[
+              styles.containerRankPosition,
+              isDark ? { backgroundColor: theme.color.black.light } : {},
+            ]}
+          >
+            <Text
+              style={[
+                styles.rankPosition,
+                isDark ? { color: theme.color.white.main } : {},
+              ]}
+            >
+              {rankGoal}º
+            </Text>
+          </View>
+
+          <View
+            style={[
+              styles.containerRankTitle,
+              isDark ? { borderColor: theme.color.black.light } : {},
+            ]}
+          >
+            <Text
+              style={[
+                styles.rankTitle,
+                isDark ? { color: theme.color.white.main } : {},
+              ]}
+            >
+              {goalsCompletedDays ? "Most" : "Less"} completed goal
+            </Text>
+          </View>
+        </View>
+
         <View style={styles.containerIncomplete}>
           <Ionicons
             name="checkmark-done-circle-outline"
@@ -162,40 +196,6 @@ const Metrics = ({ task, showMetricsModal, setShowMetricsModal }) => {
             </Text>{" "}
             {goalsCompletedDays === 1 ? "time" : "times"}
           </Text>
-        </View>
-
-        <View style={styles.containerRank}>
-          <View
-            style={[
-              styles.containerRankPosition,
-              isDark ? { backgroundColor: theme.color.black.light } : {},
-            ]}
-          >
-            <Text
-              style={[
-                styles.rankPosition,
-                isDark ? { color: theme.color.white.main } : {},
-              ]}
-            >
-              {rankGoal}º
-            </Text>
-          </View>
-
-          <View
-            style={[
-              styles.containerRankTitle,
-              isDark ? { borderColor: theme.color.black.light } : {},
-            ]}
-          >
-            <Text
-              style={[
-                styles.rankTitle,
-                isDark ? { color: theme.color.white.main } : {},
-              ]}
-            >
-              {goalsCompletedDays ? "Most" : "Less"} completed goal
-            </Text>
-          </View>
         </View>
 
         <View style={styles.containerHistory}>
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
     height: 64,
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 32,
+    marginTop: 16,
   },
   incompleteIcon: {
     color: theme.color.black.main,
