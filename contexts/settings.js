@@ -9,7 +9,6 @@ const defaultSettings = {
   history: false, // Define if completed goals should be shown. Options: true or false
   card: true, // Define the goal card full size. Options: true or false
   font: "Inter_600SemiBold",
-  review: false, // Identifies if the in app review was shown. Options: true or false
 };
 
 const SettingsContext = createContext(defaultSettings);
