@@ -70,6 +70,8 @@ const Header = ({ navigation, showNewTask }) => {
         <View style={[styles.column, styles.columnMenu]}>
           <TouchableOpacity
             onPress={() => {
+              setOptions((previousOptions) => !previousOptions);
+
               Linking.openURL("https://buy.stripe.com/fZe01e3TD87YgmcaEE");
             }}
             activeOpacity={0.8}
