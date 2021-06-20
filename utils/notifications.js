@@ -22,6 +22,8 @@ const schedulePushNotification = async (content, trigger) => {
 };
 
 const cancelPushNotification = async (identifier) => {
+  if (!identifier) return;
+
   const status = await Notifications.cancelScheduledNotificationAsync(
     identifier
   );
