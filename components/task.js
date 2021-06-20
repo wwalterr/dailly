@@ -15,6 +15,8 @@ import {
 
 import Modal from "react-native-modal";
 
+import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+
 import Clipboard from "@react-native-community/clipboard";
 
 import { AnimatedEmoji } from "react-native-animated-emoji";
@@ -39,7 +41,7 @@ const taskMargin = 16;
 
 const taskPadding = 20;
 
-const taskHeight = 155 + taskMargin * 2;
+const taskHeight = 150 + taskMargin * 2;
 
 const messageComplete = "Goal completed";
 
@@ -119,69 +121,21 @@ const Task = ({ task, index, scrollY, navigation }) => {
           : {},
       ]}
     >
-      <View style={styles.containerHeader}>
-        <TouchableOpacity
-          onPress={() => {
-            setShowMetricsModal(true);
-          }}
-          activeOpacity={0.8}
-          key={"metrics"}
-        >
-          <Text style={[styles.metrics, cardFontColor]}>Metrics</Text>
-        </TouchableOpacity>
-
-        <Metrics
-          task={task}
-          showMetricsModal={showMetricsModal}
-          setShowMetricsModal={setShowMetricsModal}
-        />
-
-        <TouchableOpacity
-          onPress={() => {
-            setEmojiCloud(true);
-          }}
-          activeOpacity={0.8}
-          key={"emoji"}
-        >
-          <Text style={styles.emoji}>{task.emoji.emoji}</Text>
-        </TouchableOpacity>
-
-        {emojiCloud ? (
-          <>
-            <AnimatedEmoji
-              index={index}
-              style={{ bottom: 0 }}
-              name={task.emoji.aliases[0]}
-              size={25}
-              duration={3500}
-              onAnimationCompleted={() => {}}
-            />
-
-            <AnimatedEmoji
-              index={index + 1}
-              style={{ bottom: 40 }}
-              name={task.emoji.aliases[0]}
-              size={15}
-              duration={3500}
-              onAnimationCompleted={() => {}}
-            />
-
-            <AnimatedEmoji
-              index={index + 2}
-              style={{ bottom: -60 }}
-              name={task.emoji.aliases[0]}
-              size={25}
-              duration={3550}
-              onAnimationCompleted={() => {
-                setEmojiCloud(false);
-              }}
-            />
-          </>
-        ) : null}
-      </View>
-
       <View style={styles.containerOutsider}>
         <View style={styles.containerInsider}>
+          {task.emoji.emoji ? (
+            <TouchableOpacity
+              onPress={() => {
+                setEmojiCloud(true);
+              }}
+              activeOpacity={0.8}
+              key={"emoji"}
+              style={{ marginRight: 8 }}
+            >
+              <Text style={styles.emoji}>{task.emoji.emoji}</Text>
+            </TouchableOpacity>
+          ) : null}
+
           <View style={styles.containerContent}>
             <View style={styles.containerText}>
               <TouchableOpacity
@@ -203,6 +157,39 @@ const Task = ({ task, index, scrollY, navigation }) => {
                 </Text>
               </TouchableOpacity>
             </View>
+
+            {emojiCloud ? (
+              <>
+                <AnimatedEmoji
+                  index={index}
+                  style={{ bottom: 0 }}
+                  name={task.emoji.aliases[0]}
+                  size={25}
+                  duration={3500}
+                  onAnimationCompleted={() => {}}
+                />
+
+                <AnimatedEmoji
+                  index={index + 1}
+                  style={{ bottom: 40 }}
+                  name={task.emoji.aliases[0]}
+                  size={15}
+                  duration={3500}
+                  onAnimationCompleted={() => {}}
+                />
+
+                <AnimatedEmoji
+                  index={index + 2}
+                  style={{ bottom: -60 }}
+                  name={task.emoji.aliases[0]}
+                  size={25}
+                  duration={3550}
+                  onAnimationCompleted={() => {
+                    setEmojiCloud(false);
+                  }}
+                />
+              </>
+            ) : null}
 
             <Modal
               isVisible={showTextModal}
@@ -247,6 +234,25 @@ const Task = ({ task, index, scrollY, navigation }) => {
               </ScrollView>
 
               <View style={styles.containerModalActions}>
+                <TouchableOpacity
+                  onPress={async () => {
+                    onShare(task.text);
+                  }}
+                  activeOpacity={0.8}
+                  key={"share"}
+                  style={styles.shareButton}
+                >
+                  <Ionicons
+                    name="share-social"
+                    size={20}
+                    color={theme.color.black.main}
+                    style={[
+                      styles.share,
+                      isDark ? { color: theme.color.white.main } : {},
+                    ]}
+                  />
+                </TouchableOpacity>
+
                 <Close
                   hide={() => {
                     setShowTextModal(false);
@@ -258,29 +264,51 @@ const Task = ({ task, index, scrollY, navigation }) => {
 
           <View style={styles.containerActions}>
             <View style={styles.actions}>
-              <TouchableOpacity
-                onPress={async () => {
-                  navigation.navigate("Update", task);
-                }}
-                activeOpacity={0.8}
-                key={"update"}
-                style={styles.updateButton}
-              >
-                <Text style={[styles.update, cardFontColor]}>Update</Text>
-              </TouchableOpacity>
+              <View style={styles.action}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setShowMetricsModal(true);
+                  }}
+                  activeOpacity={0.8}
+                  key={"metrics"}
+                  style={styles.actionButton}
+                >
+                  <MaterialIcons
+                    name="graphic-eq"
+                    size={18}
+                    color={theme.color.black.main}
+                    style={[styles.icon, cardFontColor]}
+                  />
 
-              <Text style={[styles.highlight, cardFontColor]}>•</Text>
+                  <Text style={[styles.metrics, cardFontColor]}>Metrics</Text>
+                </TouchableOpacity>
 
-              <TouchableOpacity
-                onPress={async () => {
-                  onShare(task.text);
-                }}
-                activeOpacity={0.8}
-                key={"share"}
-                style={styles.shareButton}
-              >
-                <Text style={[styles.share, cardFontColor]}>Share</Text>
-              </TouchableOpacity>
+                <Metrics
+                  task={task}
+                  showMetricsModal={showMetricsModal}
+                  setShowMetricsModal={setShowMetricsModal}
+                />
+              </View>
+
+              <View style={styles.action}>
+                <TouchableOpacity
+                  onPress={async () => {
+                    navigation.navigate("Update", task);
+                  }}
+                  activeOpacity={0.8}
+                  key={"update"}
+                  style={styles.actionButton}
+                >
+                  <MaterialIcons
+                    name="update"
+                    size={18}
+                    color={theme.color.black.main}
+                    style={[styles.icon, cardFontColor]}
+                  />
+
+                  <Text style={[styles.update, cardFontColor]}>Update</Text>
+                </TouchableOpacity>
+              </View>
             </View>
 
             <TouchableOpacity
@@ -315,8 +343,24 @@ const Task = ({ task, index, scrollY, navigation }) => {
               }}
               activeOpacity={0.8}
               key={"complete"}
-              style={styles.completeButton}
+              style={styles.actionButton}
             >
+              {task.completed[today] ? (
+                <Ionicons
+                  name="checkmark-done-circle"
+                  size={18}
+                  color={theme.color.black.main}
+                  style={[styles.icon, cardFontColor]}
+                />
+              ) : (
+                <Ionicons
+                  name="checkmark-done-circle-outline"
+                  size={18}
+                  color={theme.color.black.main}
+                  style={[styles.icon, cardFontColor]}
+                />
+              )}
+
               <Text style={[styles.complete, cardFontColor]}>
                 {task.completed[today] ? "Mark as incomplete" : "Complete"}
               </Text>
@@ -338,19 +382,7 @@ const styles = StyleSheet.create({
     padding: taskPadding,
     backgroundColor: theme.color.black.main,
   },
-  containerHeader: {
-    flex: 0.2,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  metrics: {
-    paddingHorizontal: 4,
-    paddingVertical: 2,
-    fontFamily: "Inter_300Light",
-    fontSize: 12,
-    color: theme.color.white.main,
-  },
+
   emoji: {
     fontSize: 22,
     opacity: 1,
@@ -365,7 +397,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   containerContent: {
-    flex: 0.85,
+    flex: 0.75,
     flexDirection: "row",
   },
   containerText: {
@@ -386,9 +418,13 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     paddingHorizontal: 32,
   },
+  icon: {
+    marginRight: 4,
+  },
   containerModalActions: {
     alignItems: "flex-end",
-    justifyContent: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginVertical: 14,
   },
   textModal: {
@@ -397,7 +433,7 @@ const styles = StyleSheet.create({
     color: theme.color.black.main,
   },
   containerActions: {
-    flex: 0.15,
+    flex: 0.25,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -408,32 +444,35 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
   },
-  highlight: {
-    marginLeft: 8,
-    color: theme.color.white.main,
+  action: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginRight: 8,
   },
-  updateButton: {
+  actionButton: {
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: 12,
   },
+  metrics: {
+    fontFamily: "Inter_400Regular",
+    fontSize: 12,
+    color: theme.color.white.main,
+  },
   update: {
-    fontFamily: "Inter_300Light",
+    fontFamily: "Inter_400Regular",
     fontSize: 12,
     color: theme.color.white.main,
   },
   shareButton: {
-    paddingVertical: 12,
+    paddingVertical: 14,
   },
   share: {
-    fontFamily: "Inter_300Light",
-    fontSize: 12,
-    color: theme.color.white.main,
+    color: theme.color.gray.dark,
     marginLeft: 8,
   },
-  completeButton: {
-    paddingVertical: 12,
-  },
   complete: {
-    fontFamily: "Inter_300Light",
+    fontFamily: "Inter_400Regular",
     fontSize: 12,
     color: theme.color.white.main,
   },

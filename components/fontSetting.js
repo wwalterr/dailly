@@ -22,7 +22,7 @@ const FontSetting = () => {
   const { settings, isDark, updateSettings } = useSettings();
 
   const [font, setFont] = useState(
-    settings.font ? settings.font : "Inter_600SemiBold"
+    settings.font ? settings.font : "Inter_700Bold"
   );
 
   const [showFont, setShowFont] = useState(false);

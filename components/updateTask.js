@@ -56,7 +56,7 @@ const UpdateTask = ({ task, navigation }) => {
   const [emoji, setEmoji] = useState(task.emoji);
 
   const [font, setFont] = useState(
-    task.font ? task.font : settings.font ? settings.font : "Inter_600SemiBold"
+    task.font ? task.font : settings.font ? settings.font : "Inter_700Bold"
   );
 
   const [showFont, setShowFont] = useState(false);

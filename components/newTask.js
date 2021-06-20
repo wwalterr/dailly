@@ -244,7 +244,7 @@ const NewTask = ({ newTaskTranslateY, hideNewTask, showModalBackground }) => {
                 completed: {
                   [today]: false,
                 },
-                font: settings.font ? settings.font : "Inter_600SemiBold",
+                font: settings.font ? settings.font : "Inter_700Bold",
                 cardColor: theme.color.black.main,
                 cardFontColor: theme.color.white.main,
                 createdAt: new Date().getTime(),
