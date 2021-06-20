@@ -55,6 +55,12 @@ const TasksProvider = ({ children }) => {
     await AsyncStorage.setItem(key, JSON.stringify(__tasks));
   };
 
+  const resetTasks = async () => {
+    setTasks(defaultTasks);
+
+    await AsyncStorage.setItem(key, JSON.stringify(defaultTasks));
+  };
+
   return (
     <TasksContext.Provider
       value={{
@@ -64,6 +70,7 @@ const TasksProvider = ({ children }) => {
         updateTask,
         removeTask,
         importTasks,
+        resetTasks,
       }}
     >
       {children}

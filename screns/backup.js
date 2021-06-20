@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   Text,
@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   ToastAndroid,
   Platform,
-  Linking,
   StyleSheet,
 } from "react-native";
 
@@ -34,10 +33,27 @@ const messageCopyGoals = "Goals exported";
 
 const messagePasteGoals = "Goals imported";
 
+const messageResetGoal = "Goals reset";
+
 const BackupScreen = ({ navigation }) => {
   const { isDark } = useSettings();
 
-  const { tasks, importTasks } = useTasks();
+  const { tasks, importTasks, resetTasks } = useTasks();
+
+  const [resetStatus, setResetStatus] = useState(false);
+
+  useEffect(() => {
+    let closeResetStatus;
+
+    if (resetStatus)
+      closeResetStatus = setTimeout(() => {
+        setResetStatus(false);
+      }, 2500);
+
+    return () => {
+      clearTimeout(closeResetStatus);
+    };
+  }, [resetStatus, setResetStatus]);
 
   return (
     <SafeAreaView
@@ -241,6 +257,41 @@ const BackupScreen = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
         </View>
+
+        <TouchableOpacity
+          onPress={async () => {
+            if (!resetStatus) {
+              setResetStatus(true);
+
+              return;
+            }
+
+            await resetTasks();
+
+            if (Platform.OS === "android")
+              ToastAndroid.show(messageResetGoal, ToastAndroid.SHORT);
+
+            if (navigation.canGoBack()) navigation.goBack();
+          }}
+          activeOpacity={0.8}
+          key={"reset"}
+          style={styles.resetButton}
+        >
+          <Text
+            style={[
+              styles.reset,
+              resetStatus
+                ? { color: theme.color.red.main }
+                : {
+                    color: isDark
+                      ? theme.color.white.main
+                      : theme.color.gray.main,
+                  },
+            ]}
+          >
+            {resetStatus ? "Confirm reset" : "Reset goals"}
+          </Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -297,6 +348,16 @@ const styles = StyleSheet.create({
     fontFamily: "Inter_400Regular",
     fontSize: 14,
     color: theme.color.white.main,
+  },
+  resetButton: {
+    flexDirection: "row",
+    paddingVertical: 12,
+  },
+  reset: {
+    fontFamily: "Inter_400Regular",
+    fontSize: 14,
+    color: theme.color.gray.main,
+    marginBottom: 16,
   },
 });
 
