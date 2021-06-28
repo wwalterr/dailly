@@ -37,7 +37,7 @@ import Close from "./close";
 
 import Metrics from "./metrics";
 
-const taskMargin = 16;
+const taskMargin = 14;
 
 const taskPadding = 20;
 
@@ -162,7 +162,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
               <>
                 <AnimatedEmoji
                   index={index}
-                  style={{ bottom: 0 }}
+                  style={{ top: 0 }}
                   name={task.emoji.aliases[0]}
                   size={25}
                   duration={3500}
@@ -171,7 +171,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
 
                 <AnimatedEmoji
                   index={index + 1}
-                  style={{ bottom: 40 }}
+                  style={{ top: 40 }}
                   name={task.emoji.aliases[0]}
                   size={15}
                   duration={3500}
@@ -180,7 +180,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
 
                 <AnimatedEmoji
                   index={index + 2}
-                  style={{ bottom: -60 }}
+                  style={{ top: -60 }}
                   name={task.emoji.aliases[0]}
                   size={25}
                   duration={3550}
@@ -382,9 +382,8 @@ const styles = StyleSheet.create({
     padding: taskPadding,
     backgroundColor: theme.color.black.main,
   },
-
   emoji: {
-    fontSize: 22,
+    fontSize: 20,
     opacity: 1,
     color: "#000000",
   },
@@ -447,7 +446,7 @@ const styles = StyleSheet.create({
   action: {
     flexDirection: "row",
     alignItems: "center",
-    marginRight: 8,
+    marginRight: 14,
   },
   actionButton: {
     flexDirection: "row",
