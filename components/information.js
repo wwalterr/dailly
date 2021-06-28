@@ -8,8 +8,6 @@ import Modal from "react-native-modal";
 
 import DatePicker from "react-native-date-picker";
 
-import { AutoGrowingTextInput } from "react-native-autogrow-textinput";
-
 import { Ionicons } from "@expo/vector-icons";
 
 import theme from "../theme";
@@ -39,7 +37,7 @@ const Information = ({
   return (
     <>
       <View style={[styles.row, styles.rowText]}>
-        <AutoGrowingTextInput
+        <TextInput
           placeholder="Describe your goal"
           placeholderTextColor={theme.color.gray.main}
           textAlign="left"
