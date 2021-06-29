@@ -357,7 +357,7 @@ const UpdateTask = ({ task, navigation }) => {
                       },
                 ]}
               >
-                {removeStatus ? "Confirm removal" : "Remove this goal"}
+                {removeStatus ? "Confirm removal" : "Remove goal"}
               </Text>
             </TouchableOpacity>
           </ScrollView>

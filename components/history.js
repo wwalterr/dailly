@@ -36,8 +36,8 @@ const History = ({
 
   const createdAtParsed = moment(createdAt).format("YYYY-MM-DD");
 
-  const today = moment().format("YYYY-MM-DD")
-  
+  const today = moment().format("YYYY-MM-DD");
+
   return (
     <Calendar
       markedDates={{
@@ -68,7 +68,7 @@ const History = ({
       hideExtraDays={true}
       hideDayNames={false}
       minDate={createdAtParsed}
-	  maxDate={today}
+      maxDate={today}
       onDayPress={(day) => {
         if (disableDayPressEvent) return;
 
