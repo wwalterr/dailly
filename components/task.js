@@ -383,7 +383,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.color.black.main,
   },
   emoji: {
-    fontSize: 20,
+    fontSize: 18,
     opacity: 1,
     color: "#000000",
   },
