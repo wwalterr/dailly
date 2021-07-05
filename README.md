@@ -45,7 +45,7 @@ Generate a build.
 yarn android
 ```
 
-Start the application server.
+Start a server.
 
 ```sh
 yarn start
