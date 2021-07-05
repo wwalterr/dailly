@@ -29,7 +29,7 @@ The main goal of this application is privacy and simplicity. No trackers, no ADS
 
 Use the package manager [Yarn](https://yarnpkg.com/getting-started/install) to install the dependencies.
 
-```bash
+```sh
 yarn
 ```
 
