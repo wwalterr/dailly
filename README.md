@@ -4,7 +4,7 @@ Create, manage and track your daily goals.
 
 ## About
 
-The main goal of this application is privacy and simplicity. No trackers, no ADS and no databases.
+Privacy and simplicity. No trackers, no ADS and no databases.
 
 ## Stores
 
