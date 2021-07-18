@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "dailly",
   "scripts": {
     "start": "react-native start",
