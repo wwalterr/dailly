@@ -33,10 +33,10 @@ Use the package manager [Yarn](https://yarnpkg.com/getting-started/install) to i
 yarn
 ```
 
-Use the package manager APT to install Java.
+Use the package manager APT to install Java or [Oracle JDK](https://www.oracle.com/java/technologies/javase-jdk16-downloads.html).
 
 ```sh
-apt install openjdk-11-jre openjdk-11-jre
+apt install openjdk-11-jdk
 ```
 
 Set Java variables to path in *$HOME/.zshrc* or *$HOME/.bashrc*.
