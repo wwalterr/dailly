@@ -33,9 +33,27 @@ Use the package manager [Yarn](https://yarnpkg.com/getting-started/install) to i
 yarn
 ```
 
-Use the IDE [Android Studio](https://developer.android.com/studio/install) to create a virtual device, using ADB, or connect to your device via USB, in developer mode.
+Use the package manager APT to install Java.
 
-> Notice that some APIs are only available in real devices, i.e through binary installation or USB connection
+```sh
+apt install openjdk-11-jre openjdk-11-jre
+```
+
+Set Java variables to path in *$HOME/.zshrc* or *$HOME/.bashrc*.
+
+```sh
+export ANDROID_HOME=$HOME/Android/Sdk
+
+export PATH=$PATH:$ANDROID_HOME/emulator
+
+export PATH=$PATH:$ANDROID_HOME/tools
+
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+```
+
+Use the IDE [Android Studio](https://developer.android.com/studio/install) to create a virtual device, using ADB, or connect your device via USB, in developer mode. Some APIs are only available in real devices.
 
 ## Usage
 
