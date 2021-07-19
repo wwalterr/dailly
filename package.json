@@ -16,13 +16,13 @@
     "@expo-google-fonts/maitree": "^0.1.0",
     "@expo-google-fonts/oxanium": "^0.1.0",
     "@expo/vector-icons": "^12.0.5",
-    "@react-native-async-storage/async-storage": "^1.15.4",
+    "@react-native-async-storage/async-storage": "^1.15.5",
     "@react-native-community/clipboard": "^1.5.1",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
     "expo": "~41.0.1",
-    "expo-app-loading": "^1.0.3",
+    "expo-app-loading": "^1.1.2",
     "expo-constants": "~10.1.3",
     "expo-notifications": "~0.11.6",
     "moment": "^2.29.1",
@@ -30,18 +30,18 @@
     "react-dom": "16.13.1",
     "react-native": "~0.63.4",
     "react-native-animated-emoji": "^0.1.4",
-    "react-native-calendars": "^1.1262.0",
-    "react-native-date-picker": "^3.3.0",
+    "react-native-calendars": "^1.1264.0",
+    "react-native-date-picker": "^3.3.2",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-modal": "^11.10.0",
-    "react-native-reanimated": "^2.1.0",
+    "react-native-reanimated": "^2.2.0",
     "react-native-safe-area-context": "^3.2.0",
-    "react-native-screens": "~3.0.0",
+    "react-native-screens": "~3.4.0",
     "react-native-switch": "https://github.com/shahen94/react-native-switch",
     "react-native-unimodules": "~0.13.3",
     "react-native-uuid": "^2.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.2"
+    "@babel/core": "^7.14.6"
   }
 }
