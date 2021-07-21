@@ -21,7 +21,10 @@ import generateRandomCode from "../utils/random";
 
 import { limitText, capitalize } from "../utils/text";
 
-import { schedulePushNotification } from "../utils/notifications";
+import {
+  schedulePushNotification,
+  cancelPushNotification,
+} from "../utils/notifications";
 
 import { useSettings } from "../contexts/settings";
 
@@ -266,7 +269,22 @@ const BackupScreen = ({ navigation }) => {
               return;
             }
 
-            await resetTasks();
+            try {
+              const promises = [];
+
+              for (const task of tasks) {
+                promises.push(cancelPushNotification(task.identifier));
+              }
+
+              await Promise.all(promises);
+
+              await resetTasks();
+            } catch (error) {
+              if (Platform.OS === "android")
+                ToastAndroid.show(error.message, ToastAndroid.SHORT);
+
+              return;
+            }
 
             if (Platform.OS === "android")
               ToastAndroid.show(messageResetGoal, ToastAndroid.SHORT);

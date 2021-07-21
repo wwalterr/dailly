@@ -59,10 +59,12 @@ const Header = ({ navigation, showNewTask }) => {
           name="dots-three-horizontal"
           size={24}
           color={
-            options
+            isDark
+              ? options
+                ? theme.color.white.hover
+                : theme.color.white.main
+              : options
               ? theme.color.black.hoverDark
-              : isDark
-              ? theme.color.white.main
               : theme.color.black.main
           }
           style={styles.dotsIcon}
