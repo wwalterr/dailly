@@ -1,12 +1,14 @@
 import React, { memo } from "react";
 
-import { View, Text, TextInput, Keyboard, StyleSheet } from "react-native";
+import { View, Text, Keyboard, StyleSheet } from "react-native";
 
 import { Switch } from "react-native-switch";
 
 import Modal from "react-native-modal";
 
 import DatePicker from "react-native-date-picker";
+
+import { AutoGrowingTextInput } from "react-native-autogrow-textinput";
 
 import { Ionicons } from "@expo/vector-icons";
 
@@ -37,7 +39,7 @@ const Information = ({
   return (
     <>
       <View style={[styles.row, styles.rowText]}>
-        <TextInput
+        <AutoGrowingTextInput
           placeholder="Describe your goal"
           placeholderTextColor={theme.color.gray.main}
           textAlign="left"

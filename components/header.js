@@ -60,7 +60,7 @@ const Header = ({ navigation, showNewTask }) => {
           size={24}
           color={
             options
-              ? theme.color.gray.main
+              ? theme.color.black.hoverDark
               : isDark
               ? theme.color.white.main
               : theme.color.black.main

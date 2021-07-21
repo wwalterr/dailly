@@ -30,6 +30,7 @@
     "react-dom": "16.13.1",
     "react-native": "~0.64.2",
     "react-native-animated-emoji": "^0.1.4",
+    "react-native-autogrow-textinput": "^5.4.0",
     "react-native-calendars": "^1.1264.0",
     "react-native-date-picker": "^3.3.2",
     "react-native-gesture-handler": "^1.10.3",

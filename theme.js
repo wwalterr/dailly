@@ -17,6 +17,7 @@ const theme = {
       main: "#000000",
       dark: "#111111",
       hover: "rgba(0, 0, 0, 0.25)",
+      hoverDark: "rgba(0, 0, 0, 0.65)",
     },
     red: {
       main: "#fc1f3d",

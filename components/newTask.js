@@ -2,7 +2,6 @@ import React, { useState, memo } from "react";
 
 import {
   View,
-  TextInput,
   Text,
   ToastAndroid,
   Platform,
@@ -15,6 +14,8 @@ import {
 import { Switch } from "react-native-switch";
 
 import { Animated } from "react-native";
+
+import { AutoGrowingTextInput } from "react-native-autogrow-textinput";
 
 import Modal from "react-native-modal";
 
@@ -110,13 +111,14 @@ const NewTask = ({ newTaskTranslateY, hideNewTask, showModalBackground }) => {
         </View>
 
         <View style={[styles.row, styles.rowText]}>
-          <TextInput
+          <AutoGrowingTextInput
             placeholder="Describe your goal"
             placeholderTextColor={theme.color.gray.main}
             textAlign="left"
             multiline={true}
             spellCheck={true}
             autoFocus={false}
+			maxHeight={100}
             underlineColorAndroid={theme.color.transparent}
             value={text}
             onChangeText={(_text) => {
