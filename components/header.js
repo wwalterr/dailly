@@ -58,7 +58,13 @@ const Header = ({ navigation, showNewTask }) => {
         <Entypo
           name="dots-three-horizontal"
           size={24}
-          color={isDark ? theme.color.white.main : theme.color.black.main}
+          color={
+            options
+              ? theme.color.gray.main
+              : isDark
+              ? theme.color.white.main
+              : theme.color.black.main
+          }
           style={styles.dotsIcon}
           onPress={() => {
             setOptions((previousOptions) => !previousOptions);
