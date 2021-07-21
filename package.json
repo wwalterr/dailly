@@ -3,6 +3,7 @@
   "scripts": {
     "start": "react-native start",
     "android": "react-native run-android",
+	"android:debug": "cd android && ./gradlew clean && ./gradlew :app:bundleRelease --stacktrace && cd ..",
     "android:production:simulation": "react-native run-android --variant=release",
     "ios": "react-native run-ios",
     "gradle:clean": "cd android && ./gradlew clean && cd ..",
