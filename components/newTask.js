@@ -77,7 +77,11 @@ const NewTask = ({ newTaskTranslateY, hideNewTask, showModalBackground }) => {
     <>
       {showModalBackground ? (
         <TouchableOpacity
-          onPress={hideNewTask}
+          onPress={() => {
+            Keyboard.dismiss();
+
+            hideNewTask();
+          }}
           style={{
             ...StyleSheet.absoluteFill,
             backgroundColor: isDark
