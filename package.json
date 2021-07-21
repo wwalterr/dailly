@@ -11,10 +11,10 @@
     "apk:create": "cd android && ./gradlew clean && ./gradlew assembleRelease && cd .. && cp ./android/app/build/outputs/apk/release/*.apk ./"
   },
   "dependencies": {
-    "@expo-google-fonts/dm-mono": "^0.1.0",
-    "@expo-google-fonts/inter": "^0.1.0",
-    "@expo-google-fonts/maitree": "^0.1.0",
-    "@expo-google-fonts/oxanium": "^0.1.0",
+    "@expo-google-fonts/dm-mono": "^0.2.0",
+    "@expo-google-fonts/inter": "^0.2.0",
+    "@expo-google-fonts/maitree": "^0.2.0",
+    "@expo-google-fonts/oxanium": "^0.2.0",
     "@expo/vector-icons": "^12.0.5",
     "@react-native-async-storage/async-storage": "^1.15.5",
     "@react-native-community/clipboard": "^1.5.1",
@@ -33,7 +33,7 @@
     "react-native-calendars": "^1.1264.0",
     "react-native-date-picker": "^3.3.2",
     "react-native-gesture-handler": "^1.10.3",
-    "react-native-modal": "^11.10.0",
+    "react-native-modal": "^12.0.2",
     "react-native-reanimated": "^2.2.0",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "~3.4.0",
