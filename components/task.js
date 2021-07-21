@@ -39,7 +39,7 @@ import Metrics from "./metrics";
 
 const taskMargin = 14;
 
-const taskPadding = 20;
+const taskPadding = 18;
 
 const taskHeight = 150 + taskMargin * 2;
 
@@ -396,7 +396,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   containerContent: {
-    flex: 0.75,
+    flex: 0.7,
     flexDirection: "row",
   },
   containerText: {
@@ -432,7 +432,7 @@ const styles = StyleSheet.create({
     color: theme.color.black.main,
   },
   containerActions: {
-    flex: 0.25,
+    flex: 0.3,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -451,7 +451,7 @@ const styles = StyleSheet.create({
   actionButton: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 12,
+    paddingVertical: 6,
   },
   metrics: {
     fontFamily: "Inter_400Regular",
