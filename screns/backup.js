@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ToastAndroid,
   Platform,
+  Alert,
   StyleSheet,
 } from "react-native";
 
@@ -42,6 +43,8 @@ import HeaderGoBack from "../components/headerGoBack";
 
 const messageCopyGoals = "Goals exported";
 
+const messageSignedIn = "You've signed in";
+
 const messagePasteGoals = "Goals imported";
 
 const messageResetGoal = "Goals reset";
@@ -57,7 +60,6 @@ const BackupScreen = ({ navigation }) => {
 
   GoogleSignin.configure({
     scopes: ["https://www.googleapis.com/auth/drive"],
-    // prettier-ignore
     webClientId: GCP_WEB_CLIENT_ID,
     offlineAccess: true,
     forceCodeForRefreshToken: true,
@@ -84,15 +86,18 @@ const BackupScreen = ({ navigation }) => {
 
       // User profile information
       await GoogleSignin.signIn();
+
+      if (Platform.OS === "android")
+        ToastAndroid.show(messageSignedIn, ToastAndroid.SHORT);
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        console.log("User cancelled the login flow");
+        Alert.alert("User cancelled the login flow");
       } else if (error.code === statusCodes.IN_PROGRESS) {
-        console.log("Operation (e.g. sign in) is in progress already");
+        Alert.alert("Operation (e.g. sign in) is in progress already");
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        console.log("Play Services not available or outdated");
+        Alert.alert("Play Services not available or outdated");
       } else {
-        console.log("Some other error", error.message);
+        Alert.alert("Some other error");
       }
     }
 
