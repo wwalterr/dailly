@@ -47,7 +47,7 @@ const TasksProvider = ({ children }) => {
     await AsyncStorage.setItem(key, JSON.stringify(_tasks));
   };
 
-  const importTasks = async (_tasks) => {
+  const createTasks = async (_tasks) => {
     const __tasks = [...tasks, ..._tasks];
 
     setTasks(__tasks);
@@ -69,7 +69,7 @@ const TasksProvider = ({ children }) => {
         findTask,
         updateTask,
         removeTask,
-        importTasks,
+        createTasks,
         resetTasks,
       }}
     >

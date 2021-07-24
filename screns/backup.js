@@ -49,10 +49,58 @@ const messagePasteGoals = "Goals imported";
 
 const messageResetGoal = "Goals reset";
 
+const exportTasks = (tasks) => {
+  Clipboard.setString(JSON.stringify(tasks));
+
+  if (Platform.OS === "android")
+    ToastAndroid.show(messageCopyGoals, ToastAndroid.SHORT);
+};
+
+const importTasks = async (tasks, createTasks) => {
+  const _tasks = tasks.map(async (task) => {
+    let identifier;
+
+    const date = new Date(task.remindTime ? task.remindTime : task.createdAt);
+
+    if (task.remind) {
+      // Async await or scope causes a undefined error,
+      // review the notification API
+      try {
+        identifier = await schedulePushNotification(
+          {
+            title: `Achieve your goal ${
+              task.emoji.emoji ? task.emoji.emoji : ""
+            }`,
+            body: capitalize(limitText(task.text, 36)),
+            vibrate: true,
+          },
+          {
+            hour: date.getHours(),
+            minute: date.getMinutes(),
+            repeats: true,
+          }
+        );
+      } catch (error) {}
+    }
+
+    return {
+      ...task,
+      id: generateRandomCode(),
+      ...(task.remind ? { identifier } : {}),
+      ...(task.remind ? { remindTime: date.getTime() } : {}),
+    };
+  });
+
+  createTasks(await Promise.all(_tasks));
+
+  if (Platform.OS === "android")
+    ToastAndroid.show(messagePasteGoals, ToastAndroid.SHORT);
+};
+
 const BackupScreen = ({ navigation }) => {
   const { isDark } = useSettings();
 
-  const { tasks, importTasks, resetTasks } = useTasks();
+  const { tasks, createTasks, resetTasks } = useTasks();
 
   const [resetStatus, setResetStatus] = useState(false);
 
@@ -97,7 +145,7 @@ const BackupScreen = ({ navigation }) => {
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
         Alert.alert("Play Services not available or outdated");
       } else {
-        Alert.alert("Some other error");
+        Alert.alert("Some other error ", error.message);
       }
     }
 
@@ -163,12 +211,7 @@ const BackupScreen = ({ navigation }) => {
           </Text>
 
           <TouchableOpacity
-            onPress={() => {
-              Clipboard.setString(JSON.stringify(tasks));
-
-              if (Platform.OS === "android")
-                ToastAndroid.show(messageCopyGoals, ToastAndroid.SHORT);
-            }}
+            onPress={() => exportTasks(tasks)}
             activeOpacity={0.8}
             key={"export"}
             style={[
@@ -227,10 +270,10 @@ const BackupScreen = ({ navigation }) => {
 
           <TouchableOpacity
             onPress={async () => {
-              let text;
+              let _tasks;
 
               try {
-                text = await Clipboard.getString();
+                _tasks = JSON.parse(await Clipboard.getString());
               } catch (error) {
                 if (Platform.OS === "android")
                   ToastAndroid.show(error.message, ToastAndroid.SHORT);
@@ -238,61 +281,7 @@ const BackupScreen = ({ navigation }) => {
                 return;
               }
 
-              let textParsed;
-
-              try {
-                textParsed = JSON.parse(text);
-              } catch (error) {
-                if (Platform.OS === "android")
-                  ToastAndroid.show(error.message, ToastAndroid.SHORT);
-
-                return;
-              }
-
-              const _tasks = [];
-
-              textParsed.forEach(async (task) => {
-                let identifier;
-
-                const date = new Date(
-                  task.remindTime ? task.remindTime : task.createdAt
-                );
-
-                if (task.remind) {
-                  // Async await or scope causes a undefined error,
-                  // review the notification API
-                  schedulePushNotification(
-                    {
-                      title: `Achieve your goal ${
-                        task.emoji.emoji ? task.emoji.emoji : ""
-                      }`,
-                      body: capitalize(limitText(task.text, 36)),
-                      vibrate: true,
-                    },
-                    {
-                      hour: date.getHours(),
-                      minute: date.getMinutes(),
-                      repeats: true,
-                    }
-                  )
-                    .then((response) => {
-                      identifier = response;
-                    })
-                    .catch((error) => {});
-                }
-
-                _tasks.push({
-                  ...task,
-                  id: generateRandomCode(),
-                  ...(task.remind ? { identifier } : {}),
-                  ...(task.remind ? { remindTime: date.getTime() } : {}),
-                });
-              });
-
-              importTasks(_tasks);
-
-              if (Platform.OS === "android")
-                ToastAndroid.show(messagePasteGoals, ToastAndroid.SHORT);
+              importTasks(_tasks, createTasks);
             }}
             activeOpacity={0.8}
             key={"import"}
