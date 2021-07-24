@@ -2,6 +2,9 @@
 .vscode
 .idea
 
+# Environment
+.env
+
 # Android
 build
 .gradle

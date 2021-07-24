@@ -15,6 +15,14 @@ import { Ionicons } from "@expo/vector-icons";
 
 import Clipboard from "@react-native-community/clipboard";
 
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from "@react-native-google-signin/google-signin";
+
+import { GCP_WEB_CLIENT_ID } from "@env";
+
 import theme from "../theme";
 
 import generateRandomCode from "../utils/random";
@@ -45,6 +53,16 @@ const BackupScreen = ({ navigation }) => {
 
   const [resetStatus, setResetStatus] = useState(false);
 
+  const [isSigninInProgress, setIsSigninInProgress] = useState(false);
+
+  GoogleSignin.configure({
+    scopes: ["https://www.googleapis.com/auth/drive"],
+    // prettier-ignore
+    webClientId: GCP_WEB_CLIENT_ID,
+    offlineAccess: true,
+    forceCodeForRefreshToken: true,
+  });
+
   useEffect(() => {
     let closeResetStatus;
 
@@ -57,6 +75,29 @@ const BackupScreen = ({ navigation }) => {
       clearTimeout(closeResetStatus);
     };
   }, [resetStatus, setResetStatus]);
+
+  const signIn = async () => {
+    setIsSigninInProgress(true);
+
+    try {
+      await GoogleSignin.hasPlayServices();
+
+      // User profile information
+      await GoogleSignin.signIn();
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        console.log("User cancelled the login flow");
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        console.log("Operation (e.g. sign in) is in progress already");
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        console.log("Play Services not available or outdated");
+      } else {
+        console.log("Some other error", error.message);
+      }
+    }
+
+    setIsSigninInProgress(false);
+  };
 
   return (
     <SafeAreaView
@@ -146,6 +187,18 @@ const BackupScreen = ({ navigation }) => {
               Export
             </Text>
           </TouchableOpacity>
+
+          <GoogleSigninButton
+            style={{ width: 130, height: 48, marginTop: 8, elevation: 0 }}
+            size={GoogleSigninButton.Size.Standard}
+            color={
+              isDark
+                ? GoogleSigninButton.Color.Dark
+                : GoogleSigninButton.Color.Light
+            }
+            onPress={signIn}
+            disabled={isSigninInProgress}
+          />
         </View>
 
         <View style={styles.action}>

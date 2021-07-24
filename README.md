@@ -39,7 +39,7 @@ Use the package manager APT to install Java or [Oracle JDK](https://www.oracle.c
 apt install openjdk-11-jdk
 ```
 
-Set Java variables to path in *$HOME/.zshrc* or *$HOME/.bashrc*.
+Set Java variables to path in _$HOME/.zshrc_ or _$HOME/.bashrc_.
 
 ```sh
 export ANDROID_HOME=$HOME/Android/Sdk
@@ -54,6 +54,8 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 ```
 
 Use the IDE [Android Studio](https://developer.android.com/studio/install) to create a virtual device, using ADB, or connect your device via USB, in developer mode. Some APIs are only available in real devices.
+
+Rename _.env.example_ to _.env_ and change the variables. Environment variables can't be `undefined` and everything that is already defined in the environment will be ignored, checl _babel.config.js_ to change this configuration.
 
 ## Usage
 

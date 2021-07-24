@@ -23,4 +23,6 @@ target 'dailly' do
   #     flipper_post_install(installer)
   #   end
   # end
+  pod 'RNGoogleSignin', :path => '../node_modules/@react-native-google-signin/google-signin'
+
 end
