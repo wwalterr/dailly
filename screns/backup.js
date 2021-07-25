@@ -50,14 +50,17 @@ import { useSettings } from "../contexts/settings";
 import { useTasks } from "../contexts/tasks";
 
 import HeaderGoBack from "../components/headerGoBack";
+import ThemeSetting from "../components/themeSetting";
 
 const messageSignedIn = "You've signed in";
 
 const messageSignedOut = "You've signed out";
 
-const messageCopyGoals = "Goals exported";
+const messageCopyGoals = "Goals copied";
 
-const messagePasteGoals = "Goals imported";
+const messageExportGoals = "Goals exported";
+
+const messageImportGoals = "Goals imported";
 
 const messageResetGoal = "Goals reset";
 
@@ -106,7 +109,7 @@ const importTasks = async (tasks, createTasks) => {
   createTasks(await Promise.all(_tasks));
 
   if (Platform.OS === "android")
-    ToastAndroid.show(messagePasteGoals, ToastAndroid.SHORT);
+    ToastAndroid.show(messageImportGoals, ToastAndroid.SHORT);
 };
 
 const signIn = async (setIsSigninInProgress, setIsSignedIn) => {
@@ -235,7 +238,7 @@ const BackupScreen = ({ navigation }) => {
 
       <ScrollView style={styles.actions}>
         {/* Google Drive */}
-        <View style={styles.action}>
+        <View style={[styles.action, styles.actionGoogleDrive]}>
           <View style={styles.actionHeader}>
             <Image
               style={styles.image}
@@ -260,24 +263,9 @@ const BackupScreen = ({ navigation }) => {
                 activeOpacity={0.8}
                 key={"sign-in"}
                 disabled={isSigninInProgress}
-                style={[
-                  styles.button,
-                  isDark ? { backgroundColor: theme.color.black.light } : {},
-                ]}
+                style={styles.button}
               >
-                <Image
-                  style={styles.buttonIconImage}
-                  source={require("../assets/backup/google.png")}
-                />
-
-                <Text
-                  style={[
-                    styles.buttonText,
-                    isDark ? { color: theme.color.white.main } : {},
-                  ]}
-                >
-                  Sign in
-                </Text>
+                <Text style={[styles.buttonText]}>Sign in with Google</Text>
               </Pressable>
             )}
 
@@ -309,35 +297,25 @@ const BackupScreen = ({ navigation }) => {
                       ).id;
 
                       if (Platform.OS === "android")
-                        ToastAndroid.show(messageCopyGoals, ToastAndroid.SHORT);
+                        ToastAndroid.show(
+                          messageExportGoals,
+                          ToastAndroid.SHORT
+                        );
                     } catch (error) {
                       Alert.alert(error.message);
                     }
                   }}
                   activeOpacity={0.8}
                   key={"export-google-drive"}
-                  style={[
-                    styles.button,
-                    isDark ? { backgroundColor: theme.color.black.light } : {},
-                  ]}
+                  style={styles.button}
                 >
                   <Ionicons
                     name="arrow-up"
                     size={22}
-                    color={
-                      isDark ? theme.color.white.main : theme.color.black.main
-                    }
                     style={styles.buttonIcon}
                   />
 
-                  <Text
-                    style={[
-                      styles.buttonText,
-                      isDark ? { color: theme.color.white.main } : {},
-                    ]}
-                  >
-                    Export
-                  </Text>
+                  <Text style={styles.buttonText}>Export</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -365,7 +343,7 @@ const BackupScreen = ({ navigation }) => {
 
                       if (Platform.OS === "android")
                         ToastAndroid.show(
-                          messagePasteGoals,
+                          messageImportGoals,
                           ToastAndroid.SHORT
                         );
                     } catch (error) {
@@ -374,28 +352,15 @@ const BackupScreen = ({ navigation }) => {
                   }}
                   activeOpacity={0.8}
                   key={"import-google-drive"}
-                  style={[
-                    styles.button,
-                    isDark ? { backgroundColor: theme.color.black.light } : {},
-                  ]}
+                  style={[styles.button, styles.buttonSpace]}
                 >
                   <Ionicons
                     name="arrow-down"
                     size={22}
-                    color={
-                      isDark ? theme.color.white.main : theme.color.black.main
-                    }
                     style={styles.buttonIcon}
                   />
 
-                  <Text
-                    style={[
-                      styles.buttonText,
-                      isDark ? { color: theme.color.white.main } : {},
-                    ]}
-                  >
-                    Import
-                  </Text>
+                  <Text style={styles.buttonText}>Import</Text>
                 </TouchableOpacity>
               </>
             ) : null}
@@ -403,7 +368,7 @@ const BackupScreen = ({ navigation }) => {
         </View>
 
         {/* Local */}
-        <View style={styles.action}>
+        <View style={[styles.action, styles.actionLocal]}>
           <View style={styles.actionHeader}>
             <Image
               style={styles.image}
@@ -414,7 +379,7 @@ const BackupScreen = ({ navigation }) => {
               <Text style={styles.actionTitle}>Local</Text>
 
               <Text style={styles.actionDescription}>
-                Backup your data on your smartphone
+                Backup your data on your device
               </Text>
             </View>
           </View>
@@ -424,26 +389,11 @@ const BackupScreen = ({ navigation }) => {
               onPress={() => exportTasks(tasks)}
               activeOpacity={0.8}
               key={"export"}
-              style={[
-                styles.button,
-                isDark ? { backgroundColor: theme.color.black.light } : {},
-              ]}
+              style={styles.button}
             >
-              <Ionicons
-                name="arrow-up"
-                size={22}
-                color={isDark ? theme.color.white.main : theme.color.black.main}
-                style={styles.buttonIcon}
-              />
+              <Ionicons name="arrow-up" size={22} style={styles.buttonIcon} />
 
-              <Text
-                style={[
-                  styles.buttonText,
-                  isDark ? { color: theme.color.white.main } : {},
-                ]}
-              >
-                Export
-              </Text>
+              <Text style={styles.buttonText}>Export</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -463,26 +413,11 @@ const BackupScreen = ({ navigation }) => {
               }}
               activeOpacity={0.8}
               key={"import"}
-              style={[
-                styles.button,
-                isDark ? { backgroundColor: theme.color.black.light } : {},
-              ]}
+              style={[styles.button, styles.buttonSpace]}
             >
-              <Ionicons
-                name="arrow-down"
-                size={22}
-                color={isDark ? theme.color.white.main : theme.color.black.main}
-                style={styles.buttonIcon}
-              />
+              <Ionicons name="arrow-down" size={22} style={styles.buttonIcon} />
 
-              <Text
-                style={[
-                  styles.buttonText,
-                  isDark ? { color: theme.color.white.main } : {},
-                ]}
-              >
-                Import
-              </Text>
+              <Text style={styles.buttonText}>Import</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -521,7 +456,7 @@ const BackupScreen = ({ navigation }) => {
             }}
             activeOpacity={0.8}
             key={"reset"}
-            style={styles.resetButton}
+            style={styles.cleanButton}
           >
             <Text
               style={[
@@ -539,31 +474,45 @@ const BackupScreen = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
 
-          <Text style={styles.highlight}>•</Text>
+          {isSignedIn ? (
+            <>
+              <Text
+                style={[
+                  styles.highlight,
+                  {
+                    color: isDark
+                      ? theme.color.gray.main
+                      : theme.color.black.hover,
+                  },
+                ]}
+              >
+                •
+              </Text>
 
-          <Pressable
-            onPress={async () => signOut(setIsSignedIn, setIsSignoutInProgress)}
-            activeOpacity={0.8}
-            key={"sign-out"}
-            disabled={isSignoutInProgress}
-            style={[
-              styles.button,
-              isDark ? { backgroundColor: theme.color.black.light } : {},
-            ]}
-          >
-            <Text
-              style={[
-                styles.reset,
-                {
-                  color: isDark
-                    ? theme.color.white.main
-                    : theme.color.gray.main,
-                },
-              ]}
-            >
-              Sign out
-            </Text>
-          </Pressable>
+              <Pressable
+                onPress={async () =>
+                  signOut(setIsSignedIn, setIsSignoutInProgress)
+                }
+                activeOpacity={0.8}
+                key={"sign-out"}
+                disabled={isSignoutInProgress}
+                style={[styles.cleanButton]}
+              >
+                <Text
+                  style={[
+                    styles.reset,
+                    {
+                      color: isDark
+                        ? theme.color.white.main
+                        : theme.color.gray.main,
+                    },
+                  ]}
+                >
+                  Sign out
+                </Text>
+              </Pressable>
+            </>
+          ) : null}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -588,18 +537,69 @@ const styles = StyleSheet.create({
   actions: {
     flex: 1,
     paddingHorizontal: 32,
+    marginTop: 8,
   },
-  action: {},
-  actionHeader: {},
-  image: {},
-  actionHeaderContent: {},
-  actionTitle: {},
-  actionDescription: {},
-  actionBody: {},
-  button: {},
-  buttonIcon: {},
-  buttonIconImage: {},
-  buttonText: {},
+  action: {
+    flexDirection: "column",
+    justifyContent: "center",
+    height: 170,
+    borderRadius: 8,
+    padding: 24,
+  },
+  actionGoogleDrive: {
+    marginBottom: 32,
+    backgroundColor: theme.color.green.soft,
+  },
+  actionLocal: {
+    marginBottom: 22,
+    backgroundColor: theme.color.blue.soft,
+  },
+  actionHeader: {
+    flex: 0.75,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  image: {
+    width: 32,
+    height: 32,
+    marginRight: 18,
+    tintColor: theme.color.black.main,
+  },
+  actionHeaderContent: {
+    flex: 1,
+  },
+  actionTitle: {
+    color: theme.color.black.main,
+    fontFamily: "Inter_500Medium",
+    fontSize: 18,
+  },
+  actionDescription: {
+    color: theme.color.black.hoverDark,
+    fontFamily: "Inter_400Regular",
+    fontSize: 13,
+  },
+  actionBody: {
+    flex: 0.75,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  button: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 8,
+    paddingLeft: 0,
+  },
+  buttonSpace: {
+    marginLeft: 18,
+  },
+  buttonIcon: {
+    color: theme.color.white.main,
+    marginRight: 8,
+  },
+  buttonText: {
+    color: theme.color.black.light,
+    fontSize: 13,
+  },
   clean: {
     flexDirection: "row",
     alignItems: "center",
@@ -608,13 +608,13 @@ const styles = StyleSheet.create({
     marginTop: -16,
     marginHorizontal: 8,
   },
-  resetButton: {
+  cleanButton: {
     flexDirection: "row",
     paddingVertical: 12,
   },
   reset: {
     fontFamily: "Inter_400Regular",
-    fontSize: 14,
+    fontSize: 12,
     color: theme.color.gray.main,
     marginBottom: 16,
   },

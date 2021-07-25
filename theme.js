@@ -23,9 +23,11 @@ const theme = {
       main: "#fc1f3d",
     },
     green: {
+      soft: "#d7fbe1",
       main: "#01ce89",
     },
     blue: {
+      soft: "#dbecfd",
       light: "#f1f5fe",
     },
     cards: [
