@@ -3,10 +3,13 @@ import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
+  ScrollView,
   TouchableOpacity,
   ToastAndroid,
+  Image,
   Platform,
   Alert,
+  Pressable,
   StyleSheet,
 } from "react-native";
 
@@ -18,15 +21,22 @@ import Clipboard from "@react-native-community/clipboard";
 
 import {
   GoogleSignin,
-  GoogleSigninButton,
   statusCodes,
 } from "@react-native-google-signin/google-signin";
+
+import {
+  GDrive,
+  ListQueryBuilder,
+  MimeTypes,
+} from "@robinbobin/react-native-google-drive-api-wrapper";
 
 import { GCP_WEB_CLIENT_ID } from "@env";
 
 import theme from "../theme";
 
 import generateRandomCode from "../utils/random";
+
+import ISODateString from "../utils/dates";
 
 import { limitText, capitalize } from "../utils/text";
 
@@ -41,9 +51,11 @@ import { useTasks } from "../contexts/tasks";
 
 import HeaderGoBack from "../components/headerGoBack";
 
-const messageCopyGoals = "Goals exported";
-
 const messageSignedIn = "You've signed in";
+
+const messageSignedOut = "You've signed out";
+
+const messageCopyGoals = "Goals exported";
 
 const messagePasteGoals = "Goals imported";
 
@@ -97,6 +109,53 @@ const importTasks = async (tasks, createTasks) => {
     ToastAndroid.show(messagePasteGoals, ToastAndroid.SHORT);
 };
 
+const signIn = async (setIsSigninInProgress, setIsSignedIn) => {
+  setIsSigninInProgress(true);
+
+  try {
+    await GoogleSignin.hasPlayServices();
+
+    // User profile information
+    await GoogleSignin.signIn();
+
+    setIsSignedIn(true);
+
+    if (Platform.OS === "android")
+      ToastAndroid.show(messageSignedIn, ToastAndroid.SHORT);
+  } catch (error) {
+    if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+      Alert.alert("User cancelled the login flow");
+    } else if (error.code === statusCodes.IN_PROGRESS) {
+      Alert.alert("Operation (e.g. sign in) is in progress already");
+    } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+      Alert.alert("Play Services not available or outdated");
+    } else {
+      Alert.alert("Some other error ", error.message);
+    }
+  }
+
+  setIsSigninInProgress(false);
+};
+
+signOut = async (setIsSignedIn, setIsSignoutInProgress) => {
+  setIsSignoutInProgress(true);
+
+  try {
+    await GoogleSignin.revokeAccess();
+
+    await GoogleSignin.signOut();
+
+    setIsSignedIn(false);
+
+    if (Platform.OS === "android")
+      ToastAndroid.show(messageSignedOut, ToastAndroid.SHORT);
+  } catch (error) {
+    Alert.alert(error.message);
+  }
+
+  setIsSignoutInProgress(false);
+};
+
 const BackupScreen = ({ navigation }) => {
   const { isDark } = useSettings();
 
@@ -104,7 +163,11 @@ const BackupScreen = ({ navigation }) => {
 
   const [resetStatus, setResetStatus] = useState(false);
 
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
   const [isSigninInProgress, setIsSigninInProgress] = useState(false);
+
+  const [isSignoutInProgress, setIsSignoutInProgress] = useState(false);
 
   GoogleSignin.configure({
     scopes: ["https://www.googleapis.com/auth/drive"],
@@ -112,6 +175,12 @@ const BackupScreen = ({ navigation }) => {
     offlineAccess: true,
     forceCodeForRefreshToken: true,
   });
+
+  useEffect(() => {
+    (async () => {
+      setIsSignedIn(await GoogleSignin.isSignedIn());
+    })();
+  }, []);
 
   useEffect(() => {
     let closeResetStatus;
@@ -125,32 +194,6 @@ const BackupScreen = ({ navigation }) => {
       clearTimeout(closeResetStatus);
     };
   }, [resetStatus, setResetStatus]);
-
-  const signIn = async () => {
-    setIsSigninInProgress(true);
-
-    try {
-      await GoogleSignin.hasPlayServices();
-
-      // User profile information
-      await GoogleSignin.signIn();
-
-      if (Platform.OS === "android")
-        ToastAndroid.show(messageSignedIn, ToastAndroid.SHORT);
-    } catch (error) {
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        Alert.alert("User cancelled the login flow");
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-        Alert.alert("Operation (e.g. sign in) is in progress already");
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        Alert.alert("Play Services not available or outdated");
-      } else {
-        Alert.alert("Some other error ", error.message);
-      }
-    }
-
-    setIsSigninInProgress(false);
-  };
 
   return (
     <SafeAreaView
@@ -190,90 +233,280 @@ const BackupScreen = ({ navigation }) => {
         </Text>
       </View>
 
-      <View style={styles.actions}>
+      <ScrollView style={styles.actions}>
+        {/* Google Drive */}
         <View style={styles.action}>
-          <Text
-            style={[
-              styles.subTitle,
-              isDark ? { color: theme.color.white.main } : {},
-            ]}
-          >
-            Export
-          </Text>
-
-          <Text
-            style={[
-              styles.description,
-              isDark ? { color: theme.color.white.main } : {},
-            ]}
-          >
-            Press the export button to copy your goals
-          </Text>
-
-          <TouchableOpacity
-            onPress={() => exportTasks(tasks)}
-            activeOpacity={0.8}
-            key={"export"}
-            style={[
-              styles.button,
-              isDark ? { backgroundColor: theme.color.black.light } : {},
-            ]}
-          >
-            <Ionicons
-              name="arrow-up"
-              size={22}
-              color={isDark ? theme.color.white.main : theme.color.black.main}
-              style={styles.buttonIcon}
+          <View style={styles.actionHeader}>
+            <Image
+              style={styles.image}
+              source={require("../assets/backup/googleDrive.png")}
             />
 
-            <Text
-              style={[
-                styles.buttonText,
-                isDark ? { color: theme.color.white.main } : {},
-              ]}
-            >
-              Export
-            </Text>
-          </TouchableOpacity>
+            <View style={styles.actionHeaderContent}>
+              <Text style={styles.actionTitle}>Google Drive</Text>
 
-          <GoogleSigninButton
-            style={{ width: 130, height: 48, marginTop: 8, elevation: 0 }}
-            size={GoogleSigninButton.Size.Standard}
-            color={
-              isDark
-                ? GoogleSigninButton.Color.Dark
-                : GoogleSigninButton.Color.Light
-            }
-            onPress={signIn}
-            disabled={isSigninInProgress}
-          />
+              <Text style={styles.actionDescription}>
+                Backup your data on cloud
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.actionBody}>
+            {isSignedIn ? null : (
+              <Pressable
+                onPress={async () =>
+                  signIn(setIsSigninInProgress, setIsSignedIn)
+                }
+                activeOpacity={0.8}
+                key={"sign-in"}
+                disabled={isSigninInProgress}
+                style={[
+                  styles.button,
+                  isDark ? { backgroundColor: theme.color.black.light } : {},
+                ]}
+              >
+                <Image
+                  style={styles.buttonIconImage}
+                  source={require("../assets/backup/google.png")}
+                />
+
+                <Text
+                  style={[
+                    styles.buttonText,
+                    isDark ? { color: theme.color.white.main } : {},
+                  ]}
+                >
+                  Sign in
+                </Text>
+              </Pressable>
+            )}
+
+            {isSignedIn ? (
+              <>
+                <TouchableOpacity
+                  onPress={async () => {
+                    const gdrive = new GDrive();
+
+                    try {
+                      gdrive.accessToken = (
+                        await GoogleSignin.getTokens()
+                      ).accessToken;
+
+                      const id = (
+                        await gdrive.files
+                          .newMultipartUploader()
+                          .setData(
+                            JSON.stringify(JSON.stringify(tasks)),
+                            MimeTypes.JSON
+                          )
+                          .setRequestBody({
+                            name: "dailly.json",
+                            description: "Backup for Dailly mobile application",
+                            createdTime: ISODateString(new Date()),
+                          })
+                          .setIsBase64()
+                          .execute()
+                      ).id;
+
+                      if (Platform.OS === "android")
+                        ToastAndroid.show(messageCopyGoals, ToastAndroid.SHORT);
+                    } catch (error) {
+                      Alert.alert(error.message);
+                    }
+                  }}
+                  activeOpacity={0.8}
+                  key={"export-google-drive"}
+                  style={[
+                    styles.button,
+                    isDark ? { backgroundColor: theme.color.black.light } : {},
+                  ]}
+                >
+                  <Ionicons
+                    name="arrow-up"
+                    size={22}
+                    color={
+                      isDark ? theme.color.white.main : theme.color.black.main
+                    }
+                    style={styles.buttonIcon}
+                  />
+
+                  <Text
+                    style={[
+                      styles.buttonText,
+                      isDark ? { color: theme.color.white.main } : {},
+                    ]}
+                  >
+                    Export
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={async () => {
+                    const gdrive = new GDrive();
+
+                    gdrive.accessToken = (
+                      await GoogleSignin.getTokens()
+                    ).accessToken;
+
+                    try {
+                      const fileId = (
+                        await gdrive.files.list({
+                          q: new ListQueryBuilder().e("name", "dailly.json"),
+                        })
+                      ).files[0].id;
+
+                      const file = await gdrive.files.getJson(
+                        fileId,
+                        null,
+                        "1-1"
+                      );
+
+                      importTasks(JSON.parse(file), createTasks);
+
+                      if (Platform.OS === "android")
+                        ToastAndroid.show(
+                          messagePasteGoals,
+                          ToastAndroid.SHORT
+                        );
+                    } catch (error) {
+                      Alert.alert(error.message);
+                    }
+                  }}
+                  activeOpacity={0.8}
+                  key={"import-google-drive"}
+                  style={[
+                    styles.button,
+                    isDark ? { backgroundColor: theme.color.black.light } : {},
+                  ]}
+                >
+                  <Ionicons
+                    name="arrow-down"
+                    size={22}
+                    color={
+                      isDark ? theme.color.white.main : theme.color.black.main
+                    }
+                    style={styles.buttonIcon}
+                  />
+
+                  <Text
+                    style={[
+                      styles.buttonText,
+                      isDark ? { color: theme.color.white.main } : {},
+                    ]}
+                  >
+                    Import
+                  </Text>
+                </TouchableOpacity>
+              </>
+            ) : null}
+          </View>
         </View>
 
+        {/* Local */}
         <View style={styles.action}>
-          <Text
-            style={[
-              styles.subTitle,
-              isDark ? { color: theme.color.white.main } : {},
-            ]}
-          >
-            Import
-          </Text>
+          <View style={styles.actionHeader}>
+            <Image
+              style={styles.image}
+              source={require("../assets/backup/smartphone.png")}
+            />
 
-          <Text
-            style={[
-              styles.description,
-              isDark ? { color: theme.color.white.main } : {},
-            ]}
-          >
-            Copy your goals and press the import button
-          </Text>
+            <View style={styles.actionHeaderContent}>
+              <Text style={styles.actionTitle}>Local</Text>
 
+              <Text style={styles.actionDescription}>
+                Backup your data on your smartphone
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.actionBody}>
+            <TouchableOpacity
+              onPress={() => exportTasks(tasks)}
+              activeOpacity={0.8}
+              key={"export"}
+              style={[
+                styles.button,
+                isDark ? { backgroundColor: theme.color.black.light } : {},
+              ]}
+            >
+              <Ionicons
+                name="arrow-up"
+                size={22}
+                color={isDark ? theme.color.white.main : theme.color.black.main}
+                style={styles.buttonIcon}
+              />
+
+              <Text
+                style={[
+                  styles.buttonText,
+                  isDark ? { color: theme.color.white.main } : {},
+                ]}
+              >
+                Export
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={async () => {
+                let _tasks;
+
+                try {
+                  _tasks = JSON.parse(await Clipboard.getString());
+                } catch (error) {
+                  if (Platform.OS === "android")
+                    ToastAndroid.show(error.message, ToastAndroid.SHORT);
+
+                  return;
+                }
+
+                importTasks(_tasks, createTasks);
+              }}
+              activeOpacity={0.8}
+              key={"import"}
+              style={[
+                styles.button,
+                isDark ? { backgroundColor: theme.color.black.light } : {},
+              ]}
+            >
+              <Ionicons
+                name="arrow-down"
+                size={22}
+                color={isDark ? theme.color.white.main : theme.color.black.main}
+                style={styles.buttonIcon}
+              />
+
+              <Text
+                style={[
+                  styles.buttonText,
+                  isDark ? { color: theme.color.white.main } : {},
+                ]}
+              >
+                Import
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Clean */}
+        <View style={styles.clean}>
           <TouchableOpacity
             onPress={async () => {
-              let _tasks;
+              if (!resetStatus) {
+                setResetStatus(true);
+
+                return;
+              }
 
               try {
-                _tasks = JSON.parse(await Clipboard.getString());
+                const promises = [];
+
+                for (const task of tasks) {
+                  promises.push(cancelPushNotification(task.identifier));
+                }
+
+                await Promise.all(promises);
+
+                await resetTasks();
               } catch (error) {
                 if (Platform.OS === "android")
                   ToastAndroid.show(error.message, ToastAndroid.SHORT);
@@ -281,83 +514,58 @@ const BackupScreen = ({ navigation }) => {
                 return;
               }
 
-              importTasks(_tasks, createTasks);
+              if (Platform.OS === "android")
+                ToastAndroid.show(messageResetGoal, ToastAndroid.SHORT);
+
+              if (navigation.canGoBack()) navigation.goBack();
             }}
             activeOpacity={0.8}
-            key={"import"}
+            key={"reset"}
+            style={styles.resetButton}
+          >
+            <Text
+              style={[
+                styles.reset,
+                resetStatus
+                  ? { color: theme.color.red.main }
+                  : {
+                      color: isDark
+                        ? theme.color.white.main
+                        : theme.color.gray.main,
+                    },
+              ]}
+            >
+              {resetStatus ? "Confirm reset" : "Reset goals"}
+            </Text>
+          </TouchableOpacity>
+
+          <Text style={styles.highlight}>•</Text>
+
+          <Pressable
+            onPress={async () => signOut(setIsSignedIn, setIsSignoutInProgress)}
+            activeOpacity={0.8}
+            key={"sign-out"}
+            disabled={isSignoutInProgress}
             style={[
               styles.button,
               isDark ? { backgroundColor: theme.color.black.light } : {},
             ]}
           >
-            <Ionicons
-              name="arrow-down"
-              size={22}
-              color={isDark ? theme.color.white.main : theme.color.black.main}
-              style={styles.buttonIcon}
-            />
-
             <Text
               style={[
-                styles.buttonText,
-                isDark ? { color: theme.color.white.main } : {},
+                styles.reset,
+                {
+                  color: isDark
+                    ? theme.color.white.main
+                    : theme.color.gray.main,
+                },
               ]}
             >
-              Import
+              Sign out
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
-
-        <TouchableOpacity
-          onPress={async () => {
-            if (!resetStatus) {
-              setResetStatus(true);
-
-              return;
-            }
-
-            try {
-              const promises = [];
-
-              for (const task of tasks) {
-                promises.push(cancelPushNotification(task.identifier));
-              }
-
-              await Promise.all(promises);
-
-              await resetTasks();
-            } catch (error) {
-              if (Platform.OS === "android")
-                ToastAndroid.show(error.message, ToastAndroid.SHORT);
-
-              return;
-            }
-
-            if (Platform.OS === "android")
-              ToastAndroid.show(messageResetGoal, ToastAndroid.SHORT);
-
-            if (navigation.canGoBack()) navigation.goBack();
-          }}
-          activeOpacity={0.8}
-          key={"reset"}
-          style={styles.resetButton}
-        >
-          <Text
-            style={[
-              styles.reset,
-              resetStatus
-                ? { color: theme.color.red.main }
-                : {
-                    color: isDark
-                      ? theme.color.white.main
-                      : theme.color.gray.main,
-                  },
-            ]}
-          >
-            {resetStatus ? "Confirm reset" : "Reset goals"}
-          </Text>
-        </TouchableOpacity>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -379,40 +587,26 @@ const styles = StyleSheet.create({
   },
   actions: {
     flex: 1,
-    justifyContent: "space-around",
     paddingHorizontal: 32,
   },
   action: {},
-  subTitle: {
-    fontFamily: "Inter_500Medium",
-    fontSize: 24,
-    color: theme.color.black.main,
-    marginBottom: 8,
-  },
-  description: {
-    fontFamily: "Inter_400Regular",
-    fontSize: 14,
-    color: theme.color.gray.main,
-    marginBottom: 16,
-  },
-  button: {
+  actionHeader: {},
+  image: {},
+  actionHeaderContent: {},
+  actionTitle: {},
+  actionDescription: {},
+  actionBody: {},
+  button: {},
+  buttonIcon: {},
+  buttonIconImage: {},
+  buttonText: {},
+  clean: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 2,
-    backgroundColor: theme.color.black.main,
-    width: 105,
-    borderRadius: 5,
   },
-  buttonIcon: {
-    color: theme.color.white.main,
-    marginVertical: 6,
-    marginRight: 14,
-    marginLeft: 8,
-  },
-  buttonText: {
-    fontFamily: "Inter_400Regular",
-    fontSize: 14,
-    color: theme.color.white.main,
+  highlight: {
+    marginTop: -16,
+    marginHorizontal: 8,
   },
   resetButton: {
     flexDirection: "row",
