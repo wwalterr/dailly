@@ -33,6 +33,8 @@ import removeObjectKey from "../utils/objects";
 
 import { limitText } from "../utils/text";
 
+import { cancelPushNotification } from "../utils/notifications";
+
 import Close from "./close";
 
 import Metrics from "./metrics";
@@ -48,6 +50,8 @@ const messageComplete = "Goal completed";
 const messageIncomplete = "Goal incomplete";
 
 const messageCopyGoal = "Goal copied";
+
+const messageRemoveGoal = "Goal completed and removed";
 
 const onShare = async (message) => {
   try {
@@ -72,7 +76,7 @@ const onShare = async (message) => {
 const Task = ({ task, index, scrollY, navigation }) => {
   const { settings, isDark } = useSettings();
 
-  const { updateTask } = useTasks();
+  const { updateTask, removeTask } = useTasks();
 
   const [showTextModal, setShowTextModal] = useState(false);
 
@@ -313,6 +317,18 @@ const Task = ({ task, index, scrollY, navigation }) => {
 
             <TouchableOpacity
               onPress={async () => {
+                if (settings.complete) {
+                  if (task.remind)
+                    await cancelPushNotification(task.identifier);
+
+                  removeTask(task.id);
+
+                  if (Platform.OS === "android")
+                    ToastAndroid.show(messageRemoveGoal, ToastAndroid.SHORT);
+
+                  return;
+                }
+
                 if (!task.completed[today]) {
                   updateTask(task.id, {
                     ...task,
@@ -362,7 +378,11 @@ const Task = ({ task, index, scrollY, navigation }) => {
               )}
 
               <Text style={[styles.complete, cardFontColor]}>
-                {task.completed[today] ? "Mark as incomplete" : "Complete"}
+                {task.completed[today]
+                  ? settings.complete
+                    ? "Remove"
+                    : "Mark as incomplete"
+                  : "Complete"}
               </Text>
             </TouchableOpacity>
           </View>

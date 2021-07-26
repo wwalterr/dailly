@@ -9,6 +9,7 @@ const defaultSettings = {
   history: false, // Define if completed goals should be shown. Options: true or false
   card: false, // Define the goal card full size. Options: true or false
   font: "Inter_600SemiBold",
+  complete: false, // Define if goal is removed when completed. Options: true or false
 };
 
 const SettingsContext = createContext(defaultSettings);

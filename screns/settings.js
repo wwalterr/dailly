@@ -18,6 +18,8 @@ import FontSetting from "../components/fontSetting";
 
 import HistorySetting from "../components/historySetting";
 
+import CompleteSetting from "../components/completeSetting";
+
 import BackupSetting from "../components/backupSetting";
 
 const SettingsScreen = ({ navigation }) => {
@@ -46,6 +48,8 @@ const SettingsScreen = ({ navigation }) => {
         <FontSetting />
 
         <HistorySetting />
+
+        <CompleteSetting />
 
         <BackupSetting navigation={navigation} />
       </ScrollView>
