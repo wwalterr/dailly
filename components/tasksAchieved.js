@@ -15,8 +15,7 @@ const TasksAchieved = () => {
     <View style={styles.container}>
       <View style={styles.containerImage}>
         <Image
-          source={require("../assets/tasks/mobPsycho.gif")}
-          resizeMode="cover"
+          source={require("../assets/tasks/mobPsycho.png")}
           style={styles.image}
         />
       </View>
@@ -39,15 +38,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
   },
   containerImage: {
-    width: 85,
-    height: 185,
+    width: 80,
+    height: 190,
     borderRadius: 40,
     overflow: "hidden",
     marginBottom: 20,
   },
   image: {
-    width: "100%",
-    height: "100%",
+    width: 85,
+    height: 190,
     borderRadius: 40,
     justifyContent: "center",
     alignSelf: "center",
