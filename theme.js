@@ -28,7 +28,6 @@ const theme = {
     blue: {
       light: "#f1f5fe",
     },
-    google: ["#4285F4", "#43A853", "#FBBC05", "#EA4335",],
     cards: [
       "#ffffff",
       "#b0b6c7",

@@ -51,10 +51,6 @@ import { useTasks } from "../contexts/tasks";
 
 import HeaderGoBack from "../components/headerGoBack";
 
-import ThemeSetting from "../components/themeSetting";
-
-import GradientText from "../components/gradientText";
-
 const messageSignedIn = "You've signed in";
 
 const messageSignedOut = "You've signed out";
@@ -315,15 +311,8 @@ const BackupScreen = ({ navigation }) => {
                       : {},
                   ]}
                 >
-                  Sign in with{" "}
+                  Sign in with Google
                 </Text>
-
-                <GradientText
-                  style={styles.buttonText}
-                  colors={theme.color.google}
-                >
-                  Google
-                </GradientText>
               </Pressable>
             )}
 
