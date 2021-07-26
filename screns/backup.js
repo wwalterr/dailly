@@ -130,7 +130,7 @@ const signIn = async (setIsSigninInProgress, setIsSignedIn) => {
       ToastAndroid.show(messageSignedIn, ToastAndroid.SHORT);
   } catch (error) {
     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-      Alert.alert("User cancelled the login flow");
+      // Alert.alert("User cancelled the login flow");
     } else if (error.code === statusCodes.IN_PROGRESS) {
       Alert.alert("Operation (e.g. sign in) is in progress already");
     } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
