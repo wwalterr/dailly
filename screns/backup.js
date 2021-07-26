@@ -50,7 +50,10 @@ import { useSettings } from "../contexts/settings";
 import { useTasks } from "../contexts/tasks";
 
 import HeaderGoBack from "../components/headerGoBack";
+
 import ThemeSetting from "../components/themeSetting";
+
+import GradientText from "../components/gradientText";
 
 const messageSignedIn = "You've signed in";
 
@@ -238,17 +241,54 @@ const BackupScreen = ({ navigation }) => {
 
       <ScrollView style={styles.actions}>
         {/* Google Drive */}
-        <View style={[styles.action, styles.actionGoogleDrive]}>
+        <View
+          style={[
+            styles.action,
+            styles.actionGoogleDrive,
+            isDark
+              ? {
+                  backgroundColor: theme.color.black.light,
+                }
+              : {},
+          ]}
+        >
           <View style={styles.actionHeader}>
             <Image
-              style={styles.image}
+              style={[
+                styles.image,
+                isDark
+                  ? {
+                      tintColor: theme.color.white.main,
+                    }
+                  : {},
+              ]}
               source={require("../assets/backup/googleDrive.png")}
             />
 
             <View style={styles.actionHeaderContent}>
-              <Text style={styles.actionTitle}>Google Drive</Text>
+              <Text
+                style={[
+                  styles.actionTitle,
+                  isDark
+                    ? {
+                        color: theme.color.white.main,
+                      }
+                    : {},
+                ]}
+              >
+                Google Drive
+              </Text>
 
-              <Text style={styles.actionDescription}>
+              <Text
+                style={[
+                  styles.actionDescription,
+                  isDark
+                    ? {
+                        color: theme.color.gray.main,
+                      }
+                    : {},
+                ]}
+              >
                 Backup your data on cloud
               </Text>
             </View>
@@ -265,7 +305,25 @@ const BackupScreen = ({ navigation }) => {
                 disabled={isSigninInProgress}
                 style={styles.button}
               >
-                <Text style={[styles.buttonText]}>Sign in with Google</Text>
+                <Text
+                  style={[
+                    styles.buttonText,
+                    isDark
+                      ? {
+                          color: theme.color.white.main,
+                        }
+                      : {},
+                  ]}
+                >
+                  Sign in with{" "}
+                </Text>
+
+                <GradientText
+                  style={styles.buttonText}
+                  colors={theme.color.google}
+                >
+                  Google
+                </GradientText>
               </Pressable>
             )}
 
@@ -312,10 +370,28 @@ const BackupScreen = ({ navigation }) => {
                   <Ionicons
                     name="arrow-up"
                     size={22}
-                    style={styles.buttonIcon}
+                    style={[
+                      styles.buttonIcon,
+                      isDark
+                        ? {
+                            color: theme.color.white.main,
+                          }
+                        : {},
+                    ]}
                   />
 
-                  <Text style={styles.buttonText}>Export</Text>
+                  <Text
+                    style={[
+                      styles.buttonText,
+                      isDark
+                        ? {
+                            color: theme.color.white.main,
+                          }
+                        : {},
+                    ]}
+                  >
+                    Export
+                  </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -357,10 +433,28 @@ const BackupScreen = ({ navigation }) => {
                   <Ionicons
                     name="arrow-down"
                     size={22}
-                    style={styles.buttonIcon}
+                    style={[
+                      styles.buttonIcon,
+                      isDark
+                        ? {
+                            color: theme.color.white.main,
+                          }
+                        : {},
+                    ]}
                   />
 
-                  <Text style={styles.buttonText}>Import</Text>
+                  <Text
+                    style={[
+                      styles.buttonText,
+                      isDark
+                        ? {
+                            color: theme.color.white.main,
+                          }
+                        : {},
+                    ]}
+                  >
+                    Import
+                  </Text>
                 </TouchableOpacity>
               </>
             ) : null}
@@ -368,17 +462,54 @@ const BackupScreen = ({ navigation }) => {
         </View>
 
         {/* Local */}
-        <View style={[styles.action, styles.actionLocal]}>
+        <View
+          style={[
+            styles.action,
+            styles.actionLocal,
+            isDark
+              ? {
+                  backgroundColor: theme.color.black.light,
+                }
+              : {},
+          ]}
+        >
           <View style={styles.actionHeader}>
             <Image
-              style={styles.image}
+              style={[
+                styles.image,
+                isDark
+                  ? {
+                      tintColor: theme.color.white.main,
+                    }
+                  : {},
+              ]}
               source={require("../assets/backup/smartphone.png")}
             />
 
             <View style={styles.actionHeaderContent}>
-              <Text style={styles.actionTitle}>Local</Text>
+              <Text
+                style={[
+                  styles.actionTitle,
+                  isDark
+                    ? {
+                        color: theme.color.white.main,
+                      }
+                    : {},
+                ]}
+              >
+                Local
+              </Text>
 
-              <Text style={styles.actionDescription}>
+              <Text
+                style={[
+                  styles.actionDescription,
+                  isDark
+                    ? {
+                        color: theme.color.gray.main,
+                      }
+                    : {},
+                ]}
+              >
                 Backup your data on your device
               </Text>
             </View>
@@ -391,9 +522,31 @@ const BackupScreen = ({ navigation }) => {
               key={"export"}
               style={styles.button}
             >
-              <Ionicons name="arrow-up" size={22} style={styles.buttonIcon} />
+              <Ionicons
+                name="arrow-up"
+                size={22}
+                style={[
+                  styles.buttonIcon,
+                  isDark
+                    ? {
+                        color: theme.color.white.main,
+                      }
+                    : {},
+                ]}
+              />
 
-              <Text style={styles.buttonText}>Export</Text>
+              <Text
+                style={[
+                  styles.buttonText,
+                  isDark
+                    ? {
+                        color: theme.color.white.main,
+                      }
+                    : {},
+                ]}
+              >
+                Export
+              </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -415,9 +568,31 @@ const BackupScreen = ({ navigation }) => {
               key={"import"}
               style={[styles.button, styles.buttonSpace]}
             >
-              <Ionicons name="arrow-down" size={22} style={styles.buttonIcon} />
+              <Ionicons
+                name="arrow-down"
+                size={22}
+                style={[
+                  styles.buttonIcon,
+                  isDark
+                    ? {
+                        color: theme.color.white.main,
+                      }
+                    : {},
+                ]}
+              />
 
-              <Text style={styles.buttonText}>Import</Text>
+              <Text
+                style={[
+                  styles.buttonText,
+                  isDark
+                    ? {
+                        color: theme.color.white.main,
+                      }
+                    : {},
+                ]}
+              >
+                Import
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -545,14 +720,13 @@ const styles = StyleSheet.create({
     height: 170,
     borderRadius: 8,
     padding: 24,
+    backgroundColor: theme.color.gray.light,
   },
   actionGoogleDrive: {
     marginBottom: 32,
-    backgroundColor: theme.color.green.soft,
   },
   actionLocal: {
     marginBottom: 22,
-    backgroundColor: theme.color.blue.soft,
   },
   actionHeader: {
     flex: 0.75,
@@ -593,7 +767,7 @@ const styles = StyleSheet.create({
     marginLeft: 18,
   },
   buttonIcon: {
-    color: theme.color.white.main,
+    color: theme.color.black.light,
     marginRight: 8,
   },
   buttonText: {

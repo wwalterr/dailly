@@ -23,13 +23,12 @@ const theme = {
       main: "#fc1f3d",
     },
     green: {
-      soft: "#d7fbe1",
       main: "#01ce89",
     },
     blue: {
-      soft: "#dbecfd",
       light: "#f1f5fe",
     },
+    google: ["#4285F4", "#4285F4", "#43A853", "#FBBC05", "#EA4335", "#EA4335"],
     cards: [
       "#ffffff",
       "#b0b6c7",
