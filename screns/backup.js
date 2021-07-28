@@ -706,7 +706,7 @@ const styles = StyleSheet.create({
   action: {
     flexDirection: "column",
     justifyContent: "center",
-    height: 170,
+    height: 180,
     borderRadius: 8,
     padding: 24,
     backgroundColor: theme.color.gray.light,
