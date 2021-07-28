@@ -157,7 +157,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
                     { fontFamily: task.font },
                   ]}
                 >
-                  {limitText(task.text, 36)}
+                  {limitText(task.text.replaceAll(/[\n\r]/g, " "), 36)}
                 </Text>
               </TouchableOpacity>
             </View>
