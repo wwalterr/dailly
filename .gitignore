@@ -1,6 +1,5 @@
 # Editor
 .vscode
-.idea
 
 # Environment
 .env
@@ -12,14 +11,15 @@ local.properties
 *.iml
 *.hprof
 
-# Release settings
+# Settings
 android/gradle.properties
 android/app/build.gradle
 *.jks
 
-# Build
+# Dependency
 node_modules
-yarn-error.log
+
+# Yarn
 yarn.lock
 
 # Buck
@@ -28,7 +28,7 @@ buck-out
 *.keystore
 !debug.keystore
 
-# Bundle artifacts
+# Bundle
 *.jsbundle
 
 # Expo
