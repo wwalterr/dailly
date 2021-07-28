@@ -46,6 +46,7 @@ const Information = ({
           multiline={true}
           spellCheck={true}
           autoFocus={false}
+          maxHeight={100}
           underlineColorAndroid={theme.color.transparent}
           value={text}
           onChangeText={(_text) => {
