@@ -16,8 +16,6 @@ Privacy and simplicity. No trackers, no ADS and no databases.
 
 [G2](https://www.g2.com/products/dailly/reviews)
 
-[Alternative Me](https://alternative.me/dailly)
-
 ## Built with
 
 - [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
