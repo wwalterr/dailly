@@ -81,6 +81,8 @@ const Information = ({
             Keyboard.dismiss();
 
             setRemind((previousRemind) => !previousRemind);
+
+            if (!remind) setShowTimePicker(true);
           }}
           circleSize={18}
           circleBorderWidth={0}
