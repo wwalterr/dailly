@@ -3,7 +3,7 @@
     "name": "dailly",
     "slug": "dailly",
     "description": "Create, manage and track your daily goals.",
-    "version": "15.0.0",
+    "version": "16.0.0",
     "orientation": "portrait",
     "icon": "./assets/application/icon.png",
     "splash": {
