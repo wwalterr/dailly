@@ -31,7 +31,7 @@ import { useTasks } from "../contexts/tasks";
 
 import removeObjectKey from "../utils/objects";
 
-import { limitText } from "../utils/text";
+import { limitText, removeBreakLines } from "../utils/text";
 
 import { cancelPushNotification } from "../utils/notifications";
 
@@ -157,7 +157,7 @@ const Task = ({ task, index, scrollY, navigation }) => {
                     { fontFamily: task.font },
                   ]}
                 >
-                  {limitText(task.text.replaceAll(/[\n\r]/g, " "), 36)}
+                  {removeBreakLines(limitText(task.text, 36))}
                 </Text>
               </TouchableOpacity>
             </View>

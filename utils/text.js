@@ -3,4 +3,6 @@ const limitText = (text, range = 10) =>
 
 const capitalize = (text) => `${text[0].toUpperCase()}${text.slice(1)}`;
 
-export { limitText, capitalize };
+const removeBreakLines = (text) => text.replaceAll(/[\n\r]/g, " ");
+
+export { limitText, capitalize, removeBreakLines };

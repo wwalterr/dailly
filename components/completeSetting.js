@@ -61,7 +61,7 @@ const CompleteSetting = () => {
           Complete
         </Text>
 
-        <Text style={styles.description}>Remove goals when completed</Text>
+        <Text style={styles.description}>Remove goals when complete</Text>
       </View>
     </View>
   );
