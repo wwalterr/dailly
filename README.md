@@ -21,7 +21,10 @@ Privacy and simplicity. No trackers, no ADS and no databases.
 - [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [React](https://reactjs.org/)
 - [React Native](https://reactnative.dev/)
+- [React Navigation](https://github.com/react-navigation/react-navigation)
+- [React Native Async Storage](https://github.com/react-native-async-storage/async-storage)
 - [Expo](https://expo.io/)
+- [Google Sign In](https://github.com/react-native-google-signin/google-signin)
 
 ## Installation
 
