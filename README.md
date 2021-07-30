@@ -12,10 +12,6 @@ Privacy and simplicity. No trackers, no ADS and no databases.
 
 [Product Hunt](https://www.producthunt.com/posts/dailly)
 
-[Alternative To](https://alternativeto.net/software/dailly/about/)
-
-[G2](https://www.g2.com/products/dailly/reviews)
-
 ## Built with
 
 - [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
