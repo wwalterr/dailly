@@ -4,7 +4,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Linking,
   StyleSheet,
 } from "react-native";
 
@@ -68,29 +67,6 @@ const Header = ({ navigation, showNewTask }) => {
 
       {options ? (
         <View style={[styles.column, styles.columnMenu]}>
-          <TouchableOpacity
-            onPress={() => {
-              setOptions((previousOptions) => !previousOptions);
-
-              Linking.openURL("https://buy.stripe.com/fZe01e3TD87YgmcaEE");
-            }}
-            activeOpacity={0.8}
-            key={"coffee"}
-            style={styles.buttonAction}
-          >
-            <Text
-              style={[
-                styles.textMenu,
-                isDark
-                  ? {
-                      color: theme.color.white.main,
-                    }
-                  : {},
-              ]}
-            >
-              Coffee
-            </Text>
-          </TouchableOpacity>
 
           <TouchableOpacity
             onPress={() => {
