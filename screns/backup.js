@@ -615,8 +615,6 @@ const BackupScreen = ({ navigation }) => {
 
               if (Platform.OS === "android")
                 ToastAndroid.show(messageResetGoal, ToastAndroid.SHORT);
-
-              if (navigation.canGoBack()) navigation.goBack();
             }}
             activeOpacity={0.8}
             key={"reset"}
