@@ -6,12 +6,6 @@ Create, manage and track your daily goals.
 
 Privacy and simplicity. No trackers, no ADS and no databases.
 
-## Stores
-
-[Play Store](https://play.google.com/store/apps/details?id=com.dailly.dailly)
-
-[Product Hunt](https://www.producthunt.com/posts/dailly)
-
 ## Built with
 
 - [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
